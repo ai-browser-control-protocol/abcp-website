@@ -1,0 +1,62 @@
+/* ==========================================================================
+   UseCaseCards Component Styles
+   ========================================================================== */
+
+.use-cases-section {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.use-case-card {
+  display: grid;
+  gap: 10px;
+  padding: var(--space-5);
+  align-content: start;
+}
+
+.use-case-icon-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.use-case-icon {
+  font-size: 22px;
+}
+
+.use-case-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.use-case-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.use-case-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ===== Responsive Use Cases ===== */
+@media (max-width: 1024px) {
+  .use-cases-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .use-cases-grid {
+    grid-template-columns: 1fr;
+  }
+}

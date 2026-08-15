@@ -1,0 +1,49 @@
+/* ==========================================================================
+   PageStage & Transition Styles
+   ========================================================================== */
+
+.page-stage {
+  position: relative;
+  flex: 1;
+}
+
+.page-stage-body {
+  max-width: var(--grid-max);
+  margin: 0 auto;
+  padding: 32px var(--space-6) 100px;
+}
+
+.page-stage-canvas {
+  position: relative;
+}
+
+.page-stage-layer {
+  transition: opacity var(--stage-duration) var(--stage-easing),
+    transform var(--stage-duration) var(--stage-easing);
+}
+
+.page-stage-layer.is-enter {
+  opacity: 0;
+  transform: translateY(8px);
+  will-change: opacity, transform;
+}
+
+.page-stage-layer.is-enter.is-running {
+  opacity: 1;
+  transform: none;
+}
+
+.page-stage-layer.is-leave {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  transform: none;
+  overflow: hidden;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.page-stage-layer.is-leave.is-running {
+  opacity: 0;
+  transform: translateY(-6px);
+}

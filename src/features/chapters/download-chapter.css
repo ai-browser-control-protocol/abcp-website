@@ -1,0 +1,320 @@
+/* ==========================================================================
+   Download Chapter Styles (Frameless Architectural Release Bay)
+   ========================================================================== */
+
+.download-page {
+  position: relative;
+  display: grid;
+  gap: var(--space-7);
+}
+
+/* Ambient Radial Glow */
+.download-ambient-glow {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1100px;
+  height: 480px;
+  background-image:
+    radial-gradient(ellipse 60% 45% at 50% 0%, rgba(255, 107, 53, 0.07), transparent 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 25%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 25%, #000 30%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== Header ===== */
+.download-header-center {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  text-align: center;
+  justify-items: center;
+  max-width: 860px;
+  margin: 16px auto 0;
+}
+
+.download-hero-title {
+  font-size: clamp(32px, 4.4vw, 50px);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+}
+
+.download-hero-lead {
+  font-size: clamp(14.5px, 1.6vw, 16px);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 720px;
+}
+
+/* ===== Main Showcase Grid ===== */
+.download-showcase-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 32px;
+  max-width: 1040px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: start;
+}
+
+/* ===== Left Column: Platform Releases ===== */
+.download-platforms-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.platform-release-item {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px);
+  transition: all 200ms ease;
+}
+
+.platform-release-item.is-active-channel:hover {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.platform-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.platform-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.platform-svg-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.platform-svg-icon.apple-icon {
+  color: #ffffff;
+}
+
+.platform-svg-icon.windows-icon {
+  color: #38bdf8;
+}
+
+.platform-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.platform-telemetry {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.platform-telemetry.active {
+  color: var(--emerald);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.platform-telemetry.upcoming {
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.platform-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.platform-action-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.download-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: #ffffff;
+  color: #090a0f;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 180ms ease;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+}
+
+.download-btn-primary:hover {
+  background: #f1f5f9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.22);
+}
+
+.download-btn-disabled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  cursor: not-allowed;
+}
+
+.platform-meta-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* Trust Strip */
+.download-trust-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 4px;
+}
+
+.trust-strip-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  font-size: 13px;
+}
+
+.trust-strip-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.trust-strip-value {
+  color: var(--text-secondary);
+}
+
+.emerald-highlight {
+  color: var(--emerald);
+  font-weight: 600;
+}
+
+/* ===== Right Column: Visual & Quick Start Roadmap ===== */
+.download-visual-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.download-figure-wrap {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.quickstart-roadmap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+}
+
+.quickstart-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.quickstart-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quickstart-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.step-number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--oxide);
+  padding: 2px 6px;
+  background: rgba(255, 107, 53, 0.12);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.step-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.step-desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ===== Responsive Download ===== */
+@media (max-width: 860px) {
+  .download-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

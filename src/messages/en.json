@@ -1,0 +1,284 @@
+{
+  "brand": {
+    "name": "WebCross",
+    "thesis": "Tedious web workflows to AI, hands and time back to living",
+    "tagline": "Next-Gen Local-First Autonomous AI Browser",
+    "badge": "On-Device Autonomous AI Browser",
+    "get": "Download"
+  },
+  "nav": {
+    "product": "Product",
+    "company": "Company",
+    "download": "Download"
+  },
+  "queue": {
+    "label": "Index",
+    "product": "Overview",
+    "company": "Corporate Info",
+    "download": "03 · Download",
+    "deck": {
+      "product": "On-Device Autonomous Web Agent",
+      "company": "Qingzhu Technology Philosophy",
+      "download": "macOS & Windows Client Download"
+    }
+  },
+  "beats": {
+    "product": [
+      "Smart Perception",
+      "Native Execution",
+      "Total Control"
+    ],
+    "company": [
+      "Founding Vision",
+      "Technical Roadmap",
+      "Open Ecosystem"
+    ],
+    "download": [
+      "Releases",
+      "System Config",
+      "Quick Start"
+    ]
+  },
+  "figure": "Interactive Schematic",
+  "locales": {
+    "zh": "简体中文",
+    "ja": "日本語",
+    "ko": "한국어",
+    "en": "English"
+  },
+  "seo": {
+    "product": {
+      "title": "ABCP · Next-Gen Local-First Autonomous AI Browser",
+      "description": "Tedious web workflows to AI, hands and time back to living. Native web automation with full on-device data sovereignty and seamless human-in-the-loop takeover."
+    },
+    "company": {
+      "title": "About Company · ABCP",
+      "description": "Qingzhu Technology: Pioneering the next paradigm of human-agent collaborative intelligence infrastructure."
+    },
+    "download": {
+      "title": "Download & Experience · ABCP",
+      "description": "Download ABCP Workbench and client applications for macOS and Windows."
+    }
+  },
+  "product": {
+    "title": "Overview",
+    "eyebrow": "Autonomous Web Agent · Local First",
+    "badge": "On-Device Autonomous AI Browser",
+    "thesis": "Tedious web workflows to AI",
+    "thesisHighlight": "Time and hands back to life",
+    "sub": "A high-performance on-device AI browser. From multi-app research to bulk form submissions, let autonomous agents handle tedious, repetitive digital routines while keeping 100% data privacy and instant human-in-the-loop takeover.",
+    "ctaPrimary": "Get Started Free",
+    "ctaSecondary": "Explore Workflow Simulation",
+    "trustTags": [
+      "End Repetitive Drudgery",
+      "100% Local Data Privacy",
+      "macOS & Windows Support"
+    ],
+    "figure": "ABCP Dual-Window Collaborative Workspace",
+    "metrics": [
+      {
+        "value": "100%",
+        "label": "Local Data Sovereignty",
+        "desc": "Credentials, cookies & execution logs 100% kept on-device, zero cloud upload"
+      },
+      {
+        "value": "Fast · Token-Smart",
+        "label": "Custom Page Engine",
+        "desc": "Tailored for high-throughput Agent actions with clean DOM pruning to minimize model token costs"
+      },
+      {
+        "value": "0 Distraction",
+        "label": "Quiet & On-Demand HITL",
+        "desc": "Browser runs autonomously in background; prompts for screen takeover only when verification is needed"
+      },
+      {
+        "value": "Self-Evolving",
+        "label": "Smart Orchestration & Reuse",
+        "desc": "Natural language intent auto-orchestrated into actions; successful runs crystallize into reusable workflows"
+      }
+    ],
+    "layers": [
+      {
+        "tag": "User Focus & Command Cockpit",
+        "name": "Task Workbench & Dispatcher",
+        "body": "The sole user focus and command center. Provides a unified task overview, dispatches concurrent tasks across multiple background browser instances, and delivers full-timeline execution replay and status auditing.",
+        "status": "Multi-Browser Dispatch Active",
+        "bullets": [
+          "Unified Console: Natural language intent parsing and multi-task concurrency scheduling",
+          "Multi-Browser Fleet: Dispatches atomic actions across isolated background browser instances",
+          "DVR-Grade Replay: Full-timeline video playback, audit events, and state snapshots",
+          "Native HITL: Seamless millisecond screen takeover on 2FA or critical checkpoints"
+        ]
+      },
+      {
+        "tag": "Dedicated Execution Base",
+        "name": "Dedicated Agent Harness",
+        "body": "The dedicated execution bridge between the dispatcher and browser fleet. Features anti-hallucination parameter validation, semantic feedback loops, and zero-trust security guardrails for multi-task concurrency.",
+        "status": "Zero-Trust Guardrails Active",
+        "bullets": [
+          "Anti-Hallucination: Built-in Zod Schema strict validation to prevent malformed actions",
+          "Observation Feedback: Precise structured DOM and visual state translation back to the Agent",
+          "Zero-Trust Policy Gateway: Sensitive operation blocking, domain whitelisting, and injection defense",
+          "Environment Isolation: Process-level lifecycle management and resource throttling"
+        ]
+      },
+      {
+        "tag": "Multi-Instance Action Fleet",
+        "name": "Custom Page Engine",
+        "body": "Multiple browser instances run quietly and isolated in the background. Engineered specifically for high-throughput atomic actions to deliver structured outcomes with ultra-low resource overhead.",
+        "status": "High-Throughput Fleet",
+        "bullets": [
+          "Action Throughput: Tailored custom engine executing atomic browser actions in milliseconds",
+          "Unobtrusive Operation: Browsers stay in the background with zero popups or distractions",
+          "Token Optimization: Intelligent DOM pruning to drastically reduce model context token costs",
+          "High-Fidelity Delivery: Cross-page structured data extraction and verified artifact export"
+        ]
+      }
+    ],
+    "interactiveDemo": {
+      "badge": "Interactive Workflow Simulation · Background Quiet Delivery",
+      "title": "Interactive Workflow Simulation · On-Device Agent Mechanics",
+      "subtitle": "Select a scenario to experience how the agent orchestrates the browser autonomously in the background. The control panel expands on demand and can be minimized to a background tab at any time—never interrupting your life or work, only collaborating when key verification is needed.",
+      "promptLabel": "Select Scenario",
+      "promptHint": "Click 'Start Simulation' to expand panel; minimize to background tab at any time",
+      "tabPrefix": "Background Tab",
+      "btnMinimize": "Minimize to Background",
+      "btnExpand": "Expand Panel",
+      "minimizedHint": "Running silently in background (Click to expand · Zero interruptions to daily work)",
+      "statusRunning": "Agent is driving the browser in background through Action Streams...",
+      "statusPaused": "Security verification encountered: panel prompted for confirmation, will resume background quiet mode once resolved",
+      "statusDone": "Action Stream completed. Structured outcomes and evidence artifacts delivered quietly in background.",
+      "btnTakeover": "Verification Completed on Screen · Resume Automation",
+      "btnReset": "Reset Simulation"
+    },
+    "comparison": {
+      "title": "Why Choose ABCP?",
+      "subtitle": "Redefining automation: Comparing traditional RPA, cloud AI agents, and standard chat interfaces",
+      "headers": [
+        "Capability",
+        "ABCP On-Device Browser",
+        "Legacy RPA Tools",
+        "Cloud AI Agents",
+        "Standard AI Chat"
+      ],
+      "rows": [
+        {
+          "dim": "Execution Environment",
+          "abcp": "User-Side Custom Page Engine",
+          "rpa": "Local Scripts / Virtual Machines",
+          "cloud": "Cloud Headless Browser",
+          "chat": "Chatbox Only"
+        },
+        {
+          "dim": "Data Privacy & Secrets",
+          "abcp": "100% Local Encryption, Zero Upload",
+          "rpa": "Hardcoded Sensitive Credentials",
+          "cloud": "Requires Uploading Cookies/Logins",
+          "chat": "All Conversation Uploaded"
+        },
+        {
+          "dim": "Captcha / 2FA Handoff",
+          "abcp": "Native One-Click HITL Takeover",
+          "rpa": "Crashes and Aborts",
+          "cloud": "Difficult to Intervene Live",
+          "chat": "Cannot Handle Web Pages"
+        },
+        {
+          "dim": "Dynamic Pages & Anti-Bot",
+          "abcp": "Adaptive Custom Action Engine",
+          "rpa": "Brittle Selectors Fail Easily",
+          "cloud": "Frequently Blocked by Anti-Bot",
+          "chat": "Not Supported"
+        },
+        {
+          "dim": "Learning Curve",
+          "abcp": "Zero Code & Self-Evolving Workflows",
+          "rpa": "Requires Dedicated Engineers",
+          "cloud": "Medium (Complex API Setup)",
+          "chat": "Easy, but No Execution"
+        }
+      ]
+    },
+    "useCases": {
+      "title": "Empowering Complex Real-World Scenarios",
+      "subtitle": "Transforming repetitive web interactions into one-sentence autonomous workflows",
+      "items": [
+        {
+          "title": "Cross-Platform Data Aggregation & Price Audit",
+          "desc": "Logs into multiple vendor portals, extracts pricing/inventory, and compiles standardized comparison reports."
+        },
+        {
+          "title": "Bulk Business Form Entry & Approval Filing",
+          "desc": "Reads local spreadsheets or CRM records, fills multi-step ERP forms, uploads attachments, and files submissions."
+        },
+        {
+          "title": "Automated Availability & Link Auditing",
+          "desc": "Periodically tests core user journeys in real environments to detect frontend errors, broken links, and UI regressions."
+        }
+      ]
+    }
+  },
+  "company": {
+    "title": "About Company",
+    "subtitle": "Qingzhu Technology · Next-Gen On-Device AI Infrastructure",
+    "lead": "Qingzhu Technology is dedicated to exploring new paradigms of human-AI synergy, creating secure, reliable, and accessible on-device intelligence.",
+    "storyTitle": "Mission & Engineering Ethos",
+    "story": "We believe the true power of AI lies not in endless chatbot conversations, but in navigating real-world digital applications to eliminate tedious, repetitive tasks. Through local-first architectures and high-throughput proprietary page engines, we protect data sovereignty while returning time and focus to creators.",
+    "legalLabel": "Corporate Entity",
+    "cityLabel": "Headquarters",
+    "productLabel": "Core Product",
+    "productName": "WebCross ABCP (On-Device AI Browser)",
+    "emailLabel": "Business & Support",
+    "legalName": "Qingzhu Technology Ltd.",
+    "city": "Hangzhou, China",
+    "figure": "Qingzhu Technology R&D Center"
+  },
+  "download": {
+    "title": "Download WebCross ABCP",
+    "lead": "Experience the new era of on-device autonomous AI browsing. Built for macOS & Windows with zero-friction local installation.",
+    "figure": "ABCP Client Installation & Preview",
+    "userButton": "Download for macOS",
+    "clientButton": "Windows (Coming Soon)",
+    "userHint": "macOS 13.0+ · Apple Silicon (M-Series) & Intel CPUs",
+    "clientHint": "Windows 11 64-bit · Preview Channel Coming Soon",
+    "systemLabel": "Supported OS",
+    "dataLabel": "Data Privacy",
+    "dataValue": "100% On-Device Local-First Storage",
+    "userMeta": "DMG Installer (128 MB) · SHA256 Signed · Available Now",
+    "clientMeta": "MSIX / EXE Setup · In Active Development",
+    "quickstartTitle": "Quick Start Guide",
+    "quickstart": [
+      {
+        "step": "01",
+        "title": "Install",
+        "desc": "Open the DMG package and drag WebCross into your Applications folder."
+      },
+      {
+        "step": "02",
+        "title": "Permissions",
+        "desc": "Grant accessibility and browser automation permissions on first launch."
+      },
+      {
+        "step": "03",
+        "title": "Execute",
+        "desc": "Type your first natural language task in the console and let the agent work."
+      }
+    ]
+  },
+  "footer": {
+    "localFirst": "100% Local-First · Zero Leakage",
+    "get": "Download",
+    "navTitle": "Navigation",
+    "productTitle": "Product & System",
+    "desc": "Built for macOS 13+ & Windows 11. Designed for privacy-first enterprise and power-user web automation.",
+    "securityBadge": "100% Local-First Architecture"
+  },
+  "a11y": {
+    "mainNav": "Main navigation",
+    "localeNav": "Language switcher",
+    "queue": "Chapter index",
+    "rail": "Chapter navigation",
+    "stage": "Main content area",
+    "menu": "Toggle mobile menu"
+  }
+}

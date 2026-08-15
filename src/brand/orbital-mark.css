@@ -1,0 +1,116 @@
+.orbital-mark {
+  --halo-color: #d8bf82;
+  --halo-bright: #fff1be;
+  --photon-cool: #e5cf94;
+  --photon-hot: #fff1cb;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: var(--orbital-size, 48px);
+  height: var(--orbital-size, 48px);
+  overflow: visible;
+  pointer-events: none;
+}
+.orbital-mark-danger {
+  --halo-color: var(--red, #db6c5d);
+  --halo-bright: #ffe3dc;
+  --photon-cool: #f18d80;
+  --photon-hot: #ffe0c6;
+}
+.orbital-mark::before {
+  position: absolute;
+  z-index: 2;
+  inset: 27%;
+  background: radial-gradient(circle at 43% 41%, #000 0 38%, #010203 57%, #071011 76%, #000 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--photon-hot) 56%, transparent), 0 0 5px color-mix(in srgb, var(--photon-cool) 44%, transparent), inset -1px -1px 2px rgb(0 0 0 / 78%);
+  content: "";
+}
+.orbital-mark::after {
+  position: absolute;
+  z-index: 1;
+  inset: 19% 14%;
+  display: block;
+  background: conic-gradient(from 212deg, transparent 0deg 16deg, color-mix(in srgb, var(--photon-cool) 50%, transparent) 38deg, var(--photon-hot) 74deg, #fff1cb 96deg, var(--photon-cool) 126deg, transparent 164deg 248deg, color-mix(in srgb, var(--photon-hot) 70%, transparent) 292deg, var(--photon-cool) 326deg, transparent 360deg);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 3px rgb(255 217 159 / 45%));
+  mask: radial-gradient(ellipse 61% 49% at center, transparent 49%, #000 56% 65%, transparent 72%);
+  rotate: -19deg;
+  scale: 1 0.76;
+  animation: abcp-photon-ring 3.2s ease-in-out infinite;
+  content: "";
+}
+.orbital-mark-static::after,
+.orbital-mark-static .floating-halo,
+.orbital-mark-static .infall-particles {
+  animation-play-state: paused;
+}
+.orbital-mark .floating-halo {
+  --halo-layer-opacity: 1;
+  position: absolute;
+  inset: 6px -5px;
+  border-radius: 50%;
+  background:
+    conic-gradient(from var(--halo-turn, 0deg), transparent 0deg 26deg, color-mix(in srgb, var(--halo-color) 15%, transparent) 48deg, var(--halo-bright) 74deg, color-mix(in srgb, var(--halo-color) 42%, transparent) 106deg, transparent 148deg 232deg, color-mix(in srgb, var(--halo-color) 38%, transparent) 276deg, var(--halo-bright) 314deg, transparent 348deg 360deg),
+    linear-gradient(90deg, transparent 0 7%, color-mix(in srgb, var(--halo-color) 36%, transparent) 16%, var(--halo-color) 34%, var(--halo-bright) 50%, var(--halo-color) 66%, color-mix(in srgb, var(--halo-color) 36%, transparent) 84%, transparent 93% 100%);
+  background-blend-mode: screen;
+  filter: drop-shadow(0 0 2px color-mix(in srgb, var(--halo-color) 48%, transparent));
+  mask: radial-gradient(ellipse 59% 40% at center, transparent 59%, #000 62% 70%, transparent 73%);
+  opacity: var(--halo-layer-opacity);
+  pointer-events: none;
+}
+.orbital-mark .floating-halo.halo-two { inset: 21% -6%; }
+.orbital-mark .floating-halo.halo-rear { z-index: 0; opacity: 0.5; }
+.orbital-mark .floating-halo.halo-front { z-index: 3; clip-path: inset(49% 0 0); }
+.orbital-mark .floating-halo.halo-one { rotate: -16deg; animation: abcp-halo-forward 4.2s linear infinite; }
+.orbital-mark .floating-halo.halo-two { rotate: 13deg; animation: abcp-halo-reverse 5.1s linear -2.55s infinite; }
+.orbital-mark .infall-particles { position: absolute; z-index: 4; inset: 4%; overflow: hidden; border-radius: 50%; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--halo-bright) 78%, transparent)); pointer-events: none; }
+.orbital-mark .infall-particle { position: absolute; top: 50%; left: 50%; width: 1.5px; height: 1.5px; margin: -0.75px; border-radius: 50%; background: var(--photon-hot); box-shadow: 0 0 2px var(--photon-hot); transform-origin: center; animation: abcp-particle-infall 1.9s linear var(--particle-delay) infinite; will-change: transform, opacity; }
+
+/* Each stream has a fixed radial direction. The particle itself never rotates;
+   only its translation changes, so the eye reads an inward fall instead of an orbit. */
+.orbital-mark .stream-one .infall-particle:nth-child(1) { --particle-start-x: -25px; --particle-start-y: -8px; --particle-end-x: -2px; --particle-end-y: 0px; --particle-delay: -0.18s; }
+.orbital-mark .stream-one .infall-particle:nth-child(2) { --particle-start-x: -27px; --particle-start-y: 1px; --particle-end-x: -1px; --particle-end-y: 0px; --particle-delay: -0.52s; }
+.orbital-mark .stream-one .infall-particle:nth-child(3) { --particle-start-x: -24px; --particle-start-y: 8px; --particle-end-x: -2px; --particle-end-y: 1px; --particle-delay: -0.86s; }
+.orbital-mark .stream-one .infall-particle:nth-child(4) { --particle-start-x: -28px; --particle-start-y: -3px; --particle-end-x: -1px; --particle-end-y: -1px; --particle-delay: -1.2s; }
+.orbital-mark .stream-one .infall-particle:nth-child(5) { --particle-start-x: -23px; --particle-start-y: 12px; --particle-end-x: -2px; --particle-end-y: 1px; --particle-delay: -1.54s; }
+
+.orbital-mark .stream-two .infall-particle:nth-child(1) { --particle-start-x: 18px; --particle-start-y: -24px; --particle-end-x: 1px; --particle-end-y: -2px; --particle-delay: -0.32s; }
+.orbital-mark .stream-two .infall-particle:nth-child(2) { --particle-start-x: 10px; --particle-start-y: -27px; --particle-end-x: 0px; --particle-end-y: -1px; --particle-delay: -0.66s; }
+.orbital-mark .stream-two .infall-particle:nth-child(3) { --particle-start-x: 24px; --particle-start-y: -20px; --particle-end-x: 1px; --particle-end-y: -2px; --particle-delay: -1s; }
+.orbital-mark .stream-two .infall-particle:nth-child(4) { --particle-start-x: 5px; --particle-start-y: -29px; --particle-end-x: 0px; --particle-end-y: -1px; --particle-delay: -1.34s; }
+.orbital-mark .stream-two .infall-particle:nth-child(5) { --particle-start-x: 27px; --particle-start-y: -16px; --particle-end-x: 2px; --particle-end-y: -1px; --particle-delay: -1.68s; }
+
+.orbital-mark .stream-three .infall-particle:nth-child(1) { --particle-start-x: 24px; --particle-start-y: 17px; --particle-end-x: 2px; --particle-end-y: 1px; --particle-delay: -0.46s; }
+.orbital-mark .stream-three .infall-particle:nth-child(2) { --particle-start-x: 27px; --particle-start-y: 8px; --particle-end-x: 1px; --particle-end-y: 0px; --particle-delay: -0.8s; }
+.orbital-mark .stream-three .infall-particle:nth-child(3) { --particle-start-x: 20px; --particle-start-y: 24px; --particle-end-x: 1px; --particle-end-y: 2px; --particle-delay: -1.14s; }
+.orbital-mark .stream-three .infall-particle:nth-child(4) { --particle-start-x: 28px; --particle-start-y: 2px; --particle-end-x: 2px; --particle-end-y: 0px; --particle-delay: -1.48s; }
+.orbital-mark .stream-three .infall-particle:nth-child(5) { --particle-start-x: 15px; --particle-start-y: 27px; --particle-end-x: 0px; --particle-end-y: 2px; --particle-delay: -1.82s; }
+.orbital-mark-static .infall-particle { animation-play-state: paused; }
+@keyframes abcp-photon-ring {
+  0%, 100% { filter: drop-shadow(0 0 2px rgb(255 217 159 / 28%)); opacity: 0.72; }
+  50% { filter: drop-shadow(0 0 5px rgb(255 217 159 / 58%)); opacity: 1; }
+}
+@keyframes abcp-halo-forward {
+  0%, 100% { --halo-turn: 0deg; translate: 0 -1px; }
+  25% { --halo-turn: 90deg; translate: 0 1px; }
+  50% { --halo-turn: 180deg; translate: 0 2px; }
+  75% { --halo-turn: 270deg; translate: 0 1px; }
+}
+@keyframes abcp-halo-reverse {
+  0%, 100% { --halo-turn: 360deg; translate: 0 1px; }
+  25% { --halo-turn: 270deg; translate: 0 -1px; }
+  50% { --halo-turn: 180deg; translate: 0 -2px; }
+  75% { --halo-turn: 90deg; translate: 0 -1px; }
+}
+@keyframes abcp-particle-infall {
+  0% { transform: translate3d(var(--particle-start-x), var(--particle-start-y), 0) scale(0.3); opacity: 0; }
+  12% { opacity: 0.78; }
+  78% { opacity: 0.48; }
+  100% { transform: translate3d(var(--particle-end-x), var(--particle-end-y), 0) scale(0.03); opacity: 0; }
+}
+@property --halo-turn {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}

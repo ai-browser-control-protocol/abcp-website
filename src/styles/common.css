@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Global Common Styles & Utilities — white / orange / black theme
+   ========================================================================== */
+
+/* ===== Layout Shell ===== */
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: #ffffff;
+  color: var(--text-primary);
+  /* clip (not hidden) keeps position:sticky alive for the nav and the demo stage */
+  overflow-x: clip;
+}
+
+/* ===== Chapter Base Container ===== */
+.chapter {
+  display: grid;
+  gap: var(--space-8);
+}
+
+/* ===== Badges & Pills ===== */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--oxide);
+  background: var(--oxide-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-full);
+}
+
+.badge-pill-orange {
+  display: inline-flex;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--oxide);
+  background: var(--oxide-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-sm);
+}
+
+.highlight-pill {
+  margin-left: 8px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: var(--oxide);
+  border-radius: var(--radius-xs);
+}
+
+/* ===== Standard Buttons ===== */
+.ui-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 22px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--oxide);
+  border: 1px solid var(--oxide);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-button-primary);
+  cursor: pointer;
+  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.ui-button-primary:hover {
+  background: var(--oxide-hover);
+  border-color: var(--oxide-hover);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow-button);
+}
+
+.ui-button-primary:active {
+  transform: translateY(0);
+}
+
+.btn-arrow {
+  transition: transform 160ms ease;
+}
+
+.ui-button-primary:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+.ui-button-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  background: #ffffff;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 160ms ease;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.ui-button-ghost:hover {
+  background: #fff7f2;
+  border-color: var(--oxide);
+  color: var(--oxide);
+  transform: translateY(-1px);
+}
+
+/* ===== Card Base & Inset Highlight ===== */
+.card-glow {
+  background: var(--bg-surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.card-glow:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== Section Head Center ===== */
+.section-head-center {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  justify-items: center;
+  max-width: 720px;
+  margin: 0 auto var(--space-6);
+}
+
+.section-title {
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.section-subtitle {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ===== Chapter Header Center ===== */
+.chapter-header-center {
+  display: grid;
+  gap: var(--space-2);
+  text-align: center;
+  justify-items: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.chapter-main-title {
+  font-size: clamp(28px, 3.8vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.chapter-main-lead {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ===== Utility Keyframe Animations ===== */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cursorBob {
+  0%, 100% { transform: translateY(-50%) translate(0, 0); }
+  50% { transform: translateY(-50%) translate(-3px, -3px); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}

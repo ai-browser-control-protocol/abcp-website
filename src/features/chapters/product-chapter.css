@@ -1,0 +1,384 @@
+/* ==========================================================================
+   Product Chapter (Home) — white / orange / black marketing page
+   ========================================================================== */
+
+.product-page {
+  position: relative;
+  gap: clamp(64px, 9vw, 104px);
+  background: #ffffff;
+}
+
+/* ===== Hero atmosphere ===== */
+
+.hero-ambient-glow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130%;
+  max-width: 1280px;
+  height: 520px;
+  background: radial-gradient(ellipse 58% 52% at 50% 8%, rgba(255, 107, 53, 0.13), transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-grid {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130%;
+  max-width: 1280px;
+  height: 520px;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.028) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 60% 58% at 50% 20%, #000 10%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 20%, #000 10%, transparent 78%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-header-center {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-4);
+  text-align: center;
+  justify-items: center;
+  max-width: 940px;
+  margin: 0 auto;
+  padding-top: clamp(32px, 6vw, 72px);
+}
+
+/* ===== Hero title ===== */
+
+.hero-display-title {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  font-size: clamp(30px, 5.2vw, 60px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  max-width: 100%;
+}
+
+.hero-title-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.28em;
+  row-gap: 0;
+}
+
+.hero-title-lead,
+.hero-title-rest {
+  color: var(--text-primary);
+}
+
+/* --- Neon tube wordmark ---------------------------------------------------
+   Three stacked layers so the letters themselves never strobe: a soft bloom
+   behind, a blurred copy of the word acting as the tube halo (this is the
+   layer that flickers), and the crisp orange letters on top.
+   ------------------------------------------------------------------------ */
+
+.hero-brand-neon {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  white-space: nowrap;
+}
+
+.hero-brand-bloom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: 116%;
+  height: 165%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.2), rgba(255, 107, 53, 0.05) 46%, transparent 72%);
+  animation: neonBloom 7.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-brand-halo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: #ff6b35;
+  filter: blur(9px);
+  opacity: 0.5;
+  animation: neonBuzz 7.2s linear infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-brand-core {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, #ff8a4a 0%, #ff6b35 55%, #ea580c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ff6b35;
+  text-shadow:
+    0 0 1px rgba(255, 138, 74, 0.9),
+    0 0 6px rgba(255, 107, 53, 0.45);
+}
+
+/* Neon-tube ballast: the halo dips twice per cycle, never fully off. */
+@keyframes neonBuzz {
+  0%,
+  4.5% { opacity: 0.5; }
+  5.2% { opacity: 0.24; }
+  6.1% { opacity: 0.54; }
+  6.8% { opacity: 0.2; }
+  7.8% { opacity: 0.5; }
+  47% { opacity: 0.5; }
+  47.8% { opacity: 0.3; }
+  48.6% { opacity: 0.52; }
+  70% { opacity: 0.46; }
+  100% { opacity: 0.5; }
+}
+
+@keyframes neonBloom {
+  0%,
+  100% { opacity: 1; }
+  5.5% { opacity: 0.45; }
+  7% { opacity: 1; }
+  47.5% { opacity: 0.6; }
+  49% { opacity: 1; }
+}
+
+.hero-cursor {
+  display: inline-block;
+  width: 0.09em;
+  min-width: 5px;
+  height: 0.86em;
+  margin-left: 0.16em;
+  background: var(--oxide);
+  border-radius: 1px;
+  box-shadow: 0 0 14px rgba(255, 107, 53, 0.7);
+  animation: cursorBlink 1.05s steps(1) infinite;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+@keyframes cursorBlink {
+  0%,
+  49% { opacity: 1; }
+  50%,
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-brand-halo,
+  .hero-brand-bloom,
+  .hero-cursor {
+    animation: none;
+  }
+  .hero-cursor {
+    opacity: 1;
+  }
+}
+
+/* ===== Hero body ===== */
+
+.hero-lead-text {
+  max-width: 700px;
+  font-size: clamp(14.5px, 1.6vw, 16.5px);
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.hero-cta-cluster {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+}
+
+.hero-btn-mac,
+.hero-btn-win {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 24px;
+  font-size: 14.5px;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.hero-btn-mac {
+  color: #ffffff;
+  background: var(--oxide);
+  border: 1px solid var(--oxide);
+  box-shadow: var(--shadow-button-primary);
+  transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.hero-btn-mac:hover {
+  background: var(--oxide-hover);
+  border-color: var(--oxide-hover);
+  color: #ffffff;
+  box-shadow: var(--shadow-glow-button);
+  transform: translateY(-1px);
+}
+
+.hero-btn-win {
+  color: var(--text-primary);
+  background: #ffffff;
+  border: 1px solid var(--rule-strong);
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+
+.hero-btn-win:hover {
+  border-color: var(--oxide);
+  color: var(--oxide);
+  background: #fff7f2;
+  transform: translateY(-1px);
+}
+
+/* Replaces the old trust-tag strip: two assurances, nothing else. */
+.hero-assurances {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.hero-assurance {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: #fff7f2;
+  border: 1px solid rgba(255, 107, 53, 0.22);
+  border-radius: var(--radius-full);
+}
+
+.hero-assurance svg {
+  color: var(--oxide);
+  flex-shrink: 0;
+}
+
+.hero-system-support {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ===== Closing CTA ===== */
+
+.closing-cta {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  padding: clamp(48px, 7vw, 72px) var(--space-5);
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff 0%, #fff7f2 100%);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  border-radius: var(--radius-xl);
+}
+
+.closing-cta-title {
+  font-size: clamp(23px, 3.4vw, 36px);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  max-width: 720px;
+}
+
+.closing-cta-sub {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.6;
+}
+
+/* ===== Shared section head ===== */
+
+.section-head-center {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  margin: 0 auto var(--space-5);
+  max-width: 760px;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--oxide);
+  background: var(--oxide-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+}
+
+.section-title {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.section-subtitle {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 720px) {
+  .hero-display-title {
+    letter-spacing: -0.025em;
+  }
+  .hero-cta-cluster {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-btn-mac,
+  .hero-btn-win {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-assurances {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hero-system-support {
+    font-size: 11.5px;
+    line-height: 1.6;
+  }
+  .hero-brand-halo {
+    filter: blur(6px);
+  }
+}

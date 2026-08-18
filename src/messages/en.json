@@ -1,0 +1,724 @@
+{
+  "brand": {
+    "name": "WebCross",
+    "thesis": "WebCross helps your agent",
+    "thesisHighlight": "finish the tedious web work",
+    "tagline": "A faster, lower-token web executor for your agent. Runs quietly in the background, never interrupts you.",
+    "badge": "On-Device Autonomous AI Browser",
+    "get": "Download"
+  },
+  "nav": {
+    "product": "Product",
+    "company": "Company",
+    "download": "Download",
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "discord": "Discord"
+  },
+  "resources": {
+    "docs": "Docs",
+    "changelog": "Changelog",
+    "blog": "Blog",
+    "tools": "Tools"
+  },
+  "queue": {
+    "label": "Index",
+    "product": "Overview",
+    "company": "Corporate Info",
+    "download": "03 · Download",
+    "deck": {
+      "product": "On-Device Autonomous Web Agent",
+      "company": "Qingzhu Technology Philosophy",
+      "download": "macOS & Windows Client Download"
+    }
+  },
+  "beats": {
+    "product": [
+      "Smart Perception",
+      "Native Execution",
+      "Total Control"
+    ],
+    "company": [
+      "Founding Vision",
+      "Technical Roadmap",
+      "Open Ecosystem"
+    ],
+    "download": [
+      "Releases",
+      "System Config",
+      "Quick Start"
+    ]
+  },
+  "figure": "Interactive Schematic",
+  "locales": {
+    "zh": "简体中文",
+    "ja": "日本語",
+    "ko": "한국어",
+    "en": "English"
+  },
+  "seo": {
+    "product": {
+      "title": "WebCross · Autonomous Web Agent Browser",
+      "description": "WebCross is an on-device, custom-Chromium browser for AI agents. 100% local data sovereignty, lowest-token web automation."
+    },
+    "company": {
+      "title": "About Company · WebCross",
+      "description": "Qingzhu Technology: Pioneering the next paradigm of human-agent collaborative intelligence infrastructure."
+    },
+    "download": {
+      "title": "Download & Experience · WebCross",
+      "description": "Download WebCross Workbench and client applications for macOS and Windows."
+    }
+  },
+  "product": {
+    "title": "Overview",
+    "thesisBrand": "WebCross",
+    "thesisLead": "helps your agent",
+    "thesisRest": "finish the tedious web work",
+    "sub": "A faster, lower-token web executor for your agent. Runs quietly in the background, never interrupts you.",
+    "ctaPrimaryMac": "Download for macOS",
+    "ctaPrimaryWin": "Download for Windows",
+    "systemSupport": "macOS 13+ (Apple Silicon / Intel) · Windows 11 64-bit",
+    "assurances": [
+      "Yes — every feature is free during the public beta",
+      "Local-first, nothing leaves your machine"
+    ],
+    "demo": {
+      "badge": "LIVE DEMO",
+      "title": "WebCross helps you get the following tasks done",
+      "scrollHint": "Keep scrolling to walk through all three tasks",
+      "clientTitle": "WebCross · Agent",
+      "taskLabel": "Original task",
+      "runLabel": "Run task",
+      "logLabel": "Execution trace",
+      "statusRunning": "Running",
+      "statusDone": "Done",
+      "tabs": {
+        "A": "Amazon price patrol",
+        "B": "Amazon seller listing",
+        "C": "Social media scrape"
+      },
+      "scenes": {
+        "A": {
+          "label": "Scene A · Amazon price patrol",
+          "caption": "Auto-monitor thousands of product links daily; catch price changes the moment they happen.",
+          "task": "Please patrol the top 30 power bank listings on Amazon. Capture url, title, price, rating, and the first 30 bad reviews for each.",
+          "steps": [
+            "Open amazon.com",
+            "Type power bank into search",
+            "Click the search button",
+            "Click the first result",
+            "Land on the product page",
+            "Capture url / title / price / rating",
+            "Scrape the first 30 bad reviews",
+            "Compile and write locally"
+          ],
+          "browser": {
+            "urlHome": "www.amazon.com",
+            "urlSerp": "www.amazon.com/s?k=power+bank",
+            "urlPdp": "www.amazon.com/dp/B0D8XQ1KJ2",
+            "urlReviews": "www.amazon.com/product-reviews/B0D8XQ1KJ2",
+            "keyword": "power bank",
+            "searchPlaceholder": "Search Amazon",
+            "deliverTo": "Deliver to Phoenix 85034",
+            "navItems": [
+              "Today Deals",
+              "Best Sellers",
+              "Electronics",
+              "New Releases",
+              "Prime"
+            ],
+            "resultsMeta": "1-16 of over 40,000 results for power bank",
+            "sortLabel": "Sort by: Featured",
+            "filterTitle": "Filters",
+            "filters": [
+              "High capacity",
+              "USB-C",
+              "Wireless",
+              "Fast charging",
+              "Built-in cable"
+            ],
+            "results": [
+              {
+                "badge": "Overall Pick",
+                "title": "INIU 45W Fast Charging Portable Charger 10000mAh, built-in USB-C cable, flight safe",
+                "rating": "4.4",
+                "reviews": "84.8K",
+                "bought": "10K+ bought in past month",
+                "price": "$21.59",
+                "listPrice": "$23.99",
+                "deal": "Limited time deal"
+              },
+              {
+                "badge": "",
+                "title": "Anker Power Bank 20,000mAh, built-in USB-C cable, 1 USB-C and 1 USB-A port",
+                "rating": "4.6",
+                "reviews": "9.2K",
+                "bought": "10K+ bought in past month",
+                "price": "$69.99",
+                "listPrice": "",
+                "deal": ""
+              },
+              {
+                "badge": "",
+                "title": "Magnetic Portable Charger 10000mAh, 20W USB-C MagSafe battery pack",
+                "rating": "4.2",
+                "reviews": "3.1K",
+                "bought": "2K+ bought in past month",
+                "price": "$29.99",
+                "listPrice": "$39.99",
+                "deal": ""
+              }
+            ],
+            "pdp": {
+              "crumb": "Electronics › Computer Accessories › Power Banks",
+              "title": "INIU 45W Fast Charging Portable Charger 10000mAh Power Bank",
+              "rating": "4.4",
+              "reviews": "84,812 ratings",
+              "bought": "10K+ bought in past month",
+              "price": "$21.59",
+              "listPrice": "$23.99",
+              "deal": "Limited time deal",
+              "shipping": "FREE delivery for Prime members",
+              "cart": "Add to Cart",
+              "buy": "Buy Now",
+              "reviewsAnchor": "See all reviews"
+            },
+            "reviews": {
+              "title": "Customer reviews",
+              "score": "4.3",
+              "scoreLabel": "out of 5",
+              "total": "475 global ratings",
+              "histogram": [
+                [
+                  "5 star",
+                  "73%",
+                  73
+                ],
+                [
+                  "4 star",
+                  "11%",
+                  11
+                ],
+                [
+                  "3 star",
+                  "3%",
+                  3
+                ],
+                [
+                  "2 star",
+                  "2%",
+                  2
+                ],
+                [
+                  "1 star",
+                  "11%",
+                  11
+                ]
+              ],
+              "filterLabel": "Filtered: 1–2 star reviews",
+              "items": [
+                {
+                  "name": "Showme-thegoods",
+                  "stars": 2,
+                  "title": "Capacity is overstated",
+                  "body": "Rated 10000mAh but it only tops my phone up 1.5 times — nowhere near the listing."
+                },
+                {
+                  "name": "Wolfenhawke",
+                  "stars": 1,
+                  "title": "Stopped charging after two weeks",
+                  "body": "Fine at first, then the LED stayed on and it would not take a charge. Support was slow."
+                },
+                {
+                  "name": "M. Ortega",
+                  "stars": 2,
+                  "title": "Fast charge only on some phones",
+                  "body": "Advertised 45W, but only the bundled cable on one model hits it. Everything else is plain 18W."
+                },
+                {
+                  "name": "kellyR",
+                  "stars": 1,
+                  "title": "Gets hot",
+                  "body": "Noticeably warm while charging and using at the same time; build quality is rougher than the photos."
+                }
+              ]
+            },
+            "capture": {
+              "title": "Captured",
+              "fields": [
+                [
+                  "url",
+                  "amazon.com/dp/B0D8XQ1KJ2"
+                ],
+                [
+                  "title",
+                  "INIU 45W 10000mAh Power Bank"
+                ],
+                [
+                  "price",
+                  "$21.59"
+                ],
+                [
+                  "rating",
+                  "4.4 / 84.8K"
+                ]
+              ],
+              "reviewLabel": "bad reviews scraped",
+              "reviewTotal": 30,
+              "doneTitle": "Written locally",
+              "doneFile": "power_bank_top30.csv",
+              "doneMeta": "30 products · 900 bad reviews · 100% on-device"
+            }
+          }
+        },
+        "B": {
+          "label": "Scene B · Amazon seller listing",
+          "caption": "List hundreds of SKUs in one click; let the agent handle the form filling.",
+          "task": "List a new product in Seller Central. Name 'Mophie 20000 Black', brand 'Mophie', price $59.95, stock 200, category 'Electronics › Power Banks'.",
+          "steps": [
+            "Open Seller Central",
+            "Enter the Add Products flow",
+            "Fill in the product name",
+            "Open the brand dropdown and select",
+            "Pick the category",
+            "Enter price and quantity",
+            "Upload the main image",
+            "Submit and confirm the listing"
+          ],
+          "browser": {
+            "url": "sellercentral.amazon.com/catalog/add",
+            "brandbar": "amazon seller central",
+            "path": "Catalog › Add Products",
+            "tabs": [
+              "Vital info",
+              "Description",
+              "Images",
+              "Keywords"
+            ],
+            "nameLabel": "Product name",
+            "nameValue": "Mophie Powerstation 20000mAh Black",
+            "brandLabel": "Brand",
+            "brandPlaceholder": "Select a brand",
+            "brandOptions": [
+              "Anker",
+              "Belkin",
+              "INIU",
+              "Mophie",
+              "UGREEN"
+            ],
+            "brandValue": "Mophie",
+            "categoryLabel": "Category",
+            "categoryPlaceholder": "Select a category",
+            "categoryOptions": [
+              "Electronics › Chargers",
+              "Electronics › Power Banks",
+              "Electronics › Cables"
+            ],
+            "categoryValue": "Electronics › Power Banks",
+            "priceLabel": "Price (USD)",
+            "priceValue": "59.95",
+            "stockLabel": "Quantity",
+            "stockValue": "200",
+            "uploadLabel": "Drop or click to upload the main image",
+            "uploadHint": "JPG / PNG · 1600×1600 recommended",
+            "uploadFile": "mophie-powerstation-20000-black.jpg",
+            "uploadSize": "1.8 MB",
+            "submitLabel": "Submit listing",
+            "submitting": "Submitting…",
+            "success": "Listing created",
+            "successMeta": "SKU MPH-PS20000-BLK queued for review",
+            "queueLabel": "SKUs left in batch",
+            "queueValue": "117 / 118"
+          }
+        },
+        "C": {
+          "label": "Scene C · Social media scrape",
+          "caption": "Auto-archive posts and engagement data; assist you in running your social channels.",
+          "task": "Scrape 30 top posts from X / Reddit under #WebCross from the past week, like + repost + comment on each, then compile a weekly report.",
+          "steps": [
+            "Open x.com and search #WebCross",
+            "Scroll the feed like a human",
+            "Open a post for detail",
+            "Like it and post a reply",
+            "Switch over to reddit.com",
+            "Browse the r/automation hot posts",
+            "Capture posts and engagement data",
+            "Archive to a local spreadsheet"
+          ],
+          "browser": {
+            "actions": {
+              "like": "Like",
+              "repost": "Repost",
+              "comment": "Comment",
+              "reply": "Reply",
+              "replyPlaceholder": "Post your reply",
+              "posted": "Posted"
+            },
+            "x": {
+              "name": "X",
+              "url": "x.com/search?q=%23WebCross",
+              "query": "#WebCross",
+              "tabs": [
+                "Top",
+                "Latest",
+                "People",
+                "Media"
+              ],
+              "posts": [
+                {
+                  "user": "Zian Lin",
+                  "handle": "@linzian",
+                  "time": "12m",
+                  "body": "Pulled 200 competitor reviews with WebCross, found three recurring complaints, wrote the report in 10 minutes.",
+                  "likes": "128",
+                  "comments": "32",
+                  "reposts": "9"
+                },
+                {
+                  "user": "Mira",
+                  "handle": "@miralab",
+                  "time": "27m",
+                  "body": "Our Amazon research used to take two interns a full day of copy-paste. With WebCross it is 30 minutes.",
+                  "likes": "412",
+                  "comments": "47",
+                  "reposts": "21"
+                },
+                {
+                  "user": "Kai",
+                  "handle": "@yikeops",
+                  "time": "1h",
+                  "body": "One scrape across every platform, engagement data exported straight to a sheet. No more stitching weekly reports by hand.",
+                  "likes": "256",
+                  "comments": "18",
+                  "reposts": "14"
+                },
+                {
+                  "user": "Jaden",
+                  "handle": "@jadenq",
+                  "time": "2h",
+                  "body": "Fingerprint switching plus the IP pool is the real win — multi-account work finally feels safe.",
+                  "likes": "98",
+                  "comments": "11",
+                  "reposts": "3"
+                }
+              ],
+              "reply": "Same here — we handed price patrol to WebCross too. Runs fully local, nothing leaves the machine 👏"
+            },
+            "reddit": {
+              "name": "Reddit",
+              "url": "reddit.com/r/automation/search?q=WebCross",
+              "sub": "r/automation",
+              "query": "WebCross",
+              "tabs": [
+                "Hot",
+                "New",
+                "Top"
+              ],
+              "posts": [
+                {
+                  "user": "u/scrape_wizard",
+                  "handle": "r/automation",
+                  "time": "6h",
+                  "body": "Finally a local browser agent that does not ship my cookies to someone else cloud.",
+                  "likes": "1.2K",
+                  "comments": "184",
+                  "reposts": "63"
+                },
+                {
+                  "user": "u/ops_daily",
+                  "handle": "r/ecommerce",
+                  "time": "9h",
+                  "body": "Ran WebCross on 800 ASINs overnight. Woke up to a clean CSV. No captcha babysitting.",
+                  "likes": "864",
+                  "comments": "121",
+                  "reposts": "37"
+                },
+                {
+                  "user": "u/pm_kento",
+                  "handle": "r/SaaS",
+                  "time": "13h",
+                  "body": "Token bill dropped by more than half after switching to the AXTree extraction mode.",
+                  "likes": "537",
+                  "comments": "76",
+                  "reposts": "25"
+                }
+              ],
+              "reply": "Same here — the skill it saved after the first run cut our token spend again on the second."
+            },
+            "archive": {
+              "title": "Archived",
+              "file": "social_weekly_report.csv",
+              "meta": "30 posts · engagement data and replies written locally",
+              "fields": [
+                "Platform",
+                "Author",
+                "Body",
+                "Likes",
+                "Comments",
+                "Reposts",
+                "Engaged"
+              ],
+              "progressLabel": "Capture progress"
+            }
+          }
+        }
+      }
+    },
+    "features": {
+      "badge": "PRODUCT",
+      "items": [
+        {
+          "key": "speed",
+          "eyebrow": "Kernel-level build",
+          "title": "The fastest agent browser",
+          "body": "A custom Chromium engine — not a JavaScript shim on top of vanilla Chrome.",
+          "figure": "Custom Chromium vs Chrome + JS adapter",
+          "bullets": [
+            "Marketplaces such as Amazon, where fingerprint and IP are policed hard",
+            "SaaS platforms and internal enterprise systems",
+            "Social media, several accounts in parallel"
+          ]
+        },
+        {
+          "key": "token",
+          "eyebrow": "AXTree extraction",
+          "title": "Same task, far fewer tokens",
+          "body": "AXTree returns filtered page structure with DOM noise stripped; cross-origin iframe and Shadow DOM supported for precise extraction.",
+          "figure": "Raw DOM vs filtered AXTree (token cost)",
+          "bullets": [
+            "Cuts page context by ~85% on average",
+            "Reads cross-origin iframes and Shadow DOM alike",
+            "Shorter context means lower latency and steadier decisions"
+          ]
+        },
+        {
+          "key": "local",
+          "eyebrow": "Data sovereignty",
+          "title": "100% local data sovereignty",
+          "body": "Credentials, cookies, and execution logs stay on your machine. Nothing goes to the cloud.",
+          "figure": "Local shield · zero cloud upload",
+          "bullets": [
+            "Credentials and cookies never leave the machine",
+            "Execution logs stay local, auditable and replayable",
+            "Tasks keep running with no network at all"
+          ]
+        },
+        {
+          "key": "fingerprint",
+          "eyebrow": "Account safety",
+          "title": "Unique fingerprint environment",
+          "body": "Custom browser fingerprints plus on-the-fly IP switching keep multi-account work safe.",
+          "figure": "Multi-instance × fingerprint / IP matrix",
+          "bullets": [
+            "One fingerprint and exit IP per instance",
+            "Sessions stay isolated across concurrent accounts",
+            "Fingerprint templates can be cloned and rolled out in bulk"
+          ]
+        },
+        {
+          "key": "skill",
+          "eyebrow": "Skill distillation",
+          "title": "Generate your own Skills",
+          "body": "Tasks run through the WebCross Harness crystallize into reusable Skills and workflows — call them next time and save 60%+ tokens.",
+          "figure": "Run → Skill → reuse",
+          "bullets": [
+            "The very first run produces a reusable Skill",
+            "Reuse skips page discovery and jumps to the key steps",
+            "Skills and workflows are stored locally"
+          ]
+        },
+        {
+          "key": "takeover",
+          "eyebrow": "Human in the loop",
+          "title": "Seamless handoff on sensitive steps",
+          "body": "On captcha or 2FA, the agent pauses for you in milliseconds; resumes automatically after confirmation.",
+          "figure": "Background → takeover card → resume",
+          "bullets": [
+            "Raised in milliseconds without pausing other tasks",
+            "Resumes from the exact breakpoint once verified",
+            "Handoff records stay on-device too"
+          ]
+        }
+      ]
+    },
+    "comparison": {
+      "title": "Why choose WebCross?",
+      "subtitle": "Compared against the four main alternatives, WebCross is closer to real business needs on every dimension.",
+      "dimensionHead": "Dimension",
+      "products": [
+        {
+          "name": "WebCross",
+          "tagline": "Custom Chromium",
+          "highlight": true,
+          "values": {
+            "exec": "On-device custom Chromium, drives page elements directly",
+            "data": "100% local, zero cloud",
+            "security": "Fingerprint + IP switch",
+            "multi": "Multi-instance background",
+            "twofa": "Native millisecond HITL",
+            "skill": "Auto-saved Skills & workflows",
+            "barrier": "Natural language, zero barrier"
+          }
+        },
+        {
+          "name": "Legacy RPA",
+          "tagline": "UiPath · Yingdao",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": true,
+            "twofa": false,
+            "skill": true,
+            "barrier": false
+          }
+        },
+        {
+          "name": "ChatGPT Atlas",
+          "tagline": "OpenAI · 2025",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": false,
+            "twofa": true,
+            "skill": false,
+            "barrier": true
+          }
+        },
+        {
+          "name": "Perplexity Comet",
+          "tagline": "Perplexity AI · 2025",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": false,
+            "twofa": true,
+            "skill": false,
+            "barrier": true
+          }
+        },
+        {
+          "name": "Browser Use",
+          "tagline": "Open source · Python",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": true,
+            "twofa": false,
+            "skill": false,
+            "barrier": false
+          }
+        }
+      ],
+      "dimensions": [
+        {
+          "key": "exec",
+          "label": "Execution env"
+        },
+        {
+          "key": "data",
+          "label": "Data locality"
+        },
+        {
+          "key": "security",
+          "label": "Account safety"
+        },
+        {
+          "key": "multi",
+          "label": "Multi-task"
+        },
+        {
+          "key": "twofa",
+          "label": "2FA / Captcha"
+        },
+        {
+          "key": "skill",
+          "label": "Custom Skill / workflow"
+        },
+        {
+          "key": "barrier",
+          "label": "Setup barrier"
+        }
+      ],
+      "legendYes": "Supported",
+      "legendNo": "Not supported"
+    },
+    "closing": {
+      "title": "Put your agent to work today",
+      "sub": "Download WebCross and try a genuinely local agent browser."
+    }
+  },
+  "company": {
+    "title": "About Company",
+    "subtitle": "Qingzhu Technology · Next-Gen On-Device AI Infrastructure",
+    "lead": "Qingzhu Technology is dedicated to exploring new paradigms of human-AI synergy, creating secure, reliable, and accessible on-device intelligence.",
+    "storyTitle": "Mission & Engineering Ethos",
+    "story": "We believe the true power of AI lies not in endless chatbot conversations, but in navigating real-world digital applications to eliminate tedious, repetitive tasks. Through local-first architectures and high-throughput proprietary page engines, we protect data sovereignty while returning time and focus to creators.",
+    "legalLabel": "Corporate Entity",
+    "cityLabel": "Headquarters",
+    "productLabel": "Core Product",
+    "productName": "WebCross (On-Device AI Browser)",
+    "emailLabel": "Business & Support",
+    "legalName": "Qingzhu Technology Ltd.",
+    "city": "Hangzhou, China",
+    "figure": "Qingzhu Technology R&D Center"
+  },
+  "download": {
+    "title": "Download WebCross",
+    "lead": "Experience the new era of on-device autonomous AI browsing. Built for macOS & Windows with zero-friction local installation.",
+    "figure": "WebCross Client Installation & Preview",
+    "userButton": "Download for macOS",
+    "clientButton": "Windows (Coming Soon)",
+    "userHint": "macOS 13.0+ · Apple Silicon (M-Series) & Intel CPUs",
+    "clientHint": "Windows 11 64-bit · Preview Channel Coming Soon",
+    "systemLabel": "Supported OS",
+    "dataLabel": "Data Privacy",
+    "dataValue": "100% On-Device Local-First Storage",
+    "userMeta": "DMG Installer (128 MB) · SHA256 Signed · Available Now",
+    "clientMeta": "MSIX / EXE Setup · In Active Development",
+    "quickstartTitle": "Quick Start Guide",
+    "quickstart": [
+      {
+        "step": "01",
+        "title": "Install",
+        "desc": "Open the DMG package and drag WebCross into your Applications folder."
+      },
+      {
+        "step": "02",
+        "title": "Permissions",
+        "desc": "Grant accessibility and browser automation permissions on first launch."
+      },
+      {
+        "step": "03",
+        "title": "Execute",
+        "desc": "Type your first natural language task in the console and let the agent work."
+      }
+    ]
+  },
+  "footer": {
+    "localFirst": "100% Local-First · Zero Leakage",
+    "get": "Download",
+    "navTitle": "Navigation",
+    "productTitle": "Product & System",
+    "desc": "Built for macOS 13+ & Windows 11. Designed for privacy-first enterprise and power-user web automation.",
+    "securityBadge": "100% Local-First Architecture"
+  },
+  "a11y": {
+    "mainNav": "Main navigation",
+    "localeNav": "Language switcher",
+    "queue": "Chapter index",
+    "rail": "Chapter navigation",
+    "stage": "Main content area",
+    "menu": "Toggle mobile menu",
+    "scenarioSwitcher": "Scenario switcher",
+    "featureList": "产品能力列表"
+  }
+}

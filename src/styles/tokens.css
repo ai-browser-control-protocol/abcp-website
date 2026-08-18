@@ -1,0 +1,98 @@
+:root {
+  /* Canvas & Surfaces — white/black/orange three-color system */
+  --desk: #ffffff;
+  --bg-canvas: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #fafafa;
+  --bg-surface-hover: #f4f4f5;
+  --bg-glass: rgba(255, 255, 255, 0.78);
+  --bg-glass-card: rgba(255, 255, 255, 0.92);
+  --bg-glass-card-hover: rgba(255, 255, 255, 0.98);
+  --bg-accent-subtle: rgba(255, 107, 53, 0.08);
+
+  /* Legacy aliases remapped to the white theme */
+  --paper: #ffffff;
+  --paper-card: #ffffff;
+  --paper-callout: #fafafa;
+  --paper-deep: #f4f4f5;
+  --paper-slot: #f7f7f8;
+  --ink: #0a0a0a;
+  --pale: #52525b;
+  --mute: #71717a;
+  --mute-slate: #a1a1aa;
+
+  /* Typography & Foreground (ink scale) */
+  --text-primary: #0a0a0a;
+  --text-secondary: #3f3f46;
+  --text-muted: #71717a;
+  --text-faint: #d4d4d8;
+
+  /* Brand accent — orange (sole accent color) */
+  --oxide: #ff6b35;
+  --oxide-hover: #ea580c;
+  --oxide-subtle: rgba(255, 107, 53, 0.1);
+  --oxide-glow: rgba(255, 107, 53, 0.25);
+  --live: var(--oxide);
+  --hold: var(--oxide);
+  --emerald: #10b981;
+  --emerald-subtle: rgba(16, 185, 129, 0.1);
+  --cyan: #0ea5e9;
+  --cyan-subtle: rgba(14, 165, 233, 0.1);
+  --gold: #f59e0b;
+
+  /* Third-party brand colors (used verbatim, never re-tinted) */
+  --discord: #5865f2;
+  --discord-hover: #4752c4;
+
+  /* Borders & Rules (light theme) */
+  --rule-desk: rgba(0, 0, 0, 0.06);
+  --rule: rgba(0, 0, 0, 0.08);
+  --rule-strong: rgba(0, 0, 0, 0.14);
+  --rule-active: rgba(0, 0, 0, 0.24);
+  --border-accent: rgba(255, 107, 53, 0.35);
+  --border-cyan: rgba(14, 165, 233, 0.3);
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #ff6b35 0%, #ea580c 100%);
+  --gradient-text: linear-gradient(180deg, #0a0a0a 0%, #3f3f46 100%);
+  --gradient-accent-text: linear-gradient(135deg, #ff6b35 0%, #ea580c 100%);
+  --gradient-card: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
+  --gradient-glow-hero: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 107, 53, 0.08), transparent 70%);
+
+  /* Shadows & Inset Highlights (softer for light theme) */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 18px -4px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.08), 0 18px 32px -6px rgba(0, 0, 0, 0.1);
+  --shadow-button-primary: 0 1px 2px rgba(0, 0, 0, 0.18);
+  --shadow-glow-button: 0 0 20px rgba(255, 107, 53, 0.25);
+
+  /* Layout & Spacing */
+  --grid-max: 1200px;
+  --stage-duration: 240ms;
+  --stage-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 72px;
+  --space-9: 104px;
+
+  /* Border Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  --radius: var(--radius-md);
+
+  /* Typography */
+  --font-en: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-zh: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "Noto Sans SC", sans-serif;
+  --font-ui: var(--font-en), var(--font-zh);
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  --font-mark: var(--font-en);
+  --nav-h: 60px;
+}

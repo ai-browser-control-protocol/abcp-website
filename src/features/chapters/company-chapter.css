@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Company Chapter Styles (Pure Editorial Corporate Profile)
+   ========================================================================== */
+
+.company-page {
+  position: relative;
+  display: grid;
+  gap: var(--space-7);
+}
+
+/* Ambient Radial Glow */
+.company-ambient-glow {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1100px;
+  height: 480px;
+  background-image:
+    radial-gradient(ellipse 60% 45% at 50% 0%, rgba(255, 107, 53, 0.06), transparent 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 25%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 25%, #000 30%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== Header Profile ===== */
+.company-header-center {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  text-align: center;
+  justify-items: center;
+  max-width: 860px;
+  margin: 16px auto 0;
+}
+
+.company-hero-title {
+  font-size: clamp(32px, 4.4vw, 50px);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+}
+
+.company-hero-tagline {
+  font-size: clamp(16px, 1.8vw, 19px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: -0.01em;
+}
+
+.company-hero-lead {
+  font-size: clamp(14.5px, 1.6vw, 16px);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 720px;
+}
+
+/* ===== Corporate Mission & Story Section ===== */
+.company-story-section {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 880px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px 0 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  text-align: left;
+}
+
+.company-story-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+}
+
+.company-story-body {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.78);
+  text-wrap: pretty;
+}
+
+/* ===== Enterprise Showcase Dual-Column ===== */
+.company-editorial-showcase {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  max-width: 880px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.company-profile-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.company-spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.company-spec-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  font-size: 14.5px;
+}
+
+.spec-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.spec-value {
+  color: #ffffff;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.spec-link {
+  color: var(--oxide);
+  text-decoration: none;
+  transition: opacity 150ms ease;
+}
+
+.spec-link:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+.company-visual-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+}
+
+/* ===== Responsive Company ===== */
+@media (max-width: 800px) {
+  .company-editorial-showcase {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .company-spec-row {
+    grid-template-columns: 110px 1fr;
+  }
+}

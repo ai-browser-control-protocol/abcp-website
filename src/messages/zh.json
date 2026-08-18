@@ -1,0 +1,724 @@
+{
+  "brand": {
+    "name": "WebCross",
+    "thesis": "WebCross 将协助您的智能体",
+    "thesisHighlight": "完成繁杂的网页工作",
+    "tagline": "让您的智能体更快、更省 Token 地完成繁杂的网页工作，全程后台运行，零干扰。",
+    "badge": "本地端自主智能体浏览器",
+    "get": "下载客户端"
+  },
+  "nav": {
+    "product": "产品特性",
+    "company": "关于公司",
+    "download": "下载客户端",
+    "solutions": "解决方案",
+    "resources": "资源",
+    "discord": "Discord"
+  },
+  "resources": {
+    "docs": "文档",
+    "changelog": "更新日志",
+    "blog": "博客",
+    "tools": "工具"
+  },
+  "queue": {
+    "label": "导航索引",
+    "product": "产品概览",
+    "company": "企业信息",
+    "download": "03 · 客户端下载",
+    "deck": {
+      "product": "本地运行的自主网页 Agent",
+      "company": "青渚科技与品牌理念",
+      "download": "macOS 与 Windows 客户端下载"
+    }
+  },
+  "beats": {
+    "product": [
+      "智能感知",
+      "原生驱动",
+      "极致掌控"
+    ],
+    "company": [
+      "品牌初心",
+      "技术愿景",
+      "开放合作"
+    ],
+    "download": [
+      "版本选择",
+      "环境配置",
+      "快速启程"
+    ]
+  },
+  "figure": "功能示意图",
+  "locales": {
+    "zh": "简体中文",
+    "ja": "日本語",
+    "ko": "한국어",
+    "en": "English"
+  },
+  "seo": {
+    "product": {
+      "title": "WebCross · 协助智能体完成繁杂的网页工作",
+      "description": "WebCross 是本机定制 Chromium 内核的智能体浏览器，100% 本地数据主权，最省 Token 的网页自动化执行环境。"
+    },
+    "company": {
+      "title": "关于公司 · WebCross",
+      "description": "青渚科技有限公司，探索下一代人机协同与端侧智能基础设施。"
+    },
+    "download": {
+      "title": "下载体验 · WebCross",
+      "description": "下载 WebCross 智能工作台与客户端，支持 macOS 与 Windows 平台。"
+    }
+  },
+  "product": {
+    "title": "产品概览",
+    "thesisBrand": "WebCross",
+    "thesisLead": "将协助您的智能体",
+    "thesisRest": "完成繁杂的网页工作",
+    "sub": "让您的智能体更快、更省 Token 地完成繁杂的网页工作，全程后台运行，零干扰。",
+    "ctaPrimaryMac": "下载 macOS 版",
+    "ctaPrimaryWin": "下载 Windows 版",
+    "systemSupport": "支持 macOS 13+（Apple Silicon / Intel）· Windows 11 64 位",
+    "assurances": [
+      "是的，公测阶段全功能免费",
+      "本地优先，数据零外泄"
+    ],
+    "demo": {
+      "badge": "LIVE DEMO",
+      "title": "WebCross 帮助用户完成以下任务",
+      "scrollHint": "继续向下滚动，依次查看三个真实任务",
+      "clientTitle": "WebCross · Agent",
+      "taskLabel": "原始任务",
+      "runLabel": "执行任务",
+      "logLabel": "执行轨迹",
+      "statusRunning": "执行中",
+      "statusDone": "已完成",
+      "tabs": {
+        "A": "Amazon 价格巡检",
+        "B": "Amazon 商家上架",
+        "C": "社交媒体采集"
+      },
+      "scenes": {
+        "A": {
+          "label": "场景 A · Amazon 商品价格巡检",
+          "caption": "每天自动巡检上千个商品链接，价格波动第一时间掌握。",
+          "task": "请帮我巡检一下 power bank 商品在 Amazon 中前 30 名的商品，需要获取商品 url、title、price、rating 和前 30 条 bad review 信息。",
+          "steps": [
+            "打开 amazon.com",
+            "在搜索框输入 power bank",
+            "点击搜索按钮",
+            "在结果页点击第一个商品",
+            "进入商品详情页",
+            "获取 url / title / price / rating",
+            "抓取前 30 条 bad review",
+            "整理并记录到本地"
+          ],
+          "browser": {
+            "urlHome": "www.amazon.com",
+            "urlSerp": "www.amazon.com/s?k=power+bank",
+            "urlPdp": "www.amazon.com/dp/B0D8XQ1KJ2",
+            "urlReviews": "www.amazon.com/product-reviews/B0D8XQ1KJ2",
+            "keyword": "power bank",
+            "searchPlaceholder": "搜索 Amazon",
+            "deliverTo": "配送至 Phoenix 85034",
+            "navItems": [
+              "Today Deals",
+              "Best Sellers",
+              "Electronics",
+              "New Releases",
+              "Prime"
+            ],
+            "resultsMeta": "1-16 条 · 共 40,000+ 条 power bank 结果",
+            "sortLabel": "排序：推荐",
+            "filterTitle": "筛选",
+            "filters": [
+              "高容量",
+              "USB-C",
+              "无线充电",
+              "快充",
+              "自带线材"
+            ],
+            "results": [
+              {
+                "badge": "Overall Pick",
+                "title": "INIU 45W 快充便携充电宝 10000mAh，自带 USB-C 线，飞行安全认证",
+                "rating": "4.4",
+                "reviews": "84.8K",
+                "bought": "过去一个月售出 10K+",
+                "price": "$21.59",
+                "listPrice": "$23.99",
+                "deal": "限时特惠"
+              },
+              {
+                "badge": "",
+                "title": "Anker Power Bank 20,000mAh，内置 USB-C 线，1 个 C 口 + 1 个 A 口",
+                "rating": "4.6",
+                "reviews": "9.2K",
+                "bought": "过去一个月售出 10K+",
+                "price": "$69.99",
+                "listPrice": "",
+                "deal": ""
+              },
+              {
+                "badge": "",
+                "title": "磁吸无线充电宝 10000mAh，20W USB-C 快充 MagSafe 电池组",
+                "rating": "4.2",
+                "reviews": "3.1K",
+                "bought": "过去一个月售出 2K+",
+                "price": "$29.99",
+                "listPrice": "$39.99",
+                "deal": ""
+              }
+            ],
+            "pdp": {
+              "crumb": "电子产品 › 电脑配件 › 移动电源",
+              "title": "INIU 45W Fast Charging Portable Charger 10000mAh Power Bank",
+              "rating": "4.4",
+              "reviews": "84,812 条评价",
+              "bought": "过去一个月售出 10K+",
+              "price": "$21.59",
+              "listPrice": "$23.99",
+              "deal": "限时特惠",
+              "shipping": "Prime 会员次日达 · 美国境内免运费",
+              "cart": "加入购物车",
+              "buy": "立即购买",
+              "reviewsAnchor": "查看全部评论"
+            },
+            "reviews": {
+              "title": "买家评价",
+              "score": "4.3",
+              "scoreLabel": "满分 5 分",
+              "total": "475 条全球评分",
+              "histogram": [
+                [
+                  "5 星",
+                  "73%",
+                  73
+                ],
+                [
+                  "4 星",
+                  "11%",
+                  11
+                ],
+                [
+                  "3 星",
+                  "3%",
+                  3
+                ],
+                [
+                  "2 星",
+                  "2%",
+                  2
+                ],
+                [
+                  "1 星",
+                  "11%",
+                  11
+                ]
+              ],
+              "filterLabel": "已筛选：1–2 星差评",
+              "items": [
+                {
+                  "name": "Showme-thegoods",
+                  "stars": 2,
+                  "title": "容量虚标，续航不达标",
+                  "body": "标称 10000mAh，实测只能把手机充满 1.5 次，和商品页描述差距明显。"
+                },
+                {
+                  "name": "Wolfenhawke",
+                  "stars": 1,
+                  "title": "两周后无法充电",
+                  "body": "刚开始还行，用了两周指示灯常亮但完全充不进电，客服响应也很慢。"
+                },
+                {
+                  "name": "M. Ortega",
+                  "stars": 2,
+                  "title": "快充只在特定手机上生效",
+                  "body": "宣传 45W，实际只有原厂线加特定机型能跑满，其他设备就是普通 18W。"
+                },
+                {
+                  "name": "kellyR",
+                  "stars": 1,
+                  "title": "外壳发烫",
+                  "body": "边充边用时外壳明显发烫，放在包里不太敢用，做工也比图片粗糙。"
+                }
+              ]
+            },
+            "capture": {
+              "title": "已采集数据",
+              "fields": [
+                [
+                  "url",
+                  "amazon.com/dp/B0D8XQ1KJ2"
+                ],
+                [
+                  "title",
+                  "INIU 45W 10000mAh Power Bank"
+                ],
+                [
+                  "price",
+                  "$21.59"
+                ],
+                [
+                  "rating",
+                  "4.4 / 84.8K"
+                ]
+              ],
+              "reviewLabel": "bad review 抓取进度",
+              "reviewTotal": 30,
+              "doneTitle": "已写入本地",
+              "doneFile": "power_bank_top30.csv",
+              "doneMeta": "30 个商品 · 900 条差评 · 100% 本地留存"
+            }
+          }
+        },
+        "B": {
+          "label": "场景 B · Amazon 商家后台上架",
+          "caption": "上百个 SKU 一键上架，表单填写交给智能体。",
+          "task": "在 Seller Central 新增商品：名称「Mophie Powerstation 20000mAh 黑色」，品牌 Mophie，类目 Electronics › Power Banks，价格 $59.95，库存 200，并上传主图后提交。",
+          "steps": [
+            "打开 Seller Central",
+            "进入 Add Products 流程",
+            "填写商品名称",
+            "展开品牌下拉菜单并选择",
+            "选择商品类目",
+            "填写价格与库存",
+            "上传商品主图",
+            "提交并确认上架成功"
+          ],
+          "browser": {
+            "url": "sellercentral.amazon.com/catalog/add",
+            "brandbar": "amazon seller central",
+            "path": "Catalog › Add Products",
+            "tabs": [
+              "关键信息",
+              "描述",
+              "图片",
+              "关键字"
+            ],
+            "nameLabel": "商品名称",
+            "nameValue": "Mophie Powerstation 20000mAh 黑色",
+            "brandLabel": "品牌",
+            "brandPlaceholder": "请选择品牌",
+            "brandOptions": [
+              "Anker",
+              "Belkin",
+              "INIU",
+              "Mophie",
+              "UGREEN"
+            ],
+            "brandValue": "Mophie",
+            "categoryLabel": "商品类目",
+            "categoryPlaceholder": "请选择类目",
+            "categoryOptions": [
+              "Electronics › Chargers",
+              "Electronics › Power Banks",
+              "Electronics › Cables"
+            ],
+            "categoryValue": "Electronics › Power Banks",
+            "priceLabel": "价格 (USD)",
+            "priceValue": "59.95",
+            "stockLabel": "库存数量",
+            "stockValue": "200",
+            "uploadLabel": "拖入或点击上传商品主图",
+            "uploadHint": "支持 JPG / PNG · 建议 1600×1600",
+            "uploadFile": "mophie-powerstation-20000-black.jpg",
+            "uploadSize": "1.8 MB",
+            "submitLabel": "提交上架",
+            "submitting": "正在提交…",
+            "success": "上架成功",
+            "successMeta": "SKU MPH-PS20000-BLK 已进入审核队列",
+            "queueLabel": "本批剩余 SKU",
+            "queueValue": "117 / 118"
+          }
+        },
+        "C": {
+          "label": "场景 C · 社交媒体内容采集与互动",
+          "caption": "帖子与互动数据自动归档，自动协助你运营社交媒体。",
+          "task": "帮我在 X 和 Reddit 上采集 #WebCross 近一周的 30 条热门帖子，抓取互动数据，并逐条点赞、转发、发布评论，最后整理成运营周报。",
+          "steps": [
+            "打开 x.com 搜索 #WebCross",
+            "模仿人类滚动浏览",
+            "点击帖子查看详情",
+            "点赞并回复评论",
+            "切换到 reddit.com",
+            "浏览 r/automation 热帖",
+            "采集帖子与互动数据",
+            "归档到本地表格"
+          ],
+          "browser": {
+            "actions": {
+              "like": "点赞",
+              "repost": "转发",
+              "comment": "评论",
+              "reply": "发布回复",
+              "replyPlaceholder": "发布你的回复",
+              "posted": "已发布"
+            },
+            "x": {
+              "name": "X",
+              "url": "x.com/search?q=%23WebCross",
+              "query": "#WebCross",
+              "tabs": [
+                "热门",
+                "最新",
+                "用户",
+                "媒体"
+              ],
+              "posts": [
+                {
+                  "user": "林子安",
+                  "handle": "@linzian",
+                  "time": "12 分钟前",
+                  "body": "用 WebCross 抓了 200 条竞品评论，总结出三个高频痛点，写报告只花了 10 分钟。",
+                  "likes": "128",
+                  "comments": "32",
+                  "reposts": "9"
+                },
+                {
+                  "user": "Mira",
+                  "handle": "@miralab",
+                  "time": "27 分钟前",
+                  "body": "我们做 Amazon 调研，从前要两个实习生手动复制一整天。换成 WebCross 之后，30 分钟搞定。",
+                  "likes": "412",
+                  "comments": "47",
+                  "reposts": "21"
+                },
+                {
+                  "user": "运营阿凯",
+                  "handle": "@yikeops",
+                  "time": "1 小时前",
+                  "body": "多平台统一抓取，互动数据自动导出表格，周报再也不用手拼了。",
+                  "likes": "256",
+                  "comments": "18",
+                  "reposts": "14"
+                },
+                {
+                  "user": "Jaden",
+                  "handle": "@jadenq",
+                  "time": "2 小时前",
+                  "body": "指纹切换加 IP 池是真的香，多账号安全得不行。",
+                  "likes": "98",
+                  "comments": "11",
+                  "reposts": "3"
+                }
+              ],
+              "reply": "同感！我们把巡检也交给 WebCross 了，全程本地跑，数据不出机器 👏"
+            },
+            "reddit": {
+              "name": "Reddit",
+              "url": "reddit.com/r/automation/search?q=WebCross",
+              "sub": "r/automation",
+              "query": "WebCross",
+              "tabs": [
+                "Hot",
+                "New",
+                "Top"
+              ],
+              "posts": [
+                {
+                  "user": "u/scrape_wizard",
+                  "handle": "r/automation",
+                  "time": "6 小时前",
+                  "body": "Finally a local browser agent that does not ship my cookies to someone else cloud.",
+                  "likes": "1.2K",
+                  "comments": "184",
+                  "reposts": "63"
+                },
+                {
+                  "user": "u/ops_daily",
+                  "handle": "r/ecommerce",
+                  "time": "9 小时前",
+                  "body": "Ran WebCross on 800 ASINs overnight. Woke up to a clean CSV. No captcha babysitting.",
+                  "likes": "864",
+                  "comments": "121",
+                  "reposts": "37"
+                },
+                {
+                  "user": "u/pm_kento",
+                  "handle": "r/SaaS",
+                  "time": "13 小时前",
+                  "body": "Token bill dropped by more than half after switching to the AXTree extraction mode.",
+                  "likes": "537",
+                  "comments": "76",
+                  "reposts": "25"
+                }
+              ],
+              "reply": "Same here — the skill it saved after the first run cut our token spend again on the second."
+            },
+            "archive": {
+              "title": "已归档",
+              "file": "social_weekly_report.csv",
+              "meta": "30 条帖子 · 互动数据与回复记录已写入本地",
+              "fields": [
+                "平台",
+                "作者",
+                "正文",
+                "点赞",
+                "评论",
+                "转发",
+                "已互动"
+              ],
+              "progressLabel": "采集进度"
+            }
+          }
+        }
+      }
+    },
+    "features": {
+      "badge": "PRODUCT",
+      "items": [
+        {
+          "key": "speed",
+          "eyebrow": "内核级定制",
+          "title": "最快的智能体浏览器",
+          "body": "定制 Chromium 内核引擎，而不是在原版 Chrome 上包一层 JavaScript 适配层。指令直达渲染进程与浏览器内部协议，省掉 RPC 往返与序列化开销，同一条任务链路执行速度可达数倍。",
+          "figure": "Chromium 内核级定制 vs Chrome + JS 适配层",
+          "bullets": [
+            "电商平台：Amazon 等对指纹与 IP 严控的场景",
+            "SaaS 平台与企业内部系统",
+            "社交媒体多账号并行运营"
+          ]
+        },
+        {
+          "key": "token",
+          "eyebrow": "AXTree 抽取",
+          "title": "同样的任务，更省 Token",
+          "body": "通过 AXTree 只回传过滤后的页面语义结构，剔除样式、脚本与嵌套容器等 DOM 冗余；同时支持跨域 iframe 与 Shadow DOM 穿透访问，让模型只看到它真正需要决策的那部分内容。",
+          "figure": "原始 DOM → 过滤后 AXTree 的 Token 消耗对比",
+          "bullets": [
+            "平均削减 85% 页面上下文体积",
+            "跨域 iframe 与 Shadow DOM 一并可读",
+            "更短的上下文等于更低延迟与更稳的决策"
+          ]
+        },
+        {
+          "key": "local",
+          "eyebrow": "数据主权",
+          "title": "100% 本地数据主权",
+          "body": "账号凭证、Cookie 会话、执行流水与指令，全部留在您的物理机上；零云端上传、零数据回传。即便断网，智能体仍可继续执行已派发的本地任务。",
+          "figure": "本机隔离沙箱 · 零云端上传",
+          "bullets": [
+            "凭证与 Cookie 永不离开本机",
+            "执行流水本地留存，可审计可回溯",
+            "断网环境下任务照常推进"
+          ]
+        },
+        {
+          "key": "fingerprint",
+          "eyebrow": "账号安全",
+          "title": "独一无二的指纹环境",
+          "body": "支持浏览器指纹定制，UA、时区、字体、Canvas 与显卡指纹独立配置，IP 池可随时切换。多账号并发执行互不串号，显著降低被风控识别的概率。",
+          "figure": "多实例 × 多指纹 × 多出口 IP 矩阵",
+          "bullets": [
+            "每个实例一套独立指纹与出口 IP",
+            "会话隔离，多账号并发不串号",
+            "指纹模板可复制、可批量下发"
+          ]
+        },
+        {
+          "key": "skill",
+          "eyebrow": "Skill 沉淀",
+          "title": "沉淀你的专属任务 Skill",
+          "body": "通过 WebCross Harness 执行过的任务，会自动沉淀为专属技能与工作流；下次直接调用已验证的路径，无需重新探索页面，节省 60% 以上 Token，并可跨任务复用。",
+          "figure": "任务执行 → 沉淀 Skill → 一键复用",
+          "bullets": [
+            "首次执行即自动生成可复用 Skill",
+            "复用时跳过页面探索，直达关键步骤",
+            "Skill 与工作流均保存在本地"
+          ]
+        },
+        {
+          "key": "takeover",
+          "eyebrow": "人机协同",
+          "title": "敏感环节无缝接管",
+          "body": "遇到验证码、2FA 或支付确认等敏感核验时，毫秒级唤起人工接管卡片；您完成核验后，智能体立刻从断点恢复后台执行，整条任务链路不需要重启。",
+          "figure": "后台执行 → 接管卡片 → 断点恢复",
+          "bullets": [
+            "毫秒级唤起，不打断其他并发任务",
+            "核验完成后从断点自动恢复",
+            "接管记录同样只留在本地"
+          ]
+        }
+      ]
+    },
+    "comparison": {
+      "title": "为什么选择 WebCross？",
+      "subtitle": "横评四类主流方案，从执行环境到上手门槛，WebCross 在每一个关键维度都更贴近真实业务需求。",
+      "dimensionHead": "能力维度",
+      "products": [
+        {
+          "name": "WebCross",
+          "tagline": "本机定制 Chromium 内核",
+          "highlight": true,
+          "values": {
+            "exec": "本机定制 Chromium 内核，直接驱动页面元素",
+            "data": "100% 本地留存，零上云",
+            "security": "指纹定制 + IP 随时切换",
+            "multi": "多实例后台并发",
+            "twofa": "原生毫秒级人工接管",
+            "skill": "任务自动沉淀 Skill / 工作流",
+            "barrier": "自然语言零门槛"
+          }
+        },
+        {
+          "name": "传统 RPA",
+          "tagline": "UiPath · 影刀",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": true,
+            "twofa": false,
+            "skill": true,
+            "barrier": false
+          }
+        },
+        {
+          "name": "ChatGPT Atlas",
+          "tagline": "OpenAI · 2025",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": false,
+            "twofa": true,
+            "skill": false,
+            "barrier": true
+          }
+        },
+        {
+          "name": "Perplexity Comet",
+          "tagline": "Perplexity AI · 2025",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": false,
+            "twofa": true,
+            "skill": false,
+            "barrier": true
+          }
+        },
+        {
+          "name": "Browser Use",
+          "tagline": "开源 · Python",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": true,
+            "twofa": false,
+            "skill": false,
+            "barrier": false
+          }
+        }
+      ],
+      "dimensions": [
+        {
+          "key": "exec",
+          "label": "核心执行环境"
+        },
+        {
+          "key": "data",
+          "label": "数据本地化"
+        },
+        {
+          "key": "security",
+          "label": "账号安全"
+        },
+        {
+          "key": "multi",
+          "label": "多任务并发"
+        },
+        {
+          "key": "twofa",
+          "label": "2FA / 验证码接管"
+        },
+        {
+          "key": "skill",
+          "label": "定制 Skill / 工作流"
+        },
+        {
+          "key": "barrier",
+          "label": "配置与学习门槛"
+        }
+      ],
+      "legendYes": "具备",
+      "legendNo": "不具备 / 不支持"
+    },
+    "closing": {
+      "title": "让您的智能体，从今天起开始干活",
+      "sub": "下载 WebCross，体验真正的本地端智能体浏览器。"
+    }
+  },
+  "company": {
+    "title": "关于公司",
+    "subtitle": "青渚科技有限公司 · 探索下一代端侧智能基础设施",
+    "lead": "青渚科技致力于探索人机协同新范式，打造安全、可靠、人人可用的下一代端侧智能基础设施。",
+    "storyTitle": "企业使命与技术初心",
+    "story": "我们深信，人工智能的真正价值不在于制造无休止的文字对话，而在于深入真实的数字世界替人类解决繁复、机械的琐碎劳作。通过端侧优先与高可用自研页面引擎架构，我们致力于守护用户数据主权，将双手与宝贵时间归还给每一位热爱生活与创造的人。",
+    "legalLabel": "企业主体",
+    "cityLabel": "总部地点",
+    "productLabel": "核心产品",
+    "productName": "WebCross (端侧智能体浏览器)",
+    "emailLabel": "商务与技术支持",
+    "legalName": "青渚科技有限公司",
+    "city": "中国 · 杭州",
+    "figure": "青渚科技研发中心"
+  },
+  "download": {
+    "title": "下载 WebCross",
+    "lead": "即刻开启本地端侧自主智能浏览新纪元。支持 macOS 与 Windows 平台，轻量无侵入，一键安装即可使用。",
+    "figure": "WebCross 客户端安装与工作台预览",
+    "userButton": "下载 macOS 客户端",
+    "clientButton": "Windows 版本 (准备中)",
+    "userHint": "macOS 13.0+ · 支持 Apple Silicon (M系列) & Intel 芯片",
+    "clientHint": "Windows 11 64位 · 预览版即将上线",
+    "systemLabel": "支持系统",
+    "dataLabel": "数据安全",
+    "dataValue": "100% 数据仅保存在本地物理机",
+    "userMeta": "DMG 安装包 (128 MB) · SHA256 签名校验 · 现已开放",
+    "clientMeta": "MSIX / EXE 安装包 · 架构联调中 · 敬请期待",
+    "quickstartTitle": "快速上手指引",
+    "quickstart": [
+      {
+        "step": "01",
+        "title": "安装部署",
+        "desc": "下载并打开 DMG 安装包，将 WebCross 图标拖入「应用程序」目录。"
+      },
+      {
+        "step": "02",
+        "title": "权限授权",
+        "desc": "首次启动通过系统提示，按需开启辅助功能与自动化控制权限。"
+      },
+      {
+        "step": "03",
+        "title": "意图执行",
+        "desc": "在控制面板输入您的第一条自然语言任务，体验端侧智能体自律执行。"
+      }
+    ]
+  },
+  "footer": {
+    "localFirst": "100% 本地优先 · 零隐私泄漏",
+    "get": "下载客户端",
+    "navTitle": "快速导航",
+    "productTitle": "产品与系统",
+    "desc": "专为 macOS 13+ 与 Windows 11 深度打造。为隐私至上的企业办公与高阶玩家量身定制的端侧网页自动化平台。",
+    "securityBadge": "100% 本地优先架构"
+  },
+  "a11y": {
+    "mainNav": "主导航栏",
+    "localeNav": "语言切换菜单",
+    "queue": "章节目录",
+    "rail": "本章导览",
+    "stage": "主要内容区域",
+    "menu": "展开移动端菜单",
+    "scenarioSwitcher": "演示场景切换",
+    "featureList": "产品能力列表"
+  }
+}

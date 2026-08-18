@@ -1,0 +1,22 @@
+/**
+ * Renders the settled chapter body from a server-built view model.
+ */
+import type { ChapterViewModel } from "@/content/models";
+import { CompanyChapter } from "./CompanyChapter";
+import { DownloadChapter } from "./DownloadChapter";
+import { ProductChapter } from "./ProductChapter";
+
+export function ChapterView({ model }: { model: ChapterViewModel }) {
+  if (model.id === "product" && model.product)
+    return (
+      <ProductChapter
+        copy={model.product}
+        brandName={model.brandName}
+        tagline={model.tagline}
+        getLabel={model.getLabel}
+      />
+    );
+  if (model.id === "company" && model.company) return <CompanyChapter copy={model.company} />;
+  if (model.id === "download" && model.download) return <DownloadChapter copy={model.download} />;
+  return null;
+}

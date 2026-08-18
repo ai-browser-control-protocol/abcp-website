@@ -4,6 +4,7 @@
  */
 import { ImageResponse } from "next/og";
 import { getChapterModel } from "@/content/models";
+import { site } from "@/content/site";
 import type { ChapterId, Locale } from "@/content/types";
 
 export const ogSize = { width: 1200, height: 630 };
@@ -122,7 +123,7 @@ export function createOgImage(locale: Locale, chapter: ChapterId) {
             macOS & Windows Client
           </span>
           <span style={{ fontSize: 15, color: "rgba(255, 255, 255, 0.4)" }}>
-            abcp.qingzhu.tech
+            {new URL(site.url).host}
           </span>
         </div>
       </div>

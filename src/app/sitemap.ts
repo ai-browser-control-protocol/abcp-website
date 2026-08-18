@@ -1,5 +1,5 @@
 /**
- * Locale × chapter sitemap using absolute placeholder URLs.
+ * Locale × chapter sitemap using absolute production URLs.
  */
 import type { MetadataRoute } from "next";
 import { chapterHref } from "@/content/chapters";

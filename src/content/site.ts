@@ -5,7 +5,7 @@ import type { Locale } from "./types";
 
 export const site = {
   name: "ABCP",
-  url: process.env.SITE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://abcp.example",
+  url: process.env.SITE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://webcross.ai",
   defaultLocale: "zh" as Locale,
   twitterSite: "@abcp_example",
   twitterCreator: "@abcp_example",

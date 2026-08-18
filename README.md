@@ -24,6 +24,35 @@ pnpm lint
 pnpm build
 ```
 
+## Deploy
+
+Production deploys run from GitHub Actions when a `v*` tag is pushed. Vercel Git auto-deploy is off in `vercel.json` so only that workflow ships production.
+
+1. Create a [Vercel access token](https://vercel.com/account/tokens).
+2. Link the project once locally and copy the IDs:
+
+```sh
+npx vercel link
+cat .vercel/project.json
+```
+
+3. In the GitHub repo: **Settings → Secrets and variables → Actions**, add:
+
+| Secret | Value |
+|---|---|
+| `VERCEL_TOKEN` | token from step 1 |
+| `VERCEL_ORG_ID` | `orgId` from `.vercel/project.json` |
+| `VERCEL_PROJECT_ID` | `projectId` from `.vercel/project.json` |
+
+4. Ship a release:
+
+```sh
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+The workflow is `.github/workflows/deploy-vercel.yml`. It builds in Actions (`vercel build --prod`) and uploads the artifact (`vercel deploy --prebuilt --prod`) so Vercel does not rebuild.
+
 ## Replace placeholders
 
 | What | Where |

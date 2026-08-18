@@ -3,6 +3,9 @@
   "framework": "nextjs",
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm build",
+  "git": {
+    "deploymentEnabled": false
+  },
   "build": {
     "env": {
       "SITE_URL": "https://webcross.ai",

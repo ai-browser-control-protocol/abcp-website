@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Global Common Styles & Utilities
+   Global Common Styles & Utilities — white / orange / black theme
    ========================================================================== */
 
 /* ===== Layout Shell ===== */
@@ -7,9 +7,10 @@
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  background: var(--desk);
+  background: #ffffff;
   color: var(--text-primary);
-  overflow-x: hidden;
+  /* clip (not hidden) keeps position:sticky alive for the nav and the demo stage */
+  overflow-x: clip;
 }
 
 /* ===== Chapter Base Container ===== */
@@ -23,16 +24,16 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 3px 10px;
+  padding: 4px 12px;
   font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--oxide);
-  background: rgba(255, 107, 53, 0.08);
-  border: 1px solid rgba(255, 107, 53, 0.2);
-  border-radius: var(--radius-sm);
+  background: var(--oxide-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-full);
 }
 
 .badge-pill-orange {
@@ -42,8 +43,8 @@
   font-size: 11px;
   font-weight: 600;
   color: var(--oxide);
-  background: rgba(255, 107, 53, 0.1);
-  border: 1px solid rgba(255, 107, 53, 0.25);
+  background: var(--oxide-subtle);
+  border: 1px solid var(--border-accent);
   border-radius: var(--radius-sm);
 }
 
@@ -51,7 +52,7 @@
   margin-left: 8px;
   padding: 2px 6px;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   color: #ffffff;
   background: var(--oxide);
@@ -64,24 +65,27 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 42px;
-  padding: 0 20px;
-  color: #090a0f;
+  min-height: 44px;
+  padding: 0 22px;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 600;
-  background: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background: var(--oxide);
+  border: 1px solid var(--oxide);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-button-primary);
   cursor: pointer;
   transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
+  font-family: inherit;
 }
 
 .ui-button-primary:hover {
-  background: #f1f5f9;
+  background: var(--oxide-hover);
+  border-color: var(--oxide-hover);
+  color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-glow-button);
 }
 
 .ui-button-primary:active {
@@ -101,28 +105,25 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 42px;
-  padding: 0 18px;
+  min-height: 44px;
+  padding: 0 20px;
   color: var(--text-primary);
   font-size: 14px;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-sm);
-  backdrop-filter: blur(8px);
+  background: #ffffff;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-full);
   cursor: pointer;
   transition: all 160ms ease;
   text-decoration: none;
+  font-family: inherit;
 }
 
 .ui-button-ghost:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--rule-strong);
+  background: #fff7f2;
+  border-color: var(--oxide);
+  color: var(--oxide);
   transform: translateY(-1px);
-}
-
-.btn-play-icon {
-  opacity: 0.8;
 }
 
 /* ===== Card Base & Inset Highlight ===== */
@@ -135,7 +136,7 @@
 }
 
 .card-glow:hover {
-  border-color: var(--rule-strong);
+  border-color: var(--border-accent);
   box-shadow: var(--shadow-card-hover);
   transform: translateY(-1px);
 }
@@ -143,7 +144,7 @@
 /* ===== Section Head Center ===== */
 .section-head-center {
   display: grid;
-  gap: var(--space-2);
+  gap: 10px;
   text-align: center;
   justify-items: center;
   max-width: 720px;
@@ -152,15 +153,15 @@
 
 .section-title {
   font-size: clamp(24px, 3.2vw, 34px);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.25;
   letter-spacing: -0.025em;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .section-subtitle {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--text-secondary);
 }
 
@@ -176,9 +177,9 @@
 
 .chapter-main-title {
   font-size: clamp(28px, 3.8vw, 40px);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.025em;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .chapter-main-lead {

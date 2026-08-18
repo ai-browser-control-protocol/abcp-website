@@ -1,64 +1,68 @@
 :root {
-  /* Canvas & Surfaces (Obsidian Slate System) */
-  --desk: #090a0f;
-  --bg-canvas: #090a0f;
-  --bg-surface: #0f1118;
-  --bg-surface-elevated: #151822;
-  --bg-surface-hover: #1b1f2c;
-  --bg-glass: rgba(9, 10, 15, 0.82);
-  --bg-glass-card: rgba(15, 17, 24, 0.7);
-  --bg-glass-card-hover: rgba(21, 24, 34, 0.85);
+  /* Canvas & Surfaces — white/black/orange three-color system */
+  --desk: #ffffff;
+  --bg-canvas: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #fafafa;
+  --bg-surface-hover: #f4f4f5;
+  --bg-glass: rgba(255, 255, 255, 0.78);
+  --bg-glass-card: rgba(255, 255, 255, 0.92);
+  --bg-glass-card-hover: rgba(255, 255, 255, 0.98);
   --bg-accent-subtle: rgba(255, 107, 53, 0.08);
 
-  /* Legacy compatible aliases */
-  --paper: #090a0f;
-  --paper-card: #0f1118;
-  --paper-callout: #151822;
-  --paper-deep: #07080b;
-  --paper-slot: #0c0e14;
-  --ink: #f8fafc;
-  --pale: #94a3b8;
-  --mute: #818cf8;
-  --mute-slate: #64748b;
+  /* Legacy aliases remapped to the white theme */
+  --paper: #ffffff;
+  --paper-card: #ffffff;
+  --paper-callout: #fafafa;
+  --paper-deep: #f4f4f5;
+  --paper-slot: #f7f7f8;
+  --ink: #0a0a0a;
+  --pale: #52525b;
+  --mute: #71717a;
+  --mute-slate: #a1a1aa;
 
-  /* Typography & Foreground */
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-faint: #334155;
+  /* Typography & Foreground (ink scale) */
+  --text-primary: #0a0a0a;
+  --text-secondary: #3f3f46;
+  --text-muted: #71717a;
+  --text-faint: #d4d4d8;
 
-  /* Precision Brand Accents */
+  /* Brand accent — orange (sole accent color) */
   --oxide: #ff6b35;
-  --oxide-hover: #ff8252;
+  --oxide-hover: #ea580c;
   --oxide-subtle: rgba(255, 107, 53, 0.1);
-  --oxide-glow: rgba(255, 107, 53, 0.2);
+  --oxide-glow: rgba(255, 107, 53, 0.25);
   --live: var(--oxide);
   --hold: var(--oxide);
   --emerald: #10b981;
-  --emerald-subtle: rgba(16, 185, 129, 0.12);
-  --cyan: #38bdf8;
-  --cyan-subtle: rgba(56, 189, 248, 0.12);
+  --emerald-subtle: rgba(16, 185, 129, 0.1);
+  --cyan: #0ea5e9;
+  --cyan-subtle: rgba(14, 165, 233, 0.1);
   --gold: #f59e0b;
 
-  /* Borders & Rules */
-  --rule-desk: rgba(255, 255, 255, 0.06);
-  --rule: rgba(255, 255, 255, 0.08);
-  --rule-strong: rgba(255, 255, 255, 0.14);
-  --rule-active: rgba(255, 255, 255, 0.24);
+  /* Third-party brand colors (used verbatim, never re-tinted) */
+  --discord: #5865f2;
+  --discord-hover: #4752c4;
+
+  /* Borders & Rules (light theme) */
+  --rule-desk: rgba(0, 0, 0, 0.06);
+  --rule: rgba(0, 0, 0, 0.08);
+  --rule-strong: rgba(0, 0, 0, 0.14);
+  --rule-active: rgba(0, 0, 0, 0.24);
   --border-accent: rgba(255, 107, 53, 0.35);
-  --border-cyan: rgba(56, 189, 248, 0.35);
+  --border-cyan: rgba(14, 165, 233, 0.3);
 
   /* Gradients */
   --gradient-brand: linear-gradient(135deg, #ff6b35 0%, #ea580c 100%);
-  --gradient-text: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-  --gradient-accent-text: linear-gradient(135deg, #ff8252 0%, #ff6b35 100%);
-  --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+  --gradient-text: linear-gradient(180deg, #0a0a0a 0%, #3f3f46 100%);
+  --gradient-accent-text: linear-gradient(135deg, #ff6b35 0%, #ea580c 100%);
+  --gradient-card: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
   --gradient-glow-hero: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 107, 53, 0.08), transparent 70%);
 
-  /* Shadows & Inset Highlights */
-  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
-  --shadow-card-hover: 0 12px 32px -4px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-  --shadow-button-primary: 0 1px 2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  /* Shadows & Inset Highlights (softer for light theme) */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 18px -4px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.08), 0 18px 32px -6px rgba(0, 0, 0, 0.1);
+  --shadow-button-primary: 0 1px 2px rgba(0, 0, 0, 0.18);
   --shadow-glow-button: 0 0 20px rgba(255, 107, 53, 0.25);
 
   /* Layout & Spacing */

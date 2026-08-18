@@ -1,62 +1,191 @@
 /* ==========================================================================
-   ComparisonTable Component Styles
+   Comparison matrix — products across, dimensions down
    ========================================================================== */
 
 .comparison-section {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-4);
 }
 
-.comparison-table-wrapper {
+.comparison-scroll {
+  width: 100%;
   overflow-x: auto;
   border: 1px solid var(--rule);
-  border-radius: var(--radius-lg);
-  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  background: #ffffff;
   box-shadow: var(--shadow-card);
+  -webkit-overflow-scrolling: touch;
 }
 
 .comparison-table {
   width: 100%;
+  min-width: 860px;
   border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.col-dimension { width: 148px; }
+.col-highlight { width: 216px; }
+
+/* ===== Head ===== */
+
+.comparison-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 14px 14px 13px;
   text-align: left;
-  font-size: 13.5px;
+  vertical-align: bottom;
+  background: #fafafa;
+  border-bottom: 1px solid var(--rule-strong);
 }
 
-.comparison-table th,
-.comparison-table td {
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--rule);
-}
-
-.comparison-table th {
-  font-size: 12.5px;
+.head-dimension {
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 700;
-  color: var(--text-secondary);
-  background: var(--bg-surface-elevated);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-right: 1px solid var(--rule);
 }
 
-.comparison-table th.col-abcp-highlight,
-.comparison-table td.col-abcp-highlight {
-  background: rgba(255, 107, 53, 0.04);
-  color: #ffffff;
-  font-weight: 600;
-  border-left: 1px solid var(--border-accent);
-  border-right: 1px solid var(--border-accent);
+.head-product {
+  display: table-cell;
 }
 
-.cell-content-abcp {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.check-icon {
-  color: var(--oxide);
-  font-weight: 800;
-}
-
-.row-dim {
+.head-product-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.head-product-tag {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.head-product.is-highlight {
+  background: linear-gradient(180deg, #fff2ea 0%, #fff7f2 100%);
+  border-bottom-color: var(--oxide);
+  box-shadow: inset 0 3px 0 var(--oxide);
+}
+
+.head-product.is-highlight .head-product-name {
+  color: var(--oxide);
+}
+
+.head-product.is-highlight .head-product-tag {
+  color: #b4501f;
+}
+
+/* ===== Body ===== */
+
+.comparison-table tbody tr + tr th,
+.comparison-table tbody tr + tr td {
+  border-top: 1px solid var(--rule);
+}
+
+.cell-dimension {
+  padding: 14px;
+  text-align: left;
+  font-size: 13px;
   font-weight: 600;
-  min-width: 130px;
+  color: var(--text-primary);
+  background: #fcfcfd;
+  border-right: 1px solid var(--rule);
+}
+
+.cell-text,
+.cell-mark {
+  padding: 14px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.cell-text {
+  font-weight: 600;
+  color: #9a3d12;
+  background: #fff9f5;
+  border-left: 1px solid rgba(255, 107, 53, 0.18);
+  border-right: 1px solid rgba(255, 107, 53, 0.18);
+}
+
+.cell-mark {
+  text-align: center;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 13px;
+  font-weight: 800;
+  border-radius: 50%;
+}
+
+.cell-mark.is-yes .mark,
+.legend-item .mark.is-yes {
+  color: #0f7a45;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.cell-mark.is-no .mark,
+.legend-item .mark.is-no {
+  color: var(--text-faint);
+  background: var(--bg-surface-hover);
+}
+
+.comparison-table tbody tr:hover .cell-dimension {
+  background: #f6f6f7;
+}
+
+/* ===== Legend ===== */
+
+.comparison-legend {
+  display: flex;
+  gap: var(--space-5);
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.legend-item .mark {
+  width: 20px;
+  height: 20px;
+  font-size: 11.5px;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .comparison-table {
+    min-width: 760px;
+  }
+  .col-dimension { width: 122px; }
+  .col-highlight { width: 190px; }
+  .cell-dimension,
+  .cell-text,
+  .cell-mark,
+  .comparison-table thead th {
+    padding: 11px 10px;
+  }
+  .cell-text { font-size: 11.5px; }
+  .cell-dimension { font-size: 12px; }
 }

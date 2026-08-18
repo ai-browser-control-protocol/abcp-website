@@ -6,12 +6,19 @@ import { CHAPTER_IDS, type ChapterId, type Locale } from "./types";
 import { site } from "./site";
 import { getMessages, type Messages } from "@/i18n/messages";
 
+/** Copy shapes the UI layer renders. Re-exported here so components in
+ *  src/components/ui never have to import from @/i18n directly. */
+export type DemoCopy = Messages["product"]["demo"];
+export type FeaturesCopy = Messages["product"]["features"];
+export type ComparisonCopy = Messages["product"]["comparison"];
+
 export interface ChromeCopy {
   locale: Locale;
   brandName: string;
   thesis: string;
   tagline: string;
-  nav: Record<ChapterId, string>;
+  nav: Record<ChapterId, string> & { solutions: string; resources: string; discord: string };
+  resourceLinks: { docs: string; changelog: string; blog: string; tools: string };
   queueLabel: string;
   queue: Record<ChapterId, string>;
   decks: Record<ChapterId, string>;
@@ -60,7 +67,6 @@ export interface ChapterViewModel {
   };
   download?: Messages["download"] & { systems: string };
 }
-
 export function getChromeCopy(locale: Locale): ChromeCopy {
   const t = getMessages(locale);
   return {
@@ -72,7 +78,11 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
       product: t.nav.product,
       company: t.nav.company,
       download: t.nav.download,
+      solutions: t.nav.solutions,
+      resources: t.nav.resources,
+      discord: t.nav.discord,
     },
+    resourceLinks: t.resources,
     queueLabel: t.queue.label,
     queue: {
       product: t.queue.product,

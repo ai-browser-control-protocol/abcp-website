@@ -1,287 +1,724 @@
 {
   "brand": {
     "name": "WebCross",
-    "thesis": "복잡한 웹 작업을 지능형 에이전트에게 맡기고",
-    "tagline": "두 손과 시간을 일상으로 되돌리세요",
-    "badge": "온디바이스 자율 에이전트 브라우저",
+    "thesis": "WebCross 가 당신의 에이전트",
+    "thesisHighlight": "번거로운 웹 작업을 도와드립니다",
+    "tagline": "에이전트가 더 빠르고, 더 적은 Token으로 웹 작업을 끝냅니다. 백그라운드에서 조용히 실행되어 작업을 방해하지 않습니다.",
+    "badge": "로컬 자립 에이전트 브라우저",
     "get": "다운로드"
   },
   "nav": {
-    "product": "제품특징",
-    "company": "회사소개",
-    "download": "다운로드"
+    "product": "제품",
+    "company": "회사 소개",
+    "download": "다운로드",
+    "solutions": "솔루션",
+    "resources": "리소스",
+    "discord": "Discord"
+  },
+  "resources": {
+    "docs": "문서",
+    "changelog": "업데이트 로그",
+    "blog": "블로그",
+    "tools": "도구"
   },
   "queue": {
-    "label": "탐색 큐",
-    "product": "01 · 제품특징",
-    "company": "05 · 회사소개",
+    "label": "목차",
+    "product": "개요",
+    "company": "회사 정보",
     "download": "03 · 다운로드",
     "deck": {
-      "product": "온디바이스 AI 스마트 브라우저",
-      "company": "차세대 온디바이스 에이전트 인프라",
-      "download": "macOS 및 Windows 클라이언트 다운로드"
+      "product": "로컬 자립 웹 에이전트",
+      "company": "청저 테크 철학",
+      "download": "macOS / Windows 클라이언트"
     }
   },
   "beats": {
     "product": [
-      "100% 로컬",
-      "맞춤형 페이지 엔진",
-      "무소음 협업",
-      "경험 축적"
+      "스마트 인지",
+      "네이티브 실행",
+      "완전 제어"
     ],
     "company": [
-      "우리의 비전",
-      "기술 철학",
-      "인프라",
-      "보안 서약"
+      "창업 비전",
+      "기술 로드맵",
+      "오픈 에코시스템"
     ],
     "download": [
-      "macOS 버전",
-      "Windows 버전",
-      "원클릭 설치",
-      "로컬 보장"
+      "릴리스",
+      "환경 설정",
+      "퀵스타트"
     ]
   },
-  "figure": "ABCP 엔지니어링 아키텍처",
+  "figure": "인터랙티브 도해",
   "locales": {
     "zh": "简体中文",
-    "en": "English",
     "ja": "日本語",
-    "ko": "한국어"
+    "ko": "한국어",
+    "en": "English"
   },
   "seo": {
     "product": {
-      "title": "WebCross - 온디바이스 자율 에이전트 브라우저",
-      "description": "복잡한 웹 작업을 대신 수행하는 온디바이스 AI 스마트 브라우저. 100% 로컬 데이터 주권과 맞춤형 페이지 엔진 탑재."
+      "title": "WebCross · 자립형 웹 에이전트 브라우저",
+      "description": "WebCross는 로컬 전용 Chromium 기반 AI 에이전트 브라우저. 100% 로컬 데이터, 최소 Token으로 웹 자동화."
     },
     "company": {
-      "title": "회사 소개 - WebCross ABCP",
-      "description": "진정한 온디바이스 자율 에이전트 브라우저를 개척하는 기술 기업."
+      "title": "회사 정보 · WebCross",
+      "description": "청저 테크: 차세대 휴먼-AI 협업 인프라 선도."
     },
     "download": {
-      "title": "체험하기 - WebCross ABCP",
-      "description": "macOS 및 Windows 전용 WebCross 클라이언트 다운로드."
+      "title": "다운로드 · WebCross",
+      "description": "macOS / Windows용 WebCross 클라이언트 다운로드."
     }
   },
   "product": {
-    "badge": "온디바이스 자율 에이전트 브라우저",
-    "thesis": "복잡한 웹 작업을 지능형 에이전트에게 맡기고",
-    "thesisHighlight": "두 손과 시간을 일상으로 되돌리세요",
-    "sub": "로컬 환경에서 직접 실행되는 온디바이스 AI 스마트 브라우저. 다중 시스템 검색, 대량 양식 제출부터 복잡한 웹 워크플로우까지, 에이전트가 지루하고 반복적인 조작을 대신 처리합니다. 민감한 작업 시 즉시 사용자에게 안전하게 인계하며, 100% 로컬 데이터 보관으로 무의미한 단순 노동을 끝내고 창의적 업무에 집중하세요.",
-    "ctaPrimary": "무료 체험 다운로드",
-    "ctaSecondary": "워크플로우 시뮬레이션 체험",
-    "trustTags": [
-      "기계적 반복 작업 종결",
-      "100% 로컬 데이터 안전",
-      "macOS & Windows 지원"
+    "title": "제품 개요",
+    "thesisBrand": "WebCross",
+    "thesisLead": "가 여러분의 에이전트를 도와",
+    "thesisRest": "번거로운 웹 작업을 완료합니다",
+    "sub": "에이전트가 더 빠르고, 더 적은 Token으로 웹 작업을 끝냅니다. 백그라운드에서 조용히 실행되어 작업을 방해하지 않습니다.",
+    "ctaPrimaryMac": "macOS 버전 다운로드",
+    "ctaPrimaryWin": "Windows 버전 다운로드",
+    "systemSupport": "macOS 13+ (Apple Silicon / Intel) · Windows 11 64-bit",
+    "assurances": [
+      "네, 공개 베타 기간에는 모든 기능이 무료입니다",
+      "로컬 우선, 데이터는 기기를 벗어나지 않습니다"
     ],
-    "figure": "ABCP 듀얼 뷰 스마트 협업 워크스페이스",
-    "metrics": [
-      {
-        "value": "100%",
-        "label": "로컬 데이터 주권",
-        "desc": "계정 정보, Cookie 세션 및 실행 로그 100% 로컬 보관, 클라우드 업로드 제로"
+    "demo": {
+      "badge": "LIVE DEMO",
+      "title": "WebCross 가 다음 작업을 도와드립니다",
+      "scrollHint": "계속 스크롤하면 세 가지 작업을 차례로 볼 수 있습니다",
+      "clientTitle": "WebCross · Agent",
+      "taskLabel": "원본 작업",
+      "runLabel": "작업 실행",
+      "logLabel": "실행 기록",
+      "statusRunning": "실행 중",
+      "statusDone": "완료",
+      "tabs": {
+        "A": "Amazon 가격 순찰",
+        "B": "Amazon 셀러 등록",
+        "C": "소셜 미디어 수집"
       },
-      {
-        "value": "고효율 · Token 절감",
-        "label": "맞춤형 페이지 엔진",
-        "desc": "Agent 동작 실행 전용 맞춤 설계로 밀리초 단위 초고속 반응; 스마트 구조 필터링으로 Token 소모 대폭 절감"
-      },
-      {
-        "value": "0 방해",
-        "label": "무소음 및 온디맨드 협업",
-        "desc": "브라우저는 백그라운드에서 조용히 자율 구동; 민감 검증 시에만 화면에서 밀리초 연계 후 즉시 복귀"
-      },
-      {
-        "value": "자율 진화",
-        "label": "스마트 편성 및 경험 재사용",
-        "desc": "자연어로 의도를 입력하면 자동 편성; 작업 완료 후 성공 경험을 자동 축적하여 고신뢰 워크플로우로 영구 재사용"
-      }
-    ],
-    "layers": [
-      {
-        "tag": "사용자 주시 및 관제 중추",
-        "name": "작업 패널 및 디스패처 센터",
-        "body": "사용자가 유일하게 주시하는 작업 센터. 전체 상황을 한눈에 파악하고 백그라운드의 여러 독립 브라우저로 작업을 병렬 분발·스케줄링하며, 전 타임라인 녹화급 작업 회고 및 감사를 제공합니다.",
-        "status": "Multi-Browser Dispatch Active",
-        "bullets": [
-          "통합 작업 대시보드: 자연어 의도 입력 및 다중 워크플로우 병렬 분발 스케줄링",
-          "다중 브라우저 협력: 여러 독립 백그라운드 브라우저로 원자 Action 분산",
-          "녹화급 작업 회고: 전 타임라인 실행 재생, 이벤트 감사 및 상태 아카이빙",
-          "네이티브 인간 협력: 민감 결정 또는 2FA 발생 시 밀리초 화면 인계 및 복귀"
-        ]
-      },
-      {
-        "tag": "전용 실행 기반",
-        "name": "전용 Agent Harness",
-        "body": "디스패처와 브라우저 군을 연결하는 전용 실행 기반. 환각 방지 파라미터 검증 방화벽, 의미론적 피드백 루프 및 제로 트러스트 정책으로 다중 병렬 실행의 안정성을 보장합니다.",
-        "status": "Zero-Trust Guardrails Active",
-        "bullets": [
-          "강타입 환각 방지: 내장 Zod Schema 파라미터 검증으로 이상 명령 사전 차단",
-          "의미론적 피드백: 웹페이지 DOM/시각 상태를 정밀하게 구조화하여 반환",
-          "제로 트러스트 게이트: 민감 동작 차단, 화이트리스트 및 프롬프트 인젝션 방어",
-          "환경 격리 관리: 다중 브라우저 인스턴스의 물리적 생명주기 및 리소스 제어"
-        ]
-      },
-      {
-        "tag": "다중 인스턴스 액션 엔진",
-        "name": "맞춤형 페이지 엔진",
-        "body": "여러 브라우저 인스턴스가 백그라운드에서 물리적으로 격리되어 조용히 자율 구동. Agent 액션 고속 처리에 특화되어 극소의 부하로 구조화 데이터를 추출합니다.",
-        "status": "High-Throughput Fleet",
-        "bullets": [
-          "초고속 액션 처리량: 에이전트 전용 맞춤형 엔진으로 밀리초 단위 원자 실행",
-          "무소음 백그라운드: 브라우저는 백그라운드에서 자율 실행, 팝업 방해 제로",
-          "스마트 구조 정리: 불필요한 DOM을 지능 필터링하여 모델 Token 소모 대폭 절감",
-          "고신뢰 결과물 전달: 다중 페이지 정밀 데이터 추출, 표 및 증빙 파일 즉시 출력"
-        ]
-      }
-    ],
-    "interactiveDemo": {
-      "badge": "Interactive Workflow Simulation · 백그라운드 무소음 실행 및 온디맨드 관리",
-      "title": "인터랙티브 시뮬레이션 · 온디바이스 에이전트 구동 원리 체험",
-      "subtitle": "실제 비즈니스 시나리오를 선택하여 에이전트가 백그라운드에서 브라우저를 자율 제어하는 과정을 경험하세요. 우측 관리 패널은 필요 시 동적으로 확장되며 언제든 백그라운드 탭으로 최소화할 수 있습니다—화면을 주시할 필요 없이 일상 업무와 생활을 방해하지 않습니다.",
-      "promptLabel": "시나리오 선택",
-      "promptHint": "「시뮬레이션 시작」 클릭 시 패널 확장, 언제든 백그라운드 탭으로 최소화 가능",
-      "tabPrefix": "백그라운드 탭",
-      "btnMinimize": "백그라운드로 최소화",
-      "btnExpand": "패널 확장",
-      "minimizedHint": "백그라운드에서 조용히 실행 중 (클릭하여 패널 다시 확장 · 일상 업무 방해 없음)",
-      "statusRunning": "에이전트가 백그라운드에서 브라우저를 구동하여 Action 스트림을 실행 중입니다...",
-      "statusPaused": "보안 검증 감지: 관리 패널이 확인을 요청하며, 완료 시 즉시 백그라운드로 복귀합니다",
-      "statusDone": "Action 스트림 실행 완료. 구조화된 업무 결과 및 증빙 파일이 백그라운드에서 전달되었습니다.",
-      "btnTakeover": "화면에서 인증 완료 · 자동화 실행 재개",
-      "btnReset": "시뮬레이션 재설정"
-    },
-    "comparison": {
-      "title": "왜 ABCP 인가요?",
-      "subtitle": "자동화의 재정의: 기존 RPA, 클라우드형 Agent, 대화형 AI와의 비교",
-      "headers": [
-        "비교 항목",
-        "ABCP 로컬 스마트 브라우저",
-        "기존 RPA 도구",
-        "클라우드형 AI Agent",
-        "대화형 AI 챗봇"
-      ],
-      "rows": [
-        {
-          "dim": "실행 환경",
-          "abcp": "사용자 로컬 맞춤형 페이지 엔진",
-          "rpa": "로컬 전용 스크립트",
-          "cloud": "클라우드 가상 헤드리스 브라우저",
-          "chat": "대화창 내부 한정"
+      "scenes": {
+        "A": {
+          "label": "시나리오 A · Amazon 가격 순찰",
+          "caption": "매일 수천 개의 상품 링크를 자동 순찰. 가격 변동을 즉시 포착합니다.",
+          "task": "Amazon 에서 power bank 상위 30 개 상품을 순찰해 주세요. url, title, price, rating, 그리고 상위 30 개의 bad review 를 수집해야 합니다.",
+          "steps": [
+            "amazon.com 열기",
+            "검색창에 power bank 입력",
+            "검색 버튼 클릭",
+            "결과 첫 번째 상품 클릭",
+            "상품 상세 페이지 진입",
+            "url / title / price / rating 수집",
+            "낮은 평점 리뷰 30건 수집",
+            "정리해 로컬에 저장"
+          ],
+          "browser": {
+            "urlHome": "www.amazon.com",
+            "urlSerp": "www.amazon.com/s?k=power+bank",
+            "urlPdp": "www.amazon.com/dp/B0D8XQ1KJ2",
+            "urlReviews": "www.amazon.com/product-reviews/B0D8XQ1KJ2",
+            "keyword": "power bank",
+            "searchPlaceholder": "Search Amazon",
+            "deliverTo": "Deliver to Phoenix 85034",
+            "navItems": [
+              "Today Deals",
+              "Best Sellers",
+              "Electronics",
+              "New Releases",
+              "Prime"
+            ],
+            "resultsMeta": "1-16 of over 40,000 results for power bank",
+            "sortLabel": "Sort by: Featured",
+            "filterTitle": "Filters",
+            "filters": [
+              "High capacity",
+              "USB-C",
+              "Wireless",
+              "Fast charging",
+              "Built-in cable"
+            ],
+            "results": [
+              {
+                "badge": "Overall Pick",
+                "title": "INIU 45W Fast Charging Portable Charger 10000mAh, built-in USB-C cable, flight safe",
+                "rating": "4.4",
+                "reviews": "84.8K",
+                "bought": "10K+ bought in past month",
+                "price": "$21.59",
+                "listPrice": "$23.99",
+                "deal": "Limited time deal"
+              },
+              {
+                "badge": "",
+                "title": "Anker Power Bank 20,000mAh, built-in USB-C cable, 1 USB-C and 1 USB-A port",
+                "rating": "4.6",
+                "reviews": "9.2K",
+                "bought": "10K+ bought in past month",
+                "price": "$69.99",
+                "listPrice": "",
+                "deal": ""
+              },
+              {
+                "badge": "",
+                "title": "Magnetic Portable Charger 10000mAh, 20W USB-C MagSafe battery pack",
+                "rating": "4.2",
+                "reviews": "3.1K",
+                "bought": "2K+ bought in past month",
+                "price": "$29.99",
+                "listPrice": "$39.99",
+                "deal": ""
+              }
+            ],
+            "pdp": {
+              "crumb": "Electronics › Computer Accessories › Power Banks",
+              "title": "INIU 45W Fast Charging Portable Charger 10000mAh Power Bank",
+              "rating": "4.4",
+              "reviews": "84,812 ratings",
+              "bought": "10K+ bought in past month",
+              "price": "$21.59",
+              "listPrice": "$23.99",
+              "deal": "Limited time deal",
+              "shipping": "FREE delivery for Prime members",
+              "cart": "Add to Cart",
+              "buy": "Buy Now",
+              "reviewsAnchor": "See all reviews"
+            },
+            "reviews": {
+              "title": "Customer reviews",
+              "score": "4.3",
+              "scoreLabel": "out of 5",
+              "total": "475 global ratings",
+              "histogram": [
+                [
+                  "5 star",
+                  "73%",
+                  73
+                ],
+                [
+                  "4 star",
+                  "11%",
+                  11
+                ],
+                [
+                  "3 star",
+                  "3%",
+                  3
+                ],
+                [
+                  "2 star",
+                  "2%",
+                  2
+                ],
+                [
+                  "1 star",
+                  "11%",
+                  11
+                ]
+              ],
+              "filterLabel": "Filtered: 1–2 star reviews",
+              "items": [
+                {
+                  "name": "Showme-thegoods",
+                  "stars": 2,
+                  "title": "Capacity is overstated",
+                  "body": "Rated 10000mAh but it only tops my phone up 1.5 times — nowhere near the listing."
+                },
+                {
+                  "name": "Wolfenhawke",
+                  "stars": 1,
+                  "title": "Stopped charging after two weeks",
+                  "body": "Fine at first, then the LED stayed on and it would not take a charge. Support was slow."
+                },
+                {
+                  "name": "M. Ortega",
+                  "stars": 2,
+                  "title": "Fast charge only on some phones",
+                  "body": "Advertised 45W, but only the bundled cable on one model hits it. Everything else is plain 18W."
+                },
+                {
+                  "name": "kellyR",
+                  "stars": 1,
+                  "title": "Gets hot",
+                  "body": "Noticeably warm while charging and using at the same time; build quality is rougher than the photos."
+                }
+              ]
+            },
+            "capture": {
+              "title": "Captured",
+              "fields": [
+                [
+                  "url",
+                  "amazon.com/dp/B0D8XQ1KJ2"
+                ],
+                [
+                  "title",
+                  "INIU 45W 10000mAh Power Bank"
+                ],
+                [
+                  "price",
+                  "$21.59"
+                ],
+                [
+                  "rating",
+                  "4.4 / 84.8K"
+                ]
+              ],
+              "reviewLabel": "bad reviews scraped",
+              "reviewTotal": 30,
+              "doneTitle": "Written locally",
+              "doneFile": "power_bank_top30.csv",
+              "doneMeta": "30 products · 900 bad reviews · 100% on-device"
+            }
+          }
         },
-        {
-          "dim": "프라이버시 및 보안",
-          "abcp": "100% 로컬 보관, 유출 제로",
-          "rpa": "코드 내 평문 자격증명 위험",
-          "cloud": "Cookie 및 계정을 클라우드로 전송",
-          "chat": "대화 기록이 외부 클라우드에 축적"
+        "B": {
+          "label": "시나리오 B · Amazon 셀러 등록",
+          "caption": "수백 개 SKU 를 원클릭 등록. 폼 작성은 에이전트에 맡기세요.",
+          "task": "Seller Central 에서 새 상품을 등록하세요. 이름 'Mophie 20000 Black', 브랜드 'Mophie', 가격 $59.95, 재고 200, 카테고리 'Electronics › Power Banks'.",
+          "steps": [
+            "Seller Central 열기",
+            "Add Products 절차 진입",
+            "상품명 입력",
+            "브랜드 드롭다운 열고 선택",
+            "상품 카테고리 선택",
+            "가격과 재고 입력",
+            "대표 이미지 업로드",
+            "제출 후 등록 완료 확인"
+          ],
+          "browser": {
+            "url": "sellercentral.amazon.com/catalog/add",
+            "brandbar": "amazon seller central",
+            "path": "Catalog › Add Products",
+            "tabs": [
+              "Vital info",
+              "Description",
+              "Images",
+              "Keywords"
+            ],
+            "nameLabel": "Product name",
+            "nameValue": "Mophie Powerstation 20000mAh Black",
+            "brandLabel": "Brand",
+            "brandPlaceholder": "Select a brand",
+            "brandOptions": [
+              "Anker",
+              "Belkin",
+              "INIU",
+              "Mophie",
+              "UGREEN"
+            ],
+            "brandValue": "Mophie",
+            "categoryLabel": "Category",
+            "categoryPlaceholder": "Select a category",
+            "categoryOptions": [
+              "Electronics › Chargers",
+              "Electronics › Power Banks",
+              "Electronics › Cables"
+            ],
+            "categoryValue": "Electronics › Power Banks",
+            "priceLabel": "Price (USD)",
+            "priceValue": "59.95",
+            "stockLabel": "Quantity",
+            "stockValue": "200",
+            "uploadLabel": "Drop or click to upload the main image",
+            "uploadHint": "JPG / PNG · 1600×1600 recommended",
+            "uploadFile": "mophie-powerstation-20000-black.jpg",
+            "uploadSize": "1.8 MB",
+            "submitLabel": "Submit listing",
+            "submitting": "Submitting…",
+            "success": "Listing created",
+            "successMeta": "SKU MPH-PS20000-BLK queued for review",
+            "queueLabel": "SKUs left in batch",
+            "queueValue": "117 / 118"
+          }
         },
-        {
-          "dim": "Captcha 및 2FA 인계",
-          "abcp": "네이티브 원클릭 인간 협력 인계",
-          "rpa": "에러 발생 후 강제 중단",
-          "cloud": "실시간 개입 어려움",
-          "chat": "웹 조작 자체 미지원"
-        },
-        {
-          "dim": "동적 페이지 적응력",
-          "abcp": "맞춤형 액션 엔진 자율 구동",
-          "rpa": "UI 변경 시 빈번한 에러",
-          "cloud": "Bot 탐지로 차단 빈발",
-          "chat": "미지원"
-        },
-        {
-          "dim": "도입 및 학습 비용",
-          "abcp": "자연어 및 경험 자동 재사용",
-          "rpa": "전문 엔지니어 개발 및 유지보수",
-          "cloud": "중간 수준 (복잡한 API 설정)",
-          "chat": "쉽지만 실행력 없음"
+        "C": {
+          "label": "시나리오 C · 소셜 미디어 수집",
+          "caption": "게시물과 인게이지먼트 데이터를 자동 아카이빙. 소셜 운영을 도와드립니다.",
+          "task": "X / Reddit 에서 #WebCross 지난 1 주간 핫 게시물 30 개를 수집하고, 좋아요 / 리트윗 / 댓글을 자동화한 뒤 주간 리포트로 정리해 주세요.",
+          "steps": [
+            "x.com에서 #WebCross 검색",
+            "사람처럼 피드 스크롤",
+            "게시물 열어 상세 확인",
+            "좋아요 누르고 댓글 작성",
+            "reddit.com으로 전환",
+            "r/automation 인기 글 탐색",
+            "게시물과 반응 데이터 수집",
+            "로컬 표로 보관"
+          ],
+          "browser": {
+            "actions": {
+              "like": "Like",
+              "repost": "Repost",
+              "comment": "Comment",
+              "reply": "Reply",
+              "replyPlaceholder": "Post your reply",
+              "posted": "Posted"
+            },
+            "x": {
+              "name": "X",
+              "url": "x.com/search?q=%23WebCross",
+              "query": "#WebCross",
+              "tabs": [
+                "Top",
+                "Latest",
+                "People",
+                "Media"
+              ],
+              "posts": [
+                {
+                  "user": "Zian Lin",
+                  "handle": "@linzian",
+                  "time": "12m",
+                  "body": "Pulled 200 competitor reviews with WebCross, found three recurring complaints, wrote the report in 10 minutes.",
+                  "likes": "128",
+                  "comments": "32",
+                  "reposts": "9"
+                },
+                {
+                  "user": "Mira",
+                  "handle": "@miralab",
+                  "time": "27m",
+                  "body": "Our Amazon research used to take two interns a full day of copy-paste. With WebCross it is 30 minutes.",
+                  "likes": "412",
+                  "comments": "47",
+                  "reposts": "21"
+                },
+                {
+                  "user": "Kai",
+                  "handle": "@yikeops",
+                  "time": "1h",
+                  "body": "One scrape across every platform, engagement data exported straight to a sheet. No more stitching weekly reports by hand.",
+                  "likes": "256",
+                  "comments": "18",
+                  "reposts": "14"
+                },
+                {
+                  "user": "Jaden",
+                  "handle": "@jadenq",
+                  "time": "2h",
+                  "body": "Fingerprint switching plus the IP pool is the real win — multi-account work finally feels safe.",
+                  "likes": "98",
+                  "comments": "11",
+                  "reposts": "3"
+                }
+              ],
+              "reply": "Same here — we handed price patrol to WebCross too. Runs fully local, nothing leaves the machine 👏"
+            },
+            "reddit": {
+              "name": "Reddit",
+              "url": "reddit.com/r/automation/search?q=WebCross",
+              "sub": "r/automation",
+              "query": "WebCross",
+              "tabs": [
+                "Hot",
+                "New",
+                "Top"
+              ],
+              "posts": [
+                {
+                  "user": "u/scrape_wizard",
+                  "handle": "r/automation",
+                  "time": "6h",
+                  "body": "Finally a local browser agent that does not ship my cookies to someone else cloud.",
+                  "likes": "1.2K",
+                  "comments": "184",
+                  "reposts": "63"
+                },
+                {
+                  "user": "u/ops_daily",
+                  "handle": "r/ecommerce",
+                  "time": "9h",
+                  "body": "Ran WebCross on 800 ASINs overnight. Woke up to a clean CSV. No captcha babysitting.",
+                  "likes": "864",
+                  "comments": "121",
+                  "reposts": "37"
+                },
+                {
+                  "user": "u/pm_kento",
+                  "handle": "r/SaaS",
+                  "time": "13h",
+                  "body": "Token bill dropped by more than half after switching to the AXTree extraction mode.",
+                  "likes": "537",
+                  "comments": "76",
+                  "reposts": "25"
+                }
+              ],
+              "reply": "Same here — the skill it saved after the first run cut our token spend again on the second."
+            },
+            "archive": {
+              "title": "Archived",
+              "file": "social_weekly_report.csv",
+              "meta": "30 posts · engagement data and replies written locally",
+              "fields": [
+                "Platform",
+                "Author",
+                "Body",
+                "Likes",
+                "Comments",
+                "Reposts",
+                "Engaged"
+              ],
+              "progressLabel": "Capture progress"
+            }
+          }
         }
-      ]
+      }
     },
-    "useCases": {
-      "title": "다양한 실무 업무 자동화",
-      "subtitle": "반복적이고 지루한 웹 작업을 한 줄의 자연어 명령으로 자동화",
+    "features": {
+      "badge": "PRODUCT",
       "items": [
         {
-          "title": "다중 플랫폼 데이터 수집 및 비교 분석",
-          "desc": "여러 공급업체 사이트를 자동 순회하여 가격과 재고를 추출하고 표준 비교 보고서를 작성합니다."
+          "key": "speed",
+          "eyebrow": "커널 수준 커스터마이징",
+          "title": "최고로 빠른 에이전트 브라우저",
+          "body": "원본 Chrome 위에 JS를 덧씌운 것이 아니라 Chromium을 자체 커스터마이즈.",
+          "figure": "Chromium 커널 커스터마이즈 vs Chrome + JS 어댑터",
+          "bullets": [
+            "电商平台：Amazon 等对指纹与 IP 严控的场景",
+            "SaaS 平台与企业内部系统",
+            "社交媒体多账号并行运营"
+          ]
         },
         {
-          "title": "사내 시스템 일괄 전표 입력 및 결재",
-          "desc": "로컬 Excel 또는 CRM 데이터를 기반으로 사내 ERP에 자동 로그인하여 다단계 양식을 등록합니다."
+          "key": "token",
+          "eyebrow": "AXTree 추출",
+          "title": "같은 작업, 훨씬 적은 Token",
+          "body": "AXTree가 DOM 노이즈를 제거한 페이지 구조만 반환. 크로스 오리진 iframe과 Shadow DOM 접근도 지원.",
+          "figure": "원본 DOM → 필터링 AXTree의 Token 비교",
+          "bullets": [
+            "平均削减 85% 页面上下文体积",
+            "跨域 iframe 与 Shadow DOM 一并可读",
+            "更短的上下文等于更低延迟与更稳的决策"
+          ]
         },
         {
-          "title": "자사 사이트 자동 순회 및 가용성 모니터링",
-          "desc": "실제 환경에서 사용자 동선을 시뮬레이션하여 링크 오류, 스타일 깨짐, JS 에러를 조기 발견합니다."
+          "key": "local",
+          "eyebrow": "데이터 주권",
+          "title": "100% 로컬 데이터 주권",
+          "body": "계정 정보, Cookie, 실행 로그 모두 당신의 머신에. 클라우드 전송 0.",
+          "figure": "로컬 방패 · 클라우드 전송 0",
+          "bullets": [
+            "凭证与 Cookie 永不离开本机",
+            "执行流水本地留存，可审计可回溯",
+            "断网环境下任务照常推进"
+          ]
+        },
+        {
+          "key": "fingerprint",
+          "eyebrow": "계정 보안",
+          "title": "유일무이한 핑거프린트 환경",
+          "body": "브라우저 핑거프린트 커스터마이즈와 IP 즉시 전환으로 멀티 계정 작업 안전.",
+          "figure": "멀티 인스턴스 × 핑거프린트 / IP 매트릭스",
+          "bullets": [
+            "每个实例一套独立指纹与出口 IP",
+            "会话隔离，多账号并发不串号",
+            "指纹模板可复制、可批量下发"
+          ]
+        },
+        {
+          "key": "skill",
+          "eyebrow": "Skill 축적",
+          "title": "전용 Skill을 자동 생성",
+          "body": "WebCross Harness로 실행한 작업은 Skill과 워크플로우로 축적. 재호출 시 60% 이상 Token 절감.",
+          "figure": "실행 → Skill화 → 재사용",
+          "bullets": [
+            "首次执行即自动生成可复用 Skill",
+            "复用时跳过页面探索，直达关键步骤",
+            "Skill 与工作流均保存在本地"
+          ]
+        },
+        {
+          "key": "takeover",
+          "eyebrow": "사람과의 협업",
+          "title": "민감 구간 즉시 인계",
+          "body": "Captcha나 2FA에서 밀리초 단위로 사용자 확인을 요청하고, 완료 후 자동으로 백그라운드 복귀.",
+          "figure": "백그라운드 → 인계 카드 → 복귀",
+          "bullets": [
+            "毫秒级唤起，不打断其他并发任务",
+            "核验完成后从断点自动恢复",
+            "接管记录同样只留在本地"
+          ]
         }
       ]
     },
-    "title": "WebCross",
-    "eyebrow": "온디바이스 AI 스마트 브라우저"
+    "comparison": {
+      "title": "왜 WebCross인가?",
+      "subtitle": "네 가지 주요 솔루션과 나란히 비교. 모든 핵심 차원에서 실제 비즈니스 요구에 더 가깝습니다.",
+      "dimensionHead": "평가 항목",
+      "products": [
+        {
+          "name": "WebCross",
+          "tagline": "자체 커스터마이즈 Chromium",
+          "highlight": true,
+          "values": {
+            "exec": "로컬 커스텀 Chromium, 페이지 요소를 직접 구동",
+            "data": "100% 로컬, 클라우드 전송 0",
+            "security": "핑거프린트 + IP 전환",
+            "multi": "멀티 인스턴스 백그라운드 병행",
+            "twofa": "네이티브 밀리초 인계",
+            "skill": "자동 축적되는 Skill / 워크플로우",
+            "barrier": "자연어, 학습 비용 0"
+          }
+        },
+        {
+          "name": "전통적 RPA",
+          "tagline": "UiPath · Yingdao",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": true,
+            "twofa": false,
+            "skill": true,
+            "barrier": false
+          }
+        },
+        {
+          "name": "ChatGPT Atlas",
+          "tagline": "OpenAI · 2025",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": false,
+            "twofa": true,
+            "skill": false,
+            "barrier": true
+          }
+        },
+        {
+          "name": "Perplexity Comet",
+          "tagline": "Perplexity AI · 2025",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": false,
+            "twofa": true,
+            "skill": false,
+            "barrier": true
+          }
+        },
+        {
+          "name": "Browser Use",
+          "tagline": "오픈소스 · Python",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": true,
+            "twofa": false,
+            "skill": false,
+            "barrier": false
+          }
+        }
+      ],
+      "dimensions": [
+        {
+          "key": "exec",
+          "label": "실행 환경"
+        },
+        {
+          "key": "data",
+          "label": "데이터 로컬리티"
+        },
+        {
+          "key": "security",
+          "label": "계정 안전"
+        },
+        {
+          "key": "multi",
+          "label": "멀티태스크"
+        },
+        {
+          "key": "twofa",
+          "label": "2FA / 캡차"
+        },
+        {
+          "key": "skill",
+          "label": "Skill / 워크플로우"
+        },
+        {
+          "key": "barrier",
+          "label": "학습 비용"
+        }
+      ],
+      "legendYes": "지원",
+      "legendNo": "미지원"
+    },
+    "closing": {
+      "title": "오늘부터 에이전트에게 일을 맡기세요",
+      "sub": "WebCross를 내려받아 진짜 로컬 에이전트 브라우저를 경험해 보세요."
+    }
   },
   "company": {
     "title": "회사 소개",
-    "subtitle": "Qingzhu Technology · 차세대 온디바이스 지능 인프라 개척",
-    "lead": "Qingzhu Technology는 인간과 AI의 새로운 협업 패러다임을 탐구하며 안전하고 신뢰할 수 있는 차세대 온디바이스 지능 인프라를 구축합니다.",
-    "storyTitle": "기업 미션 및 기술 철학",
-    "story": "우리는 AI의 진정한 가치가 단순한 텍스트 대화 생성을 넘어, 실제 웹 환경에서 지루하고 기계적인 반복 작업을 대신 완수하는 데 있다고 믿습니다. 로컬 우선 원칙과 자체 개발 고속 페이지 엔진을 통해 데이터 주권을 완벽히 보호하며, 모든 창작자에게 두 손과 시간을 되돌려 드립니다.",
-    "legalLabel": "법인명",
-    "cityLabel": "본사 소재지",
+    "subtitle": "청저 테크 · 차세대 로컬 AI 인프라",
+    "lead": "청저 테크는 인간과 AI의 새로운 협업 패러다임을 탐구하며, 안전하고 신뢰할 수 있으며 누구나 사용할 수 있는 차세대 로컬 AI 인프라를 구축합니다.",
+    "storyTitle": "미션과 엔지니어링 신조",
+    "story": "AI의 진정한 가치는 끝없는 채팅이 아니라 실제 디지털 세계를 탐색하여 지루하고 반복적인 작업을 끝내는 데 있다고 믿습니다. 로컬 우선 아키텍처와 고처리량 자체 페이지 엔진으로 데이터 주권을 지키며, 창작자에게 시간과 집중을 돌려줍니다.",
+    "legalLabel": "법인",
+    "cityLabel": "본사",
     "productLabel": "핵심 제품",
-    "productName": "WebCross ABCP (온디바이스 스마트 브라우저)",
-    "emailLabel": "비즈니스 및 기술 지원",
-    "legalName": "Qingzhu Technology Ltd.",
-    "city": "중국 항저우",
-    "figure": "Qingzhu Technology R&D Center"
+    "productName": "WebCross (로컬 AI 브라우저)",
+    "emailLabel": "비즈니스 / 지원",
+    "legalName": "청저 테크",
+    "city": "중국 · 항저우",
+    "figure": "청저 테크 R&D 센터"
   },
   "download": {
-    "title": "WebCross ABCP 다운로드",
-    "lead": "온디바이스 자율 AI 브라우징의 새로운 시대를 시작하세요. macOS 및 Windows를 지원하며 원클릭으로 간편하게 설치할 수 있습니다.",
-    "figure": "ABCP 클라이언트 설치 및 워크스페이스 미리보기",
-    "userButton": "macOS 버전 다운로드",
-    "clientButton": "Windows 버전 (준비 중)",
-    "userHint": "macOS 13.0+ · Apple Silicon (M시리즈) 및 Intel 지원",
-    "clientHint": "Windows 11 64bit · 프리뷰 버전 출시 예정",
-    "systemLabel": "지원 환경",
-    "dataLabel": "데이터 보안",
-    "dataValue": "100% 데이터 로컬 기기 보관",
-    "userMeta": "DMG 설치 파일 (128 MB) · SHA256 서명 검증 완료",
-    "clientMeta": "MSIX / EXE 설치 파일 · 개발 진행 중",
-    "quickstartTitle": "빠른 시작 가이드",
+    "title": "WebCross 다운로드",
+    "lead": "로컬 자립 AI 브라우징의 새 시대. macOS와 Windows 지원, 가볍고 간단한 설치.",
+    "figure": "WebCross 클라이언트 설치 및 미리보기",
+    "userButton": "macOS 다운로드",
+    "clientButton": "Windows (출시 예정)",
+    "userHint": "macOS 13.0+ · Apple Silicon (M 시리즈) & Intel",
+    "clientHint": "Windows 11 64-bit · 프리뷰 곧 출시",
+    "systemLabel": "지원 OS",
+    "dataLabel": "데이터 보호",
+    "dataValue": "100% 로컬 저장만",
+    "userMeta": "DMG 설치 파일 (128 MB) · SHA256 서명 · 제공 중",
+    "clientMeta": "MSIX / EXE · 개발 중",
+    "quickstartTitle": "퀵스타트",
     "quickstart": [
       {
         "step": "01",
         "title": "설치",
-        "desc": "DMG 파일을 열고 WebCross 아이콘을 응용 프로그램 폴더로 드래그합니다."
+        "desc": "DMG를 열고 WebCross를 Applications 폴더로 드래그."
       },
       {
         "step": "02",
-        "title": "권한 부여",
-        "desc": "최초 실행 시 시스템 안내에 따라 손쉬운 사용 및 자동화 권한을 활성화합니다."
+        "title": "권한",
+        "desc": "최초 실행 시 접근성 및 자동화 제어 권한 부여."
       },
       {
         "step": "03",
-        "title": "작업 실행",
-        "desc": "제어 패널에 첫 자연어 명령을 입력하고 자율 에이전트 실행을 경험하세요."
+        "title": "실행",
+        "desc": "콘솔에 첫 자연어 작업을 입력하고 에이전트가 처리하도록 하세요."
       }
     ]
   },
   "footer": {
-    "localFirst": "100% 로컬 우선 · 유출 제로",
+    "localFirst": "100% 로컬 우선 · 유출 0",
     "get": "다운로드",
-    "navTitle": "빠른 탐색",
-    "productTitle": "제품 및 시스템 환경",
-    "desc": "macOS 13+ 및 Windows 11 완벽 지원. 프라이버시를 최우선으로 하는 기업 및 파워 유저를 위한 온디바이스 웹 자동화 플랫폼.",
+    "navTitle": "네비게이션",
+    "productTitle": "제품 및 시스템",
+    "desc": "macOS 13+ / Windows 11 전용. 프라이버시 최우선的企业 및 파워 유저용.",
     "securityBadge": "100% 로컬 우선 아키텍처"
   },
   "a11y": {
-    "mainNav": "메인 네비게이션",
-    "localeNav": "언어 전환 메뉴",
-    "queue": "챕터 목록",
-    "rail": "챕터 가이드",
-    "stage": "메인 콘텐츠 영역",
-    "menu": "모바일 메뉴 열기"
+    "mainNav": "기본 내비게이션",
+    "localeNav": "언어 전환",
+    "queue": "챕터 목차",
+    "rail": "챕터 내비",
+    "stage": "메인 콘텐츠",
+    "menu": "모바일 메뉴",
+    "scenarioSwitcher": "시나리오 전환",
+    "featureList": "产品能力列表"
   }
 }

@@ -1,45 +1,55 @@
 {
   "brand": {
     "name": "WebCross",
-    "thesis": "定型的なブラウザ作業はAIへ 手と時間は日々の暮らしへ",
-    "tagline": "次世代ローカルファースト自律型AIブラウザ",
-    "badge": "ローカル完結型 自律AIブラウザ",
+    "thesis": "WebCross はあなたのエージェント",
+    "thesisHighlight": "退屈な Web 作業を代行します",
+    "tagline": "エージェントがより速く、より少ない Token で Web 作業を完了。バックグラウンドで静かに動作し、仕事の邪魔をしません。",
+    "badge": "ローカル自律エージェントブラウザ",
     "get": "ダウンロード"
   },
   "nav": {
-    "product": "製品特長",
-    "company": "会社概要",
-    "download": "ダウンロード"
+    "product": "製品",
+    "company": "会社について",
+    "download": "ダウンロード",
+    "solutions": "ソリューション",
+    "resources": "リソース",
+    "discord": "Discord"
+  },
+  "resources": {
+    "docs": "ドキュメント",
+    "changelog": "更新履歴",
+    "blog": "ブログ",
+    "tools": "ツール"
   },
   "queue": {
-    "label": "インデックス",
-    "product": "製品概要",
-    "company": "企業情報",
+    "label": "目次",
+    "product": "概要",
+    "company": "会社情報",
     "download": "03 · ダウンロード",
     "deck": {
-      "product": "端末内で稼働する自律Webエージェント",
-      "company": "Qingzhu Technologyのビジョン",
-      "download": "macOS & Windows クライアントダウンロード"
+      "product": "ローカル自律 Web エージェント",
+      "company": "青渚テクノロジーの理念",
+      "download": "macOS / Windows クライアント"
     }
   },
   "beats": {
     "product": [
-      "スマート認識",
-      "ネイティブ駆動",
-      "完全な掌握"
+      "スマート感知",
+      "ネイティブ実行",
+      "完全制御"
     ],
     "company": [
-      "創業の想い",
-      "技術ビジョン",
-      "オープン共創"
+      "創業ビジョン",
+      "技術ロードマップ",
+      "オープンエコシステム"
     ],
     "download": [
-      "バージョン選択",
+      "リリース",
       "環境設定",
       "クイックスタート"
     ]
   },
-  "figure": "機能概要図",
+  "figure": "インタラクティブ図",
   "locales": {
     "zh": "简体中文",
     "ja": "日本語",
@@ -48,237 +58,667 @@
   },
   "seo": {
     "product": {
-      "title": "ABCP · 次世代ローカルファースト自律型ブラウザ",
-      "description": "定型的なブラウザ作業はAIへ、手と時間は日々の暮らしへ。実Web環境と融合し、完全ローカル安全環境で稼働。"
+      "title": "WebCross · 自律 Web エージェントブラウザ",
+      "description": "WebCross はローカル専用 Chromium ベースの AI エージェントブラウザ。100% ローカルデータ、最小 Token で Web 自動化を実現。"
     },
     "company": {
-      "title": "会社概要 · ABCP",
-      "description": "Qingzhu Technology、人とエージェントが協調する次世代インフラを構築。"
+      "title": "会社情報 · WebCross",
+      "description": "青渚テクノロジー：次世代の人間・AI 協働インフラを先導。"
     },
     "download": {
-      "title": "ダウンロードと体験 · ABCP",
-      "description": "macOSおよびWindows対応のABCPスマートワークベンチをダウンロード。"
+      "title": "ダウンロード · WebCross",
+      "description": "macOS / Windows 対応の WebCross クライアントをダウンロード。"
     }
   },
   "product": {
     "title": "製品概要",
-    "eyebrow": "Autonomous Web Agent · Local First",
-    "badge": "ローカル完結型 自律AIブラウザ",
-    "thesis": "定型的なブラウザ作業はAIへ",
-    "thesisHighlight": "手と時間は日々の暮らしへ",
-    "sub": "端末上で稼働するオンデバイスAIブラウザ。複数システムの情報収集から大量のフォーム入力まで、退屈な反復作業を自律実行。要確認時はミリ秒単位でスムーズに人間へ引き継ぎ、データは100%端末内で安全に完結します。",
-    "ctaPrimary": "無料で体験する",
-    "ctaSecondary": "ワークフロー体験シミュレーション",
-    "trustTags": [
-      "単純作業からの解放",
-      "100% ローカル安全設計",
-      "macOS / Windows 対応"
+    "thesisBrand": "WebCross",
+    "thesisLead": "があなたのエージェントを支援し",
+    "thesisRest": "煩雑なウェブ作業を完了させます",
+    "sub": "エージェントがより速く、より少ない Token で Web 作業を完了。バックグラウンドで静かに動作し、仕事の邪魔をしません。",
+    "ctaPrimaryMac": "macOS 版をダウンロード",
+    "ctaPrimaryWin": "Windows 版をダウンロード",
+    "systemSupport": "macOS 13+ (Apple Silicon / Intel) · Windows 11 64-bit",
+    "assurances": [
+      "はい、公開ベータ期間中は全機能が無料です",
+      "ローカル優先、データは端末から出ません"
     ],
-    "figure": "ABCP デュアルウィンドウ協調ワークベンチ",
-    "metrics": [
-      {
-        "value": "100%",
-        "label": "ローカルデータ主権",
-        "desc": "アカウント認証情報、Cookie、操作ログは100%端末内に保持、クラウド送信ゼロ"
+    "demo": {
+      "badge": "LIVE DEMO",
+      "title": "WebCross は以下のタスクを代行します",
+      "scrollHint": "スクロールすると 3 つのタスクを順に確認できます",
+      "clientTitle": "WebCross · Agent",
+      "taskLabel": "元のタスク",
+      "runLabel": "タスクを実行",
+      "logLabel": "実行トレース",
+      "statusRunning": "実行中",
+      "statusDone": "完了",
+      "tabs": {
+        "A": "Amazon 価格巡回",
+        "B": "Amazon 出品",
+        "C": "SNS 収集"
       },
-      {
-        "value": "高速 · Token節約",
-        "label": "カスタムページエンジン",
-        "desc": "AgentのAction実行に特化したカスタム設計。ミリ秒単位の応答と構造剪定でToken消費を大幅削減"
-      },
-      {
-        "value": "0 妨害",
-        "label": "静默とオンデマンド協調",
-        "desc": "ブラウザはバックグラウンドで静默に自律実行。要確認時のみ画面上でミリ秒連携し、完了後は直ちに復帰"
-      },
-      {
-        "value": "自己進化",
-        "label": "スマート編成と経験蓄積",
-        "desc": "自然言語で指示を下すだけで自動タスク編成。実行完了後は操作経験を蓄積し高信頼ワークフローとして再利用"
-      }
-    ],
-    "layers": [
-      {
-        "tag": "ユーザー注視・統制中枢",
-        "name": "タスクパネルとディスパッチャー",
-        "body": "ユーザーが唯一注视する操作・指示センター。全体状況を一元把握し、バックグラウンドの複数の独立ブラウザへタスクを並行ディスパッチ。全タイムラインの録画級タスク回顧と監査を提供。",
-        "status": "Multi-Browser Dispatch Active",
-        "bullets": [
-          "統合タスク盤：自然言語による意図入力と複数ワークフローの並行ディスパッチ",
-          "複数ブラウザ協調：複数の独立バックグラウンドブラウザへ原子Actionを分散",
-          "録画級の回顧：全タイムラインの操作再生、イベント監査および状態アーカイブ",
-          "ネイティブ人機協調：2FAや重要意思決定時にミリ秒単位で画面上引き継ぎ"
-        ]
-      },
-      {
-        "tag": "専用実行基盤",
-        "name": "専用 Agent Harness",
-        "body": "ディスパッチャーとブラウザ群を繋ぐ専用実行基盤。防幻覚パラメータ検証ファイアウォール、意味論的フィードバック、ゼロトラスト保護により並行実行の安定性を確保。",
-        "status": "Zero-Trust Guardrails Active",
-        "bullets": [
-          "強型防幻覚：Zod Schema による厳格な検証で不正指令を遮断",
-          "意味論的フィードバック：WebページのDOM/視覚状態を精密に構造化して返送",
-          "ゼロトラストゲート：危険操作ブロック、ホワイトリストおよびプロンプト注入防御",
-          "環境隔離管理：複数ブラウザインスタンスのプロセス別ライフサイクル制御"
-        ]
-      },
-      {
-        "tag": "複数インスタンス実行エンジン",
-        "name": "カスタムページエンジン",
-        "body": "複数のブラウザインスタンスがバックグラウンドで物理隔離され静默自律稼働。Agentアクションの高速スループットに特化し、極小の負荷で構造化データを抽出。",
-        "status": "High-Throughput Fleet",
-        "bullets": [
-          "超高速アクション：AIエージェント専用設計、ミリ秒単位の原子操作実行",
-          "完全静默稼働：ブラウザはバックグラウンドで自律稼働し、ポップアップ妨害ゼロ",
-          "スマート構造剪定：冗長なDOMを自動フィルタリングし、モデルToken消費を大幅削減",
-          "高信頼成果物交付：複数ページから精密データ抽出、テーブルや証跡ファイルを一発出力"
-        ]
-      }
-    ],
-    "interactiveDemo": {
-      "badge": "Interactive Workflow Simulation · バックグラウンド静默実行とオンデマンド管理",
-      "title": "インタラクティブ・シミュレーション · 自律Agentの実行機構を体感",
-      "subtitle": "実際の業務シナリオを選択し、エージェントがバックグラウンドでブラウザを自律操作する様子を体験。右側の管理パネルは必要に応じて展開し、いつでもバックグラウンドタブへ最小化可能——画面を見守る必要はなく、仕事や生活を妨げません。",
-      "promptLabel": "シナリオ選択",
-      "promptHint": "「シミュレーション開始」をクリックで展開、いつでもバックグラウンドタブへ最小化可能",
-      "tabPrefix": "バックグラウンドタブ",
-      "btnMinimize": "バックグラウンドへ最小化",
-      "btnExpand": "パネルを展開",
-      "minimizedHint": "バックグラウンドで静默実行中 (クリックで再展開 · 日常業務を妨げません)",
-      "statusRunning": "エージェントがバックグラウンドでブラウザを自律駆動し、Actionを実行中...",
-      "statusPaused": "安全検証を検出：管理パネルが確認を求め、完了後は直ちにバックグラウンドへ戻ります",
-      "statusDone": "Actionの実行が完了し、構造化データと証跡ファイルをバックグラウンドで静默交付しました",
-      "btnTakeover": "画面上で認証を完了しました · 自動化を再開",
-      "btnReset": "シミュレーションをリセット"
-    },
-    "comparison": {
-      "title": "なぜ ABCP なのか？",
-      "subtitle": "自動化の再定義：従来のRPA、クラウド型Agent、対話型AIとの徹底比較",
-      "headers": [
-        "比較項目",
-        "ABCP ローカルスマートブラウザ",
-        "従来のRPAツール",
-        "クラウド型AI Agent",
-        "対話型AIチャット"
-      ],
-      "rows": [
-        {
-          "dim": "実行環境",
-          "abcp": "端末上のカスタムページエンジン",
-          "rpa": "ローカル専用スクリプト",
-          "cloud": "クラウド仮想ヘッドレスブラウザ",
-          "chat": "チャット画面内のみ"
+      "scenes": {
+        "A": {
+          "label": "シーン A · Amazon 商品価格巡回",
+          "caption": "毎日数千件の出品価格を自動監視。価格変動を即座にキャッチ。",
+          "task": "Amazon の power bank 上位 30 商品を巡回。url・title・price・rating・上位 30 件の bad review を取得してください。",
+          "steps": [
+            "amazon.com を開く",
+            "検索欄に power bank を入力",
+            "検索ボタンをクリック",
+            "検索結果の 1 件目をクリック",
+            "商品詳細ページへ移動",
+            "url / title / price / rating を取得",
+            "低評価レビュー上位 30 件を取得",
+            "整理してローカルに保存"
+          ],
+          "browser": {
+            "urlHome": "www.amazon.com",
+            "urlSerp": "www.amazon.com/s?k=power+bank",
+            "urlPdp": "www.amazon.com/dp/B0D8XQ1KJ2",
+            "urlReviews": "www.amazon.com/product-reviews/B0D8XQ1KJ2",
+            "keyword": "power bank",
+            "searchPlaceholder": "Search Amazon",
+            "deliverTo": "Deliver to Phoenix 85034",
+            "navItems": [
+              "Today Deals",
+              "Best Sellers",
+              "Electronics",
+              "New Releases",
+              "Prime"
+            ],
+            "resultsMeta": "1-16 of over 40,000 results for power bank",
+            "sortLabel": "Sort by: Featured",
+            "filterTitle": "Filters",
+            "filters": [
+              "High capacity",
+              "USB-C",
+              "Wireless",
+              "Fast charging",
+              "Built-in cable"
+            ],
+            "results": [
+              {
+                "badge": "Overall Pick",
+                "title": "INIU 45W Fast Charging Portable Charger 10000mAh, built-in USB-C cable, flight safe",
+                "rating": "4.4",
+                "reviews": "84.8K",
+                "bought": "10K+ bought in past month",
+                "price": "$21.59",
+                "listPrice": "$23.99",
+                "deal": "Limited time deal"
+              },
+              {
+                "badge": "",
+                "title": "Anker Power Bank 20,000mAh, built-in USB-C cable, 1 USB-C and 1 USB-A port",
+                "rating": "4.6",
+                "reviews": "9.2K",
+                "bought": "10K+ bought in past month",
+                "price": "$69.99",
+                "listPrice": "",
+                "deal": ""
+              },
+              {
+                "badge": "",
+                "title": "Magnetic Portable Charger 10000mAh, 20W USB-C MagSafe battery pack",
+                "rating": "4.2",
+                "reviews": "3.1K",
+                "bought": "2K+ bought in past month",
+                "price": "$29.99",
+                "listPrice": "$39.99",
+                "deal": ""
+              }
+            ],
+            "pdp": {
+              "crumb": "Electronics › Computer Accessories › Power Banks",
+              "title": "INIU 45W Fast Charging Portable Charger 10000mAh Power Bank",
+              "rating": "4.4",
+              "reviews": "84,812 ratings",
+              "bought": "10K+ bought in past month",
+              "price": "$21.59",
+              "listPrice": "$23.99",
+              "deal": "Limited time deal",
+              "shipping": "FREE delivery for Prime members",
+              "cart": "Add to Cart",
+              "buy": "Buy Now",
+              "reviewsAnchor": "See all reviews"
+            },
+            "reviews": {
+              "title": "Customer reviews",
+              "score": "4.3",
+              "scoreLabel": "out of 5",
+              "total": "475 global ratings",
+              "histogram": [
+                [
+                  "5 star",
+                  "73%",
+                  73
+                ],
+                [
+                  "4 star",
+                  "11%",
+                  11
+                ],
+                [
+                  "3 star",
+                  "3%",
+                  3
+                ],
+                [
+                  "2 star",
+                  "2%",
+                  2
+                ],
+                [
+                  "1 star",
+                  "11%",
+                  11
+                ]
+              ],
+              "filterLabel": "Filtered: 1–2 star reviews",
+              "items": [
+                {
+                  "name": "Showme-thegoods",
+                  "stars": 2,
+                  "title": "Capacity is overstated",
+                  "body": "Rated 10000mAh but it only tops my phone up 1.5 times — nowhere near the listing."
+                },
+                {
+                  "name": "Wolfenhawke",
+                  "stars": 1,
+                  "title": "Stopped charging after two weeks",
+                  "body": "Fine at first, then the LED stayed on and it would not take a charge. Support was slow."
+                },
+                {
+                  "name": "M. Ortega",
+                  "stars": 2,
+                  "title": "Fast charge only on some phones",
+                  "body": "Advertised 45W, but only the bundled cable on one model hits it. Everything else is plain 18W."
+                },
+                {
+                  "name": "kellyR",
+                  "stars": 1,
+                  "title": "Gets hot",
+                  "body": "Noticeably warm while charging and using at the same time; build quality is rougher than the photos."
+                }
+              ]
+            },
+            "capture": {
+              "title": "Captured",
+              "fields": [
+                [
+                  "url",
+                  "amazon.com/dp/B0D8XQ1KJ2"
+                ],
+                [
+                  "title",
+                  "INIU 45W 10000mAh Power Bank"
+                ],
+                [
+                  "price",
+                  "$21.59"
+                ],
+                [
+                  "rating",
+                  "4.4 / 84.8K"
+                ]
+              ],
+              "reviewLabel": "bad reviews scraped",
+              "reviewTotal": 30,
+              "doneTitle": "Written locally",
+              "doneFile": "power_bank_top30.csv",
+              "doneMeta": "30 products · 900 bad reviews · 100% on-device"
+            }
+          }
         },
-        {
-          "dim": "プライバシー・安全性",
-          "abcp": "100%端末内完结、漏洩ゼロ",
-          "rpa": "コード内平文埋め込みのリスク",
-          "cloud": "Cookieやアカウントをクラウドへ送信",
-          "chat": "対話ログが外部クラウドに蓄積"
+        "B": {
+          "label": "シーン B · Amazon 出品",
+          "caption": "数百 SKU をワンクリック出品。フォーム入力はエージェントに。",
+          "task": "Seller Central で新商品を出品。名称「Mophie 20000 ブラック」、ブランド「Mophie」、価格 $59.95、在庫 200、カテゴリ「Electronics › Power Banks」。",
+          "steps": [
+            "Seller Central を開く",
+            "Add Products フローに入る",
+            "商品名を入力",
+            "ブランドのプルダウンを開いて選択",
+            "商品カテゴリを選択",
+            "価格と在庫数を入力",
+            "メイン画像をアップロード",
+            "送信して出品完了を確認"
+          ],
+          "browser": {
+            "url": "sellercentral.amazon.com/catalog/add",
+            "brandbar": "amazon seller central",
+            "path": "Catalog › Add Products",
+            "tabs": [
+              "Vital info",
+              "Description",
+              "Images",
+              "Keywords"
+            ],
+            "nameLabel": "Product name",
+            "nameValue": "Mophie Powerstation 20000mAh Black",
+            "brandLabel": "Brand",
+            "brandPlaceholder": "Select a brand",
+            "brandOptions": [
+              "Anker",
+              "Belkin",
+              "INIU",
+              "Mophie",
+              "UGREEN"
+            ],
+            "brandValue": "Mophie",
+            "categoryLabel": "Category",
+            "categoryPlaceholder": "Select a category",
+            "categoryOptions": [
+              "Electronics › Chargers",
+              "Electronics › Power Banks",
+              "Electronics › Cables"
+            ],
+            "categoryValue": "Electronics › Power Banks",
+            "priceLabel": "Price (USD)",
+            "priceValue": "59.95",
+            "stockLabel": "Quantity",
+            "stockValue": "200",
+            "uploadLabel": "Drop or click to upload the main image",
+            "uploadHint": "JPG / PNG · 1600×1600 recommended",
+            "uploadFile": "mophie-powerstation-20000-black.jpg",
+            "uploadSize": "1.8 MB",
+            "submitLabel": "Submit listing",
+            "submitting": "Submitting…",
+            "success": "Listing created",
+            "successMeta": "SKU MPH-PS20000-BLK queued for review",
+            "queueLabel": "SKUs left in batch",
+            "queueValue": "117 / 118"
+          }
         },
-        {
-          "dim": "Captcha・2FA対応",
-          "abcp": "シームレスな人間協調引き継ぎ",
-          "rpa": "エラー停止し例外終了",
-          "cloud": "人間介入が困難",
-          "chat": "Web操作自体が非対応"
-        },
-        {
-          "dim": "動的ページ適応力",
-          "abcp": "カスタムアクションエンジン自律駆動",
-          "rpa": "UI改修で頻繁に停止",
-          "cloud": "Bot検知でブロック多発",
-          "chat": "非対応"
-        },
-        {
-          "dim": "導入・利用コスト",
-          "abcp": "自然言語と経験の自動再利用",
-          "rpa": "専門エンジニアによる開発保守",
-          "cloud": "中程度（複雑なAPI設定）",
-          "chat": "簡単だが実行力なし"
+        "C": {
+          "label": "シーン C · SNS 投稿収集",
+          "caption": "投稿とエンゲージメントを自動アーカイブ。SNS 運用を代行。",
+          "task": "X / Reddit の #WebCross 過去 1 週間のホット投稿 30 件を取得し、いいね / リポスト / コメントを自動で行い、週報にまとめてください。",
+          "steps": [
+            "x.com で #WebCross を検索",
+            "人間のようにスクロール",
+            "投稿を開いて詳細を確認",
+            "いいねして返信を投稿",
+            "reddit.com に切り替え",
+            "r/automation の人気投稿を閲覧",
+            "投稿とエンゲージメントを収集",
+            "ローカルの表に保存"
+          ],
+          "browser": {
+            "actions": {
+              "like": "Like",
+              "repost": "Repost",
+              "comment": "Comment",
+              "reply": "Reply",
+              "replyPlaceholder": "Post your reply",
+              "posted": "Posted"
+            },
+            "x": {
+              "name": "X",
+              "url": "x.com/search?q=%23WebCross",
+              "query": "#WebCross",
+              "tabs": [
+                "Top",
+                "Latest",
+                "People",
+                "Media"
+              ],
+              "posts": [
+                {
+                  "user": "Zian Lin",
+                  "handle": "@linzian",
+                  "time": "12m",
+                  "body": "Pulled 200 competitor reviews with WebCross, found three recurring complaints, wrote the report in 10 minutes.",
+                  "likes": "128",
+                  "comments": "32",
+                  "reposts": "9"
+                },
+                {
+                  "user": "Mira",
+                  "handle": "@miralab",
+                  "time": "27m",
+                  "body": "Our Amazon research used to take two interns a full day of copy-paste. With WebCross it is 30 minutes.",
+                  "likes": "412",
+                  "comments": "47",
+                  "reposts": "21"
+                },
+                {
+                  "user": "Kai",
+                  "handle": "@yikeops",
+                  "time": "1h",
+                  "body": "One scrape across every platform, engagement data exported straight to a sheet. No more stitching weekly reports by hand.",
+                  "likes": "256",
+                  "comments": "18",
+                  "reposts": "14"
+                },
+                {
+                  "user": "Jaden",
+                  "handle": "@jadenq",
+                  "time": "2h",
+                  "body": "Fingerprint switching plus the IP pool is the real win — multi-account work finally feels safe.",
+                  "likes": "98",
+                  "comments": "11",
+                  "reposts": "3"
+                }
+              ],
+              "reply": "Same here — we handed price patrol to WebCross too. Runs fully local, nothing leaves the machine 👏"
+            },
+            "reddit": {
+              "name": "Reddit",
+              "url": "reddit.com/r/automation/search?q=WebCross",
+              "sub": "r/automation",
+              "query": "WebCross",
+              "tabs": [
+                "Hot",
+                "New",
+                "Top"
+              ],
+              "posts": [
+                {
+                  "user": "u/scrape_wizard",
+                  "handle": "r/automation",
+                  "time": "6h",
+                  "body": "Finally a local browser agent that does not ship my cookies to someone else cloud.",
+                  "likes": "1.2K",
+                  "comments": "184",
+                  "reposts": "63"
+                },
+                {
+                  "user": "u/ops_daily",
+                  "handle": "r/ecommerce",
+                  "time": "9h",
+                  "body": "Ran WebCross on 800 ASINs overnight. Woke up to a clean CSV. No captcha babysitting.",
+                  "likes": "864",
+                  "comments": "121",
+                  "reposts": "37"
+                },
+                {
+                  "user": "u/pm_kento",
+                  "handle": "r/SaaS",
+                  "time": "13h",
+                  "body": "Token bill dropped by more than half after switching to the AXTree extraction mode.",
+                  "likes": "537",
+                  "comments": "76",
+                  "reposts": "25"
+                }
+              ],
+              "reply": "Same here — the skill it saved after the first run cut our token spend again on the second."
+            },
+            "archive": {
+              "title": "Archived",
+              "file": "social_weekly_report.csv",
+              "meta": "30 posts · engagement data and replies written locally",
+              "fields": [
+                "Platform",
+                "Author",
+                "Body",
+                "Likes",
+                "Comments",
+                "Reposts",
+                "Engaged"
+              ],
+              "progressLabel": "Capture progress"
+            }
+          }
         }
-      ]
+      }
     },
-    "useCases": {
-      "title": "多彩な実務シーンへの適用",
-      "subtitle": "反復的で退屈なWeb操作を、一行の自然言語指示で自動化",
+    "features": {
+      "badge": "PRODUCT",
       "items": [
         {
-          "title": "複数プラットフォームのデータ収集と比較",
-          "desc": "複数サプライヤーのサイトを自動巡回し、同等品の価格・在庫を抽出。比較レポートを作成。"
+          "key": "speed",
+          "eyebrow": "カーネルレベルの独自実装",
+          "title": "最速のエージェントブラウザ",
+          "body": "純正 Chrome に JS を被せたのではなく、Chromium を独自カスタマイズ。",
+          "figure": "Chromium カーネル改造 vs Chrome + JS 層",
+          "bullets": [
+            "电商平台：Amazon 等对指纹与 IP 严控的场景",
+            "SaaS 平台与企业内部系统",
+            "社交媒体多账号并行运营"
+          ]
         },
         {
-          "title": "社内システムへの一括伝票入力・申請",
-          "desc": "ローカルのExcelやCRMデータに基づき、社内ERPへ自動ログインして多段階フォームを登録。"
+          "key": "token",
+          "eyebrow": "AXTree 抽出",
+          "title": "同じタスクで Token を大幅節約",
+          "body": "AXTree が冗長 DOM を除去したページ構造のみを返却。クロスオリジン iframe と Shadow DOM もアクセス可能。",
+          "figure": "生 DOM → フィルタ後 AXTree の Token 比較",
+          "bullets": [
+            "平均削减 85% 页面上下文体积",
+            "跨域 iframe 与 Shadow DOM 一并可读",
+            "更短的上下文等于更低延迟与更稳的决策"
+          ]
         },
         {
-          "title": "自社サイトの自動巡回と可用性監視",
-          "desc": "実環境上でユーザー導線をシミュレーションし、リンク切れ、表示崩れ、JSエラーを早期検知。"
+          "key": "local",
+          "eyebrow": "データ主権",
+          "title": "100% ローカルデータ主権",
+          "body": "アカウント情報、Cookie、実行ログはすべてあなたのマシンに。クラウド送信ゼロ。",
+          "figure": "ローカル盾アイコン · クラウド送信ゼロ",
+          "bullets": [
+            "凭证与 Cookie 永不离开本机",
+            "执行流水本地留存，可审计可回溯",
+            "断网环境下任务照常推进"
+          ]
+        },
+        {
+          "key": "fingerprint",
+          "eyebrow": "アカウント安全性",
+          "title": "唯一の指紋環境",
+          "body": "ブラウザ指紋のカスタマイズと IP 随時切替で、複数アカウントの安全性を確保。",
+          "figure": "複数インスタンス × 指紋 / IP マトリクス",
+          "bullets": [
+            "每个实例一套独立指纹与出口 IP",
+            "会话隔离，多账号并发不串号",
+            "指纹模板可复制、可批量下发"
+          ]
+        },
+        {
+          "key": "skill",
+          "eyebrow": "Skill の蓄積",
+          "title": "あなた専用の Skill を生成",
+          "body": "WebCross Harness で実行したタスクは Skill とワークフローとして蓄積。次回は 60% 以上の Token 削減。",
+          "figure": "実行 → Skill 化 → 再利用",
+          "bullets": [
+            "首次执行即自动生成可复用 Skill",
+            "复用时跳过页面探索，直达关键步骤",
+            "Skill 与工作流均保存在本地"
+          ]
+        },
+        {
+          "key": "takeover",
+          "eyebrow": "人との協調",
+          "title": "敏感場面でシームレス接管",
+          "body": "Captcha や 2FA ではミリ秒で人手を呼び出し、確認後自動でバックグラウンド復帰。",
+          "figure": "バックグラウンド → 接管カード → 復帰",
+          "bullets": [
+            "毫秒级唤起，不打断其他并发任务",
+            "核验完成后从断点自动恢复",
+            "接管记录同样只留在本地"
+          ]
         }
       ]
+    },
+    "comparison": {
+      "title": "なぜ WebCross？",
+      "subtitle": "4 つの主要ソリューションと横並びで比較。すべての重要次元で業務により近い選択肢です。",
+      "dimensionHead": "評価項目",
+      "products": [
+        {
+          "name": "WebCross",
+          "tagline": "独自 Chromium カーネル",
+          "highlight": true,
+          "values": {
+            "exec": "ローカル Chromium カーネル、ページ要素を直接駆動",
+            "data": "100% ローカル、クラウド送信ゼロ",
+            "security": "指紋 + IP 切替",
+            "multi": "複数インスタンス並列",
+            "twofa": "ネイティブにミリ秒接管",
+            "skill": "自動蓄積される Skill / ワークフロー",
+            "barrier": "自然言語、ゼロ学習コスト"
+          }
+        },
+        {
+          "name": "従来型 RPA",
+          "tagline": "UiPath · 影刀",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": true,
+            "twofa": false,
+            "skill": true,
+            "barrier": false
+          }
+        },
+        {
+          "name": "ChatGPT Atlas",
+          "tagline": "OpenAI · 2025",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": false,
+            "twofa": true,
+            "skill": false,
+            "barrier": true
+          }
+        },
+        {
+          "name": "Perplexity Comet",
+          "tagline": "Perplexity AI · 2025",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": false,
+            "twofa": true,
+            "skill": false,
+            "barrier": true
+          }
+        },
+        {
+          "name": "Browser Use",
+          "tagline": "オープンソース · Python",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "data": false,
+            "security": false,
+            "multi": true,
+            "twofa": false,
+            "skill": false,
+            "barrier": false
+          }
+        }
+      ],
+      "dimensions": [
+        {
+          "key": "exec",
+          "label": "実行環境"
+        },
+        {
+          "key": "data",
+          "label": "データローカリティ"
+        },
+        {
+          "key": "security",
+          "label": "アカウント安全性"
+        },
+        {
+          "key": "multi",
+          "label": "マルチタスク"
+        },
+        {
+          "key": "twofa",
+          "label": "2FA / Captcha"
+        },
+        {
+          "key": "skill",
+          "label": "Skill / ワークフロー"
+        },
+        {
+          "key": "barrier",
+          "label": "学習コスト"
+        }
+      ],
+      "legendYes": "対応",
+      "legendNo": "非対応"
+    },
+    "closing": {
+      "title": "今日からエージェントに働いてもらいましょう",
+      "sub": "WebCross をダウンロードして、真にローカルなエージェントブラウザを体験してください。"
     }
   },
   "company": {
-    "title": "会社概要",
-    "subtitle": "青渚科技 · 次世代オンデバイス知能インフラの開拓",
-    "lead": "青渚科技は人間とAIの新しい協調パラダイムを探求し、安全・高信頼で誰もが使えるオンデバイス知能インフラを構築しています。",
-    "storyTitle": "企業使命と技術の原点",
-    "story": "私たちは、AIの真価が単なるテキスト対話にとどまらず、実世界のデジタル空間で機械的で退屈な作業を人に代わって完遂することにあると信じています。ローカルファーストと自研高効率ページエンジンにより、データ主権を守りつつ、人々の両手と時間を創造的生活へと回帰させます。",
-    "legalLabel": "法人名",
-    "cityLabel": "本社所在地",
+    "title": "会社情報",
+    "subtitle": "青渚テクノロジー · 次世代ローカル AI インフラ",
+    "lead": "青渚テクノロジーは人間と AI の新しい協働パラダイムを探索し、安全で信頼でき、誰もが使える次世代のローカル AI インフラを構築します。",
+    "storyTitle": "ミッションとエンジニアリングの信条",
+    "story": "AI の真の価値は無限のチャットではなく、現実のデジタル世界をナビゲートして退屈で反復的なタスクを終わらせることだと信じています。ローカル優先アーキテクチャと高スループットな独自ページエンジンにより、データ主権を守りながら、創作者に時間と集中を取り戻します。",
+    "legalLabel": "法人",
+    "cityLabel": "本社",
     "productLabel": "主力製品",
-    "productName": "WebCross ABCP (自律型スマートブラウザ)",
-    "emailLabel": "ビジネス・技術窓口",
-    "legalName": "青渚科技有限公司",
-    "city": "中国・杭州",
-    "figure": "青渚科技 開発センター"
+    "productName": "WebCross (ローカル AI ブラウザ)",
+    "emailLabel": "ビジネス・サポート",
+    "legalName": "青渚科技有限会社",
+    "city": "中国 · 杭州",
+    "figure": "青渚テクノロジー R&D センター"
   },
   "download": {
-    "title": "WebCross ABCP をダウンロード",
-    "lead": "オンデバイス自律ブラウジングの新時代へ。macOSとWindowsに対応し、ワンクリックで安全にインストール可能です。",
-    "figure": "ABCP クライアントのインストールとワークベンチプレビュー",
+    "title": "WebCross をダウンロード",
+    "lead": "ローカル自律 AI ブラウジングの新時代へ。macOS と Windows 対応、軽量で簡単インストール。",
+    "figure": "WebCross クライアントインストールとプレビュー",
     "userButton": "macOS 版をダウンロード",
-    "clientButton": "Windows 版 (準備中)",
-    "userHint": "macOS 13.0+ · Apple Silicon (Mシリーズ) & Intel 対応",
-    "clientHint": "Windows 11 64bit · プレビュー版近日公開",
-    "systemLabel": "対応OS",
-    "dataLabel": "プライバシー保証",
-    "dataValue": "すべてのデータを100%ローカルに保存",
-    "userMeta": "DMG インストーラー (128 MB) · SHA256 署名検証済",
-    "clientMeta": "MSIX / EXE セットアップ · 開発中",
-    "quickstartTitle": "クイックスタート手順",
+    "clientButton": "Windows (近日公開)",
+    "userHint": "macOS 13.0+ · Apple Silicon (M シリーズ) & Intel",
+    "clientHint": "Windows 11 64-bit · プレビュー版近日公開",
+    "systemLabel": "対応 OS",
+    "dataLabel": "データ保護",
+    "dataValue": "100% ローカル保存のみ",
+    "userMeta": "DMG インストーラー (128 MB) · SHA256 署名 · 提供中",
+    "clientMeta": "MSIX / EXE · 開発中",
+    "quickstartTitle": "クイックスタート",
     "quickstart": [
       {
         "step": "01",
         "title": "インストール",
-        "desc": "DMGパッケージを開き、WebCrossを「アプリケーション」フォルダへドラッグ。"
+        "desc": "DMG を開き、WebCross を Applications フォルダにドラッグ。"
       },
       {
         "step": "02",
-        "title": "権限の許可",
-        "desc": "初回起動時のシステムプロンプトに従い、アクセシビリティ権限を許可。"
+        "title": "権限",
+        "desc": "初回起動時にアクセシビリティと自動化制御を許可。"
       },
       {
         "step": "03",
-        "title": "タスク実行",
-        "desc": "自然言語で最初の指示を入力し、エージェントの自律Web操作を体験。"
+        "title": "実行",
+        "desc": "コンソールで自然言語タスクを入力し、エージェントに任せます。"
       }
     ]
   },
   "footer": {
-    "localFirst": "100% ローカル完結 · 漏洩ゼロ",
+    "localFirst": "100% ローカル優先 · 漏洩ゼロ",
     "get": "ダウンロード",
     "navTitle": "ナビゲーション",
-    "productTitle": "製品とシステム環境",
-    "desc": "macOS 13+ および Windows 11 に最適化。プライバシーを最優先する企業やパワーユーザー向けに設計された端側Web自動化プラットフォーム。",
-    "securityBadge": "100% ローカルファースト構造"
+    "productTitle": "製品とシステム",
+    "desc": "macOS 13+ / Windows 11 専用。プライバシー重視の企業とパワーユーザー向け。",
+    "securityBadge": "100% ローカル優先アーキテクチャ"
   },
   "a11y": {
     "mainNav": "メインナビゲーション",
-    "localeNav": "言語選択メニュー",
+    "localeNav": "言語切替",
     "queue": "章目次",
-    "rail": "章ナビゲーション",
-    "stage": "メインコンテンツエリア",
-    "menu": "モバイルメニューを開く"
+    "rail": "章ナビ",
+    "stage": "メインコンテンツ",
+    "menu": "モバイルメニュー切替",
+    "scenarioSwitcher": "シーン切替",
+    "featureList": "产品能力列表"
   }
 }

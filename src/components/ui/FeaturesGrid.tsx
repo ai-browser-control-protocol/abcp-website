@@ -17,9 +17,12 @@ import "./features-grid.css";
 export function FeaturesGrid({ copy }: { copy: FeaturesCopy }) {
   if (!copy?.items?.length) return null;
 
+  // Filter out hidden sections (e.g. takeover) while preserving their resources
+  const visibleItems = copy.items.filter((item) => item.key !== "takeover");
+
   return (
     <section className="features-section" id="features" aria-label="Product capabilities">
-      {copy.items.map((item, index) => (
+      {visibleItems.map((item, index) => (
         <FeatureRow key={item.key} item={item} index={index} badge={copy.badge} />
       ))}
     </section>
@@ -83,7 +86,7 @@ function FeatureRow({
 
       <div className="feature-figure">
         <div className="feature-figure-card">
-          <FeatureIllustration index={index} />
+          <FeatureIllustration itemKey={item.key} index={index} />
         </div>
         <span className="feature-figure-caption">{item.figure}</span>
       </div>
@@ -95,7 +98,24 @@ function FeatureRow({
 /* Figures                                                                     */
 /* ========================================================================== */
 
-function FeatureIllustration({ index }: { index: number }) {
+function FeatureIllustration({ itemKey, index }: { itemKey?: string; index: number }) {
+  if (itemKey) {
+    switch (itemKey) {
+      case "speed":
+        return <IllusSpeed />;
+      case "token":
+        return <IllusToken />;
+      case "local":
+        return <IllusLocal />;
+      case "fingerprint":
+        return <IllusFingerprint />;
+      case "skill":
+        return <IllusSkill />;
+      case "takeover":
+        return <IllusTakeover />;
+    }
+  }
+
   switch (index) {
     case 0:
       return <IllusSpeed />;

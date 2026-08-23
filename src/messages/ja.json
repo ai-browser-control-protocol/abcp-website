@@ -75,17 +75,13 @@
     "thesisBrand": "WebCross",
     "thesisLead": "があなたのエージェントを支援し",
     "thesisRest": "煩雑なウェブ作業を完了させます",
-    "sub": "エージェントがより速く、より少ない Token で Web 作業を完了。バックグラウンドで静かに動作し、仕事の邪魔をしません。",
-    "ctaPrimaryMac": "macOS 版をダウンロード",
-    "ctaPrimaryWin": "Windows 版をダウンロード",
-    "systemSupport": "macOS 13+ (Apple Silicon / Intel) · Windows 11 64-bit",
+    "ctaPrimary": "WebCross を無料でダウンロード",
     "assurances": [
       "はい、公開ベータ期間中は全機能が無料です",
       "ローカル優先、データは端末から出ません"
     ],
     "demo": {
-      "badge": "LIVE DEMO",
-      "title": "WebCross は以下のタスクを代行します",
+      "title": "**あらゆる自動化シーン**のために",
       "scrollHint": "スクロールすると 3 つのタスクを順に確認できます",
       "clientTitle": "WebCross · Agent",
       "taskLabel": "元のタスク",
@@ -101,7 +97,7 @@
       "scenes": {
         "A": {
           "label": "シーン A · Amazon 商品価格巡回",
-          "caption": "毎日数千件の出品価格を自動監視。価格変動を即座にキャッチ。",
+          "caption": "毎日**数千件の出品価格**を自動監視。価格変動を即座にキャッチ。",
           "task": "Amazon の power bank 上位 30 商品を巡回。url・title・price・rating・上位 30 件の bad review を取得してください。",
           "steps": [
             "amazon.com を開く",
@@ -243,38 +239,20 @@
                   "body": "Noticeably warm while charging and using at the same time; build quality is rougher than the photos."
                 }
               ]
-            },
-            "capture": {
-              "title": "Captured",
-              "fields": [
-                [
-                  "url",
-                  "amazon.com/dp/B0D8XQ1KJ2"
-                ],
-                [
-                  "title",
-                  "INIU 45W 10000mAh Power Bank"
-                ],
-                [
-                  "price",
-                  "$21.59"
-                ],
-                [
-                  "rating",
-                  "4.4 / 84.8K"
-                ]
-              ],
-              "reviewLabel": "bad reviews scraped",
-              "reviewTotal": 30,
-              "doneTitle": "Written locally",
-              "doneFile": "power_bank_top30.csv",
-              "doneMeta": "30 products · 900 bad reviews · 100% on-device"
             }
+          },
+          "result": {
+            "summary": "商品 30 件 · 低評価 30 件を取得",
+            "items": [
+              "url / title / price / rating を表に記録",
+              "低評価を商品ごとに整理",
+              "power-bank-top30.csv を書き出し"
+            ]
           }
         },
         "B": {
           "label": "シーン B · Amazon 出品",
-          "caption": "数百 SKU をワンクリック出品。フォーム入力はエージェントに。",
+          "caption": "**数百 SKU** をワンクリック出品。フォーム入力はエージェントに。",
           "task": "Seller Central で新商品を出品。名称「Mophie 20000 ブラック」、ブランド「Mophie」、価格 $59.95、在庫 200、カテゴリ「Electronics › Power Banks」。",
           "steps": [
             "Seller Central を開く",
@@ -330,11 +308,19 @@
             "successMeta": "SKU MPH-PS20000-BLK queued for review",
             "queueLabel": "SKUs left in batch",
             "queueValue": "117 / 118"
+          },
+          "result": {
+            "summary": "SKU 1 件を送信 · 残り 119 件",
+            "items": [
+              "商品名 / ブランド / カテゴリを入力",
+              "価格と在庫を登録",
+              "メイン画像をアップロード、審査待ち"
+            ]
           }
         },
         "C": {
           "label": "シーン C · SNS 投稿収集",
-          "caption": "投稿とエンゲージメントを自動アーカイブ。SNS 運用を代行。",
+          "caption": "投稿とエンゲージメントを**自動アーカイブ**。SNS 運用を代行。",
           "task": "X / Reddit の #WebCross 過去 1 週間のホット投稿 30 件を取得し、いいね / リポスト / コメントを自動で行い、週報にまとめてください。",
           "steps": [
             "x.com で #WebCross を検索",
@@ -445,25 +431,26 @@
                 }
               ],
               "reply": "Same here — the skill it saved after the first run cut our token spend again on the second."
-            },
-            "archive": {
-              "title": "Archived",
-              "file": "social_weekly_report.csv",
-              "meta": "30 posts · engagement data and replies written locally",
-              "fields": [
-                "Platform",
-                "Author",
-                "Body",
-                "Likes",
-                "Comments",
-                "Reposts",
-                "Engaged"
-              ],
-              "progressLabel": "Capture progress"
             }
+          },
+          "result": {
+            "summary": "投稿 24 件 · 2 プラットフォームを保存",
+            "items": [
+              "いいねと返信が完了",
+              "エンゲージメントを取得",
+              "ローカルの social-daily.xlsx に書き込み"
+            ]
           }
         }
-      }
+      },
+      "runningLabel": "実行中…",
+      "rerunLabel": "もう一度実行",
+      "previewTitle": "これはプレビューです",
+      "previewBody": "デモは組み込みのタスクのみ実行します。ご自身のタスクを最後まで通すには、まず WebCross をダウンロードしてください。",
+      "previewCta": "WebCross をダウンロード",
+      "resultTitle": "タスク完了",
+      "exploreHint": "クリックして試す",
+      "composerPlaceholder": "自分のタスクを入力、または内蔵タスクをそのまま実行…"
     },
     "features": {
       "badge": "PRODUCT",
@@ -475,33 +462,45 @@
           "body": "純正 Chrome に JS を被せたのではなく、Chromium を独自カスタマイズ。",
           "figure": "Chromium カーネル改造 vs Chrome + JS 層",
           "bullets": [
-            "电商平台：Amazon 等对指纹与 IP 严控的场景",
-            "SaaS 平台与企业内部系统",
-            "社交媒体多账号并行运营"
+            "指令直达渲染进程，中间没有 JS 适配层",
+            "省掉 CDP / RPC 往返与序列化开销",
+            "同一条任务链路，端到端快 3 倍以上"
           ]
         },
         {
           "key": "token",
-          "eyebrow": "AXTree 抽出",
+          "eyebrow": "AXTree + SemanticTree",
           "title": "同じタスクで Token を大幅節約",
-          "body": "AXTree が冗長 DOM を除去したページ構造のみを返却。クロスオリジン iframe と Shadow DOM もアクセス可能。",
-          "figure": "生 DOM → フィルタ後 AXTree の Token 比較",
+          "body": "AXTree がまずページ全体を簡潔な意味骨格へ圧縮し、スタイル・スクリプト・入れ子コンテナなどの DOM 冗長を取り除きます。その上で SemanticTree が要素間の階層・グルーピング・相互作用を補完。AXTree のフィルタだけの従来方式に比べ、コンテキストは短いのにページ構造の把握はより正確で、情報量も豊富です。",
+          "figure": "AXTree でページ骨格を圧縮 → SemanticTree で構造情報を補完",
           "bullets": [
-            "平均削减 85% 页面上下文体积",
-            "跨域 iframe 与 Shadow DOM 一并可读",
-            "更短的上下文等于更低延迟与更稳的决策"
+            "AXTree 压缩页面骨架，上下文体积平均降低 85%",
+            "SemanticTree 补齐层级、分组与交互关系",
+            "跨域 iframe 与 Shadow DOM 一并可读"
           ]
         },
         {
           "key": "local",
           "eyebrow": "データ主権",
           "title": "100% ローカルデータ主権",
-          "body": "アカウント情報、Cookie、実行ログはすべてあなたのマシンに。クラウド送信ゼロ。",
-          "figure": "ローカル盾アイコン · クラウド送信ゼロ",
+          "body": "アカウント情報、Cookie セッション、実行ログ、指示はすべてあなたの実機に残ります。タスクはローカルカーネルが直接実行し、ページの内容が第三者サーバーを経由することはありません。クラウドへのアップロードも送信もゼロです。",
+          "figure": "データは端末内でのみ流通 · 第三者サーバーを経由しない",
           "bullets": [
             "凭证与 Cookie 永不离开本机",
             "执行流水本地留存，可审计可回溯",
-            "断网环境下任务照常推进"
+            "页面内容不经第三方服务器中转"
+          ]
+        },
+        {
+          "key": "skill",
+          "eyebrow": "Skill の蓄積",
+          "title": "あなた専用の Skill を生成",
+          "body": "WebCross Harness で実行したタスクは、完了後に専用の Skill と Workflow として蓄積できます。次回は検証済みの経路をそのまま呼び出せるためページ探索が不要になり、Token を 80% 以上削減。タスクを越えて再利用できます。",
+          "figure": "タスク実行 → Skill + Workflow 化 → ワンクリック再利用",
+          "bullets": [
+            "任务执行完成后可生成 Skill + Workflow",
+            "复用时跳过页面探索，直达关键步骤",
+            "Skill 与 Workflow 均保存在本地"
           ]
         },
         {
@@ -509,23 +508,11 @@
           "eyebrow": "アカウント安全性",
           "title": "唯一の指紋環境",
           "body": "ブラウザ指紋のカスタマイズと IP 随時切替で、複数アカウントの安全性を確保。",
-          "figure": "複数インスタンス × 指紋 / IP マトリクス",
+          "figure": "マルチインスタンス × （マルチ指紋 + マルチ出口 IP） マトリクス",
           "bullets": [
             "每个实例一套独立指纹与出口 IP",
             "会话隔离，多账号并发不串号",
             "指纹模板可复制、可批量下发"
-          ]
-        },
-        {
-          "key": "skill",
-          "eyebrow": "Skill の蓄積",
-          "title": "あなた専用の Skill を生成",
-          "body": "WebCross Harness で実行したタスクは Skill とワークフローとして蓄積。次回は 60% 以上の Token 削減。",
-          "figure": "実行 → Skill 化 → 再利用",
-          "bullets": [
-            "首次执行即自动生成可复用 Skill",
-            "复用时跳过页面探索，直达关键步骤",
-            "Skill 与工作流均保存在本地"
           ]
         },
         {
@@ -540,11 +527,75 @@
             "接管记录同样只留在本地"
           ]
         }
-      ]
+      ],
+      "figures": {
+        "speed": {
+          "alt": "カーネル直結とアダプタ層の経路比較",
+          "kernel": "Chromium カーネル改造",
+          "adapter": "+ JavaScript アダプタ層",
+          "serialize": "シリアライズ · IPC 往復",
+          "caption": "同一タスク経路 · 所要時間の比較"
+        },
+        "tree": {
+          "alt": "DOM を AXTree で圧縮し SemanticTree で構造を補完",
+          "dom": "生の DOM",
+          "skeleton": "ページ骨格を圧縮",
+          "structure": "構造情報を補完",
+          "plus": "+構造",
+          "tags": [
+            "送信",
+            "紐付け",
+            "グループ",
+            "×30",
+            "遷移"
+          ],
+          "pills": [
+            "iframe 貫通",
+            "Shadow DOM 可読",
+            "階層 · グループ · 関係"
+          ],
+          "caption": "より短いコンテキストで、より正確なページ理解"
+        },
+        "local": {
+          "alt": "データはすべて端末内に留まる",
+          "assets": "認証情報 · Cookie · 指示 · 実行ログ",
+          "banner": "第三者サーバーを経由しない"
+        },
+        "skill": {
+          "alt": "一度の実行を再利用可能な Skill に蒸留",
+          "run": "タスク実行",
+          "distil": "Skill + Workflow に蒸留",
+          "reuse": "即座に再利用",
+          "perRun": "tokens / 回",
+          "first": "初回実行（ページ探索）",
+          "repeat": "Skill + Workflow を再利用"
+        },
+        "fingerprint": {
+          "alt": "フィンガープリントと出口 IP のマトリクス",
+          "cities": [
+            "US · ロサンゼルス",
+            "JP · 東京",
+            "DE · フランクフルト",
+            "UK · ロンドン"
+          ],
+          "caption": "12 インスタンス · 12 種の指紋 · 12 本の出口 IP · 混線なし"
+        },
+        "takeover": {
+          "alt": "2FA で人が引き継ぎ、中断点から再開",
+          "running": "バックグラウンド実行中",
+          "runningNote": "ログイン・クリック・取得までエージェントが自動で処理",
+          "prompt": "確認が必要 · 2FA 認証コード",
+          "promptNote": "中断点で一時停止中。認証が済めば自動で続行します",
+          "verified": "認証済み",
+          "latency": "呼び出し < 40 ms",
+          "resume": "中断点から実行を再開",
+          "resumeNote": "タスクの再起動は不要、他の並列インスタンスも止まりません"
+        }
+      }
     },
     "comparison": {
-      "title": "なぜ WebCross？",
-      "subtitle": "4 つの主要ソリューションと横並びで比較。すべての重要次元で業務により近い選択肢です。",
+      "title": "なぜ **WebCross**？",
+      "subtitle": "主流 5 方式との横断比較。実行環境から Token コスト、導入ハードルまで、WebCross はすべての重要な軸で実業務に近づいています。",
       "dimensionHead": "評価項目",
       "products": [
         {
@@ -552,13 +603,21 @@
           "tagline": "独自 Chromium カーネル",
           "highlight": true,
           "values": {
-            "exec": "ローカル Chromium カーネル、ページ要素を直接駆動",
-            "data": "100% ローカル、クラウド送信ゼロ",
+            "exec": "カーネルが要素を直接駆動",
+            "tokens": {
+              "tier": "low",
+              "text": "再利用でほぼゼロ"
+            },
+            "time": {
+              "tier": "low",
+              "text": "秒単位、探索を省略"
+            },
+            "data": "100% ローカル",
             "security": "指紋 + IP 切替",
             "multi": "複数インスタンス並列",
-            "twofa": "ネイティブにミリ秒接管",
-            "skill": "自動蓄積される Skill / ワークフロー",
-            "barrier": "自然言語、ゼロ学習コスト"
+            "twofa": "ミリ秒で接管",
+            "skill": "Skill を自動蓄積",
+            "barrier": "自然言語、学習コスト 0"
           }
         },
         {
@@ -567,6 +626,14 @@
           "highlight": false,
           "values": {
             "exec": false,
+            "tokens": {
+              "tier": "none",
+              "text": "モデル呼び出しなし"
+            },
+            "time": {
+              "tier": "low",
+              "text": "速いが開発に数週間"
+            },
             "data": false,
             "security": false,
             "multi": true,
@@ -576,11 +643,19 @@
           }
         },
         {
-          "name": "ChatGPT Atlas",
-          "tagline": "OpenAI · 2025",
+          "name": "Claude for Chrome",
+          "tagline": "Anthropic · ブラウザ拡張",
           "highlight": false,
           "values": {
             "exec": false,
+            "tokens": {
+              "tier": "high",
+              "text": "1 枚 1k+ Token"
+            },
+            "time": {
+              "tier": "high",
+              "text": "1 ステップ 1–3 秒"
+            },
             "data": false,
             "security": false,
             "multi": false,
@@ -595,6 +670,14 @@
           "highlight": false,
           "values": {
             "exec": false,
+            "tokens": {
+              "tier": "high",
+              "text": "1 タスク 10 万級"
+            },
+            "time": {
+              "tier": "high",
+              "text": "長いタスクは数分"
+            },
             "data": false,
             "security": false,
             "multi": false,
@@ -609,11 +692,41 @@
           "highlight": false,
           "values": {
             "exec": false,
+            "tokens": {
+              "tier": "mid",
+              "text": "12–22 万/タスク"
+            },
+            "time": {
+              "tier": "mid",
+              "text": "約 2–4 分"
+            },
             "data": false,
             "security": false,
             "multi": true,
             "twofa": false,
             "skill": false,
+            "barrier": false
+          }
+        },
+        {
+          "name": "Browserbase",
+          "tagline": "クラウドブラウザ基盤",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "tokens": {
+              "tier": "mid",
+              "text": "クラウド課金"
+            },
+            "time": {
+              "tier": "mid",
+              "text": "クラウド往復が加算"
+            },
+            "data": false,
+            "security": true,
+            "multi": true,
+            "twofa": true,
+            "skill": true,
             "barrier": false
           }
         }
@@ -622,6 +735,14 @@
         {
           "key": "exec",
           "label": "実行環境"
+        },
+        {
+          "key": "tokens",
+          "label": "Token 消費"
+        },
+        {
+          "key": "time",
+          "label": "タスク完了時間"
         },
         {
           "key": "data",
@@ -649,10 +770,113 @@
         }
       ],
       "legendYes": "対応",
-      "legendNo": "非対応"
+      "legendNo": "非対応",
+      "tiers": {
+        "none": "なし",
+        "low": "低",
+        "mid": "中",
+        "high": "高"
+      },
+      "note": "Token と所要時間は公開評価およびベンダー資料（WebVoyager、Online-Mind2Web、OSWorld-Human 等）に基づく桁数の比較であり、同一ハードウェアでの実測値ではありません。実際の値はモデル・ページ・タスクの複雑さで変動します。"
+    },
+    "faq": {
+      "badge": "FAQ",
+      "title": "WebCross について **よくある質問**",
+      "subtitle": "実行の仕組みからデータの行き先まで、よく聞かれる 10 項目。",
+      "items": [
+        {
+          "q": "WebCross とは何ですか？",
+          "a": [
+            "WebCross はローカル実行のエージェントブラウザです。独自の Chromium カーネル上に構築され、自然言語で受け取ったタスクをエージェントが代行します——商品価格の巡回、フォームの一括入力、複数プラットフォームでの収集とエンゲージメントなど。すべてバックグラウンドで動き、速く、Token を節約し、作業の邪魔をしません。データは **100% 端末内に留まります**。",
+            "従来のブラウザと違い、WebCross はカーネル層からエージェント駆動のために設計されています。命令はレンダープロセスに直接届き、標準の Chrome の上に JavaScript のアダプタを重ねることはありません。"
+          ]
+        },
+        {
+          "q": "Playwright や Puppeteer との違いは？",
+          "a": [
+            "Playwright と Puppeteer はコードに組み込む自動化ライブラリで、CSS セレクタでページを操作します。サイトが DOM を変えた瞬間にスクリプトは壊れ得ますし、手順は一つずつ手で書く必要があります。",
+            "WebCross はカーネルレベルの改造という別の道を選びました。",
+            "- 命令はレンダープロセスとブラウザ内部のプロトコルに直接届きます。間に JS アダプタが無いため CDP / RPC の往復もシリアライズのコストも発生せず、同じタスク経路が端から端まで **3 倍以上高速** になります；",
+            "- 壊れやすいセレクタではなく AXTree + SemanticTree による意味的なページ理解を使います（第 5 項参照）；",
+            "- 自然言語で指示するだけで実行でき、**スクリプトは不要** です。"
+          ]
+        },
+        {
+          "q": "Browser Use や Claude for Chrome といった AI ブラウザとの違いは？",
+          "a": [
+            "- **実行環境**：同種の多くは標準 Chrome に拡張機能やアダプタ層を重ねるため、一手ごとに往復が発生します。WebCross はカーネルからページ要素を直接駆動します。",
+            "- **Token 消費**：同種のツールは 1 タスクで十万単位の Token を使うことも珍しくありません（Browser Use は 1 タスク約 12〜22 万、Perplexity Comet は 1 タスク十万単位、Claude for Chrome は 1 フレーム 1k+ Token・1 手 1〜3 秒）。WebCross は意味ツリーの圧縮と Skill の再利用で、再利用後はほぼゼロになります。",
+            "- **データ主権**：クラウド型はページ内容を第三者サーバー経由で扱います。WebCross は認証情報・Cookie・実行ログを 100% 端末内に保持します。",
+            "- **アカウント安全性**：フィンガープリントの作り分けと IP プールの切り替えに対応し、複数アカウントの同時実行でも混線しません。",
+            "- **人との協調**：CAPTCHA や 2FA はミリ秒で人に引き継ぎ、確認後は中断点から再開します。タスク経路を再起動する必要はありません。",
+            "上の比較表では、従来型 RPA（UiPath・影刀）、Claude for Chrome、Perplexity Comet、Browser Use、Browserbase と 9 つの観点で並べています。"
+          ]
+        },
+        {
+          "q": "使い始めるには？",
+          "a": [
+            "# WebCross Harness で使う",
+            "1. **最初のタスクを渡す**：コンソールに自然言語で入力します。たとえば「Amazon の power bank 上位 30 商品の url・title・price・rating と低評価レビュー 30 件を集めて」。エージェントがページを開き、検索し、クリックし、取得し、整理してローカルに書き出すまでを自律的に行います。",
+            "2. **Skill + Workflow に蒸留する**：完了したら `/skill-create` と入力すると、いま実行した手順から専用の Skill と Workflow が作られ、ローカルに保存されます。",
+            "3. **Skill を呼び出す**：次回は `/あなたの Skill 名` と入力するだけ。エージェントはページ探索を飛ばして検証済みの経路を再生し、要点の手順に直行します。**Token を 80% 以上節約** できます。",
+            "# サードパーティのエージェントから使う（Claude Code、Codex など）",
+            "普段お使いのエージェントにも接続できます。WebCross から該当の Skill をコピーし、Claude Code や Codex などのスキルディレクトリに貼り付けて導入すれば、そのエージェントから WebCross の機能を直接呼び出せます。SDK の統合は不要です。近日公開予定。"
+          ]
+        },
+        {
+          "q": "WebCross はどうやって Token を節約しているのですか？",
+          "a": [
+            "節約は 3 つの層の積み重ねから生まれます。",
+            "- **AXTree による意味圧縮**：まずページ全体を簡潔な意味の骨格に圧縮し、スタイル・スクリプト・入れ子コンテナといった DOM の冗長を取り除きます。コンテキスト量は平均で 85% 減ります；",
+            "- **SemanticTree による構造補完**：その骨格に、コントロール同士の階層・グループ・相互作用の関係を戻します。AXTree のフィルタだけの方式に比べ、モデルが受け取るコンテキストは短いのにページ構造の判断はより正確です。クロスドメインの iframe や Shadow DOM も読み取れます；",
+            "- **Skill の再利用**：実行済みのタスクは Skill と Workflow になり、次回はページ探索ごと省けます。さらに 80% 以上の削減です（第 9 項参照）。"
+          ]
+        },
+        {
+          "q": "エージェントの実行中、アカウントやプライバシーは安全ですか？",
+          "a": [
+            "安全です。WebCross は **徹底したローカル優先** の設計です。",
+            "- 認証情報、Cookie セッション、実行ログ、指示のすべてがお使いの端末内に留まります；",
+            "- タスクは端末のカーネルが直接実行するため、ページ内容が第三者サーバーを経由することはありません。アップロードも送り返しもありません；",
+            "- 実行ログはローカルに残るので、後から監査・追跡できます；",
+            "- 蒸留した Skill と Workflow も同じくローカル保存のみです。"
+          ]
+        },
+        {
+          "q": "CAPTCHA や 2FA、決済確認などの場面ではどうなりますか？",
+          "a": [
+            "WebCross は **ミリ秒で引き継ぎカードを表示** します。タスクは中断点で自動的に一時停止し、確認が済んだ瞬間にエージェントがその地点からバックグラウンド実行を再開します。タスク経路を再起動する必要はなく、並行して動く他のインスタンスも影響を受けません。引き継ぎの記録もローカルにのみ残ります。"
+          ]
+        },
+        {
+          "q": "複数アカウントを同時に運用したいのですが、プラットフォームに紐付けられませんか？",
+          "a": [
+            "各インスタンスに **固有のフィンガープリント環境** を用意します。",
+            "- UA、タイムゾーン、フォント、Canvas、GPU のフィンガープリントをそれぞれ個別に設定できます；",
+            "- IP プールはいつでも切り替えられ、インスタンスごとに 1 組のフィンガープリントと 1 本の出口 IP を持ちます；",
+            "- セッションは完全に分離され、複数アカウントの同時実行でも混線しません；",
+            "- フィンガープリントのテンプレートは複製でき、一括で配布できます。",
+            "複数店舗の EC 運用でも、複数アカウントの SNS 運用でも、安心して並行実行できます。"
+          ]
+        },
+        {
+          "q": "繰り返しのタスクも、毎回ゼロから実行して Token を使い直すのですか？",
+          "a": [
+            "いいえ。WebCross Harness で実行したタスクは、完了後に専用の Skill と Workflow として蒸留し、ローカルに保存できます。次に同じ、または似たタスクを行うときは検証済みの経路をそのまま呼び出し、ページ探索を飛ばして要点の手順に直行します。**Token は 80% 以上の削減** で、タスクをまたいで再利用できます。毎日 1,000 件の商品リンクを巡回する、100 件の SKU を一括で出品するといった作業も、通すのは一度きりです。"
+          ]
+        },
+        {
+          "q": "対応プラットフォームと料金は？",
+          "a": [
+            "- **プラットフォーム**：macOS 13.0+ に対応済み（Apple Silicon と Intel）。DMG は約 128 MB、SHA256 署名の検証付きです。Windows 11 64 ビット版はアーキテクチャ結合中で、まもなく公開します。",
+            "- **料金**：公開ベータの期間中は全機能無料です。",
+            "- **導入**：インストール後、システムが求めるアクセシビリティと自動化の権限を許可し、コンソールに最初の自然言語タスクを入力してください。"
+          ]
+        }
+      ]
     },
     "closing": {
-      "title": "今日からエージェントに働いてもらいましょう",
+      "title": "**今日から**エージェントに働いてもらいましょう",
       "sub": "WebCross をダウンロードして、真にローカルなエージェントブラウザを体験してください。"
     }
   },

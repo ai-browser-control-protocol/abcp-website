@@ -42,3 +42,6 @@ next-env.d.ts
 
 # local verification screenshots
 /screenshots
+
+.agents
+.claude

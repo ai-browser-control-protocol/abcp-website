@@ -45,8 +45,26 @@ input {
 }
 
 :focus-visible {
-  outline: 2px solid var(--live);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
+}
+
+/* The nav is sticky, so anything the browser scrolls to — an #id, or a control
+   that Tab just moved focus to — has to clear it or it lands under the bar. */
+html {
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+}
+
+/* Visually hidden, still announced. Global utility: any component may use it. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 h1,

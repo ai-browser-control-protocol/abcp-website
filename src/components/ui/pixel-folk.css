@@ -1,0 +1,413 @@
+/* ==========================================================================
+   Hero relay strip — three voxel colleagues plus a fourth peeking in
+
+   Layout note: the three figures are absolutely placed off one centre line,
+   offset by `--hop`. The whole trio also slides left by `--trio-shift`, because
+   the peek station owns the right end of the strip.
+
+   Ordering note: every narrow-screen override lives at the BOTTOM of this file.
+   A media query adds no specificity, so a mobile rule placed above a base rule
+   silently loses to it.
+   ========================================================================== */
+
+.pixel-scene {
+  --hop: clamp(122px, 18vw, 224px);
+  --folk-h: clamp(118px, 13.5vw, 176px);
+  --trio-shift: clamp(26px, 5.4vw, 80px);
+  /* Drop from the stage's top rule to the top of every figure. The trio get it
+     for free by standing on the floor of a stage this much taller than they
+     are; the peek figure is shorter, so it has to be told. */
+  --head-line: 78px;
+  width: 100%;
+  margin-top: clamp(10px, 2.4vw, 26px);
+}
+
+.pixel-scene-stage {
+  position: relative;
+  height: calc(var(--folk-h) + var(--head-line));
+}
+
+.pixel-scene-ground {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(820px, 94%);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 107, 53, 0.32) 18%,
+    rgba(255, 107, 53, 0.32) 82%,
+    transparent 100%
+  );
+}
+
+/* ---- figures ------------------------------------------------------------ */
+
+.folk-fig {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - var(--trio-shift));
+  height: var(--folk-h);
+  z-index: 1;
+  transition: opacity 320ms ease;
+}
+
+.folk-fig-1 { transform: translateX(calc(-50% - var(--hop))); }
+.folk-fig-2 { transform: translateX(-50%); }
+.folk-fig-3 { transform: translateX(calc(-50% + var(--hop))); }
+
+/* Off-beat figures stand down so the eye knows which one is working. */
+.folk-fig:not(.is-active) {
+  opacity: 0.68;
+}
+
+.folk-fig.is-active {
+  opacity: 1;
+}
+
+/* Every still is stacked; the beat decides which one is opaque. The fade is
+   short on purpose — long enough to soften the swap, short enough that the
+   idle/type alternation still reads as tapping rather than as a dissolve. */
+.folk-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  opacity: 0;
+  transition: opacity 80ms linear;
+}
+
+.folk-frame.is-on {
+  opacity: 1;
+}
+
+/* A breath under the one that is working. */
+.folk-fig.is-active .folk-frame.is-on {
+  animation: folkBreathe 2.4s ease-in-out infinite;
+}
+
+@keyframes folkBreathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* ---- the report travelling down the line -------------------------------- */
+
+.folk-parcel {
+  position: absolute;
+  bottom: calc(var(--folk-h) * 0.46);
+  left: calc(50% - var(--trio-shift));
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  width: 30px;
+  height: 37px;
+  padding: 5px;
+  background: #f8f5f0;
+  border: 1px solid rgba(24, 16, 12, 0.24);
+  border-radius: 2px;
+  box-shadow: 0 4px 10px -4px rgba(24, 16, 12, 0.45);
+  opacity: 0;
+  transform: translateX(calc(-50% - var(--hop)));
+}
+
+.folk-parcel-line {
+  height: 3px;
+  background: var(--oxide);
+  border-radius: 1px;
+}
+
+.folk-parcel-line:last-child {
+  width: 62%;
+  background: rgba(24, 16, 12, 0.3);
+}
+
+/* Lane 1 — handed across: a real arc, with the sheet tipping as it travels. */
+.folk-parcel.is-pass-1 {
+  animation: passArc 1.15s cubic-bezier(0.32, 0, 0.36, 1) forwards;
+}
+
+@keyframes passArc {
+  0% { opacity: 0; transform: translateX(calc(-50% - var(--hop))) translateY(0) scale(0.5) rotate(-14deg); }
+  16% { opacity: 1; transform: translateX(calc(-50% - var(--hop))) translateY(-4px) scale(1) rotate(-10deg); }
+  55% { opacity: 1; transform: translateX(calc(-50% - var(--hop) * 0.5)) translateY(-40px) scale(1.05) rotate(8deg); }
+  88% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(0) scale(0.78) rotate(0deg); }
+}
+
+/* Lane 2 — wired across: flat, fast, and it stretches as it goes, with a beam
+   behind it. Same beat as lane 1 but a different character of motion. */
+.folk-parcel.is-pass-2 {
+  animation: passWire 1.15s cubic-bezier(0.6, 0, 0.2, 1) forwards;
+}
+
+.folk-parcel.is-pass-2::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  height: 2px;
+  margin-right: 5px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, transparent, var(--oxide));
+  transform: translateY(-50%);
+  animation: passBeam 1.15s cubic-bezier(0.6, 0, 0.2, 1) forwards;
+}
+
+@keyframes passWire {
+  0% { opacity: 0; transform: translateX(-50%) scaleX(1) scale(0.5); }
+  14% { opacity: 1; transform: translateX(-50%) scale(1); }
+  30% { opacity: 1; transform: translateX(-50%) scale(1); }
+  55% { opacity: 1; transform: translateX(calc(-50% + var(--hop) * 0.55)) scale(1) scaleX(1.5); }
+  86% { opacity: 1; transform: translateX(calc(-50% + var(--hop))) scale(1) scaleX(1); }
+  100% { opacity: 0; transform: translateX(calc(-50% + var(--hop))) scale(0.78); }
+}
+
+@keyframes passBeam {
+  0%, 26% { width: 0; opacity: 0; }
+  46% { width: 68px; opacity: 0.9; }
+  80% { width: 28px; opacity: 0.5; }
+  100% { width: 0; opacity: 0; }
+}
+
+/* ---- the claim over w1 --------------------------------------------------- */
+
+.folk-bubble {
+  position: absolute;
+  top: 0;
+  left: calc(50% - var(--trio-shift));
+  z-index: 4;
+  max-width: min(240px, 40vw);
+  padding: 9px 14px;
+  font-size: 13.5px;
+  font-weight: 650;
+  line-height: 1.45;
+  color: var(--text-primary);
+  text-align: left;
+  text-wrap: balance;
+  background: #ffffff;
+  border: 1.5px solid rgba(255, 107, 53, 0.34);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  transform: translateX(calc(-50% - var(--hop)));
+  transition: transform 320ms var(--stage-easing), border-color 320ms ease, box-shadow 320ms ease;
+}
+
+/* Stepped tail — two squares, so it reads built rather than drawn. */
+.folk-bubble::before,
+.folk-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  background: #ffffff;
+  border-right: 1.5px solid rgba(255, 107, 53, 0.34);
+  border-bottom: 1.5px solid rgba(255, 107, 53, 0.34);
+}
+
+.folk-bubble::before {
+  bottom: -7px;
+  margin-left: -9px;
+  width: 10px;
+  height: 8px;
+}
+
+.folk-bubble::after {
+  bottom: -12px;
+  margin-left: -4px;
+  width: 5px;
+  height: 6px;
+}
+
+.folk-bubble.is-lit {
+  border-color: var(--oxide);
+  box-shadow: 0 10px 26px -12px rgba(255, 107, 53, 0.85);
+  transform: translateX(calc(-50% - var(--hop))) translateY(-4px);
+}
+
+.folk-bubble.is-lit::before,
+.folk-bubble.is-lit::after {
+  border-color: var(--oxide);
+}
+
+/* ==========================================================================
+   Peek station — fourth character, leaning in from the page edge
+
+   The cutout has one flat edge (they are gripping a wall in the render); the
+   export mirrors it so that edge lands on the right and the figure leans left
+   into the page. `.peek-folk` clips, so sliding right tucks them out of sight.
+
+   They never hide completely: the bubble carries a real claim and has to stay
+   readable, and a tail pointing at an empty patch reads as a bug.
+   ========================================================================== */
+
+/* Hung from the top rather than stood on the ground line, so the bubble's top
+   edge lands on the same rule as .folk-bubble across the strip — the two read
+   as one row of speech. Anchoring the tops rather than matching heights is what
+   makes that survive a translation: whichever bubble grows a second line, the
+   first lines still sit on the same rule.
+
+   Standing them on the ground instead would push this bubble ~70px below the
+   other, and closing the gap by growing the figure would make the one character
+   who is only leaning in the largest one on the strip. Floating suits them:
+   they are gripping a wall edge, not standing on the floor. */
+.peek-station {
+  position: absolute;
+  right: clamp(0px, 2vw, 24px);
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.peek-bubble {
+  position: relative;
+  padding: 9px 14px;
+  font-size: 13.5px;
+  font-weight: 650;
+  line-height: 1.45;
+  white-space: nowrap;
+  color: var(--text-primary);
+  background: #ffffff;
+  border: 1.5px solid rgba(255, 107, 53, 0.34);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+.peek-bubble::before,
+.peek-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  background: #ffffff;
+  border-right: 1.5px solid rgba(255, 107, 53, 0.34);
+  border-bottom: 1.5px solid rgba(255, 107, 53, 0.34);
+}
+
+.peek-bubble::before {
+  bottom: -7px;
+  margin-left: -9px;
+  width: 10px;
+  height: 8px;
+}
+
+.peek-bubble::after {
+  bottom: -12px;
+  margin-left: -4px;
+  width: 5px;
+  height: 6px;
+}
+
+/* Pinned to the head line rather than spaced off the bubble. This figure is a
+   bust where the other three are whole people, so letting a fixed gap decide its
+   position put its head above theirs — a fourth head riding higher than the row
+   it is meant to join. Hanging it off the same rule lines all four up, and the
+   space that opens under the bubble matches the one over w1 to the pixel. */
+.peek-folk {
+  position: absolute;
+  top: var(--head-line);
+  left: 50%;
+  width: clamp(58px, 6.4vw, 78px);
+  height: clamp(96px, 10.6vw, 130px);
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+
+.peek-folk-slide {
+  position: absolute;
+  inset: 0;
+  transform-origin: right bottom;
+  animation: peekSlide 6.4s ease-in-out infinite;
+}
+
+.peek-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+/* The smile lands after they arrive, so it is a beat and not a resting state. */
+.peek-face-smile {
+  opacity: 0;
+  animation: peekSmile 6.4s ease-in-out infinite;
+}
+
+@keyframes peekSlide {
+  0%, 8% { transform: translateX(52%) rotate(3deg); }
+  26%, 64% { transform: translateX(0) rotate(0deg); }
+  82%, 100% { transform: translateX(52%) rotate(3deg); }
+}
+
+@keyframes peekSmile {
+  0%, 30% { opacity: 0; }
+  38%, 60% { opacity: 1; }
+  68%, 100% { opacity: 0; }
+}
+
+/* ==========================================================================
+   Narrow screens — all overrides below the base rules, see the header note
+   ========================================================================== */
+
+@media (max-width: 1180px) {
+  .pixel-scene {
+    --hop: clamp(104px, 16vw, 190px);
+    --folk-h: clamp(104px, 13vw, 150px);
+    --trio-shift: clamp(30px, 5.4vw, 62px);
+  }
+  .peek-bubble,
+  .folk-bubble {
+    font-size: 12.5px;
+    padding: 8px 12px;
+  }
+}
+
+/* Four stations stop fitting well before the phone breakpoint; below this the
+   peek station retires and the trio takes back the centre. */
+@media (max-width: 900px) {
+  .peek-station {
+    display: none;
+  }
+  .pixel-scene {
+    --trio-shift: 0px;
+    --hop: clamp(96px, 15vw, 132px);
+    --folk-h: clamp(92px, 12vw, 122px);
+  }
+}
+
+@media (max-width: 640px) {
+  .pixel-scene {
+    --hop: 23vw;
+    --folk-h: 20vw;
+    --head-line: 66px;
+  }
+  .folk-bubble {
+    max-width: min(200px, 54vw);
+    font-size: 11.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folk-fig.is-active .folk-frame.is-on,
+  .folk-parcel,
+  .folk-parcel::before,
+  .peek-folk-slide,
+  .peek-face-smile {
+    animation: none;
+  }
+  .peek-folk-slide {
+    transform: none;
+  }
+  .peek-face-smile {
+    opacity: 1;
+  }
+}

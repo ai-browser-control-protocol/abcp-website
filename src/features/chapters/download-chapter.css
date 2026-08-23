@@ -144,7 +144,9 @@
 }
 
 .platform-telemetry.upcoming {
-  color: var(--text-muted);
+  /* Mid-grey on the dark card was only 3.57:1 — this ground needs a lighter
+     neutral than the one that works on the white page. */
+  color: #a1a1aa;
   background: rgba(255, 255, 255, 0.04);
 }
 

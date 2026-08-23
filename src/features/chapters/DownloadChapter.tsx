@@ -138,7 +138,7 @@ export function DownloadChapter({ copy }: { copy: Messages["download"] & { syste
           {/* Quick Start 3-Step Guide */}
           {copy.quickstart && (
             <div className="quickstart-roadmap">
-              <h3 className="quickstart-heading">{copy.quickstartTitle}</h3>
+              <h2 className="quickstart-heading">{copy.quickstartTitle}</h2>
               <div className="quickstart-steps-list">
                 {copy.quickstart.map((item, idx) => (
                   <div className="quickstart-step-item" key={idx}>

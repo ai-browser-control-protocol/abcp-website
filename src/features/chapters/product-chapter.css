@@ -12,33 +12,66 @@
 
 .hero-ambient-glow {
   position: absolute;
-  top: -80px;
+  top: -120px;
   left: 50%;
   transform: translateX(-50%);
-  width: 130%;
-  max-width: 1280px;
-  height: 520px;
-  background: radial-gradient(ellipse 58% 52% at 50% 8%, rgba(255, 107, 53, 0.13), transparent 68%);
+  width: 100vw;
+  height: 760px;
+  background: var(--wash-hero);
   pointer-events: none;
   z-index: 0;
+  /* The drifting blobs below are wider than the wash; clip them to it so they
+     never bleed a hard edge into the page. */
+  overflow: hidden;
 }
 
-.hero-grid {
+/* Two warm blobs drifting under the wash on long, co-prime periods, so they
+   never fall back into the same relative position. The point is not to be seen
+   moving — at 26s and 34s per cycle nothing visibly travels — but to keep the
+   ground from reading as a flat printed panel. Both are pure compositor work
+   (transform + opacity), so they cost nothing per frame.
+
+   `will-change` is deliberately absent: these run for the life of the page, and
+   pinning two full-width layers into GPU memory forever is a worse trade than
+   the odd repaint. */
+.hero-ambient-glow::before,
+.hero-ambient-glow::after {
+  content: "";
   position: absolute;
-  top: -32px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 130%;
-  max-width: 1280px;
-  height: 520px;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.028) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 60% 58% at 50% 20%, #000 10%, transparent 78%);
-  -webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 20%, #000 10%, transparent 78%);
+  border-radius: 50%;
   pointer-events: none;
-  z-index: 0;
+}
+
+.hero-ambient-glow::before {
+  top: -18%;
+  left: 8%;
+  width: 46vw;
+  height: 46vw;
+  max-width: 620px;
+  max-height: 620px;
+  background: radial-gradient(circle, rgba(255, 140, 90, 0.16) 0%, rgba(255, 140, 90, 0) 68%);
+  animation: heroDriftA var(--dur-drift) ease-in-out infinite alternate;
+}
+
+.hero-ambient-glow::after {
+  top: -6%;
+  right: 6%;
+  width: 38vw;
+  height: 38vw;
+  max-width: 520px;
+  max-height: 520px;
+  background: radial-gradient(circle, rgba(255, 190, 150, 0.2) 0%, rgba(255, 190, 150, 0) 70%);
+  animation: heroDriftB calc(var(--dur-drift) * 1.31) ease-in-out infinite alternate;
+}
+
+@keyframes heroDriftA {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(7%, 5%, 0) scale(1.12); }
+}
+
+@keyframes heroDriftB {
+  from { transform: translate3d(0, 0, 0) scale(1.06); }
+  to   { transform: translate3d(-6%, 7%, 0) scale(0.94); }
 }
 
 .hero-header-center {
@@ -50,7 +83,7 @@
   justify-items: center;
   max-width: 940px;
   margin: 0 auto;
-  padding-top: clamp(32px, 6vw, 72px);
+  padding-top: clamp(48px, 8vw, 104px);
 }
 
 /* ===== Hero title ===== */
@@ -59,10 +92,10 @@
   display: grid;
   gap: 4px;
   justify-items: center;
-  font-size: clamp(30px, 5.2vw, 60px);
+  font-size: clamp(34px, 6vw, 72px);
   font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.035em;
+  line-height: 1.14;
+  letter-spacing: -0.042em;
   color: var(--text-primary);
   max-width: 100%;
 }
@@ -127,9 +160,18 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: #ff6b35;
-  text-shadow:
-    0 0 1px rgba(255, 138, 74, 0.9),
-    0 0 6px rgba(255, 107, 53, 0.45);
+  /* One glow, not two. A tight 1px halo used to sit under the 6px bloom, and it
+     fogged the letterform itself — the core rendered at #ff8747 instead of the
+     #ff6b35 the gradient asks for, so the stroke ended up as bright as its own
+     glow. Real neon is the opposite: a dense saturated tube inside a soft bloom.
+     Dropping the inner layer restores that separation and takes the wordmark
+     from 1.92:1 to 2.26:1 against the hero wash.
+
+     It still does not reach the 3:1 large-text gate, and deliberately so: no
+     orange dark enough to clear 3:1 on a warm ground still reads as lit. This
+     is a brand wordmark under the WCAG 1.4.3 logotype exception, and the name
+     is carried at full contrast by the nav, the CTA and the page title. */
+  text-shadow: 0 0 6px rgba(255, 107, 53, 0.45);
 }
 
 /* Neon-tube ballast: the halo dips twice per cycle, never fully off. */
@@ -190,13 +232,6 @@
 
 /* ===== Hero body ===== */
 
-.hero-lead-text {
-  max-width: 700px;
-  font-size: clamp(14.5px, 1.6vw, 16.5px);
-  line-height: 1.75;
-  color: var(--text-secondary);
-}
-
 .hero-cta-cluster {
   display: flex;
   gap: var(--space-3);
@@ -206,112 +241,83 @@
   margin-top: var(--space-2);
 }
 
-.hero-btn-mac,
-.hero-btn-win {
+/* One CTA for every platform — the download page splits macOS / Windows. */
+.hero-btn-download {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 46px;
-  padding: 0 24px;
-  font-size: 14.5px;
-  font-weight: 600;
+  gap: 9px;
+  min-height: 56px;
+  padding: 0 34px;
+  font-size: 16px;
+  font-weight: 650;
   border-radius: var(--radius-full);
   text-decoration: none;
   font-family: inherit;
-}
-
-.hero-btn-mac {
-  color: #ffffff;
+  color: var(--on-oxide);
   background: var(--oxide);
   border: 1px solid var(--oxide);
-  box-shadow: var(--shadow-button-primary);
+  box-shadow: 0 10px 24px -10px rgba(255, 107, 53, 0.7);
   transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
-.hero-btn-mac:hover {
+.hero-btn-download:hover {
   background: var(--oxide-hover);
   border-color: var(--oxide-hover);
-  color: #ffffff;
+  color: var(--on-oxide);
   box-shadow: var(--shadow-glow-button);
   transform: translateY(-1px);
-}
-
-.hero-btn-win {
-  color: var(--text-primary);
-  background: #ffffff;
-  border: 1px solid var(--rule-strong);
-  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
-}
-
-.hero-btn-win:hover {
-  border-color: var(--oxide);
-  color: var(--oxide);
-  background: #fff7f2;
-  transform: translateY(-1px);
-}
-
-/* Replaces the old trust-tag strip: two assurances, nothing else. */
-.hero-assurances {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 6px;
-}
-
-.hero-assurance {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  background: #fff7f2;
-  border: 1px solid rgba(255, 107, 53, 0.22);
-  border-radius: var(--radius-full);
-}
-
-.hero-assurance svg {
-  color: var(--oxide);
-  flex-shrink: 0;
-}
-
-.hero-system-support {
-  font-size: 12.5px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
 }
 
 /* ===== Closing CTA ===== */
 
 .closing-cta {
+  position: relative;
   display: grid;
   justify-items: center;
   gap: var(--space-4);
-  padding: clamp(48px, 7vw, 72px) var(--space-5);
+  padding: clamp(56px, 8vw, 92px) var(--space-5);
   text-align: center;
-  background: linear-gradient(180deg, #ffffff 0%, #fff7f2 100%);
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  border-radius: var(--radius-xl);
+  background: var(--card-ink);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-ink);
+  overflow: hidden;
+}
+
+/* A single warm bloom keeps the black card from reading as a dead rectangle. */
+.closing-cta::before {
+  content: "";
+  position: absolute;
+  inset: -40% 20% auto;
+  height: 420px;
+  background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.3), transparent 68%);
+  pointer-events: none;
+}
+
+/* Lift the content above the bloom — but leave the voxel character alone, it
+   places itself against the card's bottom-right corner. */
+.closing-cta > :not(.closing-folk) {
+  position: relative;
 }
 
 .closing-cta-title {
-  font-size: clamp(23px, 3.4vw, 36px);
+  font-size: clamp(26px, 4vw, 44px);
   font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  line-height: 1.3;
-  max-width: 720px;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.22;
+  max-width: 760px;
+  text-wrap: balance;
+}
+
+.closing-cta-title .em-accent {
+  color: #ff8a4a;
 }
 
 .closing-cta-sub {
-  font-size: 15px;
-  color: var(--text-secondary);
+  font-size: 16.5px;
+  color: rgba(255, 255, 255, 0.68);
   max-width: 560px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 /* ===== Shared section head ===== */
@@ -332,7 +338,7 @@
   font-family: var(--font-mono);
   font-size: 11.5px;
   font-weight: 700;
-  color: var(--oxide);
+  color: var(--oxide-text);
   background: var(--oxide-subtle);
   border: 1px solid var(--border-accent);
   border-radius: var(--radius-full);
@@ -340,16 +346,16 @@
 }
 
 .section-title {
-  font-size: clamp(22px, 3vw, 32px);
+  font-size: clamp(26px, 3.9vw, 44px);
   font-weight: 800;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
-  line-height: 1.3;
+  letter-spacing: -0.032em;
+  line-height: 1.2;
   text-wrap: balance;
 }
 
 .section-subtitle {
-  font-size: 14.5px;
+  font-size: 16.5px;
   color: var(--text-secondary);
   line-height: 1.7;
   text-wrap: pretty;
@@ -365,18 +371,9 @@
     flex-direction: column;
     width: 100%;
   }
-  .hero-btn-mac,
-  .hero-btn-win {
+  .hero-btn-download {
     width: 100%;
     justify-content: center;
-  }
-  .hero-assurances {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .hero-system-support {
-    font-size: 11.5px;
-    line-height: 1.6;
   }
   .hero-brand-halo {
     filter: blur(6px);

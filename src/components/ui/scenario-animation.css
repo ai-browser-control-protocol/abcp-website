@@ -2,29 +2,45 @@
    Demo section — WebCross client (left) + mimicked browsing (right)
    ========================================================================== */
 
+/* Two modes, one layout.
+
+   The stack lives on .scenario-pin, so it is byte-identical whether or not the
+   section is pinned. Pinning only adds a taller parent to scroll through.
+
+   An earlier version of this was a flat 300vh track, which left a tall dead
+   band under the demo because nothing consumed the extra height. Here the track
+   is the stage height plus exactly the scroll the three stops spend, so the pin
+   lets the page go the instant the third scenario has had its turn. That height
+   depends on the measured stage and comes in as an inline style; CSS cannot see
+   it, and guessing it is what produced the dead band last time. */
 .scenario-section {
   position: relative;
 }
 
-/* The tall track exists only when the sticky scroll-through is active. */
-.scenario-track.is-sticky {
-  height: 300vh;
-}
-
-.scenario-track.is-sticky .scenario-sticky {
-  position: sticky;
-  top: calc(var(--nav-h) + 10px);
-}
-
-.scenario-sticky {
+.scenario-pin {
   display: grid;
-  gap: 14px;
+  gap: 18px;
   justify-items: center;
+}
+
+/* Nothing here may change the pin's height — the script measures it to decide
+   whether to pin at all, so a rule that only applies while pinned would feed
+   back into that decision and flicker. Keep both modes the same box. */
+.scenario-section[data-pinned] .scenario-pin {
+  position: sticky;
+  /* Set per viewport by the script so the stage sits in the middle of the room
+     it has rather than against the nav. The fallback is the floor value, the
+     closest it is ever allowed to park. */
+  top: var(--pin-top, 72px);
 }
 
 .scenario-head {
   margin-bottom: 0;
   gap: 8px;
+}
+
+.scenario-tab {
+  cursor: pointer;
 }
 
 /* ===== Scene tabs ===== */
@@ -42,6 +58,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 44px;
   padding: 8px 16px 10px;
   font-family: inherit;
   font-size: 13px;
@@ -52,7 +69,17 @@
   border-radius: var(--radius-full);
   cursor: pointer;
   overflow: hidden;
-  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+  transition: color var(--dur-hover) ease, border-color var(--dur-hover) ease,
+    background var(--dur-hover) ease, transform var(--dur-hover) var(--ease-back);
+}
+
+.scenario-tab:hover {
+  transform: translateY(-2px);
+}
+
+.scenario-tab:active {
+  transform: translateY(0);
+  transition-duration: var(--dur-press);
 }
 
 .scenario-tab:hover {
@@ -61,7 +88,7 @@
 }
 
 .scenario-tab.is-active {
-  color: var(--oxide);
+  color: var(--oxide-text);
   background: #fff7f2;
   border-color: var(--border-accent);
 }
@@ -75,13 +102,13 @@
   font-family: var(--font-mono);
   font-size: 10.5px;
   font-weight: 700;
-  color: var(--text-muted);
+  color: #68686f;   /* 5.03:1 on --bg-surface-hover; --text-muted was 4.40:1 */
   background: var(--bg-surface-hover);
   border-radius: var(--radius-xs);
 }
 
 .scenario-tab.is-active .scenario-tab-key {
-  color: #ffffff;
+  color: var(--on-oxide);
   background: var(--oxide);
 }
 
@@ -105,40 +132,73 @@
 
 .scenario-stage {
   display: grid;
-  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.55fr);
-  gap: 16px;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.5fr);
+  gap: 18px;
   width: 100%;
-  height: clamp(400px, calc(100vh - 300px), 600px);
+  align-items: stretch;
+  height: clamp(470px, 64vh, 640px);
 }
 
-/* Wide but short window: side by side, but let the stage size to its content. */
-.scenario-track:not(.is-sticky) .scenario-stage {
-  height: auto;
-}
-
-.scenario-track:not(.is-sticky) .browser-panel {
-  min-height: 430px;
-}
-
+/* The scene line — one sentence naming what you are watching. It is a display
+   line, not body copy: set at headline weight in ink, with the phrase that
+   carries the claim lifted into orange and marked by a low highlight rule. It
+   cross-fades whenever the scene changes. */
 .scenario-caption {
-  font-size: 13.5px;
-  color: var(--text-secondary);
+  max-width: 760px;
+  font-size: clamp(17px, 1.45vw, 22px);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
   text-align: center;
+  text-wrap: balance;
+  animation: captionIn 420ms var(--stage-easing) both;
+}
+
+.scenario-caption .em-accent {
+  padding-bottom: 1px;
+  background-image: linear-gradient(180deg, transparent 68%, var(--oxide-subtle) 68%);
+}
+
+@keyframes captionIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* The caption leads the panel by one stagger step — the sentence naming the
+   scene should land just before the thing it names. */
+.scenario-section[data-dir="1"] .scenario-caption {
+  animation: captionFromRight var(--dur-enter) var(--ease-expo) both;
+}
+
+.scenario-section[data-dir="-1"] .scenario-caption {
+  animation: captionFromLeft var(--dur-enter) var(--ease-expo) both;
+}
+
+@keyframes captionFromRight {
+  from { opacity: 0; transform: translate3d(16px, 0, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes captionFromLeft {
+  from { opacity: 0; transform: translate3d(-16px, 0, 0); }
+  to   { opacity: 1; transform: none; }
 }
 
 /* ==========================================================================
    Left — WebCross client (dark shell, orange accent)
    ========================================================================== */
 
+/* Titlebar, transcript, composer — the transcript is the only part that grows. */
 .client-panel {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  background: #0c0d10;
+  background: var(--card-ink);
   border: 1px solid #1e2027;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
-  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.45);
+  box-shadow: var(--shadow-ink);
 }
 
 .client-titlebar {
@@ -180,9 +240,24 @@
   border-radius: var(--radius-full);
 }
 
+.client-status.is-idle {
+  color: #8892a0;   /* 5.23:1 on the ink panel; #7b8493 was 4.37:1 */
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.client-status.is-idle .client-status-dot {
+  animation: none;
+}
+
+/* Running is orange because it is the live state; done goes to solid white so
+   the two never read alike, without adding a fourth colour to the palette. */
 .client-status.is-done {
-  color: #35d07f;
-  background: rgba(53, 208, 127, 0.12);
+  color: #0c0d10;
+  background: #ffffff;
+}
+
+.client-status.is-done .client-status-dot {
+  animation: none;
 }
 
 .client-status-dot {
@@ -198,20 +273,70 @@
   50% { opacity: 0.3; }
 }
 
-.client-body {
+/* The transcript. Runs stack up here and the newest one is scrolled to, so the
+   log is how you compare the three scenarios rather than a single live frame. */
+.client-log {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  padding: 14px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333844 transparent;
+}
+
+.client-log::-webkit-scrollbar {
+  width: 6px;
+}
+
+.client-log::-webkit-scrollbar-thumb {
+  background: #333844;
+  border-radius: 3px;
+}
+
+.client-log-empty {
+  margin: auto;
+  font-size: 12.5px;
+  color: #6a7280;
+}
+
+.client-turn {
   display: flex;
   flex-direction: column;
   gap: 9px;
-  min-height: 0;
-  padding: 14px;
-  overflow: hidden;
+}
+
+/* What was sent — right-aligned, the way a chat client shows your own turn. */
+.client-said {
+  align-self: flex-end;
+  max-width: 86%;
+  padding: 10px 13px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--on-oxide);
+  background: linear-gradient(180deg, #ff7a45 0%, #ea580c 100%);
+  border-radius: 12px 12px 3px 12px;
+  animation: promptIn 300ms var(--stage-easing) both;
+}
+
+.client-reply {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 11px;
+  background: #14161c;
+  border: 1px solid #262a33;
+  border-radius: 3px 12px 12px 12px;
+  animation: promptIn 320ms var(--stage-easing) both;
 }
 
 .client-scene-tag {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-weight: 600;
   color: #c8cfda;
 }
@@ -225,48 +350,95 @@
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--on-oxide);
   background: var(--oxide);
   border-radius: var(--radius-xs);
 }
 
-.client-field-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #5f6875;
-}
-
 .client-log-count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
   color: var(--oxide);
 }
 
-.client-prompt {
-  display: flex;
-  gap: 8px;
+/* Visually hidden, still read aloud — the composer needs a real label. */
+/* The prompt is a real field — visitors type into it on reflex, and a dead box
+   that swallows keystrokes reads as broken. */
+.client-prompt-input {
+  display: block;
+  width: 100%;
   padding: 10px 12px;
-  font-size: 11.5px;
+  font-family: inherit;
+  font-size: 12.5px;
   line-height: 1.65;
   color: #dfe5ee;
   background: #101216;
   border: 1px solid #262a33;
   border-radius: var(--radius-md);
+  resize: none;
   animation: promptIn 420ms var(--stage-easing) both;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.client-prompt-input:hover:not(:disabled) {
+  border-color: #38404d;
+}
+
+.client-prompt-input:focus-visible {
+  outline: 2px solid var(--oxide);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.client-prompt-input:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Shown once the text no longer matches the built-in task. */
+.client-preview-note {
+  display: grid;
+  gap: 5px;
+  justify-items: start;
+  padding: 10px 12px;
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.32);
+  border-radius: var(--radius-md);
+  animation: promptIn 260ms var(--stage-easing) both;
+}
+
+.client-preview-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff8a4a;
+}
+
+.client-preview-body {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: #c2c9d4;
+}
+
+.client-preview-cta {
+  margin-top: 2px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--on-oxide);
+  background: var(--oxide);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+}
+
+.client-preview-cta:hover {
+  background: var(--oxide-hover);
+  color: var(--on-oxide);
 }
 
 @keyframes promptIn {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: none; }
-}
-
-.client-prompt-caret {
-  color: var(--oxide);
-  font-weight: 700;
-  flex-shrink: 0;
 }
 
 .client-run {
@@ -278,23 +450,41 @@
   font-family: inherit;
   font-size: 11.5px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--on-oxide);
   background: var(--oxide);
   border: 0;
   border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease, opacity 150ms ease;
+}
+
+.client-run:hover:not(:disabled) {
+  background: var(--oxide-hover);
+  transform: translateY(-1px);
+}
+
+.client-run:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.client-run:disabled {
+  opacity: 0.62;
   cursor: default;
+}
+
+.client-run-spinner {
+  width: 11px;
+  height: 11px;
+  border: 1.6px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 720ms linear infinite;
 }
 
 .client-run-key {
   font-family: var(--font-mono);
   font-size: 10px;
   opacity: 0.75;
-}
-
-.client-log-label {
-  margin-top: 2px;
-  padding-top: 9px;
-  border-top: 1px dashed #262a33;
 }
 
 .client-steps {
@@ -313,8 +503,8 @@
   align-items: center;
   gap: 9px;
   padding: 6px 9px;
-  font-size: 11.5px;
-  color: #59616e;
+  font-size: 12.5px;
+  color: #6a7280;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
   transition: color 220ms ease, background 220ms ease, border-color 220ms ease;
@@ -340,7 +530,7 @@
   font-family: var(--font-mono);
   font-size: 9.5px;
   font-weight: 700;
-  color: #5f6875;
+  color: #828c99;   /* 5.11:1 on #171a20 — #5f6875 was 3.09:1 */
   background: #171a20;
   border-radius: var(--radius-xs);
 }
@@ -351,7 +541,7 @@
 }
 
 .client-step.is-current .client-step-mark {
-  color: #ffffff;
+  color: var(--on-oxide);
   background: var(--oxide);
 }
 
@@ -376,6 +566,28 @@
 /* ==========================================================================
    Right — browser
    ========================================================================== */
+
+/* Spatial continuity: the stage arrives from the side the tab row moved
+   toward, so a scene change reads as travelling along a row of scenarios
+   rather than as three unrelated panels blinking in the same spot. The panel
+   is keyed on the scene in ScenarioAnimation, which is what replays this. */
+.scenario-section[data-dir="1"] .browser-panel {
+  animation: panelFromRight var(--dur-panel) var(--ease-expo) both;
+}
+
+.scenario-section[data-dir="-1"] .browser-panel {
+  animation: panelFromLeft var(--dur-panel) var(--ease-expo) both;
+}
+
+@keyframes panelFromRight {
+  from { opacity: 0; transform: translate3d(26px, 0, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes panelFromLeft {
+  from { opacity: 0; transform: translate3d(-26px, 0, 0); }
+  to   { opacity: 1; transform: none; }
+}
 
 .browser-panel {
   position: relative;
@@ -1111,7 +1323,7 @@
 }
 
 .az-hist-row.is-bad {
-  color: var(--oxide);
+  color: var(--oxide-text);
   font-weight: 700;
 }
 
@@ -1120,7 +1332,7 @@
   padding: 3px 8px;
   font-size: 9px;
   font-weight: 700;
-  color: var(--oxide);
+  color: var(--oxide-text);
   background: #fff7f2;
   border: 1px dashed var(--border-accent);
   border-radius: 4px;
@@ -1179,7 +1391,7 @@
 
 .az-review-stars {
   font-size: 9.5px;
-  color: var(--oxide);
+  color: var(--oxide-text);
   letter-spacing: -0.5px;
 }
 
@@ -1207,150 +1419,6 @@
 @keyframes scanSweep {
   from { transform: translateX(-100%); }
   to { transform: translateX(100%); }
-}
-
-/* ===== Capture panel (scene A) ===== */
-
-/* While the capture panel is docked the page keeps a gutter for it. */
-.page-viewport.has-capture .az-serp-body,
-.page-viewport.has-capture .az-pdp-body,
-.page-viewport.has-capture .az-reviews-body {
-  padding-right: 194px;
-}
-
-.capture-panel {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 20;
-  display: grid;
-  gap: 7px;
-  width: 172px;
-  padding: 10px;
-  background: #0c0d10;
-  border: 1px solid #23262e;
-  border-radius: var(--radius-md);
-  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transform: translateX(14px);
-  transition: opacity 320ms ease, transform 320ms var(--stage-easing);
-  pointer-events: none;
-}
-
-.capture-panel.is-open {
-  opacity: 1;
-  transform: none;
-}
-
-.capture-head {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #9aa3b0;
-}
-
-.capture-rec {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--oxide);
-  box-shadow: 0 0 6px var(--oxide);
-  animation: clientPulse 1.2s ease-in-out infinite;
-}
-
-.capture-fields {
-  display: grid;
-  gap: 4px;
-  margin: 0;
-}
-
-.capture-field {
-  display: grid;
-  gap: 1px;
-  padding: 5px 7px;
-  background: #131519;
-  border-radius: var(--radius-xs);
-  animation: captureIn 380ms var(--stage-easing) both;
-}
-
-@keyframes captureIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: none; }
-}
-
-.capture-field dt {
-  font-family: var(--font-mono);
-  font-size: 8.5px;
-  color: #6b7481;
-}
-
-.capture-field dd {
-  margin: 0;
-  font-size: 9.5px;
-  color: #e7ebf1;
-  word-break: break-all;
-}
-
-.capture-progress-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 8.5px;
-  color: #6b7481;
-}
-
-.capture-progress-num { color: var(--oxide); }
-
-.capture-progress {
-  height: 4px;
-  background: #1c1f26;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.capture-progress-fill {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, #ff8a4a, #ff6b35);
-  border-radius: 2px;
-  transition: width 700ms var(--stage-easing);
-}
-
-.capture-done {
-  display: grid;
-  gap: 3px;
-  padding: 7px;
-  background: rgba(53, 208, 127, 0.08);
-  border: 1px solid rgba(53, 208, 127, 0.28);
-  border-radius: var(--radius-xs);
-  animation: captureIn 380ms var(--stage-easing) both;
-}
-
-.capture-done-head {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 9.5px;
-  font-weight: 700;
-  color: #35d07f;
-}
-
-.capture-done code {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: #e7ebf1;
-  word-break: break-all;
-}
-
-.capture-done-meta {
-  font-size: 8.5px;
-  line-height: 1.5;
-  color: #8b93a1;
 }
 
 /* ==========================================================================
@@ -1522,15 +1590,15 @@
 }
 
 .sc-option.is-target {
-  color: #ffffff;
+  color: var(--on-oxide);
   background: var(--oxide);
   animation: optionHit 900ms ease-out 420ms both;
 }
 
 @keyframes optionHit {
   0% { background: rgba(255, 107, 53, 0.25); color: #0f1111; }
-  30% { background: var(--oxide); color: #ffffff; }
-  100% { background: var(--oxide); color: #ffffff; }
+  30% { background: var(--oxide); color: var(--on-oxide); }
+  100% { background: var(--oxide); color: var(--on-oxide); }
 }
 
 .sc-field-row {
@@ -1809,8 +1877,6 @@
 
 .so-body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 168px;
-  gap: 12px;
   flex: 1;
   min-height: 0;
   padding: 10px 12px;
@@ -1921,7 +1987,7 @@
 }
 
 .so-action.is-hit {
-  color: var(--oxide);
+  color: var(--oxide-text);
   animation: actionHit 700ms ease-out;
 }
 
@@ -2015,101 +2081,17 @@
   pointer-events: none;
 }
 
-.so-archive {
-  display: grid;
-  gap: 7px;
-  align-content: start;
-  align-self: start;
-  padding: 10px;
-  background: #0c0d10;
-  border: 1px solid #23262e;
-  border-radius: var(--radius-md);
-}
-
-.so-archive .so-archive-num,
-.so-archive .capture-progress {
-  opacity: 0.4;
-  transition: opacity 300ms ease;
-}
-
-.so-archive.is-open .so-archive-num,
-.so-archive.is-open .capture-progress {
-  opacity: 1;
-}
-
-.so-archive-platforms {
-  display: flex;
-  gap: 5px;
-}
-
-.so-archive-platforms span {
-  padding: 2px 8px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: #6b7481;
-  background: #16181d;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  transition: color 220ms ease, border-color 220ms ease;
-}
-
-.so-archive-platforms span.is-active {
-  color: var(--oxide);
-  border-color: rgba(255, 107, 53, 0.4);
-}
-
-.so-archive-head {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #9aa3b0;
-}
-
-.so-archive-num {
-  font-family: var(--font-mono);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--oxide);
-  line-height: 1;
-}
-
-.so-archive-num span {
-  font-size: 11px;
-  color: #6b7481;
-}
-
-.so-archive-fields {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.so-archive-fields li {
-  padding: 2px 6px;
-  font-size: 8.5px;
-  color: #9aa3b0;
-  background: #16181d;
-  border-radius: 3px;
-}
-
 /* ==========================================================================
    Responsive
    ========================================================================== */
 
 /* Laptop-height windows: compact the trace so all eight steps stay visible. */
 @media (max-height: 920px) {
-  .client-body { gap: 7px; padding: 12px; }
-  .client-prompt { padding: 8px 10px; font-size: 11px; line-height: 1.55; }
+  .client-log { gap: 13px; padding: 12px; }
+  .client-composer { padding: 9px 10px; }
+  .client-prompt-input { padding: 8px 10px; font-size: 11px; line-height: 1.55; }
   .client-run { padding: 5px 12px; font-size: 11px; }
   .client-step { padding: 4px 9px; font-size: 11px; }
-  .client-log-label { padding-top: 7px; }
 }
 
 @media (max-width: 1200px) {
@@ -2119,14 +2101,9 @@
   .az-serp-body { grid-template-columns: 108px minmax(0, 1fr); }
   .az-pdp-body { grid-template-columns: 124px minmax(0, 1fr); }
   .az-reviews-body { grid-template-columns: 140px minmax(0, 1fr); }
-  .so-body { grid-template-columns: minmax(0, 1fr) 150px; }
-  .capture-panel { width: 156px; }
 }
 
 @media (max-width: 1023px) {
-  .scenario-track {
-    height: auto;
-  }
   .scenario-stage {
     grid-template-columns: minmax(0, 1fr);
     height: auto;
@@ -2166,19 +2143,6 @@
   .az-gallery {
     display: none;
   }
-  .so-body {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .so-archive {
-    display: none;
-  }
-  .capture-panel {
-    top: auto;
-    bottom: 8px;
-    right: 8px;
-    left: 8px;
-    width: auto;
-  }
   .sc-field,
   .sc-field-row .sc-field {
     grid-template-columns: minmax(0, 1fr);
@@ -2199,4 +2163,181 @@
   .so-feed.is-scrolling {
     animation: none;
   }
+}
+
+/* ==========================================================================
+   Completion card — what the run actually produced
+   The trace proves the agent moved; this proves it finished with something.
+   ========================================================================== */
+
+.client-result {
+  display: grid;
+  gap: 9px;
+  padding: 11px;
+  background: linear-gradient(180deg, rgba(255, 107, 53, 0.16) 0%, rgba(255, 107, 53, 0.05) 100%);
+  border: 1px solid rgba(255, 107, 53, 0.34);
+  border-radius: var(--radius-md);
+  animation: resultIn 420ms var(--stage-easing) both;
+}
+
+@keyframes resultIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+
+.client-result-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.client-result-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 800;
+  color: #1a0d06;
+  background: var(--oxide);
+  border-radius: 50%;
+  animation: resultPop 460ms var(--stage-easing) both;
+}
+
+@keyframes resultPop {
+  0% { transform: scale(0.4); opacity: 0; }
+  60% { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.client-result-heading {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.client-result-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff8a4a;
+}
+
+.client-result-summary {
+  font-size: 12.5px;
+  color: #c2c9d4;
+}
+
+.client-result-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.client-result-list li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #ccd3de;
+  animation: resultLineIn 320ms var(--stage-easing) both;
+}
+
+.client-result-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--oxide);
+}
+
+@keyframes resultLineIn {
+  from { opacity: 0; transform: translateX(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Nothing is driving the page between runs, so the cursor stands down. */
+.agent-cursor.is-hidden {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+/* ==========================================================================
+   Composer — the one part of the client a visitor can actually touch
+   Hover lifts it away from the rest of the panel and a hint rides the cursor,
+   because nothing else in the mock is editable and the box looks like the mock.
+   ========================================================================== */
+
+.client-composer {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 9px;
+  flex-shrink: 0;
+  padding: 11px 12px;
+  border-top: 1px solid #22262f;
+  background: #0e1015;
+  cursor: text;
+}
+
+.client-composer .client-prompt-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.client-composer .client-run {
+  flex-shrink: 0;
+}
+
+.client-composer.is-hovered .client-prompt-input {
+  background: #14171d;
+  border-color: var(--oxide);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.14);
+}
+
+.client-prompt-hint {
+  position: absolute;
+  z-index: 5;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--on-oxide);
+  background: var(--oxide);
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  /* Above the cursor: the composer sits on the panel floor, so a tooltip
+     offset downward gets clipped by the panel. */
+  transform: translate(12px, calc(-100% - 12px));
+  box-shadow: 0 6px 14px -6px rgba(255, 107, 53, 0.9);
+  animation: hintIn 140ms ease-out both;
+}
+
+@keyframes hintIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Tabs lock while a run is in flight. */
+.scenario-tab:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+/* The composer while the demo types into it, and the button beat before the
+   trace starts — together they replay the interaction a visitor would perform. */
+.client-composer.is-autotyping .client-prompt-input {
+  border-color: var(--oxide);
+  background: #14171d;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.12);
+  opacity: 1;
+  color: #f0f3f8;
+}
+
+.client-run.is-pressed {
+  transform: translateY(1px) scale(0.96);
+  background: var(--oxide-hover);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.22);
 }

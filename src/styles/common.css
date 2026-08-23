@@ -26,11 +26,11 @@
   gap: 6px;
   padding: 4px 12px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--oxide);
+  color: var(--oxide-text);
   background: var(--oxide-subtle);
   border: 1px solid var(--border-accent);
   border-radius: var(--radius-full);
@@ -42,7 +42,7 @@
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
-  color: var(--oxide);
+  color: var(--oxide-text);
   background: var(--oxide-subtle);
   border: 1px solid var(--border-accent);
   border-radius: var(--radius-sm);
@@ -54,7 +54,7 @@
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--on-oxide);
   background: var(--oxide);
   border-radius: var(--radius-xs);
 }
@@ -67,7 +67,7 @@
   gap: 8px;
   min-height: 44px;
   padding: 0 22px;
-  color: #ffffff;
+  color: var(--on-oxide);
   font-size: 14px;
   font-weight: 600;
   background: var(--oxide);
@@ -75,7 +75,10 @@
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-button-primary);
   cursor: pointer;
-  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* `all` also transitions colour and shadow on the same curve; naming the
+     properties lets the lift overshoot while the paint stays linear-ish. */
+  transition: background var(--dur-hover) ease, border-color var(--dur-hover) ease,
+    box-shadow var(--dur-hover) ease, transform var(--dur-hover) var(--ease-back);
   text-decoration: none;
   font-family: inherit;
 }
@@ -83,13 +86,14 @@
 .ui-button-primary:hover {
   background: var(--oxide-hover);
   border-color: var(--oxide-hover);
-  color: #ffffff;
-  transform: translateY(-1px);
+  color: var(--on-oxide);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-glow-button);
 }
 
 .ui-button-primary:active {
   transform: translateY(0);
+  transition-duration: var(--dur-press);
 }
 
 .btn-arrow {
@@ -114,16 +118,22 @@
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: all 160ms ease;
+  transition: background var(--dur-hover) ease, border-color var(--dur-hover) ease,
+    color var(--dur-hover) ease, transform var(--dur-hover) var(--ease-back);
   text-decoration: none;
   font-family: inherit;
+}
+
+.ui-button-ghost:active {
+  transform: translateY(0);
+  transition-duration: var(--dur-press);
 }
 
 .ui-button-ghost:hover {
   background: #fff7f2;
   border-color: var(--oxide);
-  color: var(--oxide);
-  transform: translateY(-1px);
+  color: var(--oxide-text);
+  transform: translateY(-2px);
 }
 
 /* ===== Card Base & Inset Highlight ===== */
@@ -132,13 +142,47 @@
   border: 1px solid var(--rule);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  transition: border-color var(--dur-hover) ease, box-shadow var(--dur-hover) ease,
+    transform var(--dur-hover) var(--ease-back);
 }
 
 .card-glow:hover {
   border-color: var(--border-accent);
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-1px);
+  transform: translateY(-3px);
+}
+
+/* ===== Anchored sections =====
+   The nav is sticky, so anything reached by its #id has to clear it or the
+   heading lands underneath the bar. */
+#demo,
+#features,
+#comparison,
+#download-macos {
+  scroll-margin-top: calc(var(--nav-h) + 16px);
+}
+
+/* ===== Inline emphasis =====
+   Rendered from `**…**` markers in the locale copy (see components/ui/RichText).
+   <em> is the right element semantically, but italic Chinese reads badly — so the
+   accent is carried by colour, never by slant. */
+.em-accent {
+  font-style: normal;
+  font-weight: inherit;
+  color: var(--oxide-text);
+}
+
+/* The other half of the same marker set: a literal the visitor will type. Sized
+   in em so it tracks whatever copy it is sitting inside. */
+.em-code {
+  padding: 0.12em 0.4em;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--oxide-text);
+  background: var(--oxide-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-xs);
+  white-space: nowrap;
 }
 
 /* ===== Section Head Center ===== */
@@ -160,7 +204,7 @@
 }
 
 .section-subtitle {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.7;
   color: var(--text-secondary);
 }

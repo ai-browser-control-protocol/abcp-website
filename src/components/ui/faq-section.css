@@ -1,0 +1,240 @@
+/* ==========================================================================
+   FAQ — heading rail on the left, questions on the right
+
+   Every other section on this page centres its heading over a full-width block.
+   Ten accordions are narrow by nature, so that treatment would have left a
+   column of empty page down one side. Splitting it puts the heading in that
+   space and keeps it in view while the answers are read.
+
+   Ordering note: narrow-screen overrides live at the BOTTOM of this file. A
+   media query adds no specificity, so a mobile rule placed above a base rule
+   silently loses to it.
+   ========================================================================== */
+
+.faq-section {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.6fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+
+/* Sticky rather than merely top-aligned: by question eight the heading would
+   otherwise be far off-screen with nothing saying what this list is. */
+.faq-rail {
+  position: sticky;
+  top: 96px;
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+
+.faq-title {
+  text-align: left;
+  text-wrap: balance;
+}
+
+.faq-subtitle {
+  margin: 0;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+/* ===== The list ===== */
+
+.faq-list {
+  display: grid;
+}
+
+.faq-item {
+  border-top: 1px solid var(--rule);
+}
+
+.faq-item:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ===== Question ===== */
+
+.faq-q {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 14px;
+  padding: 20px 4px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 16.5px;
+  font-weight: 650;
+  line-height: 1.5;
+  color: var(--text-primary);
+  transition: color 160ms ease;
+}
+
+/* Safari still paints its own disclosure triangle without this. */
+.faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.faq-q:hover,
+.faq-item[open] > .faq-q {
+  color: var(--oxide-text);
+}
+
+.faq-q:focus-visible {
+  outline: 2px solid var(--oxide);
+  outline-offset: -2px;
+  border-radius: var(--radius-sm);
+}
+
+.faq-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  transition: color 160ms ease;
+}
+
+.faq-item[open] > .faq-q .faq-num {
+  color: var(--oxide);
+}
+
+.faq-q-text {
+  text-wrap: pretty;
+}
+
+/* ===== Open / closed mark =====
+   A plus that loses its vertical bar rather than a rotating chevron: the state
+   is readable at a glance without having to judge which way an arrow points. */
+
+.faq-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  align-self: center;
+  color: var(--text-muted);
+  background: var(--bg-surface-hover);
+  border-radius: 50%;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.faq-item[open] > .faq-q .faq-mark {
+  color: var(--oxide);
+  background: var(--oxide-subtle);
+}
+
+.faq-mark-bar {
+  transform-origin: center;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.faq-item[open] > .faq-q .faq-mark-bar {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+/* ===== Answer ===== */
+
+.faq-a {
+  display: grid;
+  gap: 12px;
+  padding: 0 4px 24px 46px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.faq-a p {
+  margin: 0;
+}
+
+.faq-a-head {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+}
+
+.faq-a ul,
+.faq-a ol {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: faq-step;
+}
+
+.faq-a li {
+  position: relative;
+  padding-left: 20px;
+}
+
+/* Marker drawn rather than inherited, so the bullet and the number sit on the
+   same left rule and neither depends on list-style rendering. */
+.faq-a ul > li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0.72em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--oxide);
+}
+
+.faq-a ol > li {
+  counter-increment: faq-step;
+}
+
+.faq-a ol > li::before {
+  content: counter(faq-step);
+  position: absolute;
+  left: 0;
+  top: 0.16em;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--oxide);
+}
+
+/* ==========================================================================
+   Narrow screens — all overrides below the base rules, see the header note
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .faq-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+  /* Nothing to stay beside once it is stacked, and a heading that follows the
+     page down while the answers scroll under it would just be in the way. */
+  .faq-rail {
+    position: static;
+    justify-items: center;
+    text-align: center;
+  }
+  .faq-title,
+  .faq-subtitle {
+    text-align: center;
+  }
+  .faq-q {
+    font-size: 15.5px;
+    gap: 11px;
+    padding: 17px 2px;
+  }
+  .faq-a {
+    padding: 0 2px 20px 39px;
+    font-size: 14.5px;
+  }
+}
+
+@media (max-width: 520px) {
+  .faq-a {
+    padding-left: 2px;
+  }
+}

@@ -1,26 +1,52 @@
 /**
  * Product capabilities — one full-width story section per capability.
  *
- * Layout mirrors lite.ego.app: text on one side, a moving figure on the other,
- * sides alternating down the page. No section heading sits above the stack; the
- * capability titles carry the page on their own.
+ * The six capabilities sit on an asymmetric bento grid rather than six identical
+ * alternating rows — a lead panel, a pair, a wide/narrow split, and a closing
+ * panel. Equal rows read as a spreadsheet; uneven ones give the eye somewhere to
+ * land. No section heading sits above the stack; the titles carry the page.
  *
  * Each figure is an inline SVG whose animations only run once the row scrolls
  * into view (`is-visible`), so nothing burns frames off-screen.
+ *
+ * Every word inside those SVGs comes from `copy.figures` rather than from this
+ * source, each figure's `aria-label` included. Drawing the diagrams in markup is
+ * what lets them animate and stay crisp at any size, but it also makes their
+ * labels content: hardcoding them left Chinese strings sitting inside the en,
+ * ja and ko pages.
  */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment } from "react";
+import { useReveal } from "./useReveal";
 import type { FeaturesCopy } from "@/content/models";
 import "./features-grid.css";
+
+/** Bento plan, one entry per capability.
+ *  span  — columns out of six
+ *  stack — figure above the copy instead of beside it (narrow cards)
+ *  flip  — figure first on wide cards
+ *  ink   — dark card, for the one panel that breaks up the light run */
+const LAYOUT = [
+  { span: 6 },
+  { span: 3, stack: true },
+  { span: 3, stack: true },
+  { span: 4 },
+  { span: 2, stack: true, ink: true },
+  { span: 6, flip: true },
+] as const;
 
 export function FeaturesGrid({ copy }: { copy: FeaturesCopy }) {
   if (!copy?.items?.length) return null;
 
   return (
-    <section className="features-section" id="features" aria-label="Product capabilities">
+    /* No aria-label: the only candidate was a hardcoded English string, which
+       zh/ja/ko visitors would hear in the wrong language. An unnamed <section>
+       is simply not exposed as a landmark, which is harmless. Give this a real
+       localized heading if the section ever gets one in the copy. */
+    <section className="features-section" id="features">
       {copy.items.map((item, index) => (
-        <FeatureRow key={item.key} item={item} index={index} badge={copy.badge} />
+        <FeatureRow key={item.key} item={item} index={index} figures={copy.figures} />
       ))}
     </section>
   );
@@ -29,43 +55,32 @@ export function FeaturesGrid({ copy }: { copy: FeaturesCopy }) {
 function FeatureRow({
   item,
   index,
-  badge,
+  figures,
 }: {
   item: FeaturesCopy["items"][number];
   index: number;
-  badge: string;
+  figures: Figures;
 }) {
-  const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [ref, visible] = useReveal<HTMLElement>();
 
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setVisible(true);
-            observer.disconnect();
-          }
-        }
-      },
-      { threshold: 0.25, rootMargin: "0px 0px -8% 0px" }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const plan = LAYOUT[index % LAYOUT.length];
+  const className = [
+    "feature-row",
+    `span-${plan.span}`,
+    "stack" in plan && plan.stack ? "is-stacked" : "",
+    "flip" in plan && plan.flip ? "is-flipped" : "",
+    "ink" in plan && plan.ink ? "is-ink" : "",
+    visible ? "is-visible" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <article
-      ref={ref}
-      className={`feature-row${index % 2 === 1 ? " is-reversed" : ""}${visible ? " is-visible" : ""}`}
-    >
+    <article ref={ref} className={className}>
       <div className="feature-copy">
         <div className="feature-eyebrow">
           <span className="feature-num">{String(index + 1).padStart(2, "0")}</span>
           <span className="feature-eyebrow-text">{item.eyebrow}</span>
-          <span className="feature-eyebrow-badge">{badge}</span>
         </div>
         <h2 className="feature-title">{item.title}</h2>
         <p className="feature-body">{item.body}</p>
@@ -82,10 +97,10 @@ function FeatureRow({
       </div>
 
       <div className="feature-figure">
+        <span className="feature-figure-title">{item.figure}</span>
         <div className="feature-figure-card">
-          <FeatureIllustration index={index} />
+          <FeatureIllustration index={index} figures={figures} />
         </div>
-        <span className="feature-figure-caption">{item.figure}</span>
       </div>
     </article>
   );
@@ -95,27 +110,29 @@ function FeatureRow({
 /* Figures                                                                     */
 /* ========================================================================== */
 
-function FeatureIllustration({ index }: { index: number }) {
+type Figures = FeaturesCopy["figures"];
+
+function FeatureIllustration({ index, figures }: { index: number; figures: Figures }) {
   switch (index) {
     case 0:
-      return <IllusSpeed />;
+      return <IllusSpeed t={figures.speed} />;
     case 1:
-      return <IllusToken />;
+      return <IllusToken t={figures.tree} />;
     case 2:
-      return <IllusLocal />;
+      return <IllusLocal t={figures.local} />;
     case 3:
-      return <IllusFingerprint />;
+      return <IllusSkill t={figures.skill} />;
     case 4:
-      return <IllusSkill />;
+      return <IllusFingerprint t={figures.fingerprint} />;
     default:
-      return <IllusTakeover />;
+      return <IllusTakeover t={figures.takeover} />;
   }
 }
 
 /* 01 — custom Chromium kernel vs Chrome + JS adapter */
-function IllusSpeed() {
+function IllusSpeed({ t }: { t: Figures["speed"] }) {
   return (
-    <svg viewBox="0 0 480 360" className="ill-svg" role="img" aria-label="Chromium kernel vs adapter layer">
+    <svg viewBox="0 0 480 360" className="ill-svg" role="img" aria-label={t.alt}>
       <defs>
         <linearGradient id="sp-bar" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#ff8a4a" />
@@ -126,33 +143,33 @@ function IllusSpeed() {
       {/* left — WebCross: the agent talks straight to the kernel */}
       <rect x="22" y="26" width="196" height="236" rx="12" fill="#0a0a0a" />
       <text x="120" y="54" textAnchor="middle" fill="#ff6b35" fontSize="13" fontWeight="800" fontFamily="ui-monospace, monospace">WebCross</text>
-      <text x="120" y="72" textAnchor="middle" fill="#ffffff" fontSize="10.5" opacity="0.6">Chromium 内核级定制</text>
-      <line x1="120" y1="86" x2="120" y2="219" stroke="#2a2a2e" strokeWidth="2" />
-      {["Agent", "Kernel", "Page"].map((label, i) => (
-        <g key={label} transform={"translate(120, " + (100 + i * 52) + ")"}>
+      <text x="120" y="72" textAnchor="middle" fill="#ffffff" fontSize="10.5" opacity="0.6">{t.kernel}</text>
+      <line x1="120" y1="104" x2="120" y2="195" stroke="#2a2a2e" strokeWidth="2" />
+      {["Agent", "Kernel"].map((label, i) => (
+        <g key={label} transform={"translate(120, " + (118 + i * 62) + ")"}>
           <rect x="-64" y="-15" width="128" height="30" rx="7" fill="#17171b" stroke="#2f2f36" />
           <text textAnchor="middle" y="4" fill="#e7e7ea" fontSize="10.5" fontFamily="ui-monospace, monospace">{label}</text>
         </g>
       ))}
-      <circle className="sp-packet-fast" r="5" fill="#ff6b35" cx="120" cy="100" />
+      <circle className="sp-packet-fast" r="5" fill="#ff6b35" cx="120" cy="118" />
       <text x="120" y="246" textAnchor="middle" fill="#ffffff" fontSize="9.5" opacity="0.45" fontFamily="ui-monospace, monospace">native binding · 0 hop</text>
 
       {/* right — Chrome, with an adapter layer on every call */}
       <rect x="262" y="26" width="196" height="236" rx="12" fill="#ffffff" stroke="#e4e4e7" />
       <text x="360" y="54" textAnchor="middle" fill="#71717a" fontSize="13" fontWeight="700">Chrome</text>
-      <text x="360" y="72" textAnchor="middle" fill="#a1a1aa" fontSize="10.5">+ JavaScript 适配层</text>
+      <text x="360" y="72" textAnchor="middle" fill="#a1a1aa" fontSize="10.5">{t.adapter}</text>
       <line x1="360" y1="86" x2="360" y2="237" stroke="#e4e4e7" strokeWidth="2" />
-      {["Agent", "JS Adapter", "CDP / RPC", "Page"].map((label, i) => (
+      {["Agent", "JS Adapter", "CDP / RPC", "Kernel"].map((label, i) => (
         <g key={label} transform={"translate(360, " + (98 + i * 42) + ")"}>
           <rect x="-64" y="-14" width="128" height="28" rx="7" fill="#f4f4f5" stroke="#e4e4e7" />
           <text textAnchor="middle" y="4" fill="#71717a" fontSize="10" fontFamily="ui-monospace, monospace">{label}</text>
         </g>
       ))}
       <circle className="sp-packet-slow" r="5" fill="#a1a1aa" cx="360" cy="98" />
-      <text x="360" y="256" textAnchor="middle" fill="#a1a1aa" fontSize="9.5" fontFamily="ui-monospace, monospace">序列化 · IPC 往返</text>
+      <text x="360" y="256" textAnchor="middle" fill="#a1a1aa" fontSize="9.5" fontFamily="ui-monospace, monospace">{t.serialize}</text>
 
       {/* same task, time spent */}
-      <text x="22" y="296" fill="#71717a" fontSize="10.5" fontWeight="700">同一条任务链路 · 耗时对比</text>
+      <text x="22" y="296" fill="#71717a" fontSize="10.5" fontWeight="700">{t.caption}</text>
       <g transform="translate(22, 322)">
         <text fill="#ff6b35" fontSize="10.5" fontWeight="700">WebCross</text>
         <rect x="98" y="-9" width="290" height="10" rx="5" fill="#f0f0f2" />
@@ -169,78 +186,100 @@ function IllusSpeed() {
   );
 }
 
-/* 02 — raw DOM vs filtered AXTree */
-function IllusToken() {
+/* 02 — DOM → AXTree skeleton → SemanticTree structure */
+function IllusToken({ t }: { t: Figures["tree"] }) {
+  /* Node names are code and stay put; only the annotation beside each is copy. */
+  const nodes = ["root", "├─ button", "├─ input", "├─ list", "│  └─ row", "└─ link"];
+  const tree = nodes.map((node, i) => [node, i === 0 ? "" : (t.tags[i - 1] ?? "")] as const);
+
   return (
-    <svg viewBox="0 0 480 320" className="ill-svg" role="img" aria-label="DOM to AXTree token reduction">
-      <rect x="22" y="26" width="188" height="216" rx="10" fill="#f6f6f7" stroke="#e4e4e7" />
-      <text x="116" y="50" textAnchor="middle" fill="#71717a" fontSize="11.5" fontWeight="700">原始 DOM</text>
+    <svg viewBox="0 0 480 320" className="ill-svg" role="img" aria-label={t.alt}>
+      {/* raw DOM — everything, most of it noise */}
+      <rect x="22" y="30" width="122" height="200" rx="10" fill="#f6f6f7" stroke="#e4e4e7" />
+      <text x="83" y="52" textAnchor="middle" fill="#71717a" fontSize="11" fontWeight="700">{t.dom}</text>
       <g className="tk-noise">
-        {Array.from({ length: 56 }).map((_, i) => {
-          const col = i % 8;
-          const row = Math.floor(i / 8);
-          return (
-            <rect
-              key={i}
-              x={38 + col * 20}
-              y={64 + row * 20}
-              width={16}
-              height={13}
-              rx={2}
-              fill={i % 4 === 0 ? "#a1a1aa" : "#d4d4d8"}
-              style={{ animationDelay: `${(i % 13) * 0.09}s` }}
-            />
-          );
-        })}
-      </g>
-      <text x="116" y="228" textAnchor="middle" fill="#a1a1aa" fontSize="10.5" fontFamily="ui-monospace, monospace">12,480 tokens</text>
-
-      <g transform="translate(220, 130)">
-        <path d="M0 4 L30 4" stroke="#ff6b35" strokeWidth="2.5" />
-        <path d="M23 -3 L30 4 L23 11" stroke="#ff6b35" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        <text x="15" y="-8" textAnchor="middle" fill="#ff6b35" fontSize="11" fontWeight="800">-85%</text>
-      </g>
-
-      <rect x="270" y="26" width="188" height="216" rx="10" fill="#fff7f2" stroke="#ff6b35" strokeWidth="1.4" />
-      <text x="364" y="50" textAnchor="middle" fill="#ff6b35" fontSize="11.5" fontWeight="700">过滤后 AXTree</text>
-      <g className="tk-tree" fontFamily="ui-monospace, monospace" fontSize="10">
-        {[
-          ["root", "#0a0a0a", 286],
-          ["├─ button[submit]", "#ff6b35", 294],
-          ["├─ input[name=email]", "#ff6b35", 294],
-          ["├─ list", "#0a0a0a", 294],
-          ["│  ├─ row “Mophie…”", "#ff6b35", 302],
-          ["│  ├─ row “Anker…”", "#0a0a0a", 302],
-          ["│  └─ row “INIU…”", "#ff6b35", 302],
-          ["└─ a[href=/cart]", "#ff6b35", 294],
-        ].map(([label, fill, x], i) => (
-          <text
+        {Array.from({ length: 28 }).map((_, i) => (
+          <rect
             key={i}
-            x={Number(x)}
-            y={74 + i * 19}
-            fill={String(fill)}
-            style={{ animationDelay: `${0.15 + i * 0.11}s` }}
-          >
-            {String(label)}
+            x={30 + (i % 4) * 27}
+            y={70 + Math.floor(i / 4) * 17}
+            width={23}
+            height={11}
+            rx={2}
+            fill={i % 4 === 0 ? "#a1a1aa" : "#d4d4d8"}
+            style={{ animationDelay: `${(i % 11) * 0.09}s` }}
+          />
+        ))}
+      </g>
+      <text x="83" y="214" textAnchor="middle" fill="#a1a1aa" fontSize="9.5" fontFamily="ui-monospace, monospace">12,480 tokens</text>
+
+      <g transform="translate(150, 126)">
+        <path d="M0 4 L14 4" stroke="#ff6b35" strokeWidth="2.2" />
+        <path d="M8 -2 L14 4 L8 10" stroke="#ff6b35" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="7" y="-10" textAnchor="middle" fill="#ff6b35" fontSize="10" fontWeight="800">-85%</text>
+      </g>
+
+      {/* AXTree — the page compressed down to a semantic skeleton */}
+      <rect x="179" y="30" width="122" height="200" rx="10" fill="#ffffff" stroke="#d4d4d8" />
+      <text x="240" y="52" textAnchor="middle" fill="#0a0a0a" fontSize="11" fontWeight="700">AXTree</text>
+      <text x="240" y="67" textAnchor="middle" fill="#a1a1aa" fontSize="8.5">{t.skeleton}</text>
+      <g className="tk-tree" fontFamily="ui-monospace, monospace" fontSize="8.5">
+        {tree.map(([node], i) => (
+          <text key={node} x="189" y={90 + i * 18} fill="#3f3f46" style={{ animationDelay: `${0.1 + i * 0.09}s` }}>
+            {node}
           </text>
         ))}
       </g>
-      <text x="364" y="228" textAnchor="middle" fill="#ff6b35" fontSize="10.5" fontWeight="800" fontFamily="ui-monospace, monospace">1,820 tokens</text>
+      <text x="240" y="214" textAnchor="middle" fill="#71717a" fontSize="9.5" fontFamily="ui-monospace, monospace">1,820 tokens</text>
 
-      {["+ Shadow DOM", "+ 跨域 iframe", "+ Canvas 语义"].map((label, i) => (
-        <g key={label} transform={`translate(${22 + i * 152}, 262)`}>
-          <rect width="142" height="26" rx="13" fill="#ffffff" stroke="#ff6b35" />
-          <text x="71" y="17" textAnchor="middle" fill="#ff6b35" fontSize="10.5" fontWeight="700">{label}</text>
+      <g transform="translate(307, 126)">
+        <path d="M0 4 L14 4" stroke="#ff6b35" strokeWidth="2.2" />
+        <path d="M8 -2 L14 4 L8 10" stroke="#ff6b35" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="7" y="-10" textAnchor="middle" fill="#ff6b35" fontSize="10" fontWeight="800">{t.plus}</text>
+      </g>
+
+      {/* SemanticTree — the same skeleton, plus how the nodes relate */}
+      <rect x="336" y="30" width="122" height="200" rx="10" fill="#fff7f2" stroke="#ff6b35" strokeWidth="1.4" />
+      <text x="397" y="52" textAnchor="middle" fill="#ff6b35" fontSize="11" fontWeight="700">SemanticTree</text>
+      <text x="397" y="67" textAnchor="middle" fill="#c2410c" fontSize="8.5">{t.structure}</text>
+      <g className="tk-tree" fontFamily="ui-monospace, monospace" fontSize="8.5">
+        {tree.map(([node, tag], i) => (
+          <Fragment key={node}>
+            <text x="346" y={90 + i * 18} fill="#3f3f46" style={{ animationDelay: `${0.55 + i * 0.09}s` }}>
+              {node}
+            </text>
+            {tag && (
+              <text
+                x="448"
+                y={90 + i * 18}
+                textAnchor="end"
+                fill="#ff6b35"
+                fontWeight="700"
+                style={{ animationDelay: `${0.62 + i * 0.09}s` }}
+              >
+                {tag}
+              </text>
+            )}
+          </Fragment>
+        ))}
+      </g>
+      <text x="397" y="214" textAnchor="middle" fill="#ff6b35" fontSize="9.5" fontWeight="700" fontFamily="ui-monospace, monospace">1,960 tokens</text>
+
+      {t.pills.map((label, i) => (
+        <g key={label} transform={`translate(${22 + i * 157}, 252)`}>
+          <rect width="122" height="26" rx="13" fill="#ffffff" stroke="#ff6b35" />
+          <text x="61" y="17" textAnchor="middle" fill="#ff6b35" fontSize="9.5" fontWeight="700">{label}</text>
         </g>
       ))}
+      <text x="240" y="302" textAnchor="middle" fill="#71717a" fontSize="10">{t.caption}</text>
     </svg>
   );
 }
 
 /* 03 — everything stays on the machine */
-function IllusLocal() {
+function IllusLocal({ t }: { t: Figures["local"] }) {
   return (
-    <svg viewBox="0 0 480 320" className="ill-svg" role="img" aria-label="All data stays local">
+    <svg viewBox="0 0 480 320" className="ill-svg" role="img" aria-label={t.alt}>
       <defs>
         <radialGradient id="lc-glow" cx="0.5" cy="0.5" r="0.5">
           <stop offset="0%" stopColor="#ff6b35" stopOpacity="0.2" />
@@ -286,21 +325,20 @@ function IllusLocal() {
       <rect x="152" y="98" width="176" height="102" rx="14" fill="none" stroke="#ff6b35" strokeWidth="1.6" strokeDasharray="7 6" className="lc-fence" />
 
       <text x="240" y="228" textAnchor="middle" fill="#ff6b35" fontSize="13" fontWeight="800" fontFamily="ui-monospace, monospace">100% LOCAL</text>
-      <text x="240" y="248" textAnchor="middle" fill="#71717a" fontSize="10.5">账号凭证 · Cookie · 指令 · 执行流水</text>
+      <text x="240" y="248" textAnchor="middle" fill="#71717a" fontSize="10.5">{t.assets}</text>
       <g transform="translate(130, 268)">
         <rect width="220" height="30" rx="15" fill="#0a0a0a" />
-        <text x="110" y="20" textAnchor="middle" fill="#ffffff" fontSize="10.5" fontWeight="600">零云端上传 · 零数据回传</text>
+        <text x="110" y="20" textAnchor="middle" fill="#ffffff" fontSize="10.5" fontWeight="600">{t.banner}</text>
       </g>
     </svg>
   );
 }
 
-/* 04 — fingerprint / IP matrix */
-function IllusFingerprint() {
+/* 05 — fingerprint / IP matrix */
+function IllusFingerprint({ t }: { t: Figures["fingerprint"] }) {
   const palette = ["#ff6b35", "#38bdf8", "#10b981", "#a855f7"];
-  const labels = ["US · 洛杉矶", "JP · 东京", "DE · 法兰克福", "UK · 伦敦"];
   return (
-    <svg viewBox="0 0 480 336" className="ill-svg" role="img" aria-label="Fingerprint and IP matrix">
+    <svg viewBox="0 0 480 336" className="ill-svg" role="img" aria-label={t.alt}>
       {Array.from({ length: 3 }).flatMap((_, row) =>
         Array.from({ length: 4 }).map((_, col) => {
           const x = 26 + col * 110;
@@ -326,20 +364,20 @@ function IllusFingerprint() {
           );
         })
       )}
-      {labels.map((label, i) => (
+      {t.cities.map((label, i) => (
         <text key={label} x={74 + i * 110} y="294" textAnchor="middle" fill="#71717a" fontSize="10" fontFamily="ui-monospace, monospace">
           {label}
         </text>
       ))}
-      <text x="240" y="326" textAnchor="middle" fill="#a1a1aa" fontSize="9.5">12 个实例 · 12 套指纹 · 12 条出口 IP · 互不串号</text>
+      <text x="240" y="326" textAnchor="middle" fill="#a1a1aa" fontSize="9.5">{t.caption}</text>
     </svg>
   );
 }
 
-/* 05 — task run distilled into a reusable skill */
-function IllusSkill() {
+/* 04 — task run distilled into a reusable skill */
+function IllusSkill({ t }: { t: Figures["skill"] }) {
   return (
-    <svg viewBox="0 0 480 320" className="ill-svg" role="img" aria-label="Task run becomes a reusable skill">
+    <svg viewBox="0 0 480 320" className="ill-svg" role="img" aria-label={t.alt}>
       <defs>
         <linearGradient id="sk-bar" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#ff8a4a" />
@@ -352,7 +390,7 @@ function IllusSkill() {
 
       <g transform="translate(20, 52)">
         <rect width="134" height="116" rx="11" fill="#f6f6f7" stroke="#e4e4e7" />
-        <text x="67" y="26" textAnchor="middle" fill="#0a0a0a" fontSize="11" fontWeight="700">任务执行</text>
+        <text x="67" y="26" textAnchor="middle" fill="#0a0a0a" fontSize="11" fontWeight="700">{t.run}</text>
         <text x="67" y="42" textAnchor="middle" fill="#71717a" fontSize="9.5">WebCross Harness</text>
         {["goto(url)", "click(.btn)", "extract(dom)", "wait(200ms)"].map((line, i) => (
           <g key={line} transform={`translate(16, ${58 + i * 15})`}>
@@ -369,7 +407,7 @@ function IllusSkill() {
 
       <g transform="translate(190, 52)">
         <rect width="134" height="116" rx="11" fill="#fff7f2" stroke="#ff6b35" strokeWidth="1.4" />
-        <text x="67" y="26" textAnchor="middle" fill="#ff6b35" fontSize="11" fontWeight="700">沉淀 Skill</text>
+        <text x="67" y="26" textAnchor="middle" fill="#ff6b35" fontSize="11" fontWeight="700">{t.distil}</text>
         <text x="67" y="42" textAnchor="middle" fill="#0a0a0a" fontSize="9.5" fontFamily="ui-monospace, monospace">amazon.patrol</text>
         {["input(query)", "pick(result[0])", "grab(price)", "grab(reviews)"].map((line, i) => (
           <g key={line} transform={`translate(16, ${58 + i * 15})`}>
@@ -386,42 +424,42 @@ function IllusSkill() {
 
       <g transform="translate(360, 52)">
         <rect width="100" height="116" rx="11" fill="#0a0a0a" />
-        <text x="50" y="26" textAnchor="middle" fill="#ff6b35" fontSize="11" fontWeight="700">一键复用</text>
+        <text x="50" y="26" textAnchor="middle" fill="#ff6b35" fontSize="11" fontWeight="700">{t.reuse}</text>
         <g className="sk-replay" transform="translate(50, 62)">
           <circle r="21" fill="none" stroke="#2c2c31" strokeWidth="3" />
           <circle className="sk-replay-arc" r="21" fill="none" stroke="#ff6b35" strokeWidth="3" strokeLinecap="round" />
-          <text textAnchor="middle" y="5" fill="#ffffff" fontSize="14" fontWeight="800" fontFamily="ui-monospace, monospace">-60%</text>
+          <text textAnchor="middle" y="5" fill="#ffffff" fontSize="14" fontWeight="800" fontFamily="ui-monospace, monospace">-80%</text>
         </g>
-        <text x="50" y="102" textAnchor="middle" fill="#ffffff" fontSize="9" opacity="0.55">tokens / 次</text>
+        <text x="50" y="102" textAnchor="middle" fill="#ffffff" fontSize="9" opacity="0.55">{t.perRun}</text>
       </g>
       <text x="410" y="188" textAnchor="middle" fill="#a1a1aa" fontSize="10" fontWeight="700" fontFamily="ui-monospace, monospace">03</text>
 
       <g transform="translate(20, 232)">
-        <text fill="#71717a" fontSize="10">首次执行</text>
+        <text fill="#71717a" fontSize="10">{t.first}</text>
         <rect x="0" y="12" width="440" height="12" rx="6" fill="#f0f0f2" />
         <rect x="0" y="12" width="440" height="12" rx="6" fill="#d4d4d8" />
         <text x="440" y="9" textAnchor="end" fill="#a1a1aa" fontSize="10" fontFamily="ui-monospace, monospace">12,480 tokens</text>
       </g>
       <g transform="translate(20, 274)">
-        <text fill="#ff6b35" fontSize="10" fontWeight="700">复用 Skill</text>
+        <text fill="#ff6b35" fontSize="10" fontWeight="700">{t.repeat}</text>
         <rect x="0" y="12" width="440" height="12" rx="6" fill="#f0f0f2" />
         <rect className="sk-saving" x="0" y="12" height="12" rx="6" fill="url(#sk-bar)" />
-        <text x="440" y="9" textAnchor="end" fill="#ff6b35" fontSize="10" fontWeight="700" fontFamily="ui-monospace, monospace">4,760 tokens</text>
+        <text x="440" y="9" textAnchor="end" fill="#ff6b35" fontSize="10" fontWeight="700" fontFamily="ui-monospace, monospace">2,480 tokens</text>
       </g>
     </svg>
   );
 }
 
 /* 06 — human takeover on 2FA, then resume */
-function IllusTakeover() {
+function IllusTakeover({ t }: { t: Figures["takeover"] }) {
   return (
-    <svg viewBox="0 0 480 320" className="ill-svg" role="img" aria-label="Human takeover and resume">
+    <svg viewBox="0 0 480 320" className="ill-svg" role="img" aria-label={t.alt}>
       <line x1="52" y1="34" x2="52" y2="286" stroke="#e8e8ea" strokeWidth="2" />
       <line className="tv-progress" x1="52" y1="34" x2="52" y2="286" stroke="#ff6b35" strokeWidth="2" />
 
       <circle cx="52" cy="52" r="6" fill="#ff6b35" />
-      <text x="74" y="48" fill="#0a0a0a" fontSize="11.5" fontWeight="700">后台执行中</text>
-      <text x="74" y="66" fill="#71717a" fontSize="10">智能体自动登录、点击、抓取，用户无感</text>
+      <text x="74" y="48" fill="#0a0a0a" fontSize="11.5" fontWeight="700">{t.running}</text>
+      <text x="74" y="66" fill="#71717a" fontSize="10">{t.runningNote}</text>
       <g transform="translate(74, 76)">
         <rect width="336" height="8" rx="4" fill="#f0f0f2" />
         <rect className="tv-run" width="336" height="8" rx="4" fill="#d4d4d8" />
@@ -431,8 +469,8 @@ function IllusTakeover() {
       <g transform="translate(74, 106)">
        <g className="tv-card">
         <rect width="336" height="112" rx="11" fill="#fff7f2" stroke="#ff6b35" strokeWidth="1.4" />
-        <text x="18" y="27" fill="#ff6b35" fontSize="11.5" fontWeight="800">需要您确认 · 2FA 验证码</text>
-        <text x="18" y="46" fill="#3f3f46" fontSize="10">任务已暂停在断点，验证完成后自动继续</text>
+        <text x="18" y="27" fill="#ff6b35" fontSize="11.5" fontWeight="800">{t.prompt}</text>
+        <text x="18" y="46" fill="#3f3f46" fontSize="10">{t.promptNote}</text>
         {[0, 1, 2, 3, 4, 5].map((i) => (
           <g key={i} transform={`translate(${18 + i * 34}, 58)`}>
             <rect width="26" height="30" rx="6" fill="#ffffff" stroke="#ff6b35" />
@@ -444,16 +482,16 @@ function IllusTakeover() {
         <g transform="translate(240, 62)">
           <g className="tv-confirm">
             <rect width="80" height="24" rx="12" fill="#ff6b35" />
-            <text x="40" y="16" textAnchor="middle" fill="#ffffff" fontSize="10.5" fontWeight="700">已验证</text>
+            <text x="40" y="16" textAnchor="middle" fill="#ffffff" fontSize="10.5" fontWeight="700">{t.verified}</text>
           </g>
         </g>
        </g>
       </g>
-      <text x="74" y="236" fill="#a1a1aa" fontSize="9.5" fontFamily="ui-monospace, monospace">唤起耗时 &lt; 40 ms</text>
+      <text x="74" y="236" fill="#a1a1aa" fontSize="9.5" fontFamily="ui-monospace, monospace">{t.latency}</text>
 
       <circle className="tv-resume" cx="52" cy="272" r="6" fill="#10b981" />
-      <text x="74" y="268" fill="#0a0a0a" fontSize="11.5" fontWeight="700">从断点恢复后台执行</text>
-      <text x="74" y="286" fill="#71717a" fontSize="10">无需重启任务，其他并发实例全程未中断</text>
+      <text x="74" y="268" fill="#0a0a0a" fontSize="11.5" fontWeight="700">{t.resume}</text>
+      <text x="74" y="286" fill="#71717a" fontSize="10">{t.resumeNote}</text>
     </svg>
   );
 }

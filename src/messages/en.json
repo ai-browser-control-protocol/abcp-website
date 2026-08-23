@@ -75,17 +75,13 @@
     "thesisBrand": "WebCross",
     "thesisLead": "helps your agent",
     "thesisRest": "finish the tedious web work",
-    "sub": "A faster, lower-token web executor for your agent. Runs quietly in the background, never interrupts you.",
-    "ctaPrimaryMac": "Download for macOS",
-    "ctaPrimaryWin": "Download for Windows",
-    "systemSupport": "macOS 13+ (Apple Silicon / Intel) · Windows 11 64-bit",
+    "ctaPrimary": "Download WebCross — free",
     "assurances": [
       "Yes — every feature is free during the public beta",
       "Local-first, nothing leaves your machine"
     ],
     "demo": {
-      "badge": "LIVE DEMO",
-      "title": "WebCross helps you get the following tasks done",
+      "title": "Built for **every automation scenario**",
       "scrollHint": "Keep scrolling to walk through all three tasks",
       "clientTitle": "WebCross · Agent",
       "taskLabel": "Original task",
@@ -101,7 +97,7 @@
       "scenes": {
         "A": {
           "label": "Scene A · Amazon price patrol",
-          "caption": "Auto-monitor thousands of product links daily; catch price changes the moment they happen.",
+          "caption": "Auto-monitor **thousands of product links** daily; catch price changes the moment they happen.",
           "task": "Please patrol the top 30 power bank listings on Amazon. Capture url, title, price, rating, and the first 30 bad reviews for each.",
           "steps": [
             "Open amazon.com",
@@ -243,38 +239,20 @@
                   "body": "Noticeably warm while charging and using at the same time; build quality is rougher than the photos."
                 }
               ]
-            },
-            "capture": {
-              "title": "Captured",
-              "fields": [
-                [
-                  "url",
-                  "amazon.com/dp/B0D8XQ1KJ2"
-                ],
-                [
-                  "title",
-                  "INIU 45W 10000mAh Power Bank"
-                ],
-                [
-                  "price",
-                  "$21.59"
-                ],
-                [
-                  "rating",
-                  "4.4 / 84.8K"
-                ]
-              ],
-              "reviewLabel": "bad reviews scraped",
-              "reviewTotal": 30,
-              "doneTitle": "Written locally",
-              "doneFile": "power_bank_top30.csv",
-              "doneMeta": "30 products · 900 bad reviews · 100% on-device"
             }
+          },
+          "result": {
+            "summary": "30 products · 30 bad reviews captured",
+            "items": [
+              "url / title / price / rating written to the sheet",
+              "Bad reviews grouped per product",
+              "Exported power-bank-top30.csv"
+            ]
           }
         },
         "B": {
           "label": "Scene B · Amazon seller listing",
-          "caption": "List hundreds of SKUs in one click; let the agent handle the form filling.",
+          "caption": "List **hundreds of SKUs** in one click; let the agent handle the form filling.",
           "task": "List a new product in Seller Central. Name 'Mophie 20000 Black', brand 'Mophie', price $59.95, stock 200, category 'Electronics › Power Banks'.",
           "steps": [
             "Open Seller Central",
@@ -330,11 +308,19 @@
             "successMeta": "SKU MPH-PS20000-BLK queued for review",
             "queueLabel": "SKUs left in batch",
             "queueValue": "117 / 118"
+          },
+          "result": {
+            "summary": "1 SKU submitted · 119 left in the batch",
+            "items": [
+              "Name / brand / category filled in",
+              "Price and quantity entered",
+              "Main image uploaded, pending review"
+            ]
           }
         },
         "C": {
           "label": "Scene C · Social media scrape",
-          "caption": "Auto-archive posts and engagement data; assist you in running your social channels.",
+          "caption": "**Auto-archive** posts and engagement data; assist you in running your social channels.",
           "task": "Scrape 30 top posts from X / Reddit under #WebCross from the past week, like + repost + comment on each, then compile a weekly report.",
           "steps": [
             "Open x.com and search #WebCross",
@@ -445,25 +431,26 @@
                 }
               ],
               "reply": "Same here — the skill it saved after the first run cut our token spend again on the second."
-            },
-            "archive": {
-              "title": "Archived",
-              "file": "social_weekly_report.csv",
-              "meta": "30 posts · engagement data and replies written locally",
-              "fields": [
-                "Platform",
-                "Author",
-                "Body",
-                "Likes",
-                "Comments",
-                "Reposts",
-                "Engaged"
-              ],
-              "progressLabel": "Capture progress"
             }
+          },
+          "result": {
+            "summary": "24 posts archived · 2 platforms",
+            "items": [
+              "Likes and replies posted",
+              "Engagement data captured",
+              "Written to local social-daily.xlsx"
+            ]
           }
         }
-      }
+      },
+      "runningLabel": "Running…",
+      "rerunLabel": "Run again",
+      "previewTitle": "This is a preview",
+      "previewBody": "The demo only runs the built-in task. To run your own end to end, download WebCross first.",
+      "previewCta": "Download WebCross",
+      "resultTitle": "Task complete",
+      "exploreHint": "Click to explore",
+      "composerPlaceholder": "Type your own task, or just run the built-in one…"
     },
     "features": {
       "badge": "PRODUCT",
@@ -475,33 +462,45 @@
           "body": "A custom Chromium engine — not a JavaScript shim on top of vanilla Chrome.",
           "figure": "Custom Chromium vs Chrome + JS adapter",
           "bullets": [
-            "Marketplaces such as Amazon, where fingerprint and IP are policed hard",
-            "SaaS platforms and internal enterprise systems",
-            "Social media, several accounts in parallel"
+            "Commands reach the renderer directly — no JS adapter in between",
+            "No CDP / RPC round trips, no serialization overhead",
+            "The same task chain runs more than 3× faster end to end"
           ]
         },
         {
           "key": "token",
-          "eyebrow": "AXTree extraction",
+          "eyebrow": "AXTree + SemanticTree",
           "title": "Same task, far fewer tokens",
-          "body": "AXTree returns filtered page structure with DOM noise stripped; cross-origin iframe and Shadow DOM supported for precise extraction.",
-          "figure": "Raw DOM vs filtered AXTree (token cost)",
+          "body": "AXTree first compresses the whole page into a lean semantic skeleton, stripping styles, scripts and nested container noise out of the DOM. SemanticTree then layers on how the controls relate — hierarchy, grouping, interaction. Compared with AXTree-only filtering the model sees a shorter context, yet reads the page structure more precisely and in richer detail.",
+          "figure": "AXTree compresses the page skeleton → SemanticTree adds the structure",
           "bullets": [
-            "Cuts page context by ~85% on average",
-            "Reads cross-origin iframes and Shadow DOM alike",
-            "Shorter context means lower latency and steadier decisions"
+            "AXTree compresses the page skeleton, cutting context by ~85%",
+            "SemanticTree fills in hierarchy, grouping and relationships",
+            "Cross-origin iframes and Shadow DOM are readable alike"
           ]
         },
         {
           "key": "local",
           "eyebrow": "Data sovereignty",
           "title": "100% local data sovereignty",
-          "body": "Credentials, cookies, and execution logs stay on your machine. Nothing goes to the cloud.",
-          "figure": "Local shield · zero cloud upload",
+          "body": "Credentials, cookie sessions, execution logs and instructions all stay on your physical machine. Tasks are executed by the local kernel directly, page content is never relayed through a third-party server, and nothing is uploaded or phoned home.",
+          "figure": "Data moves only on your machine · never relayed by a third party",
           "bullets": [
             "Credentials and cookies never leave the machine",
             "Execution logs stay local, auditable and replayable",
-            "Tasks keep running with no network at all"
+            "Page content is never relayed through a third-party server"
+          ]
+        },
+        {
+          "key": "skill",
+          "eyebrow": "Skill distillation",
+          "title": "Generate your own Skills",
+          "body": "Tasks run through the WebCross Harness can be distilled into your own Skills and Workflows once they finish. The next run calls the verified path straight away — no page discovery, more than 80% fewer tokens, and reusable across tasks.",
+          "figure": "Run the task → distill a Skill + Workflow → reuse in one click",
+          "bullets": [
+            "A finished run can be saved as a Skill + Workflow",
+            "Reuse skips page discovery and jumps to the key steps",
+            "Skills and workflows are stored locally"
           ]
         },
         {
@@ -509,23 +508,11 @@
           "eyebrow": "Account safety",
           "title": "Unique fingerprint environment",
           "body": "Custom browser fingerprints plus on-the-fly IP switching keep multi-account work safe.",
-          "figure": "Multi-instance × fingerprint / IP matrix",
+          "figure": "Multi-instance × (multi-fingerprint + multi-exit-IP) matrix",
           "bullets": [
             "One fingerprint and exit IP per instance",
             "Sessions stay isolated across concurrent accounts",
             "Fingerprint templates can be cloned and rolled out in bulk"
-          ]
-        },
-        {
-          "key": "skill",
-          "eyebrow": "Skill distillation",
-          "title": "Generate your own Skills",
-          "body": "Tasks run through the WebCross Harness crystallize into reusable Skills and workflows — call them next time and save 60%+ tokens.",
-          "figure": "Run → Skill → reuse",
-          "bullets": [
-            "The very first run produces a reusable Skill",
-            "Reuse skips page discovery and jumps to the key steps",
-            "Skills and workflows are stored locally"
           ]
         },
         {
@@ -540,11 +527,75 @@
             "Handoff records stay on-device too"
           ]
         }
-      ]
+      ],
+      "figures": {
+        "speed": {
+          "alt": "Kernel-level driving versus an adapter layer",
+          "kernel": "Kernel-level Chromium build",
+          "adapter": "+ JavaScript adapter layer",
+          "serialize": "Serialize · IPC round trip",
+          "caption": "Same task chain · time spent"
+        },
+        "tree": {
+          "alt": "DOM compressed by AXTree, then structured by SemanticTree",
+          "dom": "Raw DOM",
+          "skeleton": "Compressed page skeleton",
+          "structure": "Structure filled in",
+          "plus": "+struct",
+          "tags": [
+            "submit",
+            "bind",
+            "group",
+            "×30",
+            "navigate"
+          ],
+          "pills": [
+            "Cross-origin iframes",
+            "Shadow DOM readable",
+            "Hierarchy · grouping"
+          ],
+          "caption": "A shorter context, and a more precise read of the page"
+        },
+        "local": {
+          "alt": "Everything stays on the machine",
+          "assets": "Credentials · cookies · commands · run logs",
+          "banner": "No third-party server in the path"
+        },
+        "skill": {
+          "alt": "One run distilled into a reusable skill",
+          "run": "Task run",
+          "distil": "Distil Skill + Workflow",
+          "reuse": "One-click reuse",
+          "perRun": "tokens / run",
+          "first": "First run (exploring the page)",
+          "repeat": "Reusing Skill + Workflow"
+        },
+        "fingerprint": {
+          "alt": "Fingerprint and exit-IP matrix",
+          "cities": [
+            "US · Los Angeles",
+            "JP · Tokyo",
+            "DE · Frankfurt",
+            "UK · London"
+          ],
+          "caption": "12 instances · 12 fingerprints · 12 exit IPs · never crossed"
+        },
+        "takeover": {
+          "alt": "Human takeover at 2FA, then resume from the breakpoint",
+          "running": "Running in the background",
+          "runningNote": "The agent logs in, clicks and scrapes without your attention",
+          "prompt": "Needs you · 2FA code",
+          "promptNote": "Paused at the breakpoint; continues automatically once verified",
+          "verified": "Verified",
+          "latency": "Raised in < 40 ms",
+          "resume": "Resumed from the breakpoint",
+          "resumeNote": "No restart, and the other concurrent instances never paused"
+        }
+      }
     },
     "comparison": {
-      "title": "Why choose WebCross?",
-      "subtitle": "Compared against the four main alternatives, WebCross is closer to real business needs on every dimension.",
+      "title": "Why choose **WebCross**?",
+      "subtitle": "Compared against five mainstream alternatives — from execution environment and Token cost to setup barrier, WebCross sits closer to real business needs on every dimension.",
       "dimensionHead": "Dimension",
       "products": [
         {
@@ -552,12 +603,20 @@
           "tagline": "Custom Chromium",
           "highlight": true,
           "values": {
-            "exec": "On-device custom Chromium, drives page elements directly",
-            "data": "100% local, zero cloud",
+            "exec": "Kernel drives elements directly",
+            "tokens": {
+              "tier": "low",
+              "text": "Near zero on reuse"
+            },
+            "time": {
+              "tier": "low",
+              "text": "Seconds — skips discovery"
+            },
+            "data": "100% local",
             "security": "Fingerprint + IP switch",
-            "multi": "Multi-instance background",
-            "twofa": "Native millisecond HITL",
-            "skill": "Auto-saved Skills & workflows",
+            "multi": "Multi-instance concurrency",
+            "twofa": "Millisecond handoff",
+            "skill": "Auto-saved Skills",
             "barrier": "Natural language, zero barrier"
           }
         },
@@ -567,6 +626,14 @@
           "highlight": false,
           "values": {
             "exec": false,
+            "tokens": {
+              "tier": "none",
+              "text": "No model calls"
+            },
+            "time": {
+              "tier": "low",
+              "text": "Fast, but weeks to build"
+            },
             "data": false,
             "security": false,
             "multi": true,
@@ -576,11 +643,19 @@
           }
         },
         {
-          "name": "ChatGPT Atlas",
-          "tagline": "OpenAI · 2025",
+          "name": "Claude for Chrome",
+          "tagline": "Anthropic · extension",
           "highlight": false,
           "values": {
             "exec": false,
+            "tokens": {
+              "tier": "high",
+              "text": "1k+ Token per frame"
+            },
+            "time": {
+              "tier": "high",
+              "text": "1–3 s per step"
+            },
             "data": false,
             "security": false,
             "multi": false,
@@ -595,6 +670,14 @@
           "highlight": false,
           "values": {
             "exec": false,
+            "tokens": {
+              "tier": "high",
+              "text": "100k+ per task"
+            },
+            "time": {
+              "tier": "high",
+              "text": "Minutes on long tasks"
+            },
             "data": false,
             "security": false,
             "multi": false,
@@ -609,11 +692,41 @@
           "highlight": false,
           "values": {
             "exec": false,
+            "tokens": {
+              "tier": "mid",
+              "text": "120k–220k per task"
+            },
+            "time": {
+              "tier": "mid",
+              "text": "About 2–4 min"
+            },
             "data": false,
             "security": false,
             "multi": true,
             "twofa": false,
             "skill": false,
+            "barrier": false
+          }
+        },
+        {
+          "name": "Browserbase",
+          "tagline": "Cloud browser infra",
+          "highlight": false,
+          "values": {
+            "exec": false,
+            "tokens": {
+              "tier": "mid",
+              "text": "Billed via cloud gateway"
+            },
+            "time": {
+              "tier": "mid",
+              "text": "Plus cloud round trips"
+            },
+            "data": false,
+            "security": true,
+            "multi": true,
+            "twofa": true,
+            "skill": true,
             "barrier": false
           }
         }
@@ -622,6 +735,14 @@
         {
           "key": "exec",
           "label": "Execution env"
+        },
+        {
+          "key": "tokens",
+          "label": "Token cost"
+        },
+        {
+          "key": "time",
+          "label": "Task completion time"
         },
         {
           "key": "data",
@@ -649,10 +770,113 @@
         }
       ],
       "legendYes": "Supported",
-      "legendNo": "Not supported"
+      "legendNo": "Not supported",
+      "tiers": {
+        "none": "None",
+        "low": "Low",
+        "mid": "Mid",
+        "high": "High"
+      },
+      "note": "Token and timing figures are order-of-magnitude comparisons drawn from public evaluations and vendor documentation (WebVoyager, Online-Mind2Web, OSWorld-Human), not measurements on identical hardware; real values shift with the model, the page and task complexity."
+    },
+    "faq": {
+      "badge": "FAQ",
+      "title": "The questions we **get asked most**",
+      "subtitle": "Ten answers, from how execution works to where your data ends up.",
+      "items": [
+        {
+          "q": "What is WebCross?",
+          "a": [
+            "WebCross is a local-first agent browser. Built on a custom Chromium kernel, it lets your agent take tasks in plain language and do the tedious web work for you — price patrols, bulk form filing, cross-platform collection and engagement. Everything runs in the background: fast, cheap in tokens, out of your way, and your data **stays 100% on your machine**.",
+            "Unlike a conventional browser, WebCross is built for agent control from the kernel up: instructions reach the render process directly, rather than through a JavaScript adapter bolted onto stock Chrome."
+          ]
+        },
+        {
+          "q": "How is this different from Playwright or Puppeteer?",
+          "a": [
+            "Playwright and Puppeteer are automation libraries you embed in code, and they drive the page through CSS selectors. The moment a site changes its DOM the script can break, and every step has to be written by hand.",
+            "WebCross is customised at the kernel level instead:",
+            "- Instructions reach the render process and the browser's internal protocols directly. With no JS adapter in between there is no CDP / RPC round trip and no serialisation cost, which makes the same task chain **over 3× faster** end to end;",
+            "- The page is read semantically through AXTree + SemanticTree (see question 5) rather than through selectors that go stale;",
+            "- A task in plain language is enough to run it — **no script to write**."
+          ]
+        },
+        {
+          "q": "How is this different from Browser Use, Claude for Chrome and other AI browsers?",
+          "a": [
+            "- **Execution environment**: most comparable tools add an extension or an adapter layer on top of stock Chrome, so every step pays a round trip. WebCross drives page elements from the kernel.",
+            "- **Token cost**: comparable tools routinely spend six figures of tokens on a single task (Browser Use around 120–220k per task, Perplexity Comet six figures per task, Claude for Chrome 1k+ tokens per frame at 1–3 seconds a step). Semantic-tree compression and skill reuse bring WebCross close to zero once a skill exists.",
+            "- **Data sovereignty**: cloud tools relay page content through a third-party server. WebCross keeps credentials, cookies and run logs 100% on your machine.",
+            "- **Account safety**: custom fingerprints and a switchable IP pool, so concurrent accounts never cross.",
+            "- **Human in the loop**: takeover for a captcha or 2FA is raised in milliseconds, and the run resumes from the breakpoint — no restart of the task chain.",
+            "The comparison table above sets WebCross against legacy RPA (UiPath, Yingdao), Claude for Chrome, Perplexity Comet, Browser Use and Browserbase across nine dimensions."
+          ]
+        },
+        {
+          "q": "How do I get started?",
+          "a": [
+            "# In WebCross Harness",
+            "1. **Give it a task**: type your first task into the console in plain language — say, “patrol the top 30 power banks on Amazon and pull url, title, price, rating and the 30 worst reviews” — and the agent opens the page, searches, clicks, scrapes, tidies up and exports locally, all on its own.",
+            "2. **Distil a Skill + Workflow**: when it finishes, type `/skill-create` to turn what just happened into a skill and workflow of your own, saved locally.",
+            "3. **Call the Skill**: next time just type `/your-skill-name`. The agent skips exploring the page and replays the verified path straight to the steps that matter, **saving over 80% of the tokens**.",
+            "# With a third-party agent (Claude Code, Codex, …)",
+            "WebCross also plugs into the agents you already use: copy the matching skill out of WebCross and paste it into the skills directory of Claude Code, Codex or similar, and that agent can call WebCross directly — no SDK to integrate. Coming soon."
+          ]
+        },
+        {
+          "q": "How does WebCross save tokens?",
+          "a": [
+            "The saving comes from three layers stacked together:",
+            "- **AXTree compression**: the whole page is first compressed into a lean semantic skeleton, stripping styles, scripts and nested container noise out of the DOM — around 85% less context on average;",
+            "- **SemanticTree structure**: hierarchy, grouping and interaction relationships are layered back onto that skeleton. Compared with AXTree-only filtering the model sees a shorter context yet reads the page more precisely; cross-origin iframes and Shadow DOM are readable too;",
+            "- **Skill reuse**: a task that has run becomes a skill and workflow, and the next run skips exploration entirely — another 80%+ off (see question 9)."
+          ]
+        },
+        {
+          "q": "Are my accounts and private data safe while the agent works?",
+          "a": [
+            "Yes. WebCross is **local-first end to end**:",
+            "- Credentials, cookie sessions, run logs and instructions all stay on your own machine;",
+            "- Tasks execute in the local kernel, so page content is never relayed through a third-party server — nothing uploaded, nothing sent back;",
+            "- Run logs are kept locally, so everything is auditable after the fact;",
+            "- The skills and workflows you distil are saved locally too."
+          ]
+        },
+        {
+          "q": "What happens at a captcha, a 2FA prompt or a payment confirmation?",
+          "a": [
+            "WebCross **raises a takeover card in milliseconds**: the task pauses at the breakpoint, and the moment you have cleared it the agent resumes in the background from exactly that point. The task chain never restarts, and other concurrent instances are untouched. The takeover record stays local as well."
+          ]
+        },
+        {
+          "q": "I run several accounts at once — will the platform link them?",
+          "a": [
+            "Every instance gets a **fingerprint of its own**:",
+            "- User agent, timezone, fonts, canvas and GPU fingerprints are each configurable;",
+            "- The IP pool can be switched at any time, one fingerprint and one exit IP per instance;",
+            "- Sessions are fully isolated, so concurrent accounts never cross;",
+            "- Fingerprint templates can be copied and rolled out in bulk.",
+            "Multi-store commerce and multi-account social management can both run concurrently without worry."
+          ]
+        },
+        {
+          "q": "Do repeat tasks start from scratch and spend tokens all over again?",
+          "a": [
+            "No. Anything you have run through WebCross Harness can be distilled into a skill and workflow, saved locally. The next identical or similar task calls that verified path instead, skipping exploration and going straight to the steps that matter — **over 80% fewer tokens**, and reusable across tasks. Patrolling a thousand product links a day, or listing a hundred SKUs, only has to be worked out once."
+          ]
+        },
+        {
+          "q": "Which platforms are supported, and what does it cost?",
+          "a": [
+            "- **Platforms**: macOS 13.0+ is available now (Apple Silicon and Intel), a ~128 MB DMG with SHA256 signature verification. Windows 11 64-bit is in architecture integration and lands shortly.",
+            "- **Price**: every feature is free during the public beta.",
+            "- **Getting started**: install it, grant the accessibility and automation permissions the system asks for, then type your first plain-language task into the console."
+          ]
+        }
+      ]
     },
     "closing": {
-      "title": "Put your agent to work today",
+      "title": "Put your agent to work **today**",
       "sub": "Download WebCross and try a genuinely local agent browser."
     }
   },

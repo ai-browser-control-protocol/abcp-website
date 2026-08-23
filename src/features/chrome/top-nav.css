@@ -191,7 +191,7 @@
 }
 
 .nav-dropdown-item:hover {
-  color: var(--oxide);
+  color: var(--oxide-text);
   background: var(--oxide-subtle);
 }
 
@@ -298,7 +298,7 @@
 }
 
 .lang-option.is-current {
-  color: var(--oxide);
+  color: var(--oxide-text);
   font-weight: 600;
   background: var(--oxide-subtle);
 }
@@ -307,8 +307,9 @@
   display: none;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  /* Touch-only control — 44x44 is the finger-size floor, not the icon size. */
+  width: 44px;
+  height: 44px;
   padding: 0;
   color: var(--text-primary);
   font-size: 13px;
@@ -379,7 +380,66 @@
     text-decoration: none;
   }
   .locale-link.is-current {
-    color: var(--oxide);
+    color: var(--oxide-text);
     font-weight: 700;
+  }
+}
+
+/* ==========================================================================
+   Pinned download CTA
+   The bar carries the same download target as the hero, so the call to action
+   survives the whole scroll. Past the hero the bar drops its translucency —
+   an orange pill over a blurred marketing section was losing its edges.
+   ========================================================================== */
+
+.top-nav.is-scrolled {
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom-color: var(--rule-strong);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02), 0 10px 30px -18px rgba(24, 16, 12, 0.35);
+}
+
+.nav-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 18px;
+  font-size: 13.5px;
+  font-weight: 650;
+  font-family: inherit;
+  white-space: nowrap;
+  color: var(--on-oxide);
+  background: var(--oxide);
+  border: 1px solid var(--oxide);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  box-shadow: 0 6px 16px -8px rgba(255, 107, 53, 0.75);
+  transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.nav-download-btn:hover {
+  background: var(--oxide-hover);
+  border-color: var(--oxide-hover);
+  color: var(--on-oxide);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px -8px rgba(255, 107, 53, 0.85);
+}
+
+.nav-download-btn:active {
+  transform: translateY(0);
+}
+
+.nav-download-btn svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .nav-download-btn {
+    height: 34px;
+    padding: 0 12px;
+    font-size: 12.5px;
+  }
+  .nav-download-btn span {
+    display: none;
   }
 }

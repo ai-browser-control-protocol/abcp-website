@@ -26,12 +26,24 @@
   --text-secondary: #3f3f46;
   --text-muted: #71717a;
   --text-faint: #d4d4d8;
+  /* Warm-tinted neutrals for footnotes and captions. Pure grey at small sizes
+     reads as greyed-out; these carry the same warmth as the page ground. */
+  --text-note: #6c635a;
+  --text-soft: #5b5349;
 
   /* Brand accent — orange (sole accent color) */
   --oxide: #ff6b35;
   --oxide-hover: #ea580c;
   --oxide-subtle: rgba(255, 107, 53, 0.1);
   --oxide-glow: rgba(255, 107, 53, 0.25);
+  /* #ff6b35 is the brand fill, but it only reaches 2.84:1 on white — too low to
+     carry text. These two split the job: the fill never changes, the letters do.
+       --oxide-text : orange AS text/icon on a light ground   (>=4.66:1)
+       --on-oxide   : text placed ON an orange fill           (6.71:1)
+     On the ink cards the plain --oxide is already 6.66:1, so it stays there. */
+  --oxide-text: #c2410c;
+  --on-oxide: #1a0d06;
+  --focus-ring: #c2410c;
   --live: var(--oxide);
   --hold: var(--oxide);
   --emerald: #10b981;
@@ -59,16 +71,57 @@
   --gradient-card: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
   --gradient-glow-hero: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 107, 53, 0.08), transparent 70%);
 
+  /* Soft grounds — the page is never flat white. A warm wash sits under the
+     hero, and section bands alternate to give the scroll a rhythm. */
+  --wash-hero: radial-gradient(ellipse 104% 72% at 50% 14%, #ffdfcd 0%, #fff1e6 38%, rgba(255, 255, 255, 0) 74%);
+  --band-warm: #fff8f4;
+  --band-mist: #fbfafa;
+
+  /* Bento card grounds — every card commits to one of these three. */
+  --card-ink: #101114;
+  --card-ink-soft: #17181d;
+  --card-peach: #fff1e8;
+  --card-cream: #fdf8f4;
+
   /* Shadows & Inset Highlights (softer for light theme) */
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 18px -4px rgba(0, 0, 0, 0.06);
   --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.08), 0 18px 32px -6px rgba(0, 0, 0, 0.1);
   --shadow-button-primary: 0 1px 2px rgba(0, 0, 0, 0.18);
   --shadow-glow-button: 0 0 20px rgba(255, 107, 53, 0.25);
+  --shadow-soft: 0 2px 6px rgba(24, 16, 12, 0.04), 0 18px 44px -16px rgba(24, 16, 12, 0.1);
+  --shadow-lift: 0 4px 12px rgba(24, 16, 12, 0.06), 0 30px 64px -20px rgba(24, 16, 12, 0.16);
+  --shadow-ink: 0 24px 60px -22px rgba(16, 17, 20, 0.45);
 
   /* Layout & Spacing */
   --grid-max: 1200px;
   --stage-duration: 240ms;
+
+  /* ===== Motion =====
+     One vocabulary for the whole site, so a transition's feel is a choice
+     between named intents rather than a number typed at each call site.
+
+     Easings
+       expo   — entrances and exits. Fast start, long settle; nothing overshoots.
+       back   — hover and press only. Overshoots ~5% and comes back, which reads
+                as "this responds to you". Never use it on an entrance: content
+                that bounces on arrival reads as unstable.
+       linear — continuous loops (marquees, drifting grounds) only. Anything
+                eased looks like it is speeding up and slowing down forever.
+
+     Durations scale with how far a thing travels, not with how important it is. */
   --stage-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --dur-press: 120ms;   /* state flip under the finger: colour, opacity */
+  --dur-hover: 220ms;   /* lift, glow, small transform */
+  --dur-enter: 420ms;   /* an element arriving on screen */
+  --dur-panel: 560ms;   /* a whole panel or column changing */
+  --dur-drift: 26s;     /* ambient ground movement, never noticed directly */
+
+  /* Gap between neighbours in a staggered group. Small enough to read as one
+     movement, large enough that the order is legible. */
+  --stagger: 90ms;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -84,7 +137,9 @@
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
-  --radius-xl: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
+  --radius-3xl: 36px;
   --radius-full: 9999px;
   --radius: var(--radius-md);
 

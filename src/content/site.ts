@@ -1,12 +1,12 @@
 /**
  * Replaceable site-wide placeholders used by SEO, footer, and download links.
  */
-import type { Locale } from "./types";
+import { DEFAULT_LOCALE } from "./types";
 
 export const site = {
   name: "ABCP",
   url: process.env.SITE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://abcp.example",
-  defaultLocale: "zh" as Locale,
+  defaultLocale: DEFAULT_LOCALE,
   twitterSite: "@abcp_example",
   twitterCreator: "@abcp_example",
   docsUrl: "https://abcp.example/docs",

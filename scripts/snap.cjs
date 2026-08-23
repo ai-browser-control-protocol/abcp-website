@@ -16,24 +16,43 @@ const shot = async (page, name) => {
   console.log(`✓ ${TAG}-${name}.png`);
 };
 
-/** Park the demo section at the scroll offset that selects scene `index`. */
+/** Park the demo section at the scroll offset that selects scene `index`.
+ *  The track is only as tall as the stage plus the scroll its three stops
+ *  spend, so the sticky range is track minus pin — not track minus window.
+ *  On layouts too small to pin there is no range at all; a click does it. */
 async function demoScene(page, index) {
   await page.evaluate((i) => {
     const track = document.querySelector(".scenario-track");
-    if (!track) return;
-    const top = window.scrollY + track.getBoundingClientRect().top;
-    const travel = Math.max(track.offsetHeight - window.innerHeight, 0);
-    window.scrollTo({ top: travel ? top + (travel * (i + 0.5)) / 3 : top - 80, behavior: "instant" });
+    const pin = document.querySelector(".scenario-pin");
+    if (!track || !pin) return;
+    const span = track.offsetHeight - pin.offsetHeight;
+    if (span <= 0) {
+      document.querySelectorAll(".scenario-tab")[i]?.click();
+      return;
+    }
+    const top = window.scrollY + track.getBoundingClientRect().top - 72;
+    window.scrollTo({ top: top + (span * (i + 0.5)) / 3, behavior: "instant" });
   }, index);
-  await page.waitForTimeout(1200);
+  await page.waitForTimeout(1400);
 }
 
 (async () => {
-  const browser = await chromium.launch({
-    channel: "msedge",
-    headless: true,
-    args: ["--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage"],
-  });
+  // Whichever Chromium the machine actually has — Playwright's own download is optional here.
+  const channels = process.env.CHANNEL ? [process.env.CHANNEL] : ["chrome", "msedge"];
+  let browser;
+  for (const channel of channels) {
+    try {
+      browser = await chromium.launch({
+        channel,
+        headless: true,
+        args: ["--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage"],
+      });
+      break;
+    } catch (err) {
+      console.log(`× ${channel}: ${err.message}`);
+    }
+  }
+  if (!browser) throw new Error("no usable Chromium channel");
   const page = await browser.newPage({ viewport: { width: vw, height: vh }, deviceScaleFactor: 1 });
 
   console.log("Navigating to", URL, `${vw}x${vh}`);

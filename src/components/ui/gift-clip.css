@@ -1,0 +1,92 @@
+/* ==========================================================================
+   Closing-card flourish
+
+   Its own file rather than a corner of the hero strip's stylesheet: the two
+   share no layout, and the coupling already cost one regression when the hero
+   sheet was rewritten and took these rules with it.
+   ========================================================================== */
+
+/* Sized to hold the same footprint as the standing figure it replaces — this
+   art is wider than it is tall, so matching on height alone would have made it
+   half again as large on the card. */
+.closing-folk {
+  position: absolute;
+  right: clamp(0px, 1.5vw, 22px);
+  bottom: 0;
+  height: clamp(112px, 12vw, 176px);
+  width: auto;
+  pointer-events: none;
+}
+
+/* The absolute placement above is also what the frames are positioned against,
+   so the ratio has to live here rather than on the images. */
+.gift-clip {
+  display: block;
+  aspect-ratio: 654 / 521;
+}
+
+.gift-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  animation-duration: 2.8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Written out longhand on purpose: the `animation` shorthand silently drops the
+   whole declaration if the name is missing, which once left this at 0s. */
+.gift-frame.is-idle {
+  opacity: 1;
+  animation-name: giftIdle;
+}
+
+.gift-frame.is-eyes {
+  animation-name: giftEyes;
+}
+
+/* ---- the blink -----------------------------------------------------------
+   Eyes open 1.9s, shut 0.9s. Slow enough to read as savouring the track rather
+   than as a nervous tic, which is what anything under half a second looks like
+   at this size.
+
+   Cut rule: the frames stack in DOM order — idle, then eyes — and only the
+   topmost one can cross-fade. Going up the stack, the incoming frame fades in
+   and the outgoing simply holds until it is covered. Coming back down, the
+   incoming snaps on under cover and the outgoing fades out to reveal it. Fade
+   both at once and the overlap goes momentarily see-through against the card.
+   ------------------------------------------------------------------------- */
+
+@keyframes giftIdle {
+  0%, 67.86% { opacity: 1; }
+  67.87%, 96.42% { opacity: 0; }
+  96.43%, 100% { opacity: 1; }
+}
+
+@keyframes giftEyes {
+  0%, 64.29% { opacity: 0; }
+  67.86%, 96.43% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ==========================================================================
+   Overrides — below the base rules, since a media query adds no specificity
+   ========================================================================== */
+
+@media (max-width: 720px) {
+  .closing-folk {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-frame {
+    animation: none;
+  }
+  .gift-frame.is-eyes {
+    opacity: 0;
+  }
+}

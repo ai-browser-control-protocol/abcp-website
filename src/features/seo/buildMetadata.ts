@@ -5,7 +5,14 @@ import type { Metadata } from "next";
 import { chapterHref } from "@/content/chapters";
 import { getChapterModel } from "@/content/models";
 import { site, siteUrl } from "@/content/site";
-import { HTML_LANG, LOCALES, OG_LOCALE, type ChapterId, type Locale } from "@/content/types";
+import {
+  DEFAULT_LOCALE,
+  HTML_LANG,
+  LOCALES,
+  OG_LOCALE,
+  type ChapterId,
+  type Locale,
+} from "@/content/types";
 
 export function buildMetadata(locale: Locale, chapter: ChapterId): Metadata {
   const model = getChapterModel(chapter, locale);
@@ -14,7 +21,7 @@ export function buildMetadata(locale: Locale, chapter: ChapterId): Metadata {
   const languages = Object.fromEntries(
     LOCALES.map((item) => [HTML_LANG[item], siteUrl(chapterHref(item, chapter))]),
   ) as Record<string, string>;
-  languages["x-default"] = siteUrl(chapterHref("zh", chapter));
+  languages["x-default"] = siteUrl(chapterHref(DEFAULT_LOCALE, chapter));
   const image = siteUrl("og", locale, `${chapter}.png`);
   const alternateLocales = LOCALES.filter((item) => item !== locale).map((item) => OG_LOCALE[item]);
 

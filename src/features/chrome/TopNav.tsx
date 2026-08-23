@@ -19,8 +19,28 @@ export function TopNav({ chrome }: { chrome: ChromeCopy }) {
   const [navOpen, setNavOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [resOpen, setResOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const resRef = useRef<HTMLDivElement>(null);
+
+  /* The download CTA rides along in the bar; past the hero the bar goes solid
+     so the button keeps its contrast over whatever scrolls under it. */
+  useEffect(() => {
+    let frame = 0;
+    const read = () => {
+      frame = 0;
+      setScrolled(window.scrollY > 24);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(read);
+    };
+    read();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (!langOpen && !resOpen) return;
@@ -49,7 +69,7 @@ export function TopNav({ chrome }: { chrome: ChromeCopy }) {
   };
 
   return (
-    <header className={`top-nav${navOpen ? " is-open" : ""}`}>
+    <header className={`top-nav${navOpen ? " is-open" : ""}${scrolled ? " is-scrolled" : ""}`}>
       <div className="top-nav-row">
         <Link href={chapterPath("product")} aria-label={chrome.brandName} className="top-nav-brand-link">
           <Wordmark mark={<OrbitalMark size={26} animated />}>
@@ -218,6 +238,15 @@ export function TopNav({ chrome }: { chrome: ChromeCopy }) {
               ))}
             </ul>
           </div>
+
+          <Link className="nav-download-btn" href={chapterPath("download")} onClick={closeAll}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M12 3v12" />
+              <path d="m7 11 5 5 5-5" />
+              <path d="M4 20h16" />
+            </svg>
+            <span>{chrome.nav.download}</span>
+          </Link>
 
           <button
             className="menu-toggle"

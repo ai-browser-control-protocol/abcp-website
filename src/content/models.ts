@@ -11,6 +11,7 @@ import { getMessages, type Messages } from "@/i18n/messages";
 export type DemoCopy = Messages["product"]["demo"];
 export type FeaturesCopy = Messages["product"]["features"];
 export type ComparisonCopy = Messages["product"]["comparison"];
+export type FaqCopy = Messages["product"]["faq"];
 
 export interface ChromeCopy {
   locale: Locale;

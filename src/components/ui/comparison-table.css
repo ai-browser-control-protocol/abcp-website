@@ -1,5 +1,9 @@
 /* ==========================================================================
    Comparison matrix — products across, dimensions down
+
+   Alignment discipline: the dimension column is the only left-aligned column.
+   Every product column — header, marks, prose and meters alike — is centred on
+   the same axis, so the ✓ / — run reads as one straight line down the page.
    ========================================================================== */
 
 .comparison-section {
@@ -10,22 +14,38 @@
 .comparison-scroll {
   width: 100%;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   border: 1px solid var(--rule);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-2xl);
   background: #ffffff;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-soft);
   -webkit-overflow-scrolling: touch;
 }
 
 .comparison-table {
   width: 100%;
-  min-width: 860px;
-  border-collapse: collapse;
+  /* Never below the sum of the declared column widths, or a fixed layout
+     scales every column down and the head starts wrapping again. */
+  min-width: 1134px;
+  border-collapse: separate;
+  border-spacing: 0;
   table-layout: fixed;
 }
 
+/* Budgeted, not guessed. The head is the binding constraint: the widest product
+   name is "Claude for Chrome" at 132px and the widest tagline "Anthropic ·
+   浏览器扩展" at 127px, so a product column needs 127 + 20px of padding before
+   either wraps. Anything less and that one column runs to four lines while the
+   rest run to two, which stretches the whole header row and leaves every other
+   column floating in a void, since the heads are bottom-aligned.
+
+   The three widths sum to the table width at the widest layout the page offers
+   (1134px). The funding came out of the dimension column (its longest label
+   needs 140px) and the WebCross column (its widest cell needs 143px; the rest
+   of that column's width was emphasis, which the orange band already carries). */
 .col-dimension { width: 148px; }
-.col-highlight { width: 216px; }
+.col-product { width: 159px; }
+.col-highlight { width: 191px; }
 
 /* ===== Head ===== */
 
@@ -33,41 +53,50 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  padding: 14px 14px 13px;
-  text-align: left;
+  padding: 13px 10px 12px;
+  text-align: center;
   vertical-align: bottom;
   background: #fafafa;
   border-bottom: 1px solid var(--rule-strong);
 }
 
+/* Dimension column stays put while the product columns scroll under it. */
+.head-dimension,
+.cell-dimension {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  text-align: left;
+  border-right: 1px solid var(--rule);
+}
+
 .head-dimension {
+  z-index: 4;
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-muted);
-  border-right: 1px solid var(--rule);
-}
-
-.head-product {
-  display: table-cell;
 }
 
 .head-product-name {
   display: block;
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .head-product-tag {
   display: block;
-  margin-top: 3px;
-  font-size: 11px;
+  margin-top: 4px;
+  font-size: 12px;
   font-weight: 500;
-  color: var(--text-muted);
+  line-height: 1.45;
+  color: var(--text-note);
+  text-wrap: balance;
 }
 
 .head-product.is-highlight {
@@ -77,7 +106,7 @@
 }
 
 .head-product.is-highlight .head-product-name {
-  color: var(--oxide);
+  color: var(--oxide-text);
 }
 
 .head-product.is-highlight .head-product-tag {
@@ -86,40 +115,51 @@
 
 /* ===== Body ===== */
 
-.comparison-table tbody tr + tr th,
-.comparison-table tbody tr + tr td {
+.comparison-table tbody th,
+.comparison-table tbody td {
   border-top: 1px solid var(--rule);
 }
 
+.comparison-table tbody tr:first-child th,
+.comparison-table tbody tr:first-child td {
+  border-top: 0;
+}
+
 .cell-dimension {
-  padding: 14px;
-  text-align: left;
-  font-size: 13px;
+  padding: 14px 13px;
+  font-size: 14px;
   font-weight: 600;
+  line-height: 1.45;
   color: var(--text-primary);
   background: #fcfcfd;
-  border-right: 1px solid var(--rule);
 }
 
 .cell-text,
-.cell-mark {
-  padding: 14px;
-  font-size: 12.5px;
-  line-height: 1.6;
+.cell-mark,
+.cell-meter {
+  padding: 16px 12px;
+  font-size: 13.5px;
+  line-height: 1.55;
   color: var(--text-primary);
+  text-align: center;
   vertical-align: middle;
 }
 
 .cell-text {
   font-weight: 600;
-  color: #9a3d12;
-  background: #fff9f5;
-  border-left: 1px solid rgba(255, 107, 53, 0.18);
-  border-right: 1px solid rgba(255, 107, 53, 0.18);
+  white-space: nowrap;
 }
 
-.cell-mark {
-  text-align: center;
+/* The WebCross column is one continuous orange band, whatever the cell holds. */
+.cell-text.is-highlight,
+.cell-mark.is-highlight,
+.cell-meter.is-highlight {
+  background: #fff9f5;
+  box-shadow: inset 1px 0 0 rgba(255, 107, 53, 0.18), inset -1px 0 0 rgba(255, 107, 53, 0.18);
+}
+
+.cell-text.is-highlight {
+  color: #9a3d12;
 }
 
 .mark {
@@ -135,29 +175,76 @@
 
 .cell-mark.is-yes .mark,
 .legend-item .mark.is-yes {
-  color: #0f7a45;
-  background: rgba(16, 185, 129, 0.12);
+  color: var(--oxide-text);
+  background: var(--oxide-subtle);
 }
 
 .cell-mark.is-no .mark,
 .legend-item .mark.is-no {
-  color: var(--text-faint);
+  color: #68686f;   /* 5.03:1 on --bg-surface-hover; --text-muted was 4.40:1 */
   background: var(--bg-surface-hover);
+}
+
+/* ===== Weight chip — "how much", for the Token / task-time rows =====
+   Less is better on both rows, so the scale runs orange (cheap) → grey → ink
+   (expensive). Reading it needs no legend: the heavy end is literally heavier. */
+
+.tier-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 26px;
+  padding: 0 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-full);
+}
+
+.tier-chip.is-none,
+.tier-chip.is-low {
+  color: var(--oxide-text);
+  background: var(--oxide-subtle);
+}
+
+.tier-chip.is-mid {
+  color: var(--text-secondary);
+  background: var(--bg-surface-hover);
+}
+
+.tier-chip.is-high {
+  color: #ffffff;
+  background: var(--text-primary);
+}
+
+.meter-text {
+  display: block;
+  margin-top: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-note);
+  white-space: nowrap;
+}
+
+.cell-meter.is-highlight .meter-text {
+  color: #9a3d12;
 }
 
 .comparison-table tbody tr:hover .cell-dimension {
   background: #f6f6f7;
 }
 
-/* ===== Legend ===== */
+/* ===== Legend & method note ===== */
 
 .comparison-legend {
   display: flex;
   gap: var(--space-5);
   justify-content: center;
   flex-wrap: wrap;
-  font-size: 12.5px;
-  color: var(--text-muted);
+  font-size: 13.5px;
+  color: var(--text-soft);
 }
 
 .legend-item {
@@ -167,25 +254,118 @@
 }
 
 .legend-item .mark {
-  width: 20px;
-  height: 20px;
-  font-size: 11.5px;
+  width: 21px;
+  height: 21px;
+  font-size: 12px;
+}
+
+.comparison-note {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text-note);
+  text-align: center;
+  text-wrap: pretty;
 }
 
 /* ===== Responsive ===== */
 
 @media (max-width: 900px) {
   .comparison-table {
-    min-width: 760px;
+    min-width: 1068px;
   }
-  .col-dimension { width: 122px; }
-  .col-highlight { width: 190px; }
+  /* Same budget re-run at the smaller head sizes below: a product column needs
+     127px of content, which is 145px with this pass's 9px padding. */
+  .col-dimension { width: 132px; }
+  .col-product { width: 152px; }
+  .col-highlight { width: 176px; }
+  .head-product-name { font-size: 13.5px; }
+  .head-product-tag { font-size: 11.5px; }
   .cell-dimension,
   .cell-text,
   .cell-mark,
+  .cell-meter,
   .comparison-table thead th {
-    padding: 11px 10px;
+    padding: 11px 9px;
   }
-  .cell-text { font-size: 11.5px; }
-  .cell-dimension { font-size: 12px; }
+  .cell-text { font-size: 13px; }
+  .cell-dimension { font-size: 13px; }
+  .meter-text { font-size: 12.5px; }
 }
+
+/* ==========================================================================
+   Scroll reveal — head, then table, then rows
+   The order matters: you read the claim, then the frame it is argued in, then
+   the evidence. Staggering in that order makes the section explain itself.
+
+   The pre-state lives inside `no-preference` on purpose. Hiding content and
+   waiting for JS to un-hide it is a real trade, so it is confined to visitors
+   who both asked for motion and are running the observer; everyone else — the
+   reduced-motion setting, a failed media query — gets the table outright.
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .comparison-section .section-head-center,
+  .comparison-section .comparison-scroll,
+  .comparison-section .comparison-legend,
+  .comparison-section .comparison-note {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  .comparison-section.is-revealed .section-head-center,
+  .comparison-section.is-revealed .comparison-scroll,
+  .comparison-section.is-revealed .comparison-legend,
+  .comparison-section.is-revealed .comparison-note {
+    animation: cmpRevealUp var(--dur-panel) var(--ease-expo) both;
+  }
+
+  .comparison-section.is-revealed .comparison-scroll {
+    animation-delay: var(--stagger);
+  }
+
+  .comparison-section.is-revealed .comparison-legend {
+    animation-delay: calc(var(--stagger) * 4);
+  }
+
+  .comparison-section.is-revealed .comparison-note {
+    animation-delay: calc(var(--stagger) * 5);
+  }
+
+  /* Rows land one after another under the header they belong to. Capped at six
+     so a longer matrix never leaves the last row waiting on a visible beat. */
+  .comparison-section .comparison-table tbody tr {
+    opacity: 0;
+  }
+
+  .comparison-section.is-revealed .comparison-table tbody tr {
+    animation: cmpRowIn var(--dur-enter) var(--ease-expo) both;
+  }
+
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(1) { animation-delay: calc(var(--stagger) * 2); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(2) { animation-delay: calc(var(--stagger) * 2.5); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(3) { animation-delay: calc(var(--stagger) * 3); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(4) { animation-delay: calc(var(--stagger) * 3.5); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(5) { animation-delay: calc(var(--stagger) * 4); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(n + 6) { animation-delay: calc(var(--stagger) * 4.5); }
+}
+
+@keyframes cmpRevealUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes cmpRowIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Rows answer the pointer, so scanning across a wide matrix keeps its place. */
+.comparison-table tbody tr {
+  transition: background var(--dur-hover) ease;
+}
+
+.comparison-table tbody tr:hover {
+  background: rgba(255, 107, 53, 0.035);
+}
+

@@ -2,8 +2,7 @@
  * Assembles read-only view models from locale catalogs. Pages pass these down.
  */
 import { company } from "./company";
-import { CHAPTER_IDS, type ChapterId, type Locale } from "./types";
-import { site } from "./site";
+import { type ChapterId, type Locale } from "./types";
 import { getMessages, type Messages } from "@/i18n/messages";
 
 /** Copy shapes the UI layer renders. Re-exported here so components in
@@ -18,25 +17,13 @@ export interface ChromeCopy {
   brandName: string;
   thesis: string;
   tagline: string;
-  nav: Record<ChapterId, string> & { solutions: string; resources: string; discord: string };
-  resourceLinks: { docs: string; changelog: string; blog: string; tools: string };
-  queueLabel: string;
-  queue: Record<ChapterId, string>;
-  decks: Record<ChapterId, string>;
+  nav: {
+    product: string;
+    download: string;
+  };
   localeLabels: Record<Locale, string>;
-  footerLocalFirst: string;
-  footerGet: string;
   footer: Messages["footer"];
-  a11y: Messages["a11y"];
-  catalog: ChapterCatalogItem[];
-}
-
-export interface ChapterCatalogItem {
-  id: ChapterId;
-  nav: string;
-  queue: string;
-  deck: string;
-  beats: string[];
+  a11y: Pick<Messages["a11y"], "mainNav" | "localeNav" | "stage" | "menu">;
 }
 
 export interface ChapterViewModel {
@@ -45,10 +32,6 @@ export interface ChapterViewModel {
   title: string;
   seoTitle: string;
   seoDescription: string;
-  figureLabel: string;
-  brandName: string;
-  tagline: string;
-  getLabel: string;
   product?: Messages["product"];
   company?: {
     title: string;
@@ -66,7 +49,6 @@ export interface ChapterViewModel {
     email: string;
     figure: string;
   };
-  download?: Messages["download"] & { systems: string };
 }
 export function getChromeCopy(locale: Locale): ChromeCopy {
   const t = getMessages(locale);
@@ -77,32 +59,16 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
     tagline: t.brand.tagline,
     nav: {
       product: t.nav.product,
-      company: t.nav.company,
       download: t.nav.download,
-      solutions: t.nav.solutions,
-      resources: t.nav.resources,
-      discord: t.nav.discord,
     },
-    resourceLinks: t.resources,
-    queueLabel: t.queue.label,
-    queue: {
-      product: t.queue.product,
-      company: t.queue.company,
-      download: t.queue.download,
-    },
-    decks: t.queue.deck,
     localeLabels: t.locales,
-    footerLocalFirst: t.footer.localFirst,
-    footerGet: t.footer.get,
     footer: t.footer,
-    a11y: t.a11y,
-    catalog: CHAPTER_IDS.map((id) => ({
-      id,
-      nav: t.nav[id],
-      queue: t.queue[id],
-      deck: t.queue.deck[id],
-      beats: t.beats[id],
-    })),
+    a11y: {
+      mainNav: t.a11y.mainNav,
+      localeNav: t.a11y.localeNav,
+      stage: t.a11y.stage,
+      menu: t.a11y.menu,
+    },
   };
 }
 
@@ -115,10 +81,6 @@ export function getChapterModel(chapter: ChapterId, locale: Locale): ChapterView
     title: chapterTitle(t, chapter),
     seoTitle: seo.title,
     seoDescription: seo.description,
-    figureLabel: t.figure,
-    brandName: t.brand.name,
-    tagline: t.brand.tagline,
-    getLabel: t.nav.download,
   };
   if (chapter === "product") model.product = t.product;
   if (chapter === "company") {
@@ -139,14 +101,11 @@ export function getChapterModel(chapter: ChapterId, locale: Locale): ChapterView
       figure: t.company.figure,
     };
   }
-  if (chapter === "download") {
-    model.download = { ...t.download, systems: site.systems };
-  }
   return model;
 }
 
 function chapterTitle(t: Messages, chapter: ChapterId): string {
   if (chapter === "product") return t.product.title;
   if (chapter === "company") return t.company.title;
-  return t.download.title;
+  return t.seo.download.title;
 }

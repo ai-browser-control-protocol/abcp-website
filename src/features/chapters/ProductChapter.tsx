@@ -41,9 +41,6 @@ export function ProductChapter({
   copy,
 }: {
   copy: Messages["product"];
-  brandName: string;
-  tagline: string;
-  getLabel: string;
 }) {
   return (
     <article className="chapter product-page">

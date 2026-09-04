@@ -82,7 +82,10 @@
   text-align: center;
   justify-items: center;
   width: 100%;
-  max-width: 940px;
+  /* Let the headline use the full stage width. The 940px cap leaves enough
+     room for Latin and Chinese, but makes the longer Japanese/Korean strings
+     wrap even when the surrounding page still has unused space. */
+  max-width: 1200px;
   min-width: 0;
   box-sizing: border-box;
   margin: 0 auto;
@@ -366,6 +369,25 @@
 }
 
 /* ===== Responsive ===== */
+
+@media (min-width: 721px) {
+  /* Keep the two authored headline rows intact on wider screens. The CJK
+     variants use a slightly denser fluid size so both rows fit the same stage
+     without clipping or introducing an accidental third line. */
+  .hero-title-line {
+    flex-wrap: nowrap;
+  }
+
+  .hero-title-lead,
+  .hero-title-rest {
+    white-space: nowrap;
+  }
+
+  html:lang(ja) .hero-display-title,
+  html:lang(ko) .hero-display-title {
+    font-size: clamp(32px, 4.6vw, 58px);
+  }
+}
 
 @media (max-width: 720px) {
   .hero-display-title {

@@ -2,54 +2,12 @@
   "brand": {
     "name": "WebCross",
     "thesis": "WebCross helps your agent",
-    "thesisHighlight": "finish the tedious web work",
-    "tagline": "A faster, lower-token web executor for your agent. Runs quietly in the background, never interrupts you.",
-    "badge": "On-Device Autonomous AI Browser",
-    "get": "Download"
+    "tagline": "A faster, lower-token web executor for your agent. Runs quietly in the background, never interrupts you."
   },
   "nav": {
     "product": "Product Introduction",
-    "company": "Company",
-    "download": "Download",
-    "solutions": "Solutions",
-    "resources": "Resources",
-    "discord": "Discord"
+    "download": "Download"
   },
-  "resources": {
-    "docs": "Docs",
-    "changelog": "Changelog",
-    "blog": "Blog",
-    "tools": "Tools"
-  },
-  "queue": {
-    "label": "Index",
-    "product": "Overview",
-    "company": "Corporate Info",
-    "download": "03 · Download",
-    "deck": {
-      "product": "On-Device Autonomous Web Agent",
-      "company": "Qingzhu Technology Philosophy",
-      "download": "macOS & Windows Client Download"
-    }
-  },
-  "beats": {
-    "product": [
-      "Smart Perception",
-      "Native Execution",
-      "Total Control"
-    ],
-    "company": [
-      "Founding Vision",
-      "Technical Roadmap",
-      "Open Ecosystem"
-    ],
-    "download": [
-      "Releases",
-      "System Config",
-      "Quick Start"
-    ]
-  },
-  "figure": "Interactive Schematic",
   "locales": {
     "zh": "简体中文",
     "ja": "日本語",
@@ -66,8 +24,8 @@
       "description": "Qingzhu Technology: Pioneering the next paradigm of human-agent collaborative intelligence infrastructure."
     },
     "download": {
-      "title": "Download & Experience · WebCross",
-      "description": "Download WebCross Workbench and client applications for macOS and Windows."
+      "title": "Download WebCross · Desktop Client",
+      "description": "Choose macOS or Windows and download the WebCross desktop client."
     }
   },
   "product": {
@@ -808,8 +766,12 @@
         {
           "q": "How do I get started?",
           "a": [
-          "Download and install WebCross, then follow the system prompts to grant the permissions it needs on first launch. You can use WebCross's built-in Agent or connect an Agent you already work with, such as Claude Code or Codex. Describe what you want in **plain language** — for example, collect product details, fill out forms in bulk, or summarize reviews — and the Agent uses WebCross to **open pages, search, click, collect and organize information locally**.",
-          "WebCross keeps the execution trail and results on your machine, so you can follow a task's progress. If a login, captcha, payment confirmation or another step needs your attention, the task **pauses at that point and continues when you are done**. Repeated flows that have already been proven can also be saved as **Workflows** and reused later, reducing repeated exploration and token use."
+            "# In WebCross Harness",
+            "1. **Give it a task**: type your first task into the console in plain language — say, “patrol the top 30 power banks on Amazon and pull url, title, price, rating and the 30 worst reviews” — and the agent opens the page, searches, clicks, scrapes, tidies up and exports locally, all on its own.",
+            "2. **Distil a Skill + Workflow**: when it finishes, type `/skill-create` to turn what just happened into a skill and workflow of your own, saved locally.",
+            "3. **Call the Skill**: next time just type `/your-skill-name`. The agent skips exploring the page and replays the verified path straight to the steps that matter, **saving over 80% of the tokens**.",
+            "# With a third-party agent (Claude Code, Codex, …)",
+            "WebCross also plugs into the agents you already use: copy the matching skill out of WebCross and paste it into the skills directory of Claude Code, Codex or similar, and that agent can call WebCross directly — no SDK to integrate. Coming soon."
           ]
         },
         {
@@ -825,10 +787,10 @@
           "q": "Are my accounts and private data safe while the agent works?",
           "a": [
             "Yes. WebCross is **local-first end to end**:",
-            "- Tasks execute in the local page engine, so page content is never relayed through a third-party server — nothing uploaded, nothing sent back;",
+            "- Credentials, cookie sessions, run logs and instructions all stay on your own machine;",
             "- Tasks execute in the local kernel, so page content is never relayed through a third-party server — nothing uploaded, nothing sent back;",
             "- Run logs are kept locally, so everything is auditable after the fact;",
-            "- The workflows you distil are saved locally too."
+            "- The skills and workflows you distil are saved locally too."
           ]
         },
         {
@@ -840,11 +802,12 @@
         {
           "q": "I run several accounts at once — will the platform link them?",
           "a": [
-            "WebCross gives each account an **independent fingerprint and network environment**:",
-            "- Browser fingerprints can be configured separately, keeping each account's browsing environment distinct;",
-            "- Each account gets its own exit IP, and the IP pool can be switched at any time;",
-            "- Sessions stay isolated, so multiple accounts can run at once without crossing;",
-            "- Fingerprint templates can be copied and applied in bulk, making it easier to manage multiple storefronts or social accounts."
+            "Every instance gets a **fingerprint of its own**:",
+            "- User agent, timezone, fonts, canvas and GPU fingerprints are each configurable;",
+            "- The IP pool can be switched at any time, one fingerprint and one exit IP per instance;",
+            "- Sessions are fully isolated, so concurrent accounts never cross;",
+            "- Fingerprint templates can be copied and rolled out in bulk.",
+            "Multi-store commerce and multi-account social management can both run concurrently without worry."
           ]
         },
         {
@@ -883,42 +846,9 @@
     "city": "Hangzhou, China",
     "figure": "Qingzhu Technology R&D Center"
   },
-  "download": {
-    "title": "Download WebCross",
-    "lead": "Experience the new era of on-device autonomous AI browsing. Built for macOS & Windows with zero-friction local installation.",
-    "figure": "WebCross Client Installation & Preview",
-    "userButton": "Download for macOS",
-    "clientButton": "Windows (Coming Soon)",
-    "userHint": "macOS 13.0+ · Apple Silicon (M-Series) & Intel CPUs",
-    "clientHint": "Windows 11 64-bit · Preview Channel Coming Soon",
-    "systemLabel": "Supported OS",
-    "dataLabel": "Data Privacy",
-    "dataValue": "100% On-Device Local-First Storage",
-    "userMeta": "DMG Installer (128 MB) · SHA256 Signed · Available Now",
-    "clientMeta": "MSIX / EXE Setup · In Active Development",
-    "quickstartTitle": "Quick Start Guide",
-    "quickstart": [
-      {
-        "step": "01",
-        "title": "Install",
-        "desc": "Open the DMG package and drag WebCross into your Applications folder."
-      },
-      {
-        "step": "02",
-        "title": "Permissions",
-        "desc": "Grant accessibility and browser automation permissions on first launch."
-      },
-      {
-        "step": "03",
-        "title": "Execute",
-        "desc": "Type your first natural language task in the console and let the agent work."
-      }
-    ]
-  },
   "footer": {
     "localFirst": "100% Local-First · Zero Leakage",
     "get": "Download",
-    "navTitle": "Navigation",
     "productTitle": "Product & System",
     "desc": "Local web automation for macOS 13+ and Windows 11+, designed for privacy-conscious businesses and power users.",
     "securityBadge": "100% Local-First Architecture"
@@ -926,11 +856,7 @@
   "a11y": {
     "mainNav": "Main navigation",
     "localeNav": "Language switcher",
-    "queue": "Chapter index",
-    "rail": "Chapter navigation",
     "stage": "Main content area",
-    "menu": "Toggle mobile menu",
-    "scenarioSwitcher": "Scenario switcher",
-    "featureList": "Product capabilities"
+    "menu": "Toggle mobile menu"
   }
 }

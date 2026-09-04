@@ -2,54 +2,12 @@
   "brand": {
     "name": "WebCross",
     "thesis": "WebCross 将协助您的智能体",
-    "thesisHighlight": "完成繁杂的网页工作",
-    "tagline": "让您的智能体更快、更省 Token 地完成繁杂的网页工作，全程后台运行，零干扰。",
-    "badge": "本地端自主智能体浏览器",
-    "get": "下载客户端"
+    "tagline": "让您的智能体更快、更省 Token 地完成繁杂的网页工作，全程后台运行，零干扰。"
   },
   "nav": {
     "product": "产品介绍",
-    "company": "关于公司",
-    "download": "下载客户端",
-    "solutions": "解决方案",
-    "resources": "资源",
-    "discord": "Discord"
+    "download": "下载客户端"
   },
-  "resources": {
-    "docs": "文档",
-    "changelog": "更新日志",
-    "blog": "博客",
-    "tools": "工具"
-  },
-  "queue": {
-    "label": "导航索引",
-    "product": "产品概览",
-    "company": "企业信息",
-    "download": "03 · 客户端下载",
-    "deck": {
-      "product": "本地运行的自主网页 Agent",
-      "company": "青渚科技与品牌理念",
-      "download": "macOS 与 Windows 客户端下载"
-    }
-  },
-  "beats": {
-    "product": [
-      "智能感知",
-      "原生驱动",
-      "极致掌控"
-    ],
-    "company": [
-      "品牌初心",
-      "技术愿景",
-      "开放合作"
-    ],
-    "download": [
-      "版本选择",
-      "环境配置",
-      "快速启程"
-    ]
-  },
-  "figure": "功能示意图",
   "locales": {
     "zh": "简体中文",
     "ja": "日本語",
@@ -808,8 +766,12 @@
         {
           "q": "如何开始使用 WebCross？",
           "a": [
-          "下载并安装 WebCross，首次启动时按系统提示完成必要授权。之后，您可以使用 WebCross 内置的 Agent，也可以连接 Claude Code、Codex 等日常使用的 Agent。只要用**自然语言**描述想完成的事情，例如整理商品信息、批量填写表单或汇总评论，Agent 就会通过 WebCross **在本机完成网页操作**。",
-          "WebCross 会将任务的执行过程和结果保留在本地，方便您了解任务进度。遇到登录、验证码或支付确认等需要人工处理的环节，任务会**暂停在当前节点，处理完成后继续执行**；已经跑通的重复流程还可以沉淀为 **Workflow**，后续直接复用，减少重复探索和 Token 消耗。"
+            "# 在 WebCross Harness 中使用",
+            "1. **交给它第一条任务**：用自然语言在控制台输入任务，例如“巡检 Amazon 上的 30 个热门移动电源，整理 url、title、price、rating 和 30 条低评分评论”。智能体会自行打开页面、搜索、点击、采集、整理并导出到本地。",
+            "2. **沉淀 Skill + Workflow**：任务完成后输入 `/skill-create`，将刚刚执行的流程沉淀为专属 Skill 与 Workflow，并保存在本地。",
+            "3. **调用 Skill**：下次只需输入 `/你的 Skill 名称`。智能体会跳过页面探索，沿已验证的路径直达关键步骤，**节省 80% 以上 Token**。",
+            "# 在第三方智能体中使用（Claude Code、Codex 等）",
+            "WebCross 也可以连接你正在使用的智能体：从 WebCross 复制对应 Skill，粘贴到 Claude Code、Codex 等工具的技能目录中，即可直接调用 WebCross，无需 SDK 集成，相关能力即将开放。"
           ]
         },
         {
@@ -844,7 +806,8 @@
             "- 浏览器指纹可独立配置，为不同账号保持不同的浏览环境；",
             "- 每个账号拥有独立的出口 IP，IP 池也可以随时切换；",
             "- 会话彼此隔离，多账号同时运行也不会串号；",
-            "- 指纹模板支持复制和批量应用，方便管理多个店铺或社交账号。"
+            "- 指纹模板支持复制和批量应用，方便管理多个店铺或社交账号。",
+            "无论是多店铺电商还是多账号社交运营，都可以安心并行运行。"
           ]
         },
         {
@@ -883,42 +846,9 @@
     "city": "中国 · 杭州",
     "figure": "青渚科技研发中心"
   },
-  "download": {
-    "title": "选择平台，开始让智能体工作。",
-    "lead": "WebCross 在你的电脑上运行，安装完成后即可处理繁杂的网页任务。",
-    "figure": "WebCross 客户端安装与工作台预览",
-    "userButton": "下载 macOS 客户端",
-    "clientButton": "Windows 版本 (准备中)",
-    "userHint": "macOS 13.0+ · 支持 Apple Silicon (M系列) & Intel 芯片",
-    "clientHint": "Windows 11 64位 · 预览版即将上线",
-    "systemLabel": "支持系统",
-    "dataLabel": "数据安全",
-    "dataValue": "100% 数据仅保存在本地物理机",
-    "userMeta": "DMG 安装包 (128 MB) · SHA256 签名校验 · 现已开放",
-    "clientMeta": "MSIX / EXE 安装包 · 架构联调中 · 敬请期待",
-    "quickstartTitle": "快速上手指引",
-    "quickstart": [
-      {
-        "step": "01",
-        "title": "安装部署",
-        "desc": "下载并打开 DMG 安装包，将 WebCross 图标拖入「应用程序」目录。"
-      },
-      {
-        "step": "02",
-        "title": "权限授权",
-        "desc": "首次启动通过系统提示，按需开启辅助功能与自动化控制权限。"
-      },
-      {
-        "step": "03",
-        "title": "意图执行",
-        "desc": "在控制面板输入您的第一条自然语言任务，体验端侧智能体自律执行。"
-      }
-    ]
-  },
   "footer": {
     "localFirst": "100% 本地优先 · 零隐私泄漏",
     "get": "下载客户端",
-    "navTitle": "快速导航",
     "productTitle": "产品与系统",
     "desc": "支持 macOS 13+ 和 Windows 11+，在本机运行网页自动化任务，适合重视隐私的企业团队和专业用户。",
     "securityBadge": "100% 本地优先架构"
@@ -926,11 +856,7 @@
   "a11y": {
     "mainNav": "主导航栏",
     "localeNav": "语言切换菜单",
-    "queue": "章节目录",
-    "rail": "本章导览",
     "stage": "主要内容区域",
-    "menu": "展开移动端菜单",
-    "scenarioSwitcher": "演示场景切换",
-    "featureList": "产品能力列表"
+    "menu": "展开移动端菜单"
   }
 }

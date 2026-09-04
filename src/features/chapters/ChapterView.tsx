@@ -8,16 +8,8 @@ import { ProductChapter } from "./ProductChapter";
 
 export function ChapterView({ model }: { model: ChapterViewModel }) {
   if (model.id === "product" && model.product)
-    return (
-      <ProductChapter
-        copy={model.product}
-        brandName={model.brandName}
-        tagline={model.tagline}
-        getLabel={model.getLabel}
-      />
-    );
+    return <ProductChapter copy={model.product} />;
   if (model.id === "company" && model.company) return <CompanyChapter copy={model.company} />;
-  if (model.id === "download" && model.download)
-    return <DownloadChapter locale={model.locale} />;
+  if (model.id === "download") return <DownloadChapter locale={model.locale} />;
   return null;
 }

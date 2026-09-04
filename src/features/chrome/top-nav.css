@@ -29,12 +29,6 @@
     gap: var(--space-3);
     padding: 0 var(--space-4);
   }
-  .nav-discord-link {
-    padding: 6px 8px;
-  }
-  .nav-discord-link span {
-    display: none;
-  }
 }
 
 .top-nav-brand-link {
@@ -110,89 +104,6 @@
 
 .nav-link.is-current::after {
   transform: scaleX(1);
-}
-
-.nav-discord-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--discord);
-  text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: var(--radius-full);
-  transition: color 150ms ease, background 150ms ease, border-color 150ms ease;
-}
-
-.nav-discord-link svg {
-  flex-shrink: 0;
-  transition: filter 150ms ease;
-}
-
-.nav-discord-link:hover {
-  color: var(--discord-hover);
-  background: rgba(88, 101, 242, 0.08);
-  border-color: rgba(88, 101, 242, 0.28);
-}
-
-.nav-discord-link:hover svg {
-  filter: drop-shadow(0 0 6px rgba(88, 101, 242, 0.45));
-}
-
-.nav-dropdown {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-
-.nav-dropdown-toggle {
-  cursor: pointer;
-}
-
-.nav-dropdown-caret {
-  transition: transform 180ms ease;
-}
-
-.nav-dropdown.is-open .nav-dropdown-caret {
-  transform: rotate(180deg);
-}
-
-.nav-dropdown-panel {
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%) translateY(-6px);
-  z-index: 120;
-  display: none;
-  min-width: 180px;
-  padding: 6px;
-  background: #ffffff;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-md);
-  box-shadow: 0 16px 36px rgba(15, 17, 24, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02);
-}
-
-.nav-dropdown.is-open .nav-dropdown-panel {
-  display: grid;
-  gap: 2px;
-  animation: fadeInDown 150ms ease;
-}
-
-.nav-dropdown-item {
-  display: block;
-  padding: 8px 12px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  transition: background 120ms ease, color 120ms ease;
-}
-
-.nav-dropdown-item:hover {
-  color: var(--oxide-text);
-  background: var(--oxide-subtle);
 }
 
 .top-nav-tools {
@@ -356,13 +267,6 @@
     margin-top: var(--space-3);
     border-top: 1px solid var(--rule);
     padding-top: var(--space-3);
-  }
-  .top-nav.is-open .nav-dropdown-panel {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    border: 1px solid var(--rule);
-    margin-top: 6px;
   }
   .nav-panel-label {
     font-size: 11px;

@@ -260,7 +260,7 @@ const MODERN_COPY: Record<Locale, ModernCopy> = {
     ],
     closingQuestion: "준비되셨나요?",
     closingTitle: "에이전트를 바로 시작하세요.",
-    closingCta: "다운로드 옵션으로",
+    closingCta: "다운로드 옵션으로 돌아가기",
     toastTitle: "프로토타입 안내",
     toastMessage: "%platform% 설치 파일 주소가 아직 준비되지 않았습니다. 정식 페이지에서는 여기서 다운로드가 시작됩니다.",
     toastClose: "알림 닫기",

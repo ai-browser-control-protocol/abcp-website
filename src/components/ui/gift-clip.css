@@ -32,20 +32,16 @@
   height: 100%;
   object-fit: contain;
   opacity: 0;
-  animation-duration: 2.8s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
 }
 
-/* Written out longhand on purpose: the `animation` shorthand silently drops the
-   whole declaration if the name is missing, which once left this at 0s. */
+/* Keep the open frame as a permanent, opaque base. Only the eyes layer changes;
+   the character can therefore never disappear between two transparent frames. */
 .gift-frame.is-idle {
   opacity: 1;
-  animation-name: giftIdle;
 }
 
 .gift-frame.is-eyes {
-  animation-name: giftEyes;
+  animation: giftEyes 2.8s steps(1, end) infinite;
 }
 
 /* ---- the blink -----------------------------------------------------------
@@ -53,23 +49,19 @@
    than as a nervous tic, which is what anything under half a second looks like
    at this size.
 
-   Cut rule: the frames stack in DOM order — idle, then eyes — and only the
-   topmost one can cross-fade. Going up the stack, the incoming frame fades in
-   and the outgoing simply holds until it is covered. Coming back down, the
-   incoming snaps on under cover and the outgoing fades out to reveal it. Fade
-   both at once and the overlap goes momentarily see-through against the card.
+   Cut rule: the open frame is always present underneath. The eyes frame is a
+   hard-edged overlay, so a decode or opacity transition can never reveal the
+   card behind the character.
    ------------------------------------------------------------------------- */
 
-@keyframes giftIdle {
-  0%, 67.86% { opacity: 1; }
-  67.87%, 96.42% { opacity: 0; }
-  96.43%, 100% { opacity: 1; }
+@keyframes giftEyes {
+  0%, 67.85% { opacity: 0; }
+  67.86%, 96.42% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-@keyframes giftEyes {
-  0%, 64.29% { opacity: 0; }
-  67.86%, 96.43% { opacity: 1; }
-  100% { opacity: 0; }
+.gift-clip:not(.is-ready) .gift-frame.is-eyes {
+  animation-play-state: paused;
 }
 
 /* ==========================================================================

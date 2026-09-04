@@ -19,6 +19,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useImagePreload } from "./useImagePreload";
 import "./pixel-folk.css";
 
 type Shot = { f: string; ms: number };
@@ -90,6 +91,12 @@ const SCRIPT: readonly Step[] = [
 /** Long enough for the hand-off to land before the next figure starts. */
 const PASS_MS = 1150;
 
+const PIXEL_SOURCES = [
+  ...CAST.flatMap((actor) => actor.frames.map((frame) => `/folk/${actor.id}-${frame}.webp`)),
+  "/folk/peek-idle.webp",
+  "/folk/peek-smile.webp",
+] as const;
+
 export function PixelScene({
   assurances = [],
   className = "",
@@ -100,6 +107,7 @@ export function PixelScene({
   const [pos, setPos] = useState({ step: 0, shot: 0 });
   const [live, setLive] = useState(false);
   const hostRef = useRef<HTMLDivElement>(null);
+  const assetsReady = useImagePreload(PIXEL_SOURCES);
 
   useEffect(() => {
     const node = hostRef.current;
@@ -112,7 +120,7 @@ export function PixelScene({
   }, []);
 
   useEffect(() => {
-    if (!live) return;
+    if (!live || !assetsReady) return;
     const step = SCRIPT[pos.step];
     const nextStep = () => setPos({ step: (pos.step + 1) % SCRIPT.length, shot: 0 });
 
@@ -127,7 +135,7 @@ export function PixelScene({
       else nextStep();
     }, shots[pos.shot].ms);
     return () => clearTimeout(id);
-  }, [pos, live]);
+  }, [pos, live, assetsReady]);
 
   const step = SCRIPT[pos.step];
   const acting = step.kind === "act" ? step.actor : -1;
@@ -140,7 +148,10 @@ export function PixelScene({
   };
 
   return (
-    <div className={`pixel-scene ${className}`.trim()} ref={hostRef}>
+    <div
+      className={`pixel-scene${assetsReady ? " is-ready" : ""}${live ? " is-live" : ""} ${className}`.trim()}
+      ref={hostRef}
+    >
       <div className="pixel-scene-stage">
         {/* Anchored over w1, who is the one doing the local work. */}
         {assurances[1] && (

@@ -17,14 +17,20 @@
  * because the floor and her sweater are the same grey within a few levels and
  * only the shelf between them separates the two.
  */
+"use client";
+
+import { useImagePreload } from "./useImagePreload";
 import "./gift-clip.css";
 
 /** Painting order matters — see the cut rule in gift-clip.css. */
 const FRAMES = ["idle", "eyes"] as const;
+const SOURCES = FRAMES.map((frame) => `/folk/gift-${frame}.webp`);
 
 export function GiftClip({ className = "" }: { className?: string }) {
+  const assetsReady = useImagePreload(SOURCES);
+
   return (
-    <span className={`gift-clip ${className}`.trim()} aria-hidden="true">
+    <span className={`gift-clip${assetsReady ? " is-ready" : ""} ${className}`.trim()} aria-hidden="true">
       {FRAMES.map((frame) => (
         <img
           key={frame}

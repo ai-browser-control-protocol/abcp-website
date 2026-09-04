@@ -17,8 +17,13 @@
 
 .footer-top-row {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1.2fr;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
   gap: var(--space-6);
+}
+
+/* Temporary reduction: keep the footer focused on the brand and product entry. */
+.footer-nav-col {
+  display: none;
 }
 
 .footer-brand-col {

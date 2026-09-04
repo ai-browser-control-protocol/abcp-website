@@ -80,7 +80,7 @@ export function createOgImage(locale: Locale, chapter: ChapterId) {
               letterSpacing: "0.5px",
             }}
           >
-            100% Local-First Autonomous AI Browser
+            Autonomous AI Browser · In Your Control
           </span>
         </div>
 

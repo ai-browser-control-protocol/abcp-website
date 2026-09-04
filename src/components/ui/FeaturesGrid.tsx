@@ -325,7 +325,7 @@ function IllusToken({ t }: { t: Figures["tree"] }) {
   );
 }
 
-/* 03 — everything stays on the machine */
+/* 03 — controllable task processes */
 function IllusLocal({ t }: { t: Figures["local"] }) {
   return (
     <svg viewBox="0 0 520 330" className="ill-svg" role="img" aria-label={t.alt}>
@@ -336,6 +336,8 @@ function IllusLocal({ t }: { t: Figures["local"] }) {
         </radialGradient>
       </defs>
       <g transform="translate(20, 5)">
+        {/* Keep the card footprint unchanged while giving the artwork more visual weight. */}
+        <g transform="translate(240, 165) scale(1.18) translate(-240, -165)">
         <circle className="lc-glow" cx="240" cy="150" r="140" fill="url(#lc-glow)" />
 
         {/* blocked outbound */}
@@ -374,11 +376,11 @@ function IllusLocal({ t }: { t: Figures["local"] }) {
         </g>
         <rect x="152" y="98" width="176" height="102" rx="14" fill="none" stroke="#ff6b35" strokeWidth="1.6" strokeDasharray="7 6" className="lc-fence" />
 
-        <text x="240" y="228" textAnchor="middle" fill="#ff6b35" fontSize="13" fontWeight="800" fontFamily="ui-monospace, monospace">100% LOCAL</text>
-        <text x="240" y="248" textAnchor="middle" fill="#71717a" fontSize="10.5">{t.assets}</text>
-        <g transform="translate(130, 268)">
+        <text x="240" y="236" textAnchor="middle" fill="#71717a" fontSize="10.5">{t.assets}</text>
+        <g transform="translate(130, 258)">
           <rect width="220" height="30" rx="15" fill="#0a0a0a" />
           <text x="110" y="20" textAnchor="middle" fill="#ffffff" fontSize="10.5" fontWeight="600">{t.banner}</text>
+        </g>
         </g>
       </g>
     </svg>

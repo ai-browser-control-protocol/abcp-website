@@ -16,6 +16,11 @@
 /* ===== Chapter Base Container ===== */
 .chapter {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   gap: var(--space-8);
 }
 

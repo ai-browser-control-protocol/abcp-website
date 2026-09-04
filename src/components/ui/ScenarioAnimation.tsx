@@ -546,6 +546,8 @@ function ClientPanel({
   const logRef = useRef<HTMLDivElement>(null);
   const [hint, setHint] = useState<{ x: number; y: number } | null>(null);
 
+  const [mobileExpanded, setMobileExpanded] = useState(false);
+
   /* A task still being typed lives in the composer, not the log yet. */
   const shown = entries.filter((e) => !(e.kind === "run" && e.phase === "type"));
   const autoTyping = liveRun?.phase === "type";
@@ -569,7 +571,29 @@ function ClientPanel({
   const value = autoTyping ? liveRun.task.slice(0, liveRun.typed) : busy ? "" : draft;
 
   return (
-    <div className="client-panel">
+    <div className={`client-panel${mobileExpanded ? " is-expanded" : ""}`}>
+      {/* Mobile top summary bar: visible only on mobile, allows toggling the full log */}
+      <div className="client-mobile-bar">
+        <div className="client-mobile-bar-info">
+          <span className={`client-status is-${status}`}>
+            <span className="client-status-dot" />
+            {busy ? copy.statusRunning : entries.length ? copy.statusDone : copy.runLabel}
+          </span>
+          <span className="client-title">{copy.clientTitle}</span>
+        </div>
+        <button
+          type="button"
+          className="client-mobile-toggle-btn"
+          onClick={() => setMobileExpanded((prev) => !prev)}
+          aria-expanded={mobileExpanded}
+        >
+          <span>{mobileExpanded ? copy.logToggleCollapse : copy.logToggleExpand}</span>
+          <span className="client-mobile-toggle-icon" aria-hidden="true">
+            {mobileExpanded ? "▴" : "▾"}
+          </span>
+        </button>
+      </div>
+
       <div className="client-titlebar">
         <span className="client-dot client-dot-r" />
         <span className="client-dot client-dot-y" />

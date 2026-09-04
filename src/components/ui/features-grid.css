@@ -11,6 +11,10 @@
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: clamp(16px, 1.8vw, 22px);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .feature-row {
@@ -23,6 +27,11 @@
   border: 1px solid var(--rule);
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-soft);
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  scroll-margin-top: 80px;
 }
 
 .feature-row.span-12 {
@@ -96,6 +105,37 @@
 }
 
 .feature-row.span-6 .ill-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Card 04 & Card 05 aspect ratio and scaling */
+.feature-row.span-7 .feature-figure-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 480 / 320;
+  box-sizing: border-box;
+}
+
+.feature-row.span-7 .ill-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.feature-row.span-5 .feature-figure-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 480 / 336;
+  box-sizing: border-box;
+}
+
+.feature-row.span-5 .ill-svg {
   width: 100%;
   height: 100%;
   display: block;
@@ -241,9 +281,12 @@
 /* ===== Figure side ===== */
 
 .feature-figure {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   display: grid;
   gap: 10px;
-  justify-items: center;
+  justify-items: stretch;
   opacity: 0;
   transform: translateY(22px) scale(0.985);
   transition: opacity 700ms var(--stage-easing) 90ms, transform 700ms var(--stage-easing) 90ms;
@@ -256,16 +299,20 @@
 
 .feature-figure-card {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   padding: clamp(12px, 1.6vw, 18px);
   background: #ffffff;
   border: 1px solid var(--rule);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-soft);
+  overflow: hidden;
 }
 
 .feature-figure-title {
   order: -1;
-  max-width: 92%;
+  max-width: 100%;
   font-size: clamp(14px, 1vw, 16px);
   font-weight: 700;
   line-height: 1.5;
@@ -278,8 +325,8 @@
 .ill-svg {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: auto;
-  overflow: visible;
 }
 
 /* ==========================================================================
@@ -824,6 +871,10 @@
 @media (max-width: 900px) {
   .features-section {
     grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .feature-row,
@@ -834,22 +885,74 @@
   .feature-row.span-4,
   .feature-row.span-3,
   .feature-row.span-2 {
-    grid-column: auto;
+    grid-column: 1 / -1;
     grid-template-columns: minmax(0, 1fr);
-    gap: 22px;
+    gap: 20px;
+    padding: clamp(20px, 4vw, 32px);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .feature-row .feature-copy,
   .feature-row.is-flipped .feature-copy {
     order: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .feature-row .feature-figure {
     order: -1;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .feature-figure-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 12px 10px;
   }
 
   .feature-body {
-    max-width: none;
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  .feature-title {
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 640px) {
+  .feature-row,
+  .feature-row.span-12,
+  .feature-row.span-7,
+  .feature-row.span-6,
+  .feature-row.span-5,
+  .feature-row.span-4,
+  .feature-row.span-3,
+  .feature-row.span-2 {
+    padding: 18px 14px;
+    border-radius: var(--radius-xl);
+  }
+
+  .feature-figure-title {
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  .feature-bullets {
+    gap: 8px;
+  }
+
+  .feature-bullets li {
+    font-size: 13px;
+    line-height: 1.5;
   }
 }
 

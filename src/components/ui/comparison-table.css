@@ -1,19 +1,36 @@
 /* ==========================================================================
    Comparison matrix — products across, dimensions down
 
-   Alignment discipline: the dimension column is the only left-aligned column.
-   Every product column — header, marks, prose and meters alike — is centred on
-   the same axis, so the ✓ / — run reads as one straight line down the page.
+   Desktop (>768px): Full 7-column comparative table.
+   - Column budgets calibrated to 100% container width with ZERO scrollbars.
+   - Explicit overflow-y: hidden avoids compound scrollbar lock.
+
+   Mobile (<=768px): Interactive 1v1 matchup card.
+   - Horizontal tab bar allows instantaneous switching between competitors.
+   - 2-column head-to-head layout maximizes readability on narrow touchscreens.
    ========================================================================== */
 
 .comparison-section {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   gap: var(--space-4);
+}
+
+/* ===== Desktop Table Structure (>768px) ===== */
+
+.comparison-desktop-wrap {
+  display: block;
+  width: 100%;
 }
 
 .comparison-scroll {
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden; /* Prevent spurious vertical scrollbar */
   overscroll-behavior-x: contain;
   border: 1px solid var(--rule);
   border-radius: var(--radius-2xl);
@@ -24,28 +41,18 @@
 
 .comparison-table {
   width: 100%;
-  /* Never below the sum of the declared column widths, or a fixed layout
-     scales every column down and the head starts wrapping again. */
-  min-width: 1134px;
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;
 }
 
-/* Budgeted, not guessed. The head is the binding constraint: the widest product
-   name is "Claude for Chrome" at 132px and the widest tagline "Anthropic ·
-   浏览器扩展" at 127px, so a product column needs 127 + 20px of padding before
-   either wraps. Anything less and that one column runs to four lines while the
-   rest run to two, which stretches the whole header row and leaves every other
-   column floating in a void, since the heads are bottom-aligned.
-
-   The three widths sum to the table width at the widest layout the page offers
-   (1134px). The funding came out of the dimension column (its longest label
-   needs 140px) and the WebCross column (its widest cell needs 143px; the rest
-   of that column's width was emphasis, which the orange band already carries). */
-.col-dimension { width: 148px; }
-.col-product { width: 159px; }
-.col-highlight { width: 191px; }
+/* Balanced column widths:
+   Dimension: 136px (comfortably holds 2FA / 验证码接管)
+   Highlight (WebCross): 172px (brand protagonist emphasis)
+   Competitors (5 columns): remainder split evenly */
+.col-dimension { width: 136px; }
+.col-highlight { width: 172px; }
+.col-product { width: calc((100% - 308px) / 5); }
 
 /* ===== Head ===== */
 
@@ -53,14 +60,13 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  padding: 13px 10px 12px;
+  padding: 13px 8px 12px;
   text-align: center;
   vertical-align: bottom;
   background: #fafafa;
   border-bottom: 1px solid var(--rule-strong);
 }
 
-/* Dimension column stays put while the product columns scroll under it. */
 .head-dimension,
 .cell-dimension {
   position: sticky;
@@ -72,6 +78,7 @@
 
 .head-dimension {
   z-index: 4;
+  padding-left: 12px;
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
@@ -82,7 +89,7 @@
 
 .head-product-name {
   display: block;
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.01em;
@@ -92,9 +99,9 @@
 .head-product-tag {
   display: block;
   margin-top: 4px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.4;
   color: var(--text-note);
   text-wrap: balance;
 }
@@ -126,8 +133,8 @@
 }
 
 .cell-dimension {
-  padding: 14px 13px;
-  font-size: 14px;
+  padding: 14px 12px;
+  font-size: 13.5px;
   font-weight: 600;
   line-height: 1.45;
   color: var(--text-primary);
@@ -137,9 +144,9 @@
 .cell-text,
 .cell-mark,
 .cell-meter {
-  padding: 16px 12px;
-  font-size: 13.5px;
-  line-height: 1.55;
+  padding: 15px 8px;
+  font-size: 13px;
+  line-height: 1.5;
   color: var(--text-primary);
   text-align: center;
   vertical-align: middle;
@@ -147,10 +154,14 @@
 
 .cell-text {
   font-weight: 600;
-  white-space: nowrap;
 }
 
-/* The WebCross column is one continuous orange band, whatever the cell holds. */
+.cell-text-val {
+  display: inline-block;
+  line-height: 1.4;
+}
+
+/* The WebCross column is one continuous orange band */
 .cell-text.is-highlight,
 .cell-mark.is-highlight,
 .cell-meter.is-highlight {
@@ -158,7 +169,8 @@
   box-shadow: inset 1px 0 0 rgba(255, 107, 53, 0.18), inset -1px 0 0 rgba(255, 107, 53, 0.18);
 }
 
-.cell-text.is-highlight {
+.cell-text.is-highlight,
+.cell-text-val.is-highlight {
   color: #9a3d12;
 }
 
@@ -174,29 +186,29 @@
 }
 
 .cell-mark.is-yes .mark,
-.legend-item .mark.is-yes {
+.legend-item .mark.is-yes,
+.mobile-dim-cell .mark.is-yes {
   color: var(--oxide-text);
   background: var(--oxide-subtle);
 }
 
 .cell-mark.is-no .mark,
-.legend-item .mark.is-no {
-  color: #68686f;   /* 5.03:1 on --bg-surface-hover; --text-muted was 4.40:1 */
+.legend-item .mark.is-no,
+.mobile-dim-cell .mark.is-no {
+  color: #68686f;
   background: var(--bg-surface-hover);
 }
 
-/* ===== Weight chip — "how much", for the Token / task-time rows =====
-   Less is better on both rows, so the scale runs orange (cheap) → grey → ink
-   (expensive). Reading it needs no legend: the heavy end is literally heavier. */
+/* ===== Weight chip — "how much", for the Token / task-time rows ===== */
 
 .tier-chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 46px;
-  height: 26px;
-  padding: 0 12px;
-  font-size: 12.5px;
+  min-width: 44px;
+  height: 25px;
+  padding: 0 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.02em;
   border-radius: var(--radius-full);
@@ -220,15 +232,15 @@
 
 .meter-text {
   display: block;
-  margin-top: 7px;
-  font-size: 13px;
+  margin-top: 6px;
+  font-size: 12.5px;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.4;
   color: var(--text-note);
-  white-space: nowrap;
 }
 
-.cell-meter.is-highlight .meter-text {
+.cell-meter.is-highlight .meter-text,
+.mobile-dim-cell.is-hero .meter-text {
   color: #9a3d12;
 }
 
@@ -236,7 +248,224 @@
   background: #f6f6f7;
 }
 
-/* ===== Legend & method note ===== */
+.comparison-table tbody tr {
+  transition: background var(--dur-hover) ease;
+}
+
+.comparison-table tbody tr:hover {
+  background: rgba(255, 107, 53, 0.035);
+}
+
+/* ===== Mobile 1v1 View (<=768px) ===== */
+
+.comparison-mobile-wrap {
+  display: none;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.comparison-mobile-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 4px 2px 14px;
+  margin-bottom: 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.comparison-mobile-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.comparison-tab-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: #f4f4f6;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--dur-hover) ease;
+}
+
+.comparison-tab-btn:hover {
+  background: #ededef;
+  color: var(--text-primary);
+}
+
+.comparison-tab-btn.is-active {
+  color: var(--oxide-text);
+  background: var(--oxide-subtle);
+  border-color: rgba(255, 107, 53, 0.45);
+  box-shadow: 0 1px 6px rgba(255, 107, 53, 0.16);
+}
+
+.comparison-mobile-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-2xl);
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.mobile-matrix-head {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  background: #fafafa;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.mobile-head-side {
+  padding: 15px 12px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-head-side.is-hero {
+  background: linear-gradient(180deg, #fff2ea 0%, #fff7f2 100%);
+  box-shadow: inset 0 3px 0 var(--oxide);
+}
+
+.mobile-badge-flag {
+  display: inline-block;
+  padding: 2px 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--oxide-text);
+  background: var(--oxide-subtle);
+  border-radius: var(--radius-full);
+  margin-bottom: 5px;
+}
+
+.mobile-badge-flag.is-muted {
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.mobile-head-title {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.mobile-head-side.is-hero .mobile-head-title {
+  color: var(--oxide-text);
+}
+
+.mobile-head-sub {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--text-note);
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.mobile-head-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.mobile-vs-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--text-muted);
+  background: #ffffff;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-matrix-body {
+  padding: 8px 12px 14px;
+}
+
+.mobile-dim-row {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.mobile-dim-row:last-child {
+  border-bottom: none;
+  padding-bottom: 4px;
+}
+
+.mobile-dim-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mobile-dim-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.mobile-dim-cell {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: var(--radius-md);
+  min-height: 54px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.mobile-dim-cell.is-hero {
+  background: #fff9f5;
+  color: #9a3d12;
+  border: 1px solid rgba(255, 107, 53, 0.18);
+}
+
+.mobile-dim-cell.is-comp {
+  background: #f8f8f9;
+  color: var(--text-primary);
+  border: 1px solid var(--rule);
+}
+
+/* ===== Legend & Method Note ===== */
 
 .comparison-legend {
   display: flex;
@@ -245,6 +474,7 @@
   flex-wrap: wrap;
   font-size: 13.5px;
   color: var(--text-soft);
+  margin-top: 4px;
 }
 
 .legend-item {
@@ -269,44 +499,41 @@
   text-wrap: pretty;
 }
 
-/* ===== Responsive ===== */
+/* ===== Responsive Breakpoints ===== */
 
-@media (max-width: 900px) {
-  .comparison-table {
-    min-width: 1068px;
-  }
-  /* Same budget re-run at the smaller head sizes below: a product column needs
-     127px of content, which is 145px with this pass's 9px padding. */
-  .col-dimension { width: 132px; }
-  .col-product { width: 152px; }
-  .col-highlight { width: 176px; }
-  .head-product-name { font-size: 13.5px; }
-  .head-product-tag { font-size: 11.5px; }
+@media (max-width: 1080px) and (min-width: 769px) {
+  .col-dimension { width: 124px; }
+  .col-highlight { width: 160px; }
+  .col-product { width: calc((100% - 284px) / 5); }
   .cell-dimension,
   .cell-text,
   .cell-mark,
   .cell-meter,
   .comparison-table thead th {
-    padding: 11px 9px;
+    padding: 11px 6px;
   }
-  .cell-text { font-size: 13px; }
-  .cell-dimension { font-size: 13px; }
-  .meter-text { font-size: 12.5px; }
+  .head-product-name { font-size: 13px; }
+  .head-product-tag { font-size: 11px; }
+  .cell-dimension { font-size: 12.5px; }
+  .cell-text { font-size: 12.5px; }
+  .meter-text { font-size: 11.5px; }
 }
 
-/* ==========================================================================
-   Scroll reveal — head, then table, then rows
-   The order matters: you read the claim, then the frame it is argued in, then
-   the evidence. Staggering in that order makes the section explain itself.
+@media (max-width: 768px) {
+  .comparison-desktop-wrap {
+    display: none;
+  }
+  .comparison-mobile-wrap {
+    display: block;
+  }
+}
 
-   The pre-state lives inside `no-preference` on purpose. Hiding content and
-   waiting for JS to un-hide it is a real trade, so it is confined to visitors
-   who both asked for motion and are running the observer; everyone else — the
-   reduced-motion setting, a failed media query — gets the table outright.
-   ========================================================================== */
+/* ===== Scroll Reveal ===== */
+
 @media (prefers-reduced-motion: no-preference) {
   .comparison-section .section-head-center,
-  .comparison-section .comparison-scroll,
+  .comparison-section .comparison-desktop-wrap,
+  .comparison-section .comparison-mobile-wrap,
   .comparison-section .comparison-legend,
   .comparison-section .comparison-note {
     opacity: 0;
@@ -314,40 +541,36 @@
   }
 
   .comparison-section.is-revealed .section-head-center,
-  .comparison-section.is-revealed .comparison-scroll,
+  .comparison-section.is-revealed .comparison-desktop-wrap,
+  .comparison-section.is-revealed .comparison-mobile-wrap,
   .comparison-section.is-revealed .comparison-legend,
   .comparison-section.is-revealed .comparison-note {
     animation: cmpRevealUp var(--dur-panel) var(--ease-expo) both;
   }
 
-  .comparison-section.is-revealed .comparison-scroll {
+  .comparison-section.is-revealed .comparison-desktop-wrap,
+  .comparison-section.is-revealed .comparison-mobile-wrap {
     animation-delay: var(--stagger);
   }
 
   .comparison-section.is-revealed .comparison-legend {
-    animation-delay: calc(var(--stagger) * 4);
+    animation-delay: calc(var(--stagger) * 3.5);
   }
 
   .comparison-section.is-revealed .comparison-note {
-    animation-delay: calc(var(--stagger) * 5);
-  }
-
-  /* Rows land one after another under the header they belong to. Capped at six
-     so a longer matrix never leaves the last row waiting on a visible beat. */
-  .comparison-section .comparison-table tbody tr {
-    opacity: 0;
+    animation-delay: calc(var(--stagger) * 4);
   }
 
   .comparison-section.is-revealed .comparison-table tbody tr {
     animation: cmpRowIn var(--dur-enter) var(--ease-expo) both;
   }
 
-  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(1) { animation-delay: calc(var(--stagger) * 2); }
-  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(2) { animation-delay: calc(var(--stagger) * 2.5); }
-  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(3) { animation-delay: calc(var(--stagger) * 3); }
-  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(4) { animation-delay: calc(var(--stagger) * 3.5); }
-  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(5) { animation-delay: calc(var(--stagger) * 4); }
-  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(n + 6) { animation-delay: calc(var(--stagger) * 4.5); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(1) { animation-delay: calc(var(--stagger) * 1.5); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(2) { animation-delay: calc(var(--stagger) * 2); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(3) { animation-delay: calc(var(--stagger) * 2.5); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(4) { animation-delay: calc(var(--stagger) * 3); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(5) { animation-delay: calc(var(--stagger) * 3.5); }
+  .comparison-section.is-revealed .comparison-table tbody tr:nth-child(n + 6) { animation-delay: calc(var(--stagger) * 4); }
 }
 
 @keyframes cmpRevealUp {
@@ -359,13 +582,3 @@
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: none; }
 }
-
-/* Rows answer the pointer, so scanning across a wide matrix keeps its place. */
-.comparison-table tbody tr {
-  transition: background var(--dur-hover) ease;
-}
-
-.comparison-table tbody tr:hover {
-  background: rgba(255, 107, 53, 0.035);
-}
-

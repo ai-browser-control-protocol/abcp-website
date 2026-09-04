@@ -22,17 +22,6 @@ import { useReveal } from "./useReveal";
 import type { FeaturesCopy } from "@/content/models";
 import "./features-grid.css";
 
-/** Bento plan, one entry per capability.
- *  Working grid: 12 columns
- *  - 01: span 12 (full-width lead)
- *  - 02 & 03: span 6 + span 6 (peach symmetric pair)
- *  - 04 & 05: span 7 + span 5 (golden asymmetry, unrepeating, zero-wrap width)
- *  - 06: span 12 (full-width flipped closing)
- *  span  — columns out of twelve
- *  stack — figure above the copy instead of beside it
- *  flip  — figure first on wide cards
- *  ink   — dark card, for the one panel that breaks up the light run
- *  peach — warm background card */
 const LAYOUT = [
   { span: 12 },
   { span: 6, stack: true, peach: true },
@@ -46,10 +35,6 @@ export function FeaturesGrid({ copy }: { copy: FeaturesCopy }) {
   if (!copy?.items?.length) return null;
 
   return (
-    /* No aria-label: the only candidate was a hardcoded English string, which
-       zh/ja/ko visitors would hear in the wrong language. An unnamed <section>
-       is simply not exposed as a landmark, which is harmless. Give this a real
-       localized heading if the section ever gets one in the copy. */
     <section className="features-section" id="features">
       {copy.items.map((item, index) => (
         <FeatureRow key={item.key} item={item} index={index} figures={copy.figures} />

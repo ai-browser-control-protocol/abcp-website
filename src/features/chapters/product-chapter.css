@@ -81,7 +81,10 @@
   gap: var(--space-4);
   text-align: center;
   justify-items: center;
+  width: 100%;
   max-width: 940px;
+  min-width: 0;
+  box-sizing: border-box;
   margin: 0 auto;
   padding-top: clamp(48px, 8vw, 104px);
 }
@@ -366,7 +369,9 @@
 
 @media (max-width: 720px) {
   .hero-display-title {
+    font-size: clamp(24px, 6.4vw, 34px);
     letter-spacing: -0.025em;
+    word-break: break-word;
   }
   .hero-cta-cluster {
     flex-direction: column;

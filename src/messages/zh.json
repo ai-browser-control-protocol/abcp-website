@@ -89,6 +89,8 @@
       "logLabel": "执行轨迹",
       "statusRunning": "执行中",
       "statusDone": "已完成",
+      "logToggleExpand": "查看执行日志",
+      "logToggleCollapse": "收起执行日志",
       "tabs": {
         "A": "Amazon 价格巡检",
         "B": "Amazon 商家上架",

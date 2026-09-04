@@ -16,7 +16,9 @@
  * block (see `blocksOf`), because JSON with a schema deep enough to express
  * "paragraph, then a list, then a paragraph" is far worse to translate against.
  */
-import { Fragment } from "react";
+"use client";
+
+import { Fragment, type MouseEvent, type SyntheticEvent } from "react";
 import { Emphasized } from "./RichText";
 import type { FaqCopy } from "@/content/models";
 import "./faq-section.css";
@@ -49,6 +51,43 @@ function blocksOf(lines: readonly string[]): Block[] {
 export function FaqSection({ copy }: { copy: FaqCopy }) {
   if (!copy?.items?.length) return null;
 
+  const handleSummaryClick = (e: MouseEvent<HTMLElement>) => {
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 900px)").matches) {
+      const currentDetails = e.currentTarget.closest("details");
+      if (!currentDetails) return;
+
+      // When opening an item on mobile, close all other open items
+      if (!currentDetails.open) {
+        const container = currentDetails.closest(".faq-list");
+        if (container) {
+          const allDetails = container.querySelectorAll<HTMLDetailsElement>("details.faq-item");
+          allDetails.forEach((el) => {
+            if (el !== currentDetails && el.open) {
+              el.open = false;
+            }
+          });
+        }
+      }
+    }
+  };
+
+  const handleToggle = (e: SyntheticEvent<HTMLDetailsElement>) => {
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 900px)").matches) {
+      const details = e.currentTarget;
+      if (details.open) {
+        const container = details.closest(".faq-list");
+        if (container) {
+          const allDetails = container.querySelectorAll<HTMLDetailsElement>("details.faq-item");
+          allDetails.forEach((el) => {
+            if (el !== details && el.open) {
+              el.open = false;
+            }
+          });
+        }
+      }
+    }
+  };
+
   return (
     <section className="faq-section" id="faq">
       <div className="faq-rail">
@@ -63,8 +102,8 @@ export function FaqSection({ copy }: { copy: FaqCopy }) {
         {copy.items.map((item, index) => (
           /* The first one opens by default: ten identical closed bars read as an
              empty section, and it costs nothing to show what an answer is. */
-          <details className="faq-item" key={item.q} open={index === 0}>
-            <summary className="faq-q">
+          <details className="faq-item" key={item.q} open={index === 0} onToggle={handleToggle}>
+            <summary className="faq-q" onClick={handleSummaryClick}>
               <span className="faq-num" aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}
               </span>

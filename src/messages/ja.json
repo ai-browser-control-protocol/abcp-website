@@ -89,6 +89,8 @@
       "logLabel": "実行トレース",
       "statusRunning": "実行中",
       "statusDone": "完了",
+      "logToggleExpand": "実行ログを表示",
+      "logToggleCollapse": "実行ログを折りたたむ",
       "tabs": {
         "A": "Amazon 価格巡回",
         "B": "Amazon 出品",

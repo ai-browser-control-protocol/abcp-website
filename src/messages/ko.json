@@ -89,6 +89,8 @@
       "logLabel": "실행 기록",
       "statusRunning": "실행 중",
       "statusDone": "완료",
+      "logToggleExpand": "실행 기록 보기",
+      "logToggleCollapse": "실행 기록 접기",
       "tabs": {
         "A": "Amazon 가격 순찰",
         "B": "Amazon 셀러 등록",

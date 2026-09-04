@@ -89,6 +89,8 @@
       "logLabel": "Execution trace",
       "statusRunning": "Running",
       "statusDone": "Done",
+      "logToggleExpand": "View execution trace",
+      "logToggleCollapse": "Collapse execution trace",
       "tabs": {
         "A": "Amazon price patrol",
         "B": "Amazon seller listing",

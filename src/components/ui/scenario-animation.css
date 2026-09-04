@@ -201,6 +201,10 @@
   box-shadow: var(--shadow-ink);
 }
 
+.client-mobile-bar {
+  display: none;
+}
+
 .client-titlebar {
   display: flex;
   align-items: center;
@@ -2116,7 +2120,69 @@
     height: auto;
   }
   .client-panel {
-    min-height: 340px;
+    min-height: 0;
+  }
+  .client-mobile-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #111317;
+    border-bottom: 1px solid #1e2027;
+  }
+  .client-mobile-bar-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .client-mobile-bar-info .client-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #c5cbd5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .client-mobile-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 9px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    color: #9aa2b1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #262a33;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .client-mobile-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e5e9f0;
+    border-color: #38404d;
+  }
+  .client-mobile-toggle-icon {
+    font-size: 11px;
+    line-height: 1;
+    color: var(--oxide);
+  }
+  /* On mobile, client-mobile-bar handles the title & status, so client-titlebar is always hidden */
+  .client-titlebar {
+    display: none;
+  }
+  /* When collapsed (default on mobile), hide the huge trace log */
+  .client-panel:not(.is-expanded) .client-log {
+    display: none;
+  }
+  /* When expanded, cap the log height and make it scrollable */
+  .client-panel.is-expanded .client-log {
+    max-height: 280px;
+    overflow-y: auto;
   }
   .browser-panel {
     height: 460px;

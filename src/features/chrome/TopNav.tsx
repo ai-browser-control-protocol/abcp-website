@@ -82,6 +82,15 @@ export function TopNav({ chrome }: { chrome: ChromeCopy }) {
             {chrome.nav.product}
           </Link>
 
+          <Link
+            className={`nav-link${chapter === "download" ? " is-current" : ""}`}
+            href={`${chapterPath("download")}#download-platforms`}
+            aria-current={chapter === "download" ? "page" : undefined}
+            onClick={closeAll}
+          >
+            {chrome.nav.downloadSection}
+          </Link>
+
           <div className="nav-panel-langs" aria-label={chrome.a11y.localeNav}>
             <span className="nav-panel-label">{chrome.a11y.localeNav}</span>
             <div className="nav-panel-lang-list">
@@ -162,7 +171,11 @@ export function TopNav({ chrome }: { chrome: ChromeCopy }) {
             </ul>
           </div>
 
-          <Link className="nav-download-btn" href={chapterPath("download")} onClick={closeAll}>
+          <Link
+            className="nav-download-btn"
+            href={`${chapterPath("download")}#download-platforms`}
+            onClick={closeAll}
+          >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M12 3v12" />
               <path d="m7 11 5 5 5-5" />

@@ -163,7 +163,8 @@
 #demo,
 #features,
 #comparison,
-#download-macos {
+#download-macos,
+#download-platforms {
   scroll-margin-top: calc(var(--nav-h) + 16px);
 }
 

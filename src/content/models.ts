@@ -19,6 +19,7 @@ export interface ChromeCopy {
   tagline: string;
   nav: {
     product: string;
+    downloadSection: string;
     download: string;
   };
   localeLabels: Record<Locale, string>;
@@ -59,6 +60,7 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
     tagline: t.brand.tagline,
     nav: {
       product: t.nav.product,
+      downloadSection: t.nav.downloadSection,
       download: t.nav.download,
     },
     localeLabels: t.locales,

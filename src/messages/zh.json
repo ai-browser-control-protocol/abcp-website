@@ -66,8 +66,8 @@
       "description": "青渚科技有限公司，探索下一代人机协同与端侧智能基础设施。"
     },
     "download": {
-      "title": "下载体验 · WebCross",
-      "description": "下载 WebCross 智能工作台与客户端，支持 macOS 与 Windows 平台。"
+      "title": "下载客户端 · WebCross",
+      "description": "选择 macOS 或 Windows 平台，下载 WebCross 桌面客户端。"
     }
   },
   "product": {
@@ -884,8 +884,8 @@
     "figure": "青渚科技研发中心"
   },
   "download": {
-    "title": "下载 WebCross",
-    "lead": "即刻开启本地端侧自主智能浏览新纪元。支持 macOS 与 Windows 平台，轻量无侵入，一键安装即可使用。",
+    "title": "选择平台，开始让智能体工作。",
+    "lead": "WebCross 在你的电脑上运行，安装完成后即可处理繁杂的网页任务。",
     "figure": "WebCross 客户端安装与工作台预览",
     "userButton": "下载 macOS 客户端",
     "clientButton": "Windows 版本 (准备中)",

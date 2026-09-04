@@ -17,6 +17,7 @@ export function ChapterView({ model }: { model: ChapterViewModel }) {
       />
     );
   if (model.id === "company" && model.company) return <CompanyChapter copy={model.company} />;
-  if (model.id === "download" && model.download) return <DownloadChapter copy={model.download} />;
+  if (model.id === "download" && model.download)
+    return <DownloadChapter locale={model.locale} />;
   return null;
 }

@@ -9,8 +9,7 @@ export type Locale = (typeof LOCALES)[number];
 
 /** Where `/` lands, and the hreflang x-default. Kept here rather than in the
  *  routing config so the SEO layer and the router cannot drift apart. Note this
- *  is the *serving* default only: zh remains the authoring source, and the other
- *  catalogs are still generated from it by scripts/sync-locales.mjs. */
+ *  is the *serving* default only: zh remains the authoring source. */
 export const DEFAULT_LOCALE: Locale = "en";
 
 export const CHAPTER_IDS = [

@@ -41,7 +41,6 @@ import {
 } from "react";
 import { Emphasized, plain } from "./RichText";
 import { chapterPath } from "@/content/chapters";
-import { Link } from "@/i18n/navigation";
 import type { DemoCopy } from "@/content/models";
 import "./scenario-animation.css";
 
@@ -593,9 +592,9 @@ function ClientPanel({
               <div className="client-reply client-preview-note">
                 <span className="client-preview-title">{copy.previewTitle}</span>
                 <p className="client-preview-body">{copy.previewBody}</p>
-                <Link className="client-preview-cta" href={chapterPath("download")}>
+                <a className="client-preview-cta" href={chapterPath("download")}>
                   {copy.previewCta}
-                </Link>
+                </a>
               </div>
             ) : (
               <RunTurn copy={copy} entry={entry} />

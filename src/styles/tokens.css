@@ -42,7 +42,7 @@
        --on-oxide   : text placed ON an orange fill           (6.71:1)
      On the ink cards the plain --oxide is already 6.66:1, so it stays there. */
   --oxide-text: #c2410c;
-  --on-oxide: #1a0d06;
+  --on-oxide: #ffffff;
   --focus-ring: #c2410c;
   --live: var(--oxide);
   --hold: var(--oxide);

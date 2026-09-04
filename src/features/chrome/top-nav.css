@@ -408,21 +408,22 @@
   font-weight: 650;
   font-family: inherit;
   white-space: nowrap;
-  color: var(--on-oxide);
-  background: var(--oxide);
-  border: 1px solid var(--oxide);
+  color: #ffffff;
+  background: linear-gradient(180deg, #ff733d 0%, #ff5722 100%);
+  border: 1px solid rgba(255, 107, 53, 0.85);
   border-radius: var(--radius-full);
   text-decoration: none;
-  box-shadow: 0 6px 16px -8px rgba(255, 107, 53, 0.75);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 14px -3px rgba(255, 107, 53, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
   transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
 .nav-download-btn:hover {
-  background: var(--oxide-hover);
-  border-color: var(--oxide-hover);
-  color: var(--on-oxide);
+  background: linear-gradient(180deg, #ff7e4a 0%, #ea580c 100%);
+  border-color: #ea580c;
+  color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px -8px rgba(255, 107, 53, 0.85);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 6px 18px -3px rgba(255, 107, 53, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .nav-download-btn:active {

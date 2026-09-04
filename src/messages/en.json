@@ -59,7 +59,7 @@
   "seo": {
     "product": {
       "title": "WebCross · Autonomous Web Agent Browser",
-      "description": "WebCross is an on-device, custom-Chromium browser for AI agents. 100% local data sovereignty, lowest-token web automation."
+      "description": "WebCross is an on-device agent browser powered by a dedicated page engine. 100% local data sovereignty, lowest-token web automation."
     },
     "company": {
       "title": "About Company · WebCross",
@@ -457,104 +457,105 @@
       "items": [
         {
           "key": "speed",
-          "eyebrow": "Kernel-level build",
-          "title": "The fastest agent browser",
-          "body": "A custom Chromium engine — not a JavaScript shim on top of vanilla Chrome.",
-          "figure": "Custom Chromium vs Chrome + JS adapter",
+          "eyebrow": "Custom Page Engine",
+          "title": "Native Direct-Drive, Millisecond Response",
+          "body": "Traditional automation relies on injected scripts or external protocols, suffering severe latency and fragile sync. WebCross embeds its execution core directly into a custom page engine, rebuilding the control pipeline so agent actions take effect as instantaneously as human input.",
+          "figure": "Dedicated Page Engine vs Vanilla Browser + JS Shim",
           "bullets": [
-            "Commands reach the renderer directly — no JS adapter in between",
-            "No CDP / RPC round trips, no serialization overhead",
-            "The same task chain runs more than 3× faster end to end"
+            "Commands reach the render pipeline directly — no injected scripts",
+            "Zero protocol translation or RPC round trips, eliminating idle latency",
+            "Instant response on complex chains, speeding up workflows by 3×+"
           ]
         },
         {
           "key": "token",
-          "eyebrow": "AXTree + SemanticTree",
-          "title": "Same task, far fewer tokens",
-          "body": "AXTree first compresses the whole page into a lean semantic skeleton, stripping styles, scripts and nested container noise out of the DOM. SemanticTree then layers on how the controls relate — hierarchy, grouping, interaction. Compared with AXTree-only filtering the model sees a shorter context, yet reads the page structure more precisely and in richer detail.",
-          "figure": "AXTree compresses the page skeleton → SemanticTree adds the structure",
+          "eyebrow": "Perception Matrix",
+          "title": "Minimal Context",
+          "body": "Say goodbye to stuffing bloated DOM into the context window. WebCross introduces a dual-layer perception matrix — combining a global compact skeleton with on-demand deep sensing — dramatically easing model input load while delivering zero-blind-spot precision in complex workflows.",
+          "figure": "AXTree Compact Skeleton + SemanticTree Deep Frame Graph",
           "bullets": [
-            "AXTree compresses the page skeleton, cutting context by ~85%",
-            "SemanticTree fills in hierarchy, grouping and relationships",
-            "Cross-origin iframes and Shadow DOM are readable alike"
+            "Filters style and container noise to slash token consumption by 85%",
+            "Extracts actionable targets and canonical IDs for direct model execution",
+            "Penetrates nested views and isolated components on demand with zero blind spots"
           ]
         },
         {
           "key": "local",
           "eyebrow": "Data sovereignty",
           "title": "100% local data sovereignty",
-          "body": "Credentials, cookie sessions, execution logs and instructions all stay on your physical machine. Tasks are executed by the local kernel directly, page content is never relayed through a third-party server, and nothing is uploaded or phoned home.",
+          "body": "When agents handle mission-critical corporate workflows, data privacy is non-negotiable. WebCross adopts a strict local-first architecture where compute and storage stay on your device, insulating your sensitive assets from cloud exposure.",
           "figure": "Data moves only on your machine · never relayed by a third party",
           "bullets": [
-            "Credentials and cookies never leave the machine",
-            "Execution logs stay local, auditable and replayable",
-            "Page content is never relayed through a third-party server"
+            "Credentials and keys stay sealed locally and never touch the cloud",
+            "Execution traces stored on-device for transparent auditing and replay",
+            "Rendered pages stay on your intranet with zero third-party telemetry"
           ]
         },
         {
           "key": "skill",
-          "eyebrow": "Skill distillation",
-          "title": "Generate your own Skills",
-          "body": "Tasks run through the WebCross Harness can be distilled into your own Skills and Workflows once they finish. The next run calls the verified path straight away — no page discovery, more than 80% fewer tokens, and reusable across tasks.",
-          "figure": "Run the task → distill a Skill + Workflow → reuse in one click",
+          "eyebrow": "Dedicated Harness",
+          "title": "Experience Distillation",
+          "body": "Say goodbye to the repetitive overhead of exploring pages from scratch every time. WebCross captures the validated paths agents discover during complex interactions, distilling them into deterministic experience and reusable workflows — compounding know-how so repeat runs jump straight to critical steps, running faster and leaner.",
+          "figure": "Run the task → distill a Workflow → reuse in one click",
           "bullets": [
-            "A finished run can be saved as a Skill + Workflow",
-            "Reuse skips page discovery and jumps to the key steps",
-            "Skills and workflows are stored locally"
+            "Interactive exploration automatically distills into reusable assets",
+            "Experience reuse jumps straight to key steps, skipping trial and error",
+            "Distilled assets stay stored locally, ready to compose across workflows"
           ]
         },
         {
           "key": "fingerprint",
           "eyebrow": "Account safety",
-          "title": "Unique fingerprint environment",
-          "body": "Custom browser fingerprints plus on-the-fly IP switching keep multi-account work safe.",
+          "title": "Environment Matrix",
+          "body": "Enterprise-grade automation demands airtight environment isolation. WebCross builds a dedicated, clean runtime environment for each task instance — physically isolating device characteristics, network channels, and session storage to keep concurrent multi-business operations completely unentangled and controlled.",
           "figure": "Multi-instance × (multi-fingerprint + multi-exit-IP) matrix",
           "bullets": [
-            "One fingerprint and exit IP per instance",
-            "Sessions stay isolated across concurrent accounts",
-            "Fingerprint templates can be cloned and rolled out in bulk"
+            "Independent environment profiles prevent cross-talk in concurrent tasks",
+            "Session storage and local caches physically segregated for clean isolation",
+            "One-click template binding gets fleet matrices ready in seconds"
           ]
         },
         {
           "key": "takeover",
-          "eyebrow": "Human in the loop",
-          "title": "Seamless handoff on sensitive steps",
-          "body": "On captcha or 2FA, the agent pauses for you in milliseconds; resumes automatically after confirmation.",
+          "eyebrow": "Compliance Governance",
+          "title": "Human-AI Co-Governance",
+          "body": "True automation never means giving up supervision. WebCross champions a shared governance model: agents power through routine, high-volume operational paths, while sensitive payments, 2FA verifications, and key decisions are handed to humans for confirmation — preserving full execution state to strike the ideal balance of safety and autonomy.",
           "figure": "Background → takeover card → resume",
           "bullets": [
-            "Raised in milliseconds without pausing other tasks",
-            "Resumes from the exact breakpoint once verified",
-            "Handoff records stay on-device too"
+            "Sensitive checkpoints request human oversight automatically with clear accountability",
+            "Task context preserves in place to resume seamlessly once verified",
+            "Complete co-management logs recorded locally for full interaction auditability"
           ]
         }
       ],
       "figures": {
         "speed": {
-          "alt": "Kernel-level driving versus an adapter layer",
-          "kernel": "Kernel-level Chromium build",
+          "alt": "Dedicated page engine vs adapter layer execution chain",
+          "kernel": "Dedicated page engine",
           "adapter": "+ JavaScript adapter layer",
-          "serialize": "Serialize · IPC round trip",
-          "caption": "Same task chain · time spent"
+          "serialize": "Serialization · IPC round trip",
+          "caption": "Same task chain · execution time"
         },
         "tree": {
-          "alt": "DOM compressed by AXTree, then structured by SemanticTree",
+          "alt": "AXTree semantic skeleton and SemanticTree cross-origin frame graph",
           "dom": "Raw DOM",
-          "skeleton": "Compressed page skeleton",
-          "structure": "Structure filled in",
-          "plus": "+struct",
+          "skeleton": "Compact Skeleton",
+          "structure": "Deep Frame Graph",
+          "plus": "+deep",
+          "fidelity": "On Demand",
           "tags": [
-            "submit",
-            "bind",
-            "group",
-            "×30",
-            "navigate"
+            "main",
+            "shadow",
+            "target",
+            "iframe",
+            "cross"
           ],
           "pills": [
-            "Cross-origin iframes",
-            "Shadow DOM readable",
-            "Hierarchy · grouping"
+            "DOM Raw Noise",
+            "Global Page Map",
+            "Nested & Isolated Views"
           ],
-          "caption": "A shorter context, and a more precise read of the page"
+          "caption": "85%+ context reduction globally, high-fidelity deep penetration on demand"
         },
         "local": {
           "alt": "Everything stays on the machine",
@@ -564,11 +565,11 @@
         "skill": {
           "alt": "One run distilled into a reusable skill",
           "run": "Task run",
-          "distil": "Distil Skill + Workflow",
+          "distil": "Distil Workflow",
           "reuse": "One-click reuse",
           "perRun": "tokens / run",
           "first": "First run (exploring the page)",
-          "repeat": "Reusing Skill + Workflow"
+          "repeat": "Reusing Workflow"
         },
         "fingerprint": {
           "alt": "Fingerprint and exit-IP matrix",
@@ -600,32 +601,30 @@
       "products": [
         {
           "name": "WebCross",
-          "tagline": "Custom Chromium",
+          "tagline": "Custom Page Engine",
           "highlight": true,
           "values": {
-            "exec": "Kernel drives elements directly",
             "tokens": {
               "tier": "low",
               "text": "Near zero on reuse"
             },
             "time": {
               "tier": "low",
-              "text": "Seconds — skips discovery"
+              "text": "Low-latency direct drive"
             },
             "data": "100% local",
             "security": "Fingerprint + IP switch",
             "multi": "Multi-instance concurrency",
-            "twofa": "Millisecond handoff",
-            "skill": "Auto-saved Skills",
+            "twofa": "Requests assist",
+            "skill": "Auto-distilled Workflow",
             "barrier": "Natural language, zero barrier"
           }
         },
         {
           "name": "Legacy RPA",
-          "tagline": "UiPath · Yingdao",
+          "tagline": "UiPath · ShadowBot",
           "highlight": false,
           "values": {
-            "exec": false,
             "tokens": {
               "tier": "none",
               "text": "No model calls"
@@ -647,14 +646,13 @@
           "tagline": "Anthropic · extension",
           "highlight": false,
           "values": {
-            "exec": false,
             "tokens": {
               "tier": "high",
-              "text": "1k+ Token per frame"
+              "text": "1k+ Token"
             },
             "time": {
               "tier": "high",
-              "text": "1–3 s per step"
+              "text": "1–3 s"
             },
             "data": false,
             "security": false,
@@ -669,7 +667,6 @@
           "tagline": "Perplexity AI · 2025",
           "highlight": false,
           "values": {
-            "exec": false,
             "tokens": {
               "tier": "high",
               "text": "100k+ per task"
@@ -691,7 +688,6 @@
           "tagline": "Open source · Python",
           "highlight": false,
           "values": {
-            "exec": false,
             "tokens": {
               "tier": "mid",
               "text": "120k–220k per task"
@@ -713,7 +709,6 @@
           "tagline": "Cloud browser infra",
           "highlight": false,
           "values": {
-            "exec": false,
             "tokens": {
               "tier": "mid",
               "text": "Billed via cloud gateway"
@@ -732,10 +727,6 @@
         }
       ],
       "dimensions": [
-        {
-          "key": "exec",
-          "label": "Execution env"
-        },
         {
           "key": "tokens",
           "label": "Token cost"
@@ -762,7 +753,7 @@
         },
         {
           "key": "skill",
-          "label": "Custom Skill / workflow"
+          "label": "Experience Distillation"
         },
         {
           "key": "barrier",
@@ -787,16 +778,16 @@
         {
           "q": "What is WebCross?",
           "a": [
-            "WebCross is a local-first agent browser. Built on a custom Chromium kernel, it lets your agent take tasks in plain language and do the tedious web work for you — price patrols, bulk form filing, cross-platform collection and engagement. Everything runs in the background: fast, cheap in tokens, out of your way, and your data **stays 100% on your machine**.",
-            "Unlike a conventional browser, WebCross is built for agent control from the kernel up: instructions reach the render process directly, rather than through a JavaScript adapter bolted onto stock Chrome."
+            "WebCross is a local-first agent browser. Built on a dedicated page engine, it lets your agent take tasks in plain language and do the tedious web work for you — price patrols, bulk form filing, cross-platform collection and engagement. Everything runs in the background: fast, cheap in tokens, out of your way, and your data **stays 100% on your machine**.",
+            "Unlike conventional browsers, WebCross is designed for agent drive with a dedicated page engine: instructions reach the rendering pipeline directly, rather than through a JavaScript adapter bolted onto stock Chrome."
           ]
         },
         {
           "q": "How is this different from Playwright or Puppeteer?",
           "a": [
             "Playwright and Puppeteer are automation libraries you embed in code, and they drive the page through CSS selectors. The moment a site changes its DOM the script can break, and every step has to be written by hand.",
-            "WebCross is customised at the kernel level instead:",
-            "- Instructions reach the render process and the browser's internal protocols directly. With no JS adapter in between there is no CDP / RPC round trip and no serialisation cost, which makes the same task chain **over 3× faster** end to end;",
+            "WebCross adopts a dedicated page engine direct-drive approach instead:",
+            "- Built directly on a dedicated page engine, instructions reach the rendering pipeline with zero external JS adapters or RPC round trips, making the same task chain **over 3× faster** end to end;",
             "- The page is read semantically through AXTree + SemanticTree (see question 5) rather than through selectors that go stale;",
             "- A task in plain language is enough to run it — **no script to write**."
           ]
@@ -804,71 +795,66 @@
         {
           "q": "How is this different from Browser Use, Claude for Chrome and other AI browsers?",
           "a": [
-            "- **Execution environment**: most comparable tools add an extension or an adapter layer on top of stock Chrome, so every step pays a round trip. WebCross drives page elements from the kernel.",
-            "- **Token cost**: comparable tools routinely spend six figures of tokens on a single task (Browser Use around 120–220k per task, Perplexity Comet six figures per task, Claude for Chrome 1k+ tokens per frame at 1–3 seconds a step). Semantic-tree compression and skill reuse bring WebCross close to zero once a skill exists.",
+            "- **Execution environment**: most comparable tools add an extension or an adapter layer on top of stock Chrome, so every step pays a round trip. WebCross drives page elements directly via its dedicated page engine.",
+            "- **Token cost**: comparable tools routinely spend six figures of tokens on a single task (Browser Use around 120–220k per task, Perplexity Comet six figures per task, Claude for Chrome 1k+ Token, 1–3 s). Semantic-tree compression and workflow reuse bring WebCross close to zero once a workflow exists.",
             "- **Data sovereignty**: cloud tools relay page content through a third-party server. WebCross keeps credentials, cookies and run logs 100% on your machine.",
             "- **Account safety**: custom fingerprints and a switchable IP pool, so concurrent accounts never cross.",
-            "- **Human in the loop**: takeover for a captcha or 2FA is raised in milliseconds, and the run resumes from the breakpoint — no restart of the task chain.",
-            "The comparison table above sets WebCross against legacy RPA (UiPath, Yingdao), Claude for Chrome, Perplexity Comet, Browser Use and Browserbase across nine dimensions."
+            "- **Human-AI co-governance**: manual review on 2FA/captchas, resumes from breakpoint without restarting.",
+            "The comparison table above sets WebCross against legacy RPA (UiPath, Yingdao), Claude for Chrome, Perplexity Comet, Browser Use and Browserbase across eight dimensions."
           ]
         },
         {
           "q": "How do I get started?",
           "a": [
-            "# In WebCross Harness",
-            "1. **Give it a task**: type your first task into the console in plain language — say, “patrol the top 30 power banks on Amazon and pull url, title, price, rating and the 30 worst reviews” — and the agent opens the page, searches, clicks, scrapes, tidies up and exports locally, all on its own.",
-            "2. **Distil a Skill + Workflow**: when it finishes, type `/skill-create` to turn what just happened into a skill and workflow of your own, saved locally.",
-            "3. **Call the Skill**: next time just type `/your-skill-name`. The agent skips exploring the page and replays the verified path straight to the steps that matter, **saving over 80% of the tokens**.",
-            "# With a third-party agent (Claude Code, Codex, …)",
-            "WebCross also plugs into the agents you already use: copy the matching skill out of WebCross and paste it into the skills directory of Claude Code, Codex or similar, and that agent can call WebCross directly — no SDK to integrate. Coming soon."
+          "Download and install WebCross, then follow the system prompts to grant the permissions it needs on first launch. You can use WebCross's built-in Agent or connect an Agent you already work with, such as Claude Code or Codex. Describe what you want in **plain language** — for example, collect product details, fill out forms in bulk, or summarize reviews — and the Agent uses WebCross to **open pages, search, click, collect and organize information locally**.",
+          "WebCross keeps the execution trail and results on your machine, so you can follow a task's progress. If a login, captcha, payment confirmation or another step needs your attention, the task **pauses at that point and continues when you are done**. Repeated flows that have already been proven can also be saved as **Workflows** and reused later, reducing repeated exploration and token use."
           ]
         },
         {
           "q": "How does WebCross save tokens?",
           "a": [
             "The saving comes from three layers stacked together:",
-            "- **AXTree compression**: the whole page is first compressed into a lean semantic skeleton, stripping styles, scripts and nested container noise out of the DOM — around 85% less context on average;",
-            "- **SemanticTree structure**: hierarchy, grouping and interaction relationships are layered back onto that skeleton. Compared with AXTree-only filtering the model sees a shorter context yet reads the page more precisely; cross-origin iframes and Shadow DOM are readable too;",
-            "- **Skill reuse**: a task that has run becomes a skill and workflow, and the next run skips exploration entirely — another 80%+ off (see question 9)."
+            "- **AXTree semantic compression**: compresses the whole page into a lean skeleton first, stripping styles, scripts and nested container clutter to slash context by ~85%;",
+            "- **SemanticTree structure**: layers hierarchy, grouping and interactive relations atop the skeleton — compared to AXTree-only filtering, the model receives a shorter context while judging structure with richer precision; deeply nested sub-pages and isolated components are directly readable as well;",
+            "- **Workflow reuse**: a task that has run becomes a dedicated workflow, and the next run skips exploration entirely — another 80%+ off (see question 9)."
           ]
         },
         {
           "q": "Are my accounts and private data safe while the agent works?",
           "a": [
             "Yes. WebCross is **local-first end to end**:",
-            "- Credentials, cookie sessions, run logs and instructions all stay on your own machine;",
+            "- Tasks execute in the local page engine, so page content is never relayed through a third-party server — nothing uploaded, nothing sent back;",
             "- Tasks execute in the local kernel, so page content is never relayed through a third-party server — nothing uploaded, nothing sent back;",
             "- Run logs are kept locally, so everything is auditable after the fact;",
-            "- The skills and workflows you distil are saved locally too."
+            "- The workflows you distil are saved locally too."
           ]
         },
         {
           "q": "What happens at a captcha, a 2FA prompt or a payment confirmation?",
           "a": [
-            "WebCross **raises a takeover card in milliseconds**: the task pauses at the breakpoint, and the moment you have cleared it the agent resumes in the background from exactly that point. The task chain never restarts, and other concurrent instances are untouched. The takeover record stays local as well."
+            "WebCross **automatically raises a takeover card** at these moments: the task pauses in place at the breakpoint, and the moment you complete verification, the agent immediately resumes background execution from that exact point. The entire task chain never needs a restart, and other concurrent instances are completely unaffected. The takeover record stays strictly local as well."
           ]
         },
         {
           "q": "I run several accounts at once — will the platform link them?",
           "a": [
-            "Every instance gets a **fingerprint of its own**:",
-            "- User agent, timezone, fonts, canvas and GPU fingerprints are each configurable;",
-            "- The IP pool can be switched at any time, one fingerprint and one exit IP per instance;",
-            "- Sessions are fully isolated, so concurrent accounts never cross;",
-            "- Fingerprint templates can be copied and rolled out in bulk.",
-            "Multi-store commerce and multi-account social management can both run concurrently without worry."
+            "WebCross gives each account an **independent fingerprint and network environment**:",
+            "- Browser fingerprints can be configured separately, keeping each account's browsing environment distinct;",
+            "- Each account gets its own exit IP, and the IP pool can be switched at any time;",
+            "- Sessions stay isolated, so multiple accounts can run at once without crossing;",
+            "- Fingerprint templates can be copied and applied in bulk, making it easier to manage multiple storefronts or social accounts."
           ]
         },
         {
           "q": "Do repeat tasks start from scratch and spend tokens all over again?",
           "a": [
-            "No. Anything you have run through WebCross Harness can be distilled into a skill and workflow, saved locally. The next identical or similar task calls that verified path instead, skipping exploration and going straight to the steps that matter — **over 80% fewer tokens**, and reusable across tasks. Patrolling a thousand product links a day, or listing a hundred SKUs, only has to be worked out once."
+            "No. Anything you have run through WebCross Harness can be distilled into a dedicated workflow, saved locally. The next identical or similar task reuses that verified workflow instead, skipping exploration and going straight to the steps that matter — **over 80% fewer tokens**, and reusable across tasks. For high-frequency tasks like patrolling a thousand product links a day or listing a hundred SKUs, once the core flow is worked out it can be reused at scale."
           ]
         },
         {
           "q": "Which platforms are supported, and what does it cost?",
           "a": [
-            "- **Platforms**: macOS 13.0+ is available now (Apple Silicon and Intel), a ~128 MB DMG with SHA256 signature verification. Windows 11 64-bit is in architecture integration and lands shortly.",
+            "- **Platforms**: macOS 13.0+ and Windows 11+ are supported.",
             "- **Price**: every feature is free during the public beta.",
             "- **Getting started**: install it, grant the accessibility and automation permissions the system asks for, then type your first plain-language task into the console."
           ]
@@ -932,7 +918,7 @@
     "get": "Download",
     "navTitle": "Navigation",
     "productTitle": "Product & System",
-    "desc": "Built for macOS 13+ & Windows 11. Designed for privacy-first enterprise and power-user web automation.",
+    "desc": "Local web automation for macOS 13+ and Windows 11+, designed for privacy-conscious businesses and power users.",
     "securityBadge": "100% Local-First Architecture"
   },
   "a11y": {
@@ -943,6 +929,6 @@
     "stage": "Main content area",
     "menu": "Toggle mobile menu",
     "scenarioSwitcher": "Scenario switcher",
-    "featureList": "产品能力列表"
+    "featureList": "Product capabilities"
   }
 }

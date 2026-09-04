@@ -65,7 +65,7 @@ export function Footer({ chrome }: { chrome: ChromeCopy }) {
 
         <div className="footer-bottom-row">
           <span className="footer-copyright">
-            © {site.copyrightYear} {chrome.brandName} · Qingzhu Technology. All rights reserved.
+            © {site.copyrightYear} {chrome.brandName}. All rights reserved.
           </span>
           <span className="footer-security-note">{chrome.footer.securityBadge}</span>
         </div>

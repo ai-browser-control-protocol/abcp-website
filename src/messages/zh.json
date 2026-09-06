@@ -22,7 +22,7 @@
     },
     "company": {
       "title": "关于公司 · WebCross",
-      "description": "青渚科技有限公司，探索下一代人机协同与端侧智能基础设施。"
+      "description": "了解 WebCross：面向可靠网页自动化、支持人工掌控关键流程的智能体浏览器。"
     },
     "download": {
       "title": "下载客户端 · WebCross",
@@ -834,18 +834,18 @@
   },
   "company": {
     "title": "关于公司",
-    "subtitle": "青渚科技有限公司 · 探索下一代端侧智能基础设施",
-    "lead": "青渚科技致力于探索人机协同新范式，打造安全、可靠、人人可用的下一代端侧智能基础设施。",
+    "subtitle": "WebCross · 面向网页自动化的智能体浏览器",
+    "lead": "WebCross 致力于打造可靠的智能体浏览器，帮助用户完成繁杂的网页工作，并保持对关键任务的自主控制。",
     "storyTitle": "企业使命与技术初心",
     "story": "我们深信，人工智能的真正价值不在于制造无休止的文字对话，而在于深入真实的数字世界替人类解决繁复、机械的琐碎劳作。通过高可用自研页面引擎与持续完善的运行治理机制，我们致力于让用户对关键任务保持自主可控，将双手与宝贵时间归还给每一位热爱生活与创造的人。",
     "legalLabel": "企业主体",
     "cityLabel": "总部地点",
     "productLabel": "核心产品",
-    "productName": "WebCross (端侧智能体浏览器)",
+    "productName": "WebCross",
     "emailLabel": "商务与技术支持",
     "legalName": "青渚科技有限公司",
     "city": "中国 · 杭州",
-    "figure": "青渚科技研发中心"
+    "figure": "WebCross 产品环境"
   },
   "footer": {
     "localFirst": "关键过程 · 自主可控",

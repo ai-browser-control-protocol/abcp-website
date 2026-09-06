@@ -4,9 +4,8 @@
  */
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { OrbitalMark } from "@/brand/OrbitalMark";
-import { Wordmark } from "@/components/ui/Wordmark";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { chapterFromSegment, chapterPath } from "@/content/chapters";
 import { LOCALES } from "@/content/types";
@@ -67,9 +66,15 @@ export function TopNav({ chrome }: { chrome: ChromeCopy }) {
     <header className={`top-nav${navOpen ? " is-open" : ""}${scrolled ? " is-scrolled" : ""}`}>
       <div className="top-nav-row">
         <Link href={chapterPath("product")} aria-label={chrome.brandName} className="top-nav-brand-link">
-          <Wordmark mark={<OrbitalMark size={26} animated />}>
-            <span className="brand-logo-text">{chrome.brandName}</span>
-          </Wordmark>
+          <Image
+            className="brand-logo-image"
+            src="/brand/webcross-horizontal.webp"
+            alt=""
+            width={1200}
+            height={314}
+            sizes="(max-width: 720px) 124px, 166px"
+            priority
+          />
         </Link>
 
         <nav className="top-nav-links" aria-label={chrome.a11y.mainNav}>

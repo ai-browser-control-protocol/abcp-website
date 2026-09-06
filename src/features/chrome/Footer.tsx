@@ -1,7 +1,7 @@
 /** Site footer: brand statement, product entry, and copyright. */
 "use client";
 
-import { OrbitalMark } from "@/brand/OrbitalMark";
+import Image from "next/image";
 import { chapterPath } from "@/content/chapters";
 import { site } from "@/content/site";
 import type { ChromeCopy } from "@/content/models";
@@ -15,8 +15,14 @@ export function Footer({ chrome }: { chrome: ChromeCopy }) {
         <div className="footer-top-row">
           <div className="footer-brand-col">
             <div className="footer-brand-header">
-              <OrbitalMark size={20} />
-              <span className="footer-brand-name">{chrome.brandName}</span>
+              <Image
+                className="footer-brand-logo"
+                src="/brand/webcross-horizontal.webp"
+                alt={chrome.brandName}
+                width={1200}
+                height={314}
+                sizes="190px"
+              />
             </div>
             <p className="footer-tagline">{chrome.tagline}</p>
             <span className="footer-badge-local">{chrome.footer.localFirst}</span>

@@ -69,7 +69,7 @@ export function createOgImage(locale: Locale, chapter: ChapterId) {
                 letterSpacing: "1px",
               }}
             >
-              WebCross ABCP
+              WebCross
             </span>
           </div>
 
@@ -122,7 +122,7 @@ export function createOgImage(locale: Locale, chapter: ChapterId) {
             macOS & Windows Client
           </span>
           <span style={{ fontSize: 15, color: "rgba(255, 255, 255, 0.4)" }}>
-            abcp.qingzhu.tech
+            webcross.ai
           </span>
         </div>
       </div>

@@ -30,13 +30,12 @@
 .footer-brand-header {
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
-.footer-brand-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-primary);
+.footer-brand-logo {
+  display: block;
+  width: min(190px, 70vw);
+  height: auto;
 }
 
 .footer-tagline {

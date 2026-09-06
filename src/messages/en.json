@@ -22,7 +22,7 @@
     },
     "company": {
       "title": "About Company · WebCross",
-      "description": "Qingzhu Technology: Pioneering the next paradigm of human-agent collaborative intelligence infrastructure."
+      "description": "Learn about WebCross, an agent browser for reliable web automation and human-controlled execution."
     },
     "download": {
       "title": "Download WebCross · Desktop Client",
@@ -834,18 +834,18 @@
   },
   "company": {
     "title": "About Company",
-    "subtitle": "Qingzhu Technology · Next-Gen On-Device AI Infrastructure",
-    "lead": "Qingzhu Technology is dedicated to exploring new paradigms of human-AI synergy, creating secure, reliable, and accessible on-device intelligence.",
+    "subtitle": "WebCross · Agent Browser for Web Automation",
+    "lead": "WebCross builds a reliable agent browser that helps people complete repetitive web work while keeping critical tasks under their control.",
     "storyTitle": "Mission & Engineering Ethos",
     "story": "We believe the true power of AI lies not in endless chatbot conversations, but in navigating real-world digital applications to eliminate tedious, repetitive tasks. Through high-throughput proprietary page engines and continuously evolving runtime governance, we help users keep critical tasks under their control while returning time and focus to creators.",
     "legalLabel": "Corporate Entity",
     "cityLabel": "Headquarters",
     "productLabel": "Core Product",
-    "productName": "WebCross (On-Device AI Browser)",
+    "productName": "WebCross",
     "emailLabel": "Business & Support",
     "legalName": "Qingzhu Technology Ltd.",
     "city": "Hangzhou, China",
-    "figure": "Qingzhu Technology R&D Center"
+    "figure": "WebCross product environment"
   },
   "footer": {
     "localFirst": "Critical tasks · Under your control",

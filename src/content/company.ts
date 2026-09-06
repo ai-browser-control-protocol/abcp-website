@@ -1,7 +1,7 @@
 /**
- * Placeholder company record. Locale-specific legal labels live in messages.
+ * Public product contact details shared by the company chapter and structured data.
  */
 export const company = {
-  productName: "ABCP",
-  email: "hello@abcp.example",
+  productName: "WebCross",
+  email: "service@webcross.ai",
 };

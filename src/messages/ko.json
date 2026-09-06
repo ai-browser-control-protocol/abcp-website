@@ -22,7 +22,7 @@
     },
     "company": {
       "title": "회사 정보 · WebCross",
-      "description": "청저 테크: 차세대 휴먼-AI 협업 인프라 선도."
+      "description": "WebCross는 신뢰할 수 있는 웹 자동화와 중요한 과정에 대한 사용자 제어를 지원하는 에이전트 브라우저입니다."
     },
     "download": {
       "title": "WebCross 다운로드 · 데스크톱 클라이언트",
@@ -834,18 +834,18 @@
   },
   "company": {
     "title": "회사 소개",
-    "subtitle": "청저 테크 · 차세대 로컬 AI 인프라",
-    "lead": "청저 테크는 인간과 AI의 새로운 협업 패러다임을 탐구하며, 안전하고 신뢰할 수 있으며 누구나 사용할 수 있는 차세대 로컬 AI 인프라를 구축합니다.",
+    "subtitle": "WebCross · 웹 자동화를 위한 에이전트 브라우저",
+    "lead": "WebCross는 중요한 작업을 직접 관리하면서 반복적인 웹 업무를 처리할 수 있도록 돕는 신뢰할 수 있는 에이전트 브라우저를 만듭니다.",
     "storyTitle": "미션과 엔지니어링 신조",
     "story": "AI의 진정한 가치는 끝없는 채팅이 아니라 실제 디지털 세계를 탐색하여 지루하고 반복적인 작업을 끝내는 데 있다고 믿습니다. 고처리량 자체 페이지 엔진과 지속적으로 개선되는 실행 거버넌스로 사용자가 핵심 작업을 주도적으로 관리하도록 돕고, 창작자에게 시간과 집중을 돌려줍니다.",
     "legalLabel": "법인",
     "cityLabel": "본사",
     "productLabel": "핵심 제품",
-    "productName": "WebCross (로컬 AI 브라우저)",
+    "productName": "WebCross",
     "emailLabel": "비즈니스 / 지원",
     "legalName": "청저 테크",
     "city": "중국 항저우",
-    "figure": "청저 테크 R&D 센터"
+    "figure": "WebCross 제품 환경"
   },
   "footer": {
     "localFirst": "핵심 과정을 직접 관리",

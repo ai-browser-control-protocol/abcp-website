@@ -37,21 +37,10 @@
   align-items: center;
 }
 
-.top-nav-brand {
-  display: inline-flex;
-  gap: 10px;
-  align-items: center;
-  color: var(--text-primary);
-  text-decoration: none;
-}
-
-.brand-logo-text {
-  font-family: var(--font-en);
-  font-size: 17px;
-  font-weight: 750;
-  letter-spacing: -0.015em;
-  color: var(--text-primary);
-  line-height: 1;
+.brand-logo-image {
+  display: block;
+  width: clamp(124px, 13vw, 166px);
+  height: auto;
 }
 
 .top-nav-links {

@@ -1,5 +1,5 @@
 /**
- * Company chapter: corporate profile, headquarters, mission, and contact.
+ * Company chapter: product mission, capabilities, and public contact.
  * Clean, pure editorial layout focusing on company introduction.
  */
 import { FigureSlot } from "@/components/ui/FigureSlot";
@@ -36,25 +36,17 @@ export function CompanyChapter({ copy }: { copy: CompanyCopy }) {
         <p className="company-hero-lead">{copy.lead}</p>
       </header>
 
-      {/* Main Corporate Story & Philosophy Section */}
+      {/* Main Product Story & Philosophy Section */}
       <div className="company-story-section">
         <h2 className="company-story-title">{copy.storyTitle}</h2>
         <p className="company-story-body">{copy.story}</p>
       </div>
 
-      {/* Enterprise Specs & R&D Center Showcase */}
+      {/* Product Details & Contact Showcase */}
       <div className="company-editorial-showcase">
-        {/* Left: Clean Corporate Profile & Contact Info */}
+        {/* Left: Product Profile & Contact Info */}
         <div className="company-profile-col">
           <div className="company-spec-list">
-            <div className="company-spec-row">
-              <span className="spec-label">{copy.legalLabel}</span>
-              <span className="spec-value">{copy.legalName}</span>
-            </div>
-            <div className="company-spec-row">
-              <span className="spec-label">{copy.cityLabel}</span>
-              <span className="spec-value">{copy.city}</span>
-            </div>
             <div className="company-spec-row">
               <span className="spec-label">{copy.productLabel}</span>
               <span className="spec-value">{copy.productName}</span>

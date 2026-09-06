@@ -1,11 +1,11 @@
 /**
- * Replaceable site-wide placeholders used by SEO, footer, and download links.
+ * Canonical site-wide values shared by SEO, navigation, and footer rendering.
  */
 import { DEFAULT_LOCALE } from "./types";
 
 export const site = {
-  name: "ABCP",
-  url: process.env.SITE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://abcp.example",
+  name: "WebCross",
+  url: process.env.SITE_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "https://webcross.ai",
   defaultLocale: DEFAULT_LOCALE,
   twitterSite: "@abcp_example",
   twitterCreator: "@abcp_example",

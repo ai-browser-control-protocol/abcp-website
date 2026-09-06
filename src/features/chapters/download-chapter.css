@@ -431,14 +431,15 @@
 }
 
 .download-modern-title {
-  max-width: none;
+  max-width: 100%;
   margin: 22px 0 22px;
   color: var(--download-ink);
   font-size: clamp(30px, 2.65vw, 40px);
   font-weight: 790;
   letter-spacing: -0.075em;
   line-height: 1.08;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .download-modern-title span {

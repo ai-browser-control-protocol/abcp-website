@@ -12,13 +12,9 @@ type CompanyCopy = {
   lead: string;
   storyTitle: string;
   story: string;
-  legalLabel: string;
-  cityLabel: string;
   productLabel: string;
   productName: string;
   emailLabel: string;
-  legalName: string;
-  city: string;
   email: string;
   figure: string;
 };

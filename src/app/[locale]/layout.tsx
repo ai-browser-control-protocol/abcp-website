@@ -10,7 +10,6 @@ import { getChromeCopy } from "@/content/models";
 import { site } from "@/content/site";
 import { HTML_LANG, LOCALES, type Locale } from "@/content/types";
 import { SiteFrame } from "@/features/chrome/SiteFrame";
-import { jsonLd } from "@/features/seo/buildMetadata";
 import { routing } from "@/i18n/routing";
 import "@/styles/base.css";
 import "@/styles/common.css";
@@ -40,10 +39,6 @@ export default async function LocaleLayout({
   return (
     <html lang={HTML_LANG[typed]} className={inter.variable}>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(typed)) }}
-        />
         <NextIntlClientProvider locale={typed} messages={{}}>
           <SiteFrame chrome={chrome}>{children}</SiteFrame>
         </NextIntlClientProvider>

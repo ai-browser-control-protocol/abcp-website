@@ -40,13 +40,9 @@ export interface ChapterViewModel {
     lead: string;
     storyTitle: string;
     story: string;
-    legalLabel: string;
-    cityLabel: string;
     productLabel: string;
     productName: string;
     emailLabel: string;
-    legalName: string;
-    city: string;
     email: string;
     figure: string;
   };
@@ -92,13 +88,9 @@ export function getChapterModel(chapter: ChapterId, locale: Locale): ChapterView
       lead: t.company.lead,
       storyTitle: t.company.storyTitle,
       story: t.company.story,
-      legalLabel: t.company.legalLabel,
-      cityLabel: t.company.cityLabel,
       productLabel: t.company.productLabel,
       productName: t.company.productName,
       emailLabel: t.company.emailLabel,
-      legalName: t.company.legalName,
-      city: t.company.city,
       email: company.email,
       figure: t.company.figure,
     };

@@ -235,6 +235,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  flex-shrink: 0;
   margin-left: auto;
   padding: 2px 8px;
   font-family: var(--font-mono);
@@ -242,6 +243,7 @@
   color: var(--oxide);
   background: rgba(255, 107, 53, 0.12);
   border-radius: var(--radius-full);
+  white-space: nowrap;
 }
 
 .client-status.is-idle {
@@ -1367,6 +1369,10 @@
   border: 1px solid #e6e8ea;
   border-radius: 6px;
   overflow: hidden;
+  /* Keep review content at its intrinsic height instead of shrinking and clipping the body. */
+  flex-shrink: 0;
+  min-height: fit-content;
+  box-sizing: border-box;
   animation: reviewIn 460ms var(--stage-easing) both;
 }
 

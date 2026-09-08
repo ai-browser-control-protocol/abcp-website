@@ -519,9 +519,9 @@ function IllusSkill({ t }: { t: Figures["skill"] }) {
               </text>
               {/* Mini step status */}
               {i < 3 ? (
-                <path d="M120 -3 L122 0 L126 -4" fill="none" stroke="#10b981" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M118 -1 L120 2 L124 -2" fill="none" stroke="#10b981" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               ) : (
-                <circle cx="123" cy="-1.5" r="2" fill="#3b82f6" />
+                <circle cx="121" cy="0.5" r="2" fill="#3b82f6" />
               )}
             </g>
           </g>

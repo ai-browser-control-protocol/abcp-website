@@ -454,17 +454,19 @@
   line-height: 1.75;
 }
 
+/* Beta board card — mirrors the home feature cards: white card, hairline rule,
+   soft shadow, orange eyebrow over an ink headline (feature-eyebrow pattern). */
 .download-modern-beta {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(145px, 0.75fr);
   align-items: center;
   gap: 24px;
-  width: min(100%, 470px);
+  width: min(100%, 480px);
   margin-top: 38px;
-  padding: 16px 18px;
+  padding: 20px 22px;
   background: #ffffff;
-  border: 1.5px solid rgba(255, 107, 53, 0.34);
-  border-radius: 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-soft);
 }
 
@@ -486,44 +488,44 @@
   width: 10px;
   height: 10px;
   content: "";
-  background: var(--download-orange);
+  background: var(--oxide);
   transform: translateY(-50%);
   border-radius: 50%;
-  box-shadow: 0 0 0 5px var(--download-orange-pale);
+  box-shadow: 0 0 0 4px var(--oxide-subtle), 0 0 12px rgba(255, 107, 53, 0.45);
 }
 
 .download-modern-beta-main span,
 .download-modern-beta-version span {
-  color: var(--download-orange-deep);
+  color: var(--oxide-text);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
 
 .download-modern-beta-main strong {
-  color: var(--download-orange-deep);
+  color: var(--text-primary);
   font-size: 24px;
-  font-weight: 790;
-  letter-spacing: -0.055em;
+  font-weight: 800;
+  letter-spacing: -0.032em;
   line-height: 1;
 }
 
 .download-modern-beta-version {
   padding-left: 24px;
-  border-left: 1px solid var(--download-orange-line);
+  border-left: 1px solid var(--rule);
 }
 
 .download-modern-beta-version span {
-  color: var(--download-muted);
+  color: var(--text-note);
   font-size: 10px;
   letter-spacing: 0.04em;
 }
 
 .download-modern-beta-version strong {
-  color: var(--download-muted);
-  font-size: 12px;
+  color: var(--text-secondary);
+  font-size: 12.5px;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 .download-modern-release {
@@ -968,7 +970,7 @@
   .download-modern-beta-version {
     padding-top: 14px;
     padding-left: 0;
-    border-top: 1px solid var(--download-orange-line);
+    border-top: 1px solid var(--rule);
     border-left: 0;
   }
 

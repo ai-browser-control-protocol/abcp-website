@@ -1,10 +1,17 @@
 /**
- * Long-page stage with a two-layer crossfade between chapters.
+ * Long-page stage: single-layer chapter transition.
  *
- * On a chapter change the incoming chapter mounts in-flow (fading in from
- * below) while the outgoing chapter lingers as an absolute overlay (fading
- * out upward). The transition is keyed only on the chapter, so re-renders
- * during the animation can no longer interrupt it.
+ * On a chapter change the stage scrolls to top before the first paint and the
+ * incoming chapter fades in; the outgoing chapter is not kept as an overlay.
+ *
+ * Why no crossfade overlay: the chapters differ in both height (the long
+ * product page vs the shorter download page) and layout model (the product
+ * page is a contained column, the download page is full-bleed 100vw). An
+ * absolute leave layer gets clipped mid-content by the incoming chapter's
+ * height, the document height collapses under the viewport, and two opaque
+ * white pages superimposed read as a torn double exposure. Scrolling to top
+ * in a layout effect (before paint) also keeps Next's own scroll reset from
+ * clamping the viewport mid-scroll — no visible jump, no tear.
  */
 "use client";
 
@@ -20,7 +27,8 @@ const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : use
 export function PageStage({ chrome, children }: { chrome: ChromeCopy; children: ReactNode }) {
   const chapter = chapterFromSegment(useSelectedLayoutSegment());
   const [staged, setStaged] = useState<ReactNode>(children);
-  const [leaving, setLeaving] = useState<ReactNode | null>(null);
+  /** True only inside the fade-in window right after a chapter change. */
+  const [entering, setEntering] = useState(false);
   const [running, setRunning] = useState(false);
   const stagedChapterRef = useRef(chapter);
   const rafRef = useRef<number[]>([]);
@@ -35,7 +43,7 @@ export function PageStage({ chrome, children }: { chrome: ChromeCopy; children: 
     }
   };
 
-  // Chapter change: crossfade old out, new in.
+  // Chapter change: scroll to top pre-paint, swap, fade the new chapter in.
   useIsoLayoutEffect(() => {
     if (chapter === stagedChapterRef.current) return;
     const prev = stagedChapterRef.current;
@@ -43,12 +51,16 @@ export function PageStage({ chrome, children }: { chrome: ChromeCopy; children: 
     cancelPending();
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setLeaving(staged);
+    // Reset scroll before the new chapter's first paint so the document height
+    // change can never clamp the viewport mid-scroll.
+    window.scrollTo(0, 0);
     setStaged(children);
+    // First paint of the new chapter is the fade's start state (opacity 0).
+    setEntering(true);
     setRunning(false);
 
     if (!shouldAnimate(prev, chapter, reduce)) {
-      setLeaving(null);
+      setEntering(false);
       return;
     }
 
@@ -59,7 +71,7 @@ export function PageStage({ chrome, children }: { chrome: ChromeCopy; children: 
     });
     rafRef.current.push(raf1);
     timerRef.current = window.setTimeout(() => {
-      setLeaving(null);
+      setEntering(false);
       setRunning(false);
     }, DURATION + 80);
   }, [chapter]);
@@ -72,19 +84,13 @@ export function PageStage({ chrome, children }: { chrome: ChromeCopy; children: 
 
   useEffect(() => () => cancelPending(), []);
 
-  const animating = leaving !== null;
   return (
-    <main className="page-stage" aria-busy={animating} aria-label={chrome.a11y.stage} id="stage">
+    <main className="page-stage" aria-label={chrome.a11y.stage} id="stage">
       <div className="page-stage-body">
         <div className="page-stage-canvas">
-          <div className={`page-stage-layer${animating ? ` is-enter${running ? " is-running" : ""}` : ""}`}>
+          <div className={`page-stage-layer${entering ? ` is-enter${running ? " is-running" : ""}` : ""}`}>
             {staged}
           </div>
-          {leaving !== null ? (
-            <div className={`page-stage-layer is-leave${running ? " is-running" : ""}`} aria-hidden="true">
-              {leaving}
-            </div>
-          ) : null}
         </div>
       </div>
     </main>

@@ -33,21 +33,6 @@
   transform: none;
 }
 
-.page-stage-layer.is-leave {
-  position: absolute;
-  inset: 0;
-  opacity: 1;
-  transform: none;
-  overflow: hidden;
-  pointer-events: none;
-  will-change: opacity, transform;
-}
-
-.page-stage-layer.is-leave.is-running {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-
 @media (max-width: 720px) {
   .page-stage-body {
     padding: 20px var(--space-4) 64px;

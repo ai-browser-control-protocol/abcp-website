@@ -32,4 +32,4 @@ pnpm build
 | Team names | `src/content/team.ts` |
 | Company email | `src/content/company.ts` |
 | Copy | `src/messages/{zh,ja,ko,en}.json` |
-| Download links | `src/features/chapters/DownloadChapter.tsx` — enable the buttons and set `href` |
+| Download links | fetched from GitHub Releases in `src/content/releases.ts` |

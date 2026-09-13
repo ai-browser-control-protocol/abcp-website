@@ -843,6 +843,57 @@
     "emailLabel": "비즈니스 / 지원",
     "figure": "WebCross 제품 환경"
   },
+  "download": {
+    "eyebrow": "클라이언트 다운로드 / DESKTOP",
+    "titleLead": "플랫폼을 선택하고, ",
+    "titleAccent": "에이전트를 바로 시작하세요.",
+    "lead": "WebCross는 컴퓨터에서 실행되며, 설치 후 복잡한 웹 작업을 바로 처리할 수 있습니다.",
+    "betaLabel": "퍼블릭 베타",
+    "betaValue": "전체 기능 무료",
+    "currentVersion": "현재 버전",
+    "packageSize": "설치 파일 크기 준비 중",
+    "panelOverline": "클라이언트 다운로드 / DESKTOP",
+    "panelTitle": "플랫폼 선택",
+    "panelLead": "시스템에 맞는 버전을 선택하세요. 언제든 플랫폼을 바꿀 수 있습니다.",
+    "supportedLabel": "지원 플랫폼",
+    "supportedValue": "macOS · Windows",
+    "recommendation": "이 기기에 권장",
+    "platforms": {
+      "macos": {
+        "name": "macOS",
+        "requirements": ["macOS 13 이상", "Apple Silicon"],
+        "download": "macOS 다운로드"
+      },
+      "windows": {
+        "name": "Windows",
+        "requirements": ["Windows 11", "64비트"],
+        "download": "Windows 다운로드"
+      }
+    },
+    "faqTitleLead": "시작하기 ",
+    "faqTitleAccent": "전에 확인하세요.",
+    "faqIntro": "시스템이나 설치 방법을 확인 중이라면 아래의 간단한 설명을 참고하세요.",
+    "faq": [
+      {
+        "question": "어떤 시스템을 지원하나요?",
+        "answer": "현재 macOS 13 이상과 Windows 11 64비트를 지원합니다. 최종 호환성은 설치 파일 안내를 확인하세요."
+      },
+      {
+        "question": "어떤 버전을 다운로드해야 하나요?",
+        "answer": "브라우저의 시스템을 기준으로 권장 플랫폼을 표시합니다. 다른 플랫폼도 직접 선택할 수 있으며 자동 다운로드는 진행되지 않습니다."
+      },
+      {
+        "question": "추가 설정이 필요한가요?",
+        "answer": "시스템 안내에 따라 필요한 권한을 허용한 뒤 WebCross를 열고 작업 공간에 첫 자연어 작업을 입력하면 됩니다."
+      }
+    ],
+    "closingQuestion": "준비되셨나요?",
+    "closingTitle": "에이전트를 바로 시작하세요.",
+    "closingCta": "다운로드 옵션으로 돌아가기",
+    "toastTitle": "프로토타입 안내",
+    "toastMessage": "%platform% 설치 파일 주소가 아직 준비되지 않았습니다. 정식 페이지에서는 여기서 다운로드가 시작됩니다.",
+    "toastClose": "알림 닫기"
+  },
   "footer": {
     "localFirst": "핵심 과정을 직접 관리",
     "get": "다운로드",

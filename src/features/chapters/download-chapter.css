@@ -703,6 +703,13 @@
   line-height: 1.65;
 }
 
+.download-modern-platform-size {
+  margin-top: 6px;
+  color: var(--download-ink);
+  font-size: 13px;
+  font-weight: 720;
+}
+
 .download-modern-platform-actions {
   display: grid;
   align-content: end;

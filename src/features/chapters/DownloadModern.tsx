@@ -2,270 +2,12 @@
 "use client";
 
 import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
+import type { DesktopReleases, DesktopPlatform as Platform } from "@/content/releases";
 import type { Locale } from "@/content/types";
+import type { Messages } from "@/i18n/messages";
 
-type Platform = "macos" | "windows";
-
-type ReleaseConfig = {
-  url: string;
-  version: string;
-  size: string;
-};
-
-/**
- * Release values are intentionally kept together so publishing an installer
- * later does not require changing the page structure or its interactions.
- */
-export const RELEASE_CONFIG: Record<Platform, ReleaseConfig> = {
-  macos: { url: "", version: "", size: "" },
-  windows: { url: "", version: "", size: "" },
-};
-
-type ModernPlatformCopy = {
-  name: string;
-  requirements: string[];
-  download: string;
-};
-
-type ModernFaqItem = {
-  question: string;
-  answer: string;
-};
-
-type ModernCopy = {
-  eyebrow: string;
-  titleLead: string;
-  titleAccent: string;
-  lead: string;
-  betaLabel: string;
-  betaValue: string;
-  currentVersion: string;
-  packageSize: string;
-  panelOverline: string;
-  panelTitle: string;
-  panelLead: string;
-  supportedLabel: string;
-  supportedValue: string;
-  recommendation: string;
-  platforms: Record<Platform, ModernPlatformCopy>;
-  faqTitleLead: string;
-  faqTitleAccent: string;
-  faqIntro: string;
-  faq: ModernFaqItem[];
-  closingQuestion: string;
-  closingTitle: string;
-  closingCta: string;
-  toastTitle: string;
-  toastMessage: string;
-  toastClose: string;
-};
-
-const MODERN_COPY: Record<Locale, ModernCopy> = {
-  zh: {
-    eyebrow: "客户端下载 / DESKTOP",
-    titleLead: "选择平台，",
-    titleAccent: "开始让智能体工作。",
-    lead: "WebCross 在你的电脑上运行，安装完成后即可处理繁杂的网页任务。",
-    betaLabel: "公测阶段",
-    betaValue: "全功能免费",
-    currentVersion: "当前版本",
-    packageSize: "安装包大小待配置",
-    panelOverline: "下载客户端 / DESKTOP",
-    panelTitle: "选择你的平台",
-    panelLead: "按系统选择版本，平台之间可以随时切换。",
-    supportedLabel: "支持平台",
-    supportedValue: "macOS · Windows",
-    recommendation: "推荐用于此设备",
-    platforms: {
-      macos: {
-        name: "macOS",
-        requirements: ["macOS 13 或更高版本", "Apple Silicon / Intel"],
-        download: "下载 macOS 版",
-      },
-      windows: {
-        name: "Windows",
-        requirements: ["Windows 11", "64 位"],
-        download: "下载 Windows 版",
-      },
-    },
-    faqTitleLead: "先了解，",
-    faqTitleAccent: "再开始。",
-    faqIntro: "如果你还在确认系统或安装方式，可以先查看下面的简短说明。",
-    faq: [
-      {
-        question: "支持哪些系统？",
-        answer: "当前支持 macOS 13 或更高版本，以及 Windows 11 64 位版本。具体兼容性以正式安装包说明为准。",
-      },
-      {
-        question: "下载哪个版本？",
-        answer: "页面会根据浏览器所在系统给出推荐，你仍然可以手动选择另一个平台，不会自动替你下载。",
-      },
-      {
-        question: "需要额外配置吗？",
-        answer: "安装后按系统提示完成必要授权，再打开 WebCross，在工作台输入你的第一条自然语言任务即可。",
-      },
-    ],
-    closingQuestion: "准备好了？",
-    closingTitle: "让智能体开始工作。",
-    closingCta: "回到下载选项",
-    toastTitle: "这是原型演示",
-    toastMessage: "%platform% 安装包地址待配置。正式页面将在这里开始下载。",
-    toastClose: "关闭提示",
-  },
-  en: {
-    eyebrow: "DOWNLOAD CLIENT / DESKTOP",
-    titleLead: "Choose your platform, ",
-    titleAccent: "put your agent to work.",
-    lead: "WebCross runs on your computer, ready to handle complex web tasks after installation.",
-    betaLabel: "PUBLIC BETA",
-    betaValue: "FULL ACCESS, FREE",
-    currentVersion: "Current release",
-    packageSize: "Package size pending",
-    panelOverline: "DOWNLOAD CLIENT / DESKTOP",
-    panelTitle: "Choose your platform",
-    panelLead: "Select a version for your system. Switch platforms anytime.",
-    supportedLabel: "Supported platforms",
-    supportedValue: "macOS · Windows",
-    recommendation: "Recommended for this device",
-    platforms: {
-      macos: {
-        name: "macOS",
-        requirements: ["macOS 13 or later", "Apple Silicon / Intel"],
-        download: "Download for macOS",
-      },
-      windows: {
-        name: "Windows",
-        requirements: ["Windows 11", "64-bit"],
-        download: "Download for Windows",
-      },
-    },
-    faqTitleLead: "Know ",
-    faqTitleAccent: "before you start.",
-    faqIntro: "If you are checking your system or installation path, these short answers should help.",
-    faq: [
-      {
-        question: "Which systems are supported?",
-        answer: "The current release supports macOS 13 or later and Windows 11 64-bit. Check the installer notes for final compatibility details.",
-      },
-      {
-        question: "Which version should I download?",
-        answer: "The page recommends a platform based on your browser's system. You can still choose the other platform; nothing downloads automatically.",
-      },
-      {
-        question: "Do I need extra configuration?",
-        answer: "Complete any permissions requested by your system, open WebCross, and enter your first natural-language task in the workspace.",
-      },
-    ],
-    closingQuestion: "Ready to start?",
-    closingTitle: "Put your agent to work.",
-    closingCta: "Back to downloads",
-    toastTitle: "Prototype demo",
-    toastMessage: "The %platform% installer URL is pending. This is where the live download will start.",
-    toastClose: "Dismiss notification",
-  },
-  ja: {
-    eyebrow: "クライアントをダウンロード / DESKTOP",
-    titleLead: "プラットフォームを選んで、",
-    titleAccent: "エージェントを動かそう。",
-    lead: "WebCross はコンピューター上で動作し、インストール後すぐに複雑な Web タスクを処理できます。",
-    betaLabel: "パブリックベータ",
-    betaValue: "全機能無料",
-    currentVersion: "現在のバージョン",
-    packageSize: "インストーラーサイズは未設定",
-    panelOverline: "クライアントをダウンロード / DESKTOP",
-    panelTitle: "プラットフォームを選択",
-    panelLead: "お使いのシステムに合うバージョンを選択。いつでも切り替えられます。",
-    supportedLabel: "対応プラットフォーム",
-    supportedValue: "macOS · Windows",
-    recommendation: "このデバイスにおすすめ",
-    platforms: {
-      macos: {
-        name: "macOS",
-        requirements: ["macOS 13 以降", "Apple Silicon / Intel"],
-        download: "macOS 版をダウンロード",
-      },
-      windows: {
-        name: "Windows",
-        requirements: ["Windows 11", "64 ビット"],
-        download: "Windows 版をダウンロード",
-      },
-    },
-    faqTitleLead: "始める",
-    faqTitleAccent: "前に確認。",
-    faqIntro: "システムやインストール方法を確認したい場合は、以下の説明をご覧ください。",
-    faq: [
-      {
-        question: "対応しているシステムは？",
-        answer: "現在は macOS 13 以降と Windows 11 64 ビットに対応しています。最終的な互換性はインストーラーの説明をご確認ください。",
-      },
-      {
-        question: "どのバージョンをダウンロードすればよいですか？",
-        answer: "ブラウザーのシステムに合わせておすすめを表示します。別のプラットフォームも手動で選択でき、自動でダウンロードすることはありません。",
-      },
-      {
-        question: "追加設定は必要ですか？",
-        answer: "システムの案内に従って必要な権限を許可し、WebCross を開いてワークスペースに最初の自然言語タスクを入力してください。",
-      },
-    ],
-    closingQuestion: "準備はできましたか？",
-    closingTitle: "エージェントを動かそう。",
-    closingCta: "ダウンロードへ戻る",
-    toastTitle: "プロトタイプの表示",
-    toastMessage: "%platform% のインストーラー URL は未設定です。正式版ではここからダウンロードが始まります。",
-    toastClose: "通知を閉じる",
-  },
-  ko: {
-    eyebrow: "클라이언트 다운로드 / DESKTOP",
-    titleLead: "플랫폼을 선택하고, ",
-    titleAccent: "에이전트를 바로 시작하세요.",
-    lead: "WebCross는 컴퓨터에서 실행되며, 설치 후 복잡한 웹 작업을 바로 처리할 수 있습니다.",
-    betaLabel: "퍼블릭 베타",
-    betaValue: "전체 기능 무료",
-    currentVersion: "현재 버전",
-    packageSize: "설치 파일 크기 준비 중",
-    panelOverline: "클라이언트 다운로드 / DESKTOP",
-    panelTitle: "플랫폼 선택",
-    panelLead: "시스템에 맞는 버전을 선택하세요. 언제든 플랫폼을 바꿀 수 있습니다.",
-    supportedLabel: "지원 플랫폼",
-    supportedValue: "macOS · Windows",
-    recommendation: "이 기기에 권장",
-    platforms: {
-      macos: {
-        name: "macOS",
-        requirements: ["macOS 13 이상", "Apple Silicon / Intel"],
-        download: "macOS 다운로드",
-      },
-      windows: {
-        name: "Windows",
-        requirements: ["Windows 11", "64비트"],
-        download: "Windows 다운로드",
-      },
-    },
-    faqTitleLead: "시작하기 ",
-    faqTitleAccent: "전에 확인하세요.",
-    faqIntro: "시스템이나 설치 방법을 확인 중이라면 아래의 간단한 설명을 참고하세요.",
-    faq: [
-      {
-        question: "어떤 시스템을 지원하나요?",
-        answer: "현재 macOS 13 이상과 Windows 11 64비트를 지원합니다. 최종 호환성은 설치 파일 안내를 확인하세요.",
-      },
-      {
-        question: "어떤 버전을 다운로드해야 하나요?",
-        answer: "브라우저의 시스템을 기준으로 권장 플랫폼을 표시합니다. 다른 플랫폼도 직접 선택할 수 있으며 자동 다운로드는 진행되지 않습니다.",
-      },
-      {
-        question: "추가 설정이 필요한가요?",
-        answer: "시스템 안내에 따라 필요한 권한을 허용한 뒤 WebCross를 열고 작업 공간에 첫 자연어 작업을 입력하면 됩니다.",
-      },
-    ],
-    closingQuestion: "준비되셨나요?",
-    closingTitle: "에이전트를 바로 시작하세요.",
-    closingCta: "다운로드 옵션으로 돌아가기",
-    toastTitle: "프로토타입 안내",
-    toastMessage: "%platform% 설치 파일 주소가 아직 준비되지 않았습니다. 정식 페이지에서는 여기서 다운로드가 시작됩니다.",
-    toastClose: "알림 닫기",
-  },
-};
+type DownloadCopy = Messages["download"];
+type PlatformCopy = DownloadCopy["platforms"][Platform];
 
 type NavigatorWithUserAgentData = Navigator & {
   userAgentData?: {
@@ -288,8 +30,12 @@ function detectPlatform(): Platform | null {
   return null;
 }
 
-function sharedReleaseValue(field: "version" | "size", fallback: string): string {
-  const values = Object.values(RELEASE_CONFIG)
+function sharedReleaseValue(
+  releases: DesktopReleases,
+  field: "version" | "size",
+  fallback: string,
+): string {
+  const values = Object.values(releases)
     .map((release) => release[field])
     .filter(Boolean);
   return values.length > 0 && new Set(values).size === 1 ? values[0] : fallback;
@@ -330,14 +76,21 @@ function ReturnIcon() {
   );
 }
 
-export function DownloadModern({ locale }: { locale: Locale }) {
-  const copy = MODERN_COPY[locale];
+export function DownloadModern({
+  locale,
+  copy,
+  releases,
+}: {
+  locale: Locale;
+  copy: DownloadCopy;
+  releases: DesktopReleases;
+}) {
   const [recommendedPlatform, setRecommendedPlatform] = useState<Platform | null>(null);
   const [toastPlatform, setToastPlatform] = useState<Platform | null>(null);
   const [lastTrigger, setLastTrigger] = useState<HTMLButtonElement | null>(null);
 
-  const currentVersion = sharedReleaseValue("version", copy.currentVersion);
-  const packageSize = sharedReleaseValue("size", copy.packageSize);
+  const currentVersion = sharedReleaseValue(releases, "version", copy.currentVersion);
+  const packageSize = sharedReleaseValue(releases, "size", "");
 
   useEffect(() => {
     const frameId = window.requestAnimationFrame(() => {
@@ -372,7 +125,7 @@ export function DownloadModern({ locale }: { locale: Locale }) {
   }, [lastTrigger, toastPlatform]);
 
   const handleDownload = (platform: Platform, event: MouseEvent<HTMLButtonElement>) => {
-    const release = RELEASE_CONFIG[platform];
+    const release = releases[platform];
     setLastTrigger(event.currentTarget);
 
     if (release.url) {
@@ -408,7 +161,7 @@ export function DownloadModern({ locale }: { locale: Locale }) {
                 </div>
                 <div className="download-modern-beta-version">
                   <span>{currentVersion}</span>
-                  <strong>{packageSize}</strong>
+                  {packageSize ? <strong>{packageSize}</strong> : null}
                 </div>
               </div>
             </div>
@@ -430,6 +183,7 @@ export function DownloadModern({ locale }: { locale: Locale }) {
                 <PlatformCard
                   platform="macos"
                   copy={copy.platforms.macos}
+                  size={releases.macos.size}
                   recommended={recommendedPlatform === "macos"}
                   recommendation={copy.recommendation}
                   onDownload={handleDownload}
@@ -439,6 +193,7 @@ export function DownloadModern({ locale }: { locale: Locale }) {
                 <PlatformCard
                   platform="windows"
                   copy={copy.platforms.windows}
+                  size={releases.windows.size}
                   recommended={recommendedPlatform === "windows"}
                   recommendation={copy.recommendation}
                   onDownload={handleDownload}
@@ -525,13 +280,15 @@ export function DownloadModern({ locale }: { locale: Locale }) {
 function PlatformCard({
   platform,
   copy,
+  size,
   recommended,
   recommendation,
   onDownload,
   children,
 }: {
   platform: Platform;
-  copy: ModernPlatformCopy;
+  copy: PlatformCopy;
+  size: string;
   recommended: boolean;
   recommendation: string;
   onDownload: (platform: Platform, event: MouseEvent<HTMLButtonElement>) => void;
@@ -553,6 +310,7 @@ function PlatformCard({
           {copy.requirements.map((requirement) => (
             <span key={requirement}>{requirement}</span>
           ))}
+          {size ? <span className="download-modern-platform-size">{size}</span> : null}
         </p>
       </div>
       <div className="download-modern-platform-actions">

@@ -843,6 +843,57 @@
     "emailLabel": "商务与技术支持",
     "figure": "WebCross 产品环境"
   },
+  "download": {
+    "eyebrow": "客户端下载 / DESKTOP",
+    "titleLead": "选择平台，",
+    "titleAccent": "开始让智能体工作。",
+    "lead": "WebCross 在你的电脑上运行，安装完成后即可处理繁杂的网页任务。",
+    "betaLabel": "公测阶段",
+    "betaValue": "全功能免费",
+    "currentVersion": "当前版本",
+    "packageSize": "安装包大小待配置",
+    "panelOverline": "下载客户端 / DESKTOP",
+    "panelTitle": "选择你的平台",
+    "panelLead": "按系统选择版本，平台之间可以随时切换。",
+    "supportedLabel": "支持平台",
+    "supportedValue": "macOS · Windows",
+    "recommendation": "推荐用于此设备",
+    "platforms": {
+      "macos": {
+        "name": "macOS",
+        "requirements": ["macOS 13 或更高版本", "Apple Silicon"],
+        "download": "下载 macOS 版"
+      },
+      "windows": {
+        "name": "Windows",
+        "requirements": ["Windows 11", "64 位"],
+        "download": "下载 Windows 版"
+      }
+    },
+    "faqTitleLead": "先了解，",
+    "faqTitleAccent": "再开始。",
+    "faqIntro": "如果你还在确认系统或安装方式，可以先查看下面的简短说明。",
+    "faq": [
+      {
+        "question": "支持哪些系统？",
+        "answer": "当前支持 macOS 13 或更高版本，以及 Windows 11 64 位版本。具体兼容性以正式安装包说明为准。"
+      },
+      {
+        "question": "下载哪个版本？",
+        "answer": "页面会根据浏览器所在系统给出推荐，你仍然可以手动选择另一个平台，不会自动替你下载。"
+      },
+      {
+        "question": "需要额外配置吗？",
+        "answer": "安装后按系统提示完成必要授权，再打开 WebCross，在工作台输入你的第一条自然语言任务即可。"
+      }
+    ],
+    "closingQuestion": "准备好了？",
+    "closingTitle": "让智能体开始工作。",
+    "closingCta": "回到下载选项",
+    "toastTitle": "这是原型演示",
+    "toastMessage": "%platform% 安装包地址待配置。正式页面将在这里开始下载。",
+    "toastClose": "关闭提示"
+  },
   "footer": {
     "localFirst": "关键过程 · 自主可控",
     "get": "下载客户端",

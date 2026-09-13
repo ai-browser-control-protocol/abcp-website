@@ -13,8 +13,8 @@ export function ChapterView({ model }: { model: ChapterViewModel }) {
       <ProductChapter copy={model.product} />
     ) : model.id === "company" && model.company ? (
       <CompanyChapter copy={model.company} />
-    ) : model.id === "download" ? (
-      <DownloadChapter locale={model.locale} />
+    ) : model.id === "download" && model.download ? (
+      <DownloadChapter locale={model.locale} copy={model.download} />
     ) : null;
 
   return (

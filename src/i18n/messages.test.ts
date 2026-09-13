@@ -19,7 +19,6 @@ const REMOVED_PATHS = [
   "a11y.rail",
   "a11y.scenarioSwitcher",
   "a11y.featureList",
-  "download",
 ] as const;
 
 function readPath(value: unknown, path: string): unknown {

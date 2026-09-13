@@ -843,6 +843,57 @@
     "emailLabel": "Business & Support",
     "figure": "WebCross product environment"
   },
+  "download": {
+    "eyebrow": "DOWNLOAD CLIENT / DESKTOP",
+    "titleLead": "Choose your platform, ",
+    "titleAccent": "put your agent to work.",
+    "lead": "WebCross runs on your computer, ready to handle complex web tasks after installation.",
+    "betaLabel": "PUBLIC BETA",
+    "betaValue": "FULL ACCESS, FREE",
+    "currentVersion": "Current release",
+    "packageSize": "Package size pending",
+    "panelOverline": "DOWNLOAD CLIENT / DESKTOP",
+    "panelTitle": "Choose your platform",
+    "panelLead": "Select a version for your system. Switch platforms anytime.",
+    "supportedLabel": "Supported platforms",
+    "supportedValue": "macOS · Windows",
+    "recommendation": "Recommended for this device",
+    "platforms": {
+      "macos": {
+        "name": "macOS",
+        "requirements": ["macOS 13 or later", "Apple Silicon"],
+        "download": "Download for macOS"
+      },
+      "windows": {
+        "name": "Windows",
+        "requirements": ["Windows 11", "64-bit"],
+        "download": "Download for Windows"
+      }
+    },
+    "faqTitleLead": "Know ",
+    "faqTitleAccent": "before you start.",
+    "faqIntro": "If you are checking your system or installation path, these short answers should help.",
+    "faq": [
+      {
+        "question": "Which systems are supported?",
+        "answer": "The current release supports macOS 13 or later and Windows 11 64-bit. Check the installer notes for final compatibility details."
+      },
+      {
+        "question": "Which version should I download?",
+        "answer": "The page recommends a platform based on your browser's system. You can still choose the other platform; nothing downloads automatically."
+      },
+      {
+        "question": "Do I need extra configuration?",
+        "answer": "Complete any permissions requested by your system, open WebCross, and enter your first natural-language task in the workspace."
+      }
+    ],
+    "closingQuestion": "Ready to start?",
+    "closingTitle": "Put your agent to work.",
+    "closingCta": "Back to downloads",
+    "toastTitle": "Prototype demo",
+    "toastMessage": "The %platform% installer URL is pending. This is where the live download will start.",
+    "toastClose": "Dismiss notification"
+  },
   "footer": {
     "localFirst": "Critical tasks · Under your control",
     "get": "Download",

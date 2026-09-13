@@ -34,6 +34,7 @@ export interface ChapterViewModel {
   seoTitle: string;
   seoDescription: string;
   product?: Messages["product"];
+  download?: Messages["download"];
   company?: {
     title: string;
     subtitle: string;
@@ -81,6 +82,7 @@ export function getChapterModel(chapter: ChapterId, locale: Locale): ChapterView
     seoDescription: seo.description,
   };
   if (chapter === "product") model.product = t.product;
+  if (chapter === "download") model.download = t.download;
   if (chapter === "company") {
     model.company = {
       title: t.company.title,

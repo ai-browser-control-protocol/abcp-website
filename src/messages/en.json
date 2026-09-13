@@ -5,9 +5,10 @@
     "tagline": "A faster, lower-token web executor for your agent. Runs quietly in the background, never interrupts you."
   },
   "nav": {
-    "product": "Product Introduction",
+    "product": "Product",
     "downloadSection": "Download",
-    "download": "Download"
+    "download": "Download",
+    "github": "GitHub"
   },
   "locales": {
     "zh": "简体中文",
@@ -820,7 +821,7 @@
         {
           "q": "Which platforms are supported, and what does it cost?",
           "a": [
-            "- **Platforms**: macOS 13.0+ and Windows 11+ are supported.",
+            "- **Platforms**: macOS 13.0+ and Windows 10 / 11+ are supported.",
             "- **Price**: every feature is free during the public beta.",
             "- **Getting started**: install it, grant the accessibility and automation permissions the system asks for, then type your first plain-language task into the console."
           ]
@@ -866,7 +867,7 @@
       },
       "windows": {
         "name": "Windows",
-        "requirements": ["Windows 11", "64-bit"],
+        "requirements": ["Windows 10 / 11", "64-bit"],
         "download": "Download for Windows"
       }
     },
@@ -876,7 +877,7 @@
     "faq": [
       {
         "question": "Which systems are supported?",
-        "answer": "The current release supports macOS 13 or later and Windows 11 64-bit. Check the installer notes for final compatibility details."
+        "answer": "The current release supports macOS 13 or later and Windows 10 / 11 64-bit. Check the installer notes for final compatibility details."
       },
       {
         "question": "Which version should I download?",
@@ -898,13 +899,15 @@
     "localFirst": "Critical tasks · Under your control",
     "get": "Download",
     "productTitle": "Product & System",
-    "desc": "Web automation for macOS 13+ and Windows 11+, designed for businesses and power users who value reliable control.",
+    "desc": "Web automation for macOS 13+ and Windows 10 / 11, designed for businesses and power users who value reliable control.",
     "securityBadge": "A controllable agent execution environment"
   },
   "a11y": {
     "mainNav": "Main navigation",
     "localeNav": "Language switcher",
     "stage": "Main content area",
-    "menu": "Toggle mobile menu"
+    "menu": "Toggle mobile menu",
+    "github": "GitHub repository",
+    "githubStars": "GitHub, {count} stars"
   }
 }

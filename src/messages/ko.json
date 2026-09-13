@@ -7,7 +7,8 @@
   "nav": {
     "product": "제품 소개",
     "downloadSection": "다운로드",
-    "download": "다운로드"
+    "download": "다운로드",
+    "github": "GitHub"
   },
   "locales": {
     "zh": "简体中文",
@@ -820,7 +821,7 @@
         {
           "q": "어떤 플랫폼을 지원하고, 요금은 어떻게 되나요?",
           "a": [
-            "- **플랫폼**: macOS 13.0+ 및 Windows 11+를 지원합니다.",
+            "- **플랫폼**: macOS 13.0+ 및 Windows 10 / 11+를 지원합니다.",
             "- **가격**: 공개 베타 기간 동안 모든 기능이 무료입니다.",
             "- **시작하기**: 설치 후 시스템이 요청하는 접근성 및 자동화 권한을 허용하고, 콘솔에 첫 자연어 작업을 입력하세요."
           ]
@@ -866,7 +867,7 @@
       },
       "windows": {
         "name": "Windows",
-        "requirements": ["Windows 11", "64비트"],
+        "requirements": ["Windows 10 / 11", "64비트"],
         "download": "Windows 다운로드"
       }
     },
@@ -876,7 +877,7 @@
     "faq": [
       {
         "question": "어떤 시스템을 지원하나요?",
-        "answer": "현재 macOS 13 이상과 Windows 11 64비트를 지원합니다. 최종 호환성은 설치 파일 안내를 확인하세요."
+        "answer": "현재 macOS 13 이상과 Windows 10 / 11 64비트를 지원합니다. 최종 호환성은 설치 파일 안내를 확인하세요."
       },
       {
         "question": "어떤 버전을 다운로드해야 하나요?",
@@ -898,13 +899,15 @@
     "localFirst": "핵심 과정을 직접 관리",
     "get": "다운로드",
     "productTitle": "제품 및 시스템",
-    "desc": "macOS 13+ 및 Windows 11+에서 사용할 수 있으며, 기업과 전문 사용자를 위한 신뢰할 수 있는 웹 자동화 기능을 제공합니다.",
+    "desc": "macOS 13+ 및 Windows 10 / 11에서 사용할 수 있으며, 기업과 전문 사용자를 위한 신뢰할 수 있는 웹 자동화 기능을 제공합니다.",
     "securityBadge": "관리하기 쉬운 에이전트 실행 환경"
   },
   "a11y": {
     "mainNav": "기본 내비게이션",
     "localeNav": "언어 전환",
     "stage": "메인 콘텐츠",
-    "menu": "모바일 메뉴"
+    "menu": "모바일 메뉴",
+    "github": "GitHub 저장소",
+    "githubStars": "GitHub, 별 {count}개"
   }
 }

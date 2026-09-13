@@ -1,6 +1,6 @@
 /**
  * The single site navigation row: wordmark, product link, language menu,
- * and quick download CTA.
+ * download CTA, and GitHub star link.
  */
 "use client";
 
@@ -8,12 +8,12 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { chapterFromSegment, chapterPath } from "@/content/chapters";
+import type { ChromeCopy, GithubNavDisplay } from "@/content/models";
 import { LOCALES } from "@/content/types";
-import type { ChromeCopy } from "@/content/models";
 import { Link } from "@/i18n/navigation";
 import "./top-nav.css";
 
-export function TopNav({ chrome }: { chrome: ChromeCopy }) {
+export function TopNav({ chrome, github }: { chrome: ChromeCopy; github: GithubNavDisplay }) {
   const chapter = chapterFromSegment(useSelectedLayoutSegment());
   const [navOpen, setNavOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -189,6 +189,8 @@ export function TopNav({ chrome }: { chrome: ChromeCopy }) {
             <span>{chrome.nav.download}</span>
           </Link>
 
+          <GithubNavLink chrome={chrome} github={github} />
+
           <button
             className="menu-toggle"
             type="button"
@@ -203,5 +205,39 @@ export function TopNav({ chrome }: { chrome: ChromeCopy }) {
         </div>
       </div>
     </header>
+  );
+}
+
+function GithubNavLink({ chrome, github }: { chrome: ChromeCopy; github: GithubNavDisplay }) {
+  const starCount = github.starCount;
+  const ariaLabel =
+    starCount != null ? chrome.a11y.githubStars.replace("{count}", starCount) : chrome.a11y.github;
+
+  return (
+    <a
+      className="nav-github"
+      href={github.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={ariaLabel}
+    >
+      <svg className="nav-github-mark" width="22" height="22" viewBox="0 0 16 16" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+        />
+      </svg>
+      {starCount != null ? (
+        <>
+          <span className="nav-github-count">{starCount}</span>
+          <svg className="nav-github-star" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 2.5 14.9 8.4 21.5 9.3 16.7 13.8 17.9 20.4 12 17.3 6.1 20.4 7.3 13.8 2.5 9.3 9.1 8.4Z"
+            />
+          </svg>
+        </>
+      ) : null}
+    </a>
   );
 }

@@ -29,6 +29,7 @@ pnpm build
 | What | Where |
 |---|---|
 | Site URL, Twitter handles, docs/repo | `src/content/site.ts` or `SITE_URL` |
+| GitHub nav repo | `src/content/site.ts` (`github`) or `GITHUB_REPO_OWNER` / `GITHUB_REPO_NAME` |
 | Team names | `src/content/team.ts` |
 | Company email | `src/content/company.ts` |
 | Copy | `src/messages/{zh,ja,ko,en}.json` |

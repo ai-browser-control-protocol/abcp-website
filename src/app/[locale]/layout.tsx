@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import { getGithubNavStats, toGithubNavDisplay } from "@/content/github";
 import { getChromeCopy } from "@/content/models";
 import { site } from "@/content/site";
 import { HTML_LANG, LOCALES, type Locale } from "@/content/types";
@@ -36,11 +37,14 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const typed = locale as Locale;
   const chrome = getChromeCopy(typed);
+  const github = toGithubNavDisplay(await getGithubNavStats());
   return (
     <html lang={HTML_LANG[typed]} className={inter.variable}>
       <body>
         <NextIntlClientProvider locale={typed} messages={{}}>
-          <SiteFrame chrome={chrome}>{children}</SiteFrame>
+          <SiteFrame chrome={chrome} github={github}>
+            {children}
+          </SiteFrame>
         </NextIntlClientProvider>
       </body>
     </html>

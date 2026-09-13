@@ -7,7 +7,8 @@
   "nav": {
     "product": "产品介绍",
     "downloadSection": "下载",
-    "download": "下载客户端"
+    "download": "下载客户端",
+    "github": "GitHub"
   },
   "locales": {
     "zh": "简体中文",
@@ -820,7 +821,7 @@
         {
           "q": "支持哪些平台？如何收费？",
           "a": [
-            "- **平台**：支持 macOS 13.0+ 和 Windows 11+。",
+            "- **平台**：支持 macOS 13.0+ 和 Windows 10 / 11+。",
             "- **价格**：公测阶段全功能免费。",
             "- **上手**：下载安装后，按系统提示开启辅助功能与自动化控制权限，在控制面板输入第一条自然语言任务，即可体验端侧智能体的自主执行。"
           ]
@@ -866,7 +867,7 @@
       },
       "windows": {
         "name": "Windows",
-        "requirements": ["Windows 11", "64 位"],
+        "requirements": ["Windows 10 / 11", "64 位"],
         "download": "下载 Windows 版"
       }
     },
@@ -876,7 +877,7 @@
     "faq": [
       {
         "question": "支持哪些系统？",
-        "answer": "当前支持 macOS 13 或更高版本，以及 Windows 11 64 位版本。具体兼容性以正式安装包说明为准。"
+        "answer": "当前支持 macOS 13 或更高版本，以及 Windows 10 / 11 64 位版本。具体兼容性以正式安装包说明为准。"
       },
       {
         "question": "下载哪个版本？",
@@ -898,13 +899,15 @@
     "localFirst": "关键过程 · 自主可控",
     "get": "下载客户端",
     "productTitle": "产品与系统",
-    "desc": "支持 macOS 13+ 和 Windows 11+，为企业团队和专业用户提供可靠的网页自动化能力。",
+    "desc": "支持 macOS 13+ 和 Windows 10 / 11，为企业团队和专业用户提供可靠的网页自动化能力。",
     "securityBadge": "自主可控执行环境"
   },
   "a11y": {
     "mainNav": "主导航栏",
     "localeNav": "语言切换菜单",
     "stage": "主要内容区域",
-    "menu": "展开移动端菜单"
+    "menu": "展开移动端菜单",
+    "github": "GitHub 仓库",
+    "githubStars": "GitHub，{count} 星标"
   }
 }

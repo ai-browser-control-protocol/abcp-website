@@ -327,6 +327,52 @@
   flex-shrink: 0;
 }
 
+.nav-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 2px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.nav-github:hover {
+  color: var(--text-primary);
+}
+
+.nav-github-mark {
+  flex-shrink: 0;
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.nav-github-count {
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.nav-github-star {
+  flex-shrink: 0;
+  display: block;
+  width: 14px;
+  height: 14px;
+  color: var(--gold);
+}
+
+@media (max-width: 720px) {
+  .nav-github {
+    /* Keep the mark compact but give the tap target a 44px floor. */
+    min-width: 44px;
+    height: 44px;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 720px) {
   .nav-download-btn {
     height: 34px;

@@ -21,10 +21,17 @@ export interface ChromeCopy {
     product: string;
     downloadSection: string;
     download: string;
+    github: string;
   };
   localeLabels: Record<Locale, string>;
   footer: Messages["footer"];
-  a11y: Pick<Messages["a11y"], "mainNav" | "localeNav" | "stage" | "menu">;
+  a11y: Pick<Messages["a11y"], "mainNav" | "localeNav" | "stage" | "menu" | "github" | "githubStars">;
+}
+
+/** Top-nav GitHub control: always a repo URL; compact count only when past 1k. */
+export interface GithubNavDisplay {
+  url: string;
+  starCount: string | null;
 }
 
 export interface ChapterViewModel {
@@ -59,6 +66,7 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
       product: t.nav.product,
       downloadSection: t.nav.downloadSection,
       download: t.nav.download,
+      github: t.nav.github,
     },
     localeLabels: t.locales,
     footer: t.footer,
@@ -67,6 +75,8 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
       localeNav: t.a11y.localeNav,
       stage: t.a11y.stage,
       menu: t.a11y.menu,
+      github: t.a11y.github,
+      githubStars: t.a11y.githubStars,
     },
   };
 }

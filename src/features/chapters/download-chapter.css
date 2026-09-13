@@ -516,9 +516,10 @@
 }
 
 .download-modern-beta-version span {
-  color: var(--text-note);
-  font-size: 10px;
-  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .download-modern-beta-version strong {

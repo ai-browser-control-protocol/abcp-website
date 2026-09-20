@@ -110,6 +110,12 @@
   display: block;
 }
 
+/* Give the stacked 02/03 figures more horizontal room without changing the
+   copy rhythm shared by the rest of the feature grid. */
+.feature-row.span-6.is-stacked {
+  padding-inline: clamp(16px, 1.8vw, 26px);
+}
+
 /* Card 04 & Card 05 aspect ratio and scaling */
 .feature-row.span-7 .feature-figure-card {
   width: 100%;
@@ -420,17 +426,17 @@
   }
 }
 
-.feature-row .tk-noise text,
-.feature-row .tk-tree text {
+.feature-row .obs-capture text,
+.feature-row .obs-records text {
   opacity: 0;
 }
 
-.feature-row.is-visible .tk-noise text,
-.feature-row.is-visible .tk-tree text {
-  animation: tkType 480ms var(--stage-easing) both;
+.feature-row.is-visible .obs-capture text,
+.feature-row.is-visible .obs-records text {
+  animation: obsType 480ms var(--stage-easing) both;
 }
 
-@keyframes tkType {
+@keyframes obsType {
   from {
     opacity: 0;
     transform: translateX(-7px);
@@ -442,31 +448,31 @@
   }
 }
 
-.feature-row.is-visible .tk-flow {
+.feature-row.is-visible .obs-flow {
   stroke-dasharray: 6 4;
-  animation: tkFlow 1s linear infinite;
+  animation: obsFlow 1s linear infinite;
 }
 
-.feature-row.is-visible .tk-flow-2 {
+.feature-row.is-visible .obs-flow-2 {
   stroke-dasharray: 6 4;
-  animation: tkFlow 1s linear infinite 0.35s;
+  animation: obsFlow 1s linear infinite 0.35s;
 }
 
-@keyframes tkFlow {
+@keyframes obsFlow {
   to {
     stroke-dashoffset: -20;
   }
 }
 
-.feature-row.is-visible .tk-arrow-badge {
-  animation: tkPulse 2.4s ease-in-out infinite;
+.feature-row.is-visible .obs-arrow-badge {
+  animation: obsPulse 2.4s ease-in-out infinite;
 }
 
-.feature-row.is-visible .tk-arrow-badge-2 {
-  animation: tkPulse 2.4s ease-in-out infinite 0.6s;
+.feature-row.is-visible .obs-arrow-badge-2 {
+  animation: obsPulse 2.4s ease-in-out infinite 0.6s;
 }
 
-@keyframes tkPulse {
+@keyframes obsPulse {
 
   0%,
   100% {

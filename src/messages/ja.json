@@ -431,14 +431,14 @@
         },
         {
           "key": "token",
-          "eyebrow": "知覚マトリクス",
-          "title": "極小コンテキスト",
-          "body": "AXTree がまずページ全体を簡潔な意味骨格へ圧縮し、スタイル・スクリプト・入れ子コンテナなどの DOM 冗長を取り除きます。その上で SemanticTree が要素間の階層・グルーピング・相互作用を補完。AXTree のフィルタだけの従来方式に比べ、コンテキストは短いのにページ構造の把握はより正確で、情報量も豊富です。",
-          "figure": "AXTree でページ骨格を圧縮 → SemanticTree で構造情報を補完",
+          "eyebrow": "統一ページ観測",
+          "title": "全体骨格、必要なときだけ展開",
+          "body": "WebCross は生の DOM をそのままコンテキストへ渡しません。1 回のページ観測で AX の意味、表示テキスト、コントロール状態、関係、Frame 構造をまとめ、検証可能なコンパクトなページマップとして公開します。既知のターゲットに追加情報が必要なときだけ、DOM・テキスト・属性・状態の詳細をオンデマンドで読み取ります。",
+          "figure": "統一ページ観測：Full artifact → Detail artifact",
           "bullets": [
-            "スタイルと不要コンテナを除去し、Token 消費を 85% 削減",
-            "操作ターゲットと固有 ID を抽出し、モデルが迷わず直行",
-            "入れ子ビューや隔離コンポーネントをオンデマンドで貫通し死角を排除"
+            "明示的なソース・メタデータ・空の表示ノイズを除去しつつ、内容・関係の端点・操作ターゲットを保持",
+            "現在の観測の不透明な n_ ID でノードを示し、targetable・candidate・actionable を分けて表現",
+            "dom・text・attributes・state をオンデマンドで照会し、長いフィールド、ターゲット失敗、不完全な Frame を返却で明示"
           ]
         },
         {
@@ -499,25 +499,25 @@
           "caption": "同一タスク経路 · 所要時間の比較"
         },
         "tree": {
-          "alt": "DOM を AXTree で圧縮し SemanticTree で構造を補完",
-          "dom": "生の DOM",
-          "skeleton": "ページ骨格を圧縮",
-          "structure": "構造情報を補完",
-          "plus": "+構造",
-          "fidelity": "オンデマンド",
+          "alt": "統一ページ観測：Native observation、Full artifact、Detail artifact",
+          "dom": "Native observation",
+          "skeleton": "現在のページマップ",
+          "structure": "既知のターゲット",
+          "plus": "query",
+          "fidelity": "diff=initial|computed",
           "tags": [
-            "メイン",
-            "シャドウ",
-            "ターゲット",
-            "iframe",
-            "クロス"
+            "frame",
+            "node",
+            "component",
+            "state",
+            "relation"
           ],
           "pills": [
-            "iframe 貫通",
-            "Shadow DOM 可読",
-            "階層 · グループ · 関係"
+            "ノイズ除去",
+            "現在のページマップ",
+            "ターゲット詳細"
           ],
-          "caption": "全体骨格でコンテキストを85%削減、複雑な画面もオンデマンドで死角なく深く理解"
+          "caption": "ページマップ → 既知ターゲットの詳細"
         },
         "local": {
           "alt": "アカウントセッションとタスクプロセスを管理するイメージ",

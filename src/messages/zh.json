@@ -431,14 +431,14 @@
         },
         {
           "key": "token",
-          "eyebrow": "感知矩阵",
-          "title": "极简上下文",
-          "body": "告别将万行 DOM 粗暴塞入上下文的传统做法。WebCross 采用『全局精简骨架 + 按需深度感知』双层矩阵，在大幅削减模型上下文负担的同时，兼顾复杂业务场景下的零盲区精准交互。",
-          "figure": "AXTree 极简交互骨架 + SemanticTree 深度穿透帧图",
+          "eyebrow": "统一页面观测",
+          "title": "全局骨架，按需展开",
+          "body": "WebCross 不把原始 DOM 直接塞进上下文。一次页面观测会汇总 AX 语义、可见文本、控件状态、关系与 Frame 结构，并发布为可校验的紧凑页面地图；只有已知目标需要更多信息时，才按需读取 DOM、文本、属性或状态详情。",
+          "figure": "统一页面观测：Full artifact → Detail artifact",
           "bullets": [
-            "过滤样式与无序容器，Token 消耗骤降 85%",
-            "原生提取操作靶点与 ID，大模型直达目标",
-            "按需深潜多层嵌套与隔离视图，消除交互死角"
+            "去除明确的源码、元数据与空白呈现噪声，同时保留内容、关系端点和操作目标",
+            "用当前观测的不透明 n_ ID 标记节点，并分开表达 targetable、candidate 与 actionable",
+            "按需查询 dom、text、attributes 或 state；长字段、目标失败与不完整 Frame 都在返回中明确标记"
           ]
         },
         {
@@ -499,25 +499,25 @@
           "caption": "同一条任务链路 · 耗时对比"
         },
         "tree": {
-          "alt": "AXTree 语义骨架与 SemanticTree 跨域帧图穿透",
-          "dom": "原始 DOM",
-          "skeleton": "全局紧凑骨架",
-          "structure": "穿透深度帧图",
-          "plus": "+穿透",
-          "fidelity": "按需高保真",
+          "alt": "统一页面观测：Native observation、Full artifact 与 Detail artifact",
+          "dom": "Native observation",
+          "skeleton": "当前页面地图",
+          "structure": "已知目标",
+          "plus": "query",
+          "fidelity": "diff=initial|computed",
           "tags": [
-            "主帧",
-            "穿透",
-            "控件",
-            "iframe",
-            "跨域"
+            "frame",
+            "node",
+            "component",
+            "state",
+            "relation"
           ],
           "pills": [
-            "DOM 冗余噪声",
-            "全局交互地图",
-            "深层嵌套 & 隔离穿透"
+            "噪声过滤",
+            "当前页面地图",
+            "目标详情"
           ],
-          "caption": "全局骨架降本 85%，复杂场景深潜穿透零盲区"
+          "caption": "页面地图 → 已知目标详情"
         },
         "local": {
           "alt": "账号会话与任务过程的可控管理示意",

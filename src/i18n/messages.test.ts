@@ -55,4 +55,20 @@ describe("locale message catalogs", () => {
       }
     }
   });
+
+  it("keeps the token feature aligned with the unified observation contract", () => {
+    const staleTerms = /SemanticTree|85%|85％|zero[- ]blind|死角|사각지대/i;
+
+    for (const locale of LOCALES) {
+      const token = getMessages(locale).product.features.items.find((item) => item.key === "token");
+      expect(token, `${locale}.product.features.token`).toBeDefined();
+      if (!token) continue;
+
+      const tree = getMessages(locale).product.features.figures.tree;
+      expect(JSON.stringify({ token, tree }), `${locale}.product.features.token`).not.toMatch(staleTerms);
+      expect(tree.tags, `${locale}.figures.tree.tags`).toHaveLength(5);
+      expect(tree.pills, `${locale}.figures.tree.pills`).toHaveLength(3);
+      expect(tree.fidelity, `${locale}.figures.tree.fidelity`).toContain("computed");
+    }
+  });
 });

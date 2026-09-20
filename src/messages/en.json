@@ -431,14 +431,14 @@
         },
         {
           "key": "token",
-          "eyebrow": "Perception Matrix",
-          "title": "Minimal Context",
-          "body": "Say goodbye to stuffing bloated DOM into the context window. WebCross introduces a dual-layer perception matrix — combining a global compact skeleton with on-demand deep sensing — dramatically easing model input load while delivering zero-blind-spot precision in complex workflows.",
-          "figure": "AXTree Compact Skeleton + SemanticTree Deep Frame Graph",
+          "eyebrow": "Unified Page Observation",
+          "title": "Global Skeleton, Detail on Demand",
+          "body": "WebCross does not put raw DOM directly into context. A single page observation combines AX semantics, visible text, control state, relations, and frame structure into a verifiable compact page map; only when a known target needs more information does it read DOM, text, attributes, or state details on demand.",
+          "figure": "Unified page observation: Full artifact → Detail artifact",
           "bullets": [
-            "Filters style and container noise to slash token consumption by 85%",
-            "Extracts actionable targets and canonical IDs for direct model execution",
-            "Penetrates nested views and isolated components on demand with zero blind spots"
+            "Filters explicit source, metadata, and empty-rendering noise while preserving content, relation endpoints, and action targets",
+            "Marks nodes with opaque n_ IDs from the current observation and separates targetable, candidate, and actionable",
+            "Queries dom, text, attributes, or state on demand; long fields, failed targets, and incomplete frames are marked in the response"
           ]
         },
         {
@@ -499,25 +499,25 @@
           "caption": "Same task chain · execution time"
         },
         "tree": {
-          "alt": "AXTree semantic skeleton and SemanticTree cross-origin frame graph",
-          "dom": "Raw DOM",
-          "skeleton": "Compact Skeleton",
-          "structure": "Deep Frame Graph",
-          "plus": "+deep",
-          "fidelity": "On Demand",
+          "alt": "Unified page observation: Native observation, Full artifact, and Detail artifact",
+          "dom": "Native observation",
+          "skeleton": "Current page map",
+          "structure": "Known target",
+          "plus": "query",
+          "fidelity": "diff=initial|computed",
           "tags": [
-            "main",
-            "shadow",
-            "target",
-            "iframe",
-            "cross"
+            "frame",
+            "node",
+            "component",
+            "state",
+            "relation"
           ],
           "pills": [
-            "DOM Raw Noise",
-            "Global Page Map",
-            "Nested & Isolated Views"
+            "Noise filtered",
+            "Current page map",
+            "Target detail"
           ],
-          "caption": "85%+ context reduction globally, high-fidelity deep penetration on demand"
+          "caption": "Page map → known-target detail"
         },
         "local": {
           "alt": "Controlled management of account sessions and task activity",

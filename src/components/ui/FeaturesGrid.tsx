@@ -17,7 +17,6 @@
  */
 "use client";
 
-import { Fragment } from "react";
 import { useReveal } from "./useReveal";
 import type { FeaturesCopy } from "@/content/models";
 import "./features-grid.css";
@@ -178,56 +177,52 @@ function IllusSpeed({ t }: { t: Figures["speed"] }) {
   );
 }
 
-/* 02 — DOM → AXTree skeleton → SemanticTree structure */
+/* 02 — native observation → full artifact → known-target detail */
 function IllusToken({ t }: { t: Figures["tree"] }) {
-  /* Raw DOM: noisy nested wrapper markup, inline style, scripts */
-  const domNodes = [
-    { text: "<div.app-wrap>", color: "#71717a" },
-    { text: "  <style>...</style>", color: "#a1a1aa" },
-    { text: "  <div.layout>", color: "#71717a" },
-    { text: "    <script>...</script>", color: "#a1a1aa" },
-    { text: "    <div.wrapper>", color: "#71717a" },
-    { text: "      <div.box-2x>", color: "#71717a" },
-    { text: "<!-- +420 tags -->", color: "#a1a1aa" },
+  const diffStates = t.fidelity.replace(/^diff=/, "");
+
+  const observationNodes = [
+    { text: "DOM + AX", color: "#71717a" },
+    { text: "text + state", color: "#71717a" },
+    { text: "relations + frames", color: "#71717a" },
   ];
 
-  /* AXTree: global compact skeleton with canonical [id], actionable #, and (+30) collapsed subtree */
-  const axNodes = [
-    "0 [1:1] rootWebArea",
-    "1 [1:10] search",
-    "2 [1:23] textbox #",
-    "2 [1:24] button #",
-    "1 [1:50] list (+30)",
-    "1 [1:90] link #",
+  const fullNodes = [
+    "# meta mode=full",
+    "frame [f_1c…] complete",
+    "0 [n_7a…] main",
+    '1 [n_91…] button "Run"',
+    "[targetable] [actionable]",
+    "component [c_02…]",
+    "combobox · candidate",
   ];
 
-  /* SemanticTree: bounded frame graph with Shadow DOM and cross-origin iframe penetration */
-  const semanticNodes = [
-    { node: "frame: main", tag: t.tags[0] ?? "主帧" },
-    { node: "└─ #shadow", tag: t.tags[1] ?? "穿透" },
-    { node: "   └─ <button>", tag: t.tags[2] ?? "控件" },
-    { node: "frame: child", tag: t.tags[3] ?? "iframe" },
-    { node: "└─ <input>", tag: t.tags[4] ?? "跨域" },
+  const detailNodes = [
+    "query.view=attributes",
+    "target [n_91…]",
+    "detail ok=true",
+    "attrs · state · relation",
+    "summary 1/1",
   ];
 
   return (
     <svg viewBox="0 0 520 330" className="ill-svg" role="img" aria-label={t.alt}>
       <defs>
-        <marker id="tk-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+        <marker id="obs-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
           <path d="M0 0 L10 5 L0 10 Z" fill="#ff6b35" />
         </marker>
       </defs>
 
-      {/* raw DOM — everything, most of it noise */}
-      <rect x="20" y="24" width="132" height="212" rx="10" fill="#f6f6f7" stroke="#e4e4e7" />
-      <text x="86" y="48" textAnchor="middle" fill="#71717a" fontSize="13.5" fontWeight="800">{t.dom}</text>
-      <text x="86" y="65" textAnchor="middle" fill="#a1a1aa" fontSize="11" fontWeight="600">HTML / CSS / JS</text>
-      <g className="tk-noise" fontFamily="ui-monospace, monospace" fontSize="9.8" fontWeight="500">
-        {domNodes.map(({ text, color }, i) => (
+      {/* Native observation — the source facts projected into one page view */}
+      <rect x="4" y="24" width="142" height="212" rx="10" fill="#f6f6f7" stroke="#e4e4e7" />
+      <text x="75" y="48" textAnchor="middle" fill="#71717a" fontSize="14.2" fontWeight="800">{t.dom}</text>
+      <text x="75" y="68" textAnchor="middle" fill="#a1a1aa" fontSize="10.5" fontWeight="600">DOM · AX · text · state</text>
+      <g className="obs-capture" fontFamily="ui-monospace, monospace" fontSize="11.2" fontWeight="500">
+        {observationNodes.map(({ text, color }, i) => (
           <text
             key={text}
-            x="26"
-            y={86 + i * 17}
+            x="14"
+            y={103 + i * 20}
             fill={color}
             style={{ animationDelay: `${0.05 + i * 0.08}s` }}
           >
@@ -235,92 +230,70 @@ function IllusToken({ t }: { t: Figures["tree"] }) {
           </text>
         ))}
       </g>
-      <text x="86" y="222" textAnchor="middle" fill="#71717a" fontSize="11.5" fontWeight="700" fontFamily="ui-monospace, monospace">12,480 tokens</text>
+      <text x="75" y="222" textAnchor="middle" fill="#71717a" fontSize="11" fontWeight="700" fontFamily="ui-monospace, monospace">freshness=current</text>
 
-      {/* Animated Arrow 1: DOM → AXTree with -85% badge */}
-      <g transform="translate(173, 122)">
+      {/* Animated Arrow 1: native observation → full artifact */}
+      <g transform="translate(168, 122)">
         <path
-          d="M-17 0 L15 0"
+          d="M-17 0 L17 0"
           stroke="#ff6b35"
           strokeWidth="2.2"
           strokeLinecap="round"
-          markerEnd="url(#tk-arrow)"
-          className="tk-flow"
+          markerEnd="url(#obs-arrow)"
+          className="obs-flow"
         />
-        <text x="0" y="-13" textAnchor="middle" fill="#ff6b35" fontSize="12" fontWeight="800" className="tk-arrow-badge">-85%</text>
+        <text x="0" y="-13" textAnchor="middle" fill="#ff6b35" fontSize="10" fontWeight="800" className="obs-arrow-badge">project</text>
       </g>
 
-      {/* AXTree — the page compressed down to a compact actionable skeleton */}
-      <rect x="194" y="24" width="132" height="212" rx="10" fill="#ffffff" stroke="#d4d4d8" />
-      <text x="260" y="48" textAnchor="middle" fill="#0a0a0a" fontSize="13.5" fontWeight="800">AXTree</text>
-      <text x="260" y="65" textAnchor="middle" fill="#a1a1aa" fontSize="11" fontWeight="600">{t.skeleton}</text>
-      <g className="tk-tree" fontFamily="ui-monospace, monospace" fontSize="9.8" fontWeight="500">
-        {axNodes.map((node, i) => {
-          const isTarget = node.endsWith(" #");
-          const text = isTarget ? node.slice(0, -2) : node;
-          return (
-            <text key={node} x="201" y={87 + i * 18.5} fill="#27272a" style={{ animationDelay: `${0.1 + i * 0.09}s` }}>
-              {text}
-              {isTarget && (
-                <tspan fill="#ff6b35" fontWeight="800"> #</tspan>
-              )}
-            </text>
-          );
-        })}
-      </g>
-      <text x="260" y="222" textAnchor="middle" fill="#ff6b35" fontSize="11.5" fontWeight="800" fontFamily="ui-monospace, monospace">1,820 tokens</text>
-
-      {/* Animated Arrow 2: AXTree → SemanticTree with +穿透 badge */}
-      <g transform="translate(347, 122)">
-        <path
-          d="M-17 0 L15 0"
-          stroke="#ff6b35"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          markerEnd="url(#tk-arrow)"
-          className="tk-flow tk-flow-2"
-        />
-        <text x="0" y="-13" textAnchor="middle" fill="#ff6b35" fontSize="11" fontWeight="800" className="tk-arrow-badge-2">{t.plus}</text>
-      </g>
-
-      {/* SemanticTree — bounded frame graph with Shadow DOM and iframe penetration */}
-      <rect x="368" y="24" width="132" height="212" rx="10" fill="#fff7f2" stroke="#ff6b35" strokeWidth="1.6" />
-      <text x="434" y="48" textAnchor="middle" fill="#ff6b35" fontSize="13.5" fontWeight="800">SemanticTree</text>
-      <text x="434" y="65" textAnchor="middle" fill="#c2410c" fontSize="11" fontWeight="600">{t.structure}</text>
-      <g className="tk-tree" fontFamily="ui-monospace, monospace" fontSize="9.8" fontWeight="500">
-        {semanticNodes.map(({ node, tag }, i) => (
-          <Fragment key={node}>
-            <text x="374" y={88 + i * 20} fill="#27272a" style={{ animationDelay: `${0.55 + i * 0.09}s` }}>
-              {node}
-            </text>
-            {tag && (
-              <text
-                x="494"
-                y={88 + i * 20}
-                textAnchor="end"
-                fill="#ff6b35"
-                fontWeight="800"
-                fontSize="10"
-                style={{ animationDelay: `${0.62 + i * 0.09}s` }}
-              >
-                {tag}
-              </text>
-            )}
-          </Fragment>
+      {/* Full artifact — immutable page map with opaque IDs and status */}
+      <rect x="189" y="24" width="142" height="212" rx="10" fill="#ffffff" stroke="#d4d4d8" />
+      <text x="260" y="48" textAnchor="middle" fill="#0a0a0a" fontSize="14.2" fontWeight="800">Full artifact</text>
+      <text x="260" y="68" textAnchor="middle" fill="#a1a1aa" fontSize="10.5" fontWeight="600">{t.skeleton}</text>
+      <g className="obs-records" fontFamily="ui-monospace, monospace" fontSize="8.2" fontWeight="500">
+        {fullNodes.map((node, i) => (
+          <text key={node} x="197" y={91 + i * 15.5} fill="#27272a" style={{ animationDelay: `${0.1 + i * 0.09}s` }}>
+            {node}
+          </text>
         ))}
       </g>
-      <text x="434" y="222" textAnchor="middle" fill="#ff6b35" fontSize="11.5" fontWeight="800">
-        {t.fidelity ?? "按需高保真"}
-      </text>
+      <text x="260" y="204" textAnchor="middle" fill="#ff6b35" fontSize="8.2" fontWeight="700" fontFamily="ui-monospace, monospace">completeness</text>
+      <text x="260" y="222" textAnchor="middle" fill="#ff6b35" fontSize="10.8" fontWeight="800" fontFamily="ui-monospace, monospace">complete|partial</text>
 
-      {/* 3 Pills perfectly aligned with the 3 cards above */}
+      {/* Animated Arrow 2: full artifact → known-target detail */}
+      <g transform="translate(353, 122)">
+        <path
+          d="M-17 0 L17 0"
+          stroke="#ff6b35"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          markerEnd="url(#obs-arrow)"
+          className="obs-flow obs-flow-2"
+        />
+        <text x="0" y="-13" textAnchor="middle" fill="#ff6b35" fontSize="10" fontWeight="800" className="obs-arrow-badge-2">query</text>
+      </g>
+
+      {/* Detail artifact — a bounded read of a known target */}
+      <rect x="374" y="24" width="142" height="212" rx="10" fill="#fff7f2" stroke="#ff6b35" strokeWidth="1.6" />
+      <text x="445" y="48" textAnchor="middle" fill="#ff6b35" fontSize="14.2" fontWeight="800">Detail artifact</text>
+      <text x="445" y="68" textAnchor="middle" fill="#c2410c" fontSize="10.5" fontWeight="600">{t.structure}</text>
+      <g className="obs-records" fontFamily="ui-monospace, monospace" fontSize="8.2" fontWeight="500">
+        {detailNodes.map((node, i) => (
+          <text key={node} x="382" y={94 + i * 18} fill="#27272a" style={{ animationDelay: `${0.55 + i * 0.09}s` }}>
+            {node}
+          </text>
+        ))}
+      </g>
+      <text x="445" y="204" textAnchor="middle" fill="#ff6b35" fontSize="8.2" fontWeight="700" fontFamily="ui-monospace, monospace">diff</text>
+      <text x="445" y="222" textAnchor="middle" fill="#ff6b35" fontSize="10.8" fontWeight="800" fontFamily="ui-monospace, monospace">{diffStates}</text>
+
+      {/* 3 pills aligned with the 3 cards and the reduced outer padding */}
       {t.pills.map((label, i) => (
-        <g key={label} transform={`translate(${20 + i * 174}, 254)`}>
-          <rect width="132" height="30" rx="15" fill="#ffffff" stroke="#ff6b35" strokeWidth="1.4" />
-          <text x="66" y="19.5" textAnchor="middle" fill="#ff6b35" fontSize="10.5" fontWeight="700">{label}</text>
+        <g key={label} transform={`translate(${4 + i * 185}, 254)`}>
+          <rect width="142" height="30" rx="15" fill="#ffffff" stroke="#ff6b35" strokeWidth="1.4" />
+          <text x="71" y="19.5" textAnchor="middle" fill="#ff6b35" fontSize="10.8" fontWeight="700">{label}</text>
         </g>
       ))}
-      <text x="260" y="314" textAnchor="middle" fill="#71717a" fontSize="12.5" fontWeight="600">{t.caption}</text>
+      <text x="260" y="314" textAnchor="middle" fill="#71717a" fontSize="13.5" fontWeight="600">{t.caption}</text>
     </svg>
   );
 }

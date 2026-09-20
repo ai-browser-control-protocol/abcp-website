@@ -386,7 +386,7 @@
                   "user": "u/pm_kento",
                   "handle": "r/SaaS",
                   "time": "13h",
-                  "body": "Token bill dropped by more than half after switching to the AXTree extraction mode.",
+                  "body": "Token use dropped once the important page information became easier to read.",
                   "likes": "537",
                   "comments": "76",
                   "reposts": "25"
@@ -431,26 +431,26 @@
         },
         {
           "key": "token",
-          "eyebrow": "Unified Page Observation",
-          "title": "Global Skeleton, Detail on Demand",
-          "body": "WebCross does not put raw DOM directly into context. A single page observation combines AX semantics, visible text, control state, relations, and frame structure into a verifiable compact page map; only when a known target needs more information does it read DOM, text, attributes, or state details on demand.",
-          "figure": "Unified page observation: Full artifact → Detail artifact",
+          "eyebrow": "Page understanding",
+          "title": "See the whole page. Go straight to the target.",
+          "body": "One observation builds a clear view of the current page, bringing visible content, control states, and page relationships into focus. Changes are called out clearly; important elements open for closer inspection only when needed.",
+          "figure": "Page overview · Page changes · Element detail",
           "bullets": [
-            "Filters explicit source, metadata, and empty-rendering noise while preserving content, relation endpoints, and action targets",
-            "Marks nodes with opaque n_ IDs from the current observation and separates targetable, candidate, and actionable",
-            "Queries dom, text, attributes, or state on demand; long fields, failed targets, and incomplete frames are marked in the response"
+            "The page overview presents content, controls, relationships, and visible scope, with complete or partial coverage made clear",
+            "Each element has a stable locator; being locatable never implies it can be acted on, and state and visibility remain distinct",
+            "Page changes stay visible; text, attributes, or state are opened only for identified elements"
           ]
         },
         {
           "key": "local",
           "eyebrow": "Control & governance",
-          "title": "Critical tasks, under your control",
-          "body": "From credentials and cookie sessions to run logs, WebCross uses environment isolation, traceable activity, and human takeover to help you understand and manage critical tasks.",
-          "figure": "Account sessions & task activity",
+          "title": "Every action leaves proof. Critical steps stay yours.",
+          "body": "Every page action is recorded by task and time. Method, purpose, status, and reviewable input, result, or error summaries stay together in one evidence chain, so you can trace, intervene in, and continue critical work.",
+          "figure": "Page action record: review · intervene · continue",
           "bullets": [
-            "Credentials and cookie sessions managed in isolated task instances",
-            "Run logs can be retained, audited, and reviewed",
-            "Human confirmation and breakpoint takeover at critical steps"
+            "Actions, tasks, statuses, and time stay grouped by page, with history available in either direction",
+            "Expand a record to review purpose, input, result, or error summary, keeping important work evidence-based",
+            "Human confirmation marks the pause point clearly; after confirmation, a task can continue, be cancelled, or retried"
           ]
         },
         {
@@ -499,30 +499,55 @@
           "caption": "Same task chain · execution time"
         },
         "tree": {
-          "alt": "Unified page observation: Native observation, Full artifact, and Detail artifact",
-          "dom": "Native observation",
-          "skeleton": "Current page map",
-          "structure": "Known target",
-          "plus": "query",
-          "fidelity": "diff=initial|computed",
-          "tags": [
-            "frame",
-            "node",
-            "component",
-            "state",
-            "relation"
+          "alt": "Page overview, page changes, and element detail",
+          "root": "Page overview",
+          "view": "Current page",
+          "frame": "Page scope · complete",
+          "node": "Main content",
+          "state": "Status · visible",
+          "target": "Ready to act",
+          "completeness": "complete / partial",
+          "diff": "Page changes",
+          "version": "v42 → v43",
+          "query": "Inspect element",
+          "detail": "Element detail",
+          "diffRows": [
+            "− status · waiting",
+            "+ status · ready"
+          ],
+          "detailRows": [
+            { "key": "type", "value": "button" },
+            { "key": "status", "value": "visible" },
+            { "key": "action", "value": "click" }
           ],
           "pills": [
-            "Noise filtered",
-            "Current page map",
-            "Target detail"
+            "Page overview",
+            "Page changes",
+            "Element detail"
           ],
-          "caption": "Page map → known-target detail"
+          "caption": "See the whole page. Go straight to the target."
         },
         "local": {
-          "alt": "Controlled management of account sessions and task activity",
-          "assets": "Credentials · cookie sessions · task instructions · run logs",
-          "banner": "Isolation · audit · takeover"
+          "alt": "Action evidence chain connecting task, page, actions, and human confirmation",
+          "intent": "Task intent",
+          "page": "Page context",
+          "timeline": "Action record",
+          "actions": [
+            "Inspect page",
+            "Take action",
+            "Enter information"
+          ],
+          "statuses": [
+            "recorded",
+            "succeeded",
+            "running"
+          ],
+          "attention": "Approval needed",
+          "resume": "Approve to continue",
+          "evidence": "Reviewable evidence",
+          "review": "Action · purpose · status · time · input / result summary",
+          "recorded": "Result recorded",
+          "caption": "Review · intervene · continue"
         },
         "skill": {
           "alt": "One run distilled into a reusable skill",
@@ -568,7 +593,7 @@
           "values": {
             "tokens": {
               "tier": "low",
-              "text": "Near zero on reuse"
+              "text": "Lower context on reuse"
             },
             "time": {
               "tier": "low",
@@ -750,7 +775,7 @@
             "Playwright and Puppeteer are automation libraries you embed in code, and they drive the page through CSS selectors. The moment a site changes its DOM the script can break, and every step has to be written by hand.",
             "WebCross adopts a dedicated page engine direct-drive approach instead:",
             "- Built directly on a dedicated page engine, instructions reach the rendering pipeline with zero external JS adapters or RPC round trips, making the same task chain **over 3× faster** end to end;",
-            "- The page is read semantically through AXTree + SemanticTree (see question 5) rather than through selectors that go stale;",
+            "- One observation creates a versioned page overview with content, control state, page relationships, and visible scope; page changes are called out, and only identified elements open text, attributes, or state for closer inspection;",
             "- A task in plain language is enough to run it — **no script to write**."
           ]
         },
@@ -758,7 +783,7 @@
           "q": "How is this different from Browser Use, Claude for Chrome and other AI browsers?",
           "a": [
             "- **Execution environment**: most comparable tools add an extension or an adapter layer on top of stock Chrome, so every step pays a round trip. WebCross drives page elements directly via its dedicated page engine.",
-            "- **Token cost**: comparable tools routinely spend six figures of tokens on a single task (Browser Use around 120–220k per task, Perplexity Comet six figures per task, Claude for Chrome 1k+ Token, 1–3 s). Semantic-tree compression and workflow reuse bring WebCross close to zero once a workflow exists.",
+            "- **Token cost**: comparable tools routinely spend six figures of tokens on a single task (Browser Use around 120–220k per task, Perplexity Comet six figures per task, Claude for Chrome 1k+ Token, 1–3 s). Versioned page overviews, page changes, element detail, and workflow reuse reduce repeated exploration and context; actual savings depend on the task and page state.",
             "- **Control & governance**: WebCross supports isolated account sessions, auditable run records, and human takeover at sensitive steps so critical tasks stay visible and manageable.",
             "- **Account safety**: custom fingerprints and a switchable IP pool, so concurrent accounts never cross.",
             "- **Human-AI co-governance**: manual review on 2FA/captchas, resumes from breakpoint without restarting.",
@@ -771,7 +796,7 @@
             "# In WebCross Harness",
             "1. **Give it a task**: type your first task into the console in plain language — say, “patrol the top 30 power banks on Amazon and pull url, title, price, rating and the 30 worst reviews” — and the agent opens the page, searches, clicks, scrapes, tidies up and exports locally, all on its own.",
             "2. **Distil a Workflow**: When the task is complete, turn its validated execution flow into a reusable Workflow.",
-            "3. **Reuse the Workflow**: When you run the same or a similar task again, reuse the verified Workflow to skip page exploration and follow the validated path straight to the critical steps, **saving over 80% of tokens**.",
+            "3. **Reuse the Workflow**: When you run the same or a similar task again, reuse the verified Workflow to skip page exploration and follow the validated path straight to the critical steps. The context saved varies with the task and page state.",
             "# With a third-party agent (Claude Code, Codex, …)",
             "Install the WebCross Skill locally when launching the app or from Settings. Once it is installed, agents with Skills support—including Claude Code and Codex—recognize WebCross automatically and can use it directly. No manual copying or pasting of Skill files, and no SDK integration, is required."
           ]
@@ -779,10 +804,11 @@
         {
           "q": "How does WebCross save tokens?",
           "a": [
-            "The saving comes from three layers stacked together:",
-            "- **AXTree semantic compression**: compresses the whole page into a lean skeleton first, stripping styles, scripts and nested container clutter to slash context by ~85%;",
-            "- **SemanticTree structure**: layers hierarchy, grouping and interactive relations atop the skeleton — compared to AXTree-only filtering, the model receives a shorter context while judging structure with richer precision; deeply nested sub-pages and isolated components are directly readable as well;",
-            "- **Workflow reuse**: a task that has run becomes a dedicated workflow, and the next run skips exploration entirely — another 80%+ off (see question 9)."
+            "Token savings come from reading only the page information that matters:",
+            "- **Page overview**: content, controls, state, relationships, and visible scope are gathered into a clear view of the current page while irrelevant rendering noise is filtered out;",
+            "- **Page changes**: only changed information is supplied, avoiding repeated reads of the same facts;",
+            "- **Element detail**: text, attributes, or state open only for identified elements; completeness, failures, and truncation stay explicit;",
+            "- **Workflow reuse**: a validated workflow skips repeated exploration and reuses the path that matters; savings vary with the task and page state."
           ]
         },
         {
@@ -815,7 +841,7 @@
         {
           "q": "Do repeat tasks start from scratch and spend tokens all over again?",
           "a": [
-            "No. Anything you have run through WebCross Harness can be distilled into a dedicated workflow and saved as a reusable asset. The next identical or similar task reuses that verified workflow instead, skipping exploration and going straight to the steps that matter — **over 80% fewer tokens**, and reusable across tasks. For high-frequency tasks like patrolling a thousand product links a day or listing a hundred SKUs, once the core flow is worked out it can be reused at scale."
+            "No. Anything you have run through WebCross Harness can be distilled into a dedicated workflow and saved as a reusable asset. The next identical or similar task reuses that verified workflow instead, skipping exploration and going straight to the steps that matter. Actual context and token savings depend on the task and page state, and the asset remains reusable across tasks. For high-frequency tasks like patrolling a thousand product links a day or listing a hundred SKUs, once the core flow is worked out it can be reused at scale."
           ]
         },
         {

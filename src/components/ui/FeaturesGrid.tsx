@@ -177,185 +177,134 @@ function IllusSpeed({ t }: { t: Figures["speed"] }) {
   );
 }
 
-/* 02 — native observation → full artifact → known-target detail */
+/* 02 — page overview with change records and element detail */
 function IllusToken({ t }: { t: Figures["tree"] }) {
-  const diffStates = t.fidelity.replace(/^diff=/, "");
-
-  const observationNodes = [
-    { text: "DOM + AX", color: "#71717a" },
-    { text: "text + state", color: "#71717a" },
-    { text: "relations + frames", color: "#71717a" },
-  ];
-
-  const fullNodes = [
-    "# meta mode=full",
-    "frame [f_1c…] complete",
-    "0 [n_7a…] main",
-    '1 [n_91…] button "Run"',
-    "[targetable] [actionable]",
-    "component [c_02…]",
-    "combobox · candidate",
-  ];
-
-  const detailNodes = [
-    "query.view=attributes",
-    "target [n_91…]",
-    "detail ok=true",
-    "attrs · state · relation",
-    "summary 1/1",
-  ];
-
+  const nodeY = [136, 170, 204];
+  const [complete, partial] = t.completeness.split(" / ");
   return (
     <svg viewBox="0 0 520 330" className="ill-svg" role="img" aria-label={t.alt}>
       <defs>
-        <marker id="obs-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+        <marker id="obs-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M0 0 L10 5 L0 10 Z" fill="#ff6b35" />
         </marker>
       </defs>
-
-      {/* Native observation — the source facts projected into one page view */}
-      <rect x="4" y="24" width="142" height="212" rx="10" fill="#f6f6f7" stroke="#e4e4e7" />
-      <text x="75" y="48" textAnchor="middle" fill="#71717a" fontSize="14.2" fontWeight="800">{t.dom}</text>
-      <text x="75" y="68" textAnchor="middle" fill="#a1a1aa" fontSize="10.5" fontWeight="600">DOM · AX · text · state</text>
-      <g className="obs-capture" fontFamily="ui-monospace, monospace" fontSize="11.2" fontWeight="500">
-        {observationNodes.map(({ text, color }, i) => (
-          <text
-            key={text}
-            x="14"
-            y={103 + i * 20}
-            fill={color}
-            style={{ animationDelay: `${0.05 + i * 0.08}s` }}
-          >
-            {text}
-          </text>
+      <rect x="12" y="22" width="312" height="246" rx="14" fill="#ffffff" stroke="#d4d4d8" />
+      <rect x="12" y="22" width="312" height="48" rx="14" fill="#0a0a0a" />
+      <rect x="12" y="56" width="312" height="14" fill="#0a0a0a" />
+      <text x="32" y="47" fill="#ffffff" fontSize="13" fontWeight="800" fontFamily="ui-monospace, monospace">{t.root}</text>
+      <text x="304" y="47" textAnchor="end" fill="#ffb28e" fontSize="9.5" fontWeight="700" fontFamily="ui-monospace, monospace">{t.view}</text>
+      <g className="obs-tree-line" fill="none" stroke="#d4d4d8" strokeWidth="1.5">
+        <path d="M72 103 V204" />
+        <path d="M72 103 H102" />
+        {nodeY.map((y) => <path key={y} d={`M72 ${y} H102`} />)}
+      </g>
+      <g className="obs-node">
+        <circle cx="72" cy="103" r="5" fill="#ff6b35" />
+        <rect x="102" y="87" width="185" height="31" rx="7" fill="#fff7f2" stroke="#ff6b35" />
+        <text x="114" y="107" fill="#9a3412" fontSize="10.2" fontWeight="700">{t.frame}</text>
+      </g>
+      <g className="obs-node obs-node-2">
+        <circle cx="72" cy="136" r="4" fill="#10b981" />
+        <rect x="102" y="124" width="137" height="25" rx="6" fill="#f8fafc" stroke="#e4e4e7" />
+        <text x="113" y="140.5" fill="#3f3f46" fontSize="9.8" fontWeight="600">{t.node}</text>
+      </g>
+      <g className="obs-node obs-node-3">
+        <circle cx="72" cy="170" r="4" fill="#0ea5e9" />
+        <rect x="102" y="158" width="154" height="25" rx="6" fill="#f8fafc" stroke="#e4e4e7" />
+        <text x="113" y="174.5" fill="#3f3f46" fontSize="9.8" fontWeight="600">{t.state}</text>
+      </g>
+      <g className="obs-node obs-node-4">
+        <circle cx="72" cy="204" r="4" fill="#ff6b35" />
+        <rect x="102" y="192" width="166" height="25" rx="6" fill="#fff1e8" stroke="#ff6b35" />
+        <text x="113" y="208.5" fill="#9a3412" fontSize="9.8" fontWeight="700">{t.target}</text>
+      </g>
+      <g className="obs-completeness">
+        <circle cx="38" cy="244" r="4" fill="#10b981" />
+        <text x="48" y="247.5" fill="#52525b" fontSize="9.2" fontWeight="700" fontFamily="ui-monospace, monospace">{complete}</text>
+        <circle cx="106" cy="244" r="4" fill="#a1a1aa" />
+        <text x="116" y="247.5" fill="#52525b" fontSize="9.2" fontWeight="700" fontFamily="ui-monospace, monospace">{partial}</text>
+      </g>
+      <g className="obs-diff">
+        <rect x="347" y="22" width="157" height="100" rx="12" fill="#fff7f2" stroke="#ff6b35" />
+        <text x="362" y="48" fill="#c2410c" fontSize="10.4" fontWeight="800">{t.diff}</text>
+        <text x="362" y="69" fill="#71717a" fontSize="10" fontFamily="ui-monospace, monospace">{t.version}</text>
+        {t.diffRows.map((row, index) => {
+          const added = index === 1;
+          return (
+            <g key={row}>
+              <rect x="362" y={78 + index * 19} width="127" height="15" rx="4" fill={added ? "#ecfdf5" : "#fff1f2"} />
+              <text x="369" y={88.5 + index * 19} fill={added ? "#047857" : "#be123c"} fontSize="8.3" fontWeight="700" fontFamily="ui-monospace, monospace">{row}</text>
+            </g>
+          );
+        })}
+      </g>
+      <path className="obs-branch" d="M268 204 C300 204 316 194 347 194" fill="none" stroke="#ff6b35" strokeWidth="2" markerEnd="url(#obs-arrow)" />
+      <text x="305" y="180" textAnchor="middle" fill="#c2410c" fontSize="9.4" fontWeight="800">{t.query}</text>
+      <g className="obs-detail">
+        <rect x="347" y="136" width="157" height="116" rx="12" fill="#0a0a0a" />
+        <text x="362" y="162" fill="#ffffff" fontSize="10.4" fontWeight="800">{t.detail}</text>
+        <path d="M362 171 H489" stroke="#3f3f46" />
+        {t.detailRows.map((row, index) => (
+          <g key={row.key}>
+            <text x="362" y={184 + index * 19} fill="#a1a1aa" fontSize="8.4" fontFamily="ui-monospace, monospace">{row.key}</text>
+            <text x="489" y={184 + index * 19} textAnchor="end" fill="#ffffff" fontSize="8.4" fontWeight="700" fontFamily="ui-monospace, monospace">{row.value}</text>
+            {index < t.detailRows.length - 1 && <path d={`M362 ${190 + index * 19} H489`} stroke="#27272a" />}
+          </g>
         ))}
       </g>
-      <text x="75" y="222" textAnchor="middle" fill="#71717a" fontSize="11" fontWeight="700" fontFamily="ui-monospace, monospace">freshness=current</text>
-
-      {/* Animated Arrow 1: native observation → full artifact */}
-      <g transform="translate(168, 122)">
-        <path
-          d="M-17 0 L17 0"
-          stroke="#ff6b35"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          markerEnd="url(#obs-arrow)"
-          className="obs-flow"
-        />
-        <text x="0" y="-13" textAnchor="middle" fill="#ff6b35" fontSize="10" fontWeight="800" className="obs-arrow-badge">project</text>
-      </g>
-
-      {/* Full artifact — immutable page map with opaque IDs and status */}
-      <rect x="189" y="24" width="142" height="212" rx="10" fill="#ffffff" stroke="#d4d4d8" />
-      <text x="260" y="48" textAnchor="middle" fill="#0a0a0a" fontSize="14.2" fontWeight="800">Full artifact</text>
-      <text x="260" y="68" textAnchor="middle" fill="#a1a1aa" fontSize="10.5" fontWeight="600">{t.skeleton}</text>
-      <g className="obs-records" fontFamily="ui-monospace, monospace" fontSize="8.2" fontWeight="500">
-        {fullNodes.map((node, i) => (
-          <text key={node} x="197" y={91 + i * 15.5} fill="#27272a" style={{ animationDelay: `${0.1 + i * 0.09}s` }}>
-            {node}
-          </text>
-        ))}
-      </g>
-      <text x="260" y="204" textAnchor="middle" fill="#ff6b35" fontSize="8.2" fontWeight="700" fontFamily="ui-monospace, monospace">completeness</text>
-      <text x="260" y="222" textAnchor="middle" fill="#ff6b35" fontSize="10.8" fontWeight="800" fontFamily="ui-monospace, monospace">complete|partial</text>
-
-      {/* Animated Arrow 2: full artifact → known-target detail */}
-      <g transform="translate(353, 122)">
-        <path
-          d="M-17 0 L17 0"
-          stroke="#ff6b35"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          markerEnd="url(#obs-arrow)"
-          className="obs-flow obs-flow-2"
-        />
-        <text x="0" y="-13" textAnchor="middle" fill="#ff6b35" fontSize="10" fontWeight="800" className="obs-arrow-badge-2">query</text>
-      </g>
-
-      {/* Detail artifact — a bounded read of a known target */}
-      <rect x="374" y="24" width="142" height="212" rx="10" fill="#fff7f2" stroke="#ff6b35" strokeWidth="1.6" />
-      <text x="445" y="48" textAnchor="middle" fill="#ff6b35" fontSize="14.2" fontWeight="800">Detail artifact</text>
-      <text x="445" y="68" textAnchor="middle" fill="#c2410c" fontSize="10.5" fontWeight="600">{t.structure}</text>
-      <g className="obs-records" fontFamily="ui-monospace, monospace" fontSize="8.2" fontWeight="500">
-        {detailNodes.map((node, i) => (
-          <text key={node} x="382" y={94 + i * 18} fill="#27272a" style={{ animationDelay: `${0.55 + i * 0.09}s` }}>
-            {node}
-          </text>
-        ))}
-      </g>
-      <text x="445" y="204" textAnchor="middle" fill="#ff6b35" fontSize="8.2" fontWeight="700" fontFamily="ui-monospace, monospace">diff</text>
-      <text x="445" y="222" textAnchor="middle" fill="#ff6b35" fontSize="10.8" fontWeight="800" fontFamily="ui-monospace, monospace">{diffStates}</text>
-
-      {/* 3 pills aligned with the 3 cards and the reduced outer padding */}
       {t.pills.map((label, i) => (
-        <g key={label} transform={`translate(${4 + i * 185}, 254)`}>
-          <rect width="142" height="30" rx="15" fill="#ffffff" stroke="#ff6b35" strokeWidth="1.4" />
-          <text x="71" y="19.5" textAnchor="middle" fill="#ff6b35" fontSize="10.8" fontWeight="700">{label}</text>
+        <g key={label} transform={`translate(${12 + i * 103}, 282)`}>
+          <rect width="96" height="24" rx="12" fill="#ffffff" stroke="#ff6b35" strokeWidth="1.2" />
+          <text x="48" y="16" textAnchor="middle" fill="#c2410c" fontSize="8.9" fontWeight="700">{label}</text>
         </g>
       ))}
-      <text x="260" y="314" textAnchor="middle" fill="#71717a" fontSize="13.5" fontWeight="600">{t.caption}</text>
+      <text x="260" y="322" textAnchor="middle" fill="#71717a" fontSize="10" fontWeight="700">{t.caption}</text>
     </svg>
   );
 }
 
-/* 03 — controllable task processes */
+/* 03 — an abstract, page-scoped action evidence chain */
 function IllusLocal({ t }: { t: Figures["local"] }) {
+  const eventY = [120, 170, 220];
+  const eventColors = ["#10b981", "#10b981", "#ff6b35"];
+
   return (
     <svg viewBox="0 0 520 330" className="ill-svg" role="img" aria-label={t.alt}>
       <defs>
-        <radialGradient id="lc-glow" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0%" stopColor="#ff6b35" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="#ff6b35" stopOpacity="0" />
-        </radialGradient>
+        <marker id="audit-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0 L10 5 L0 10 Z" fill="#ff6b35" />
+        </marker>
       </defs>
-      <g transform="translate(20, 5)">
-        {/* Keep the card footprint unchanged while giving the artwork more visual weight. */}
-        <g transform="translate(240, 165) scale(1.18) translate(-240, -165)">
-        <circle className="lc-glow" cx="240" cy="150" r="140" fill="url(#lc-glow)" />
-
-        {/* blocked outbound */}
-        {[
-          [78, 44],
-          [366, 44],
-        ].map(([x, y], i) => (
-          <g key={i} transform={`translate(${x}, ${y})`} opacity="0.65">
-            <path d="M6 26 a18 18 0 0 1 0 -18 a18 18 0 0 1 36 0 a13 13 0 0 1 0 26 z" fill="#ececee" />
-            <text x="24" y="48" textAnchor="middle" fill="#a1a1aa" fontSize="9.5" fontWeight="700" fontFamily="ui-monospace, monospace">CLOUD</text>
-            <g className="lc-block">
-              <line x1="2" y1="4" x2="46" y2="34" stroke="#ff6b35" strokeWidth="2.4" strokeLinecap="round" />
-              <line x1="46" y1="4" x2="2" y2="34" stroke="#ff6b35" strokeWidth="2.4" strokeLinecap="round" />
-            </g>
-          </g>
-        ))}
-
-        {/* outbound attempts that bounce back */}
-        <path className="lc-try" d="M200 118 C170 96 140 84 116 78" stroke="#ff6b35" strokeWidth="1.8" fill="none" strokeDasharray="4 5" />
-        <path className="lc-try lc-try-2" d="M282 118 C312 96 342 84 366 78" stroke="#ff6b35" strokeWidth="1.8" fill="none" strokeDasharray="4 5" />
-
-        {/* device */}
-        <g transform="translate(178, 106)">
-          <rect width="124" height="86" rx="9" fill="#0a0a0a" />
-          <rect x="7" y="7" width="110" height="72" rx="5" fill="#1c1c20" />
-          <rect x="16" y="16" width="58" height="7" rx="3.5" fill="#ff6b35" />
-          <rect className="lc-line" x="16" y="30" width="42" height="5" rx="2.5" fill="#3f3f46" />
-          <rect className="lc-line lc-line-2" x="16" y="40" width="56" height="5" rx="2.5" fill="#3f3f46" />
-          <rect className="lc-line lc-line-3" x="16" y="50" width="36" height="5" rx="2.5" fill="#3f3f46" />
-          <rect x="16" y="62" width="32" height="9" rx="4.5" fill="#ff6b35" opacity="0.65" />
-          <rect x="52" y="62" width="24" height="9" rx="4.5" fill="#3f3f46" />
-          <g className="lc-shield" transform="translate(100, 22)">
-            <path d="M0 -9 l9 4.2 v6.3 c0 4.6 -3.9 8 -9 9 -5.1 -1 -9 -4.4 -9 -9 v-6.3z" fill="#ff6b35" />
-            <path d="M-3.6 0.4 l2.4 2.4 l4.8 -4.8" stroke="#0a0a0a" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-          </g>
+      <rect x="20" y="22" width="144" height="46" rx="12" fill="#0a0a0a" />
+      <text x="92" y="49" textAnchor="middle" fill="#ffffff" fontSize="11" fontWeight="800">{t.intent}</text>
+      <path className="audit-flow" d="M166 45 H202" fill="none" stroke="#ff6b35" strokeWidth="2" markerEnd="url(#audit-arrow)" />
+      <rect x="214" y="22" width="144" height="46" rx="12" fill="#fff7f2" stroke="#ff6b35" />
+      <text x="286" y="49" textAnchor="middle" fill="#9a3412" fontSize="11" fontWeight="800">{t.page}</text>
+      <path d="M80 98 V248" stroke="#d4d4d8" strokeWidth="2" />
+      <text x="20" y="92" fill="#71717a" fontSize="9.5" fontWeight="700" fontFamily="ui-monospace, monospace">{t.timeline}</text>
+      {t.actions.map((action, index) => (
+        <g key={action} className={`audit-event audit-event-${index + 1}`}>
+          <circle cx="80" cy={eventY[index]} r="7" fill={eventColors[index]} />
+          {index === 2 && <circle className="audit-pulse" cx="80" cy={eventY[index]} r="11" fill="none" stroke="#ff6b35" strokeWidth="2" />}
+          <rect x="101" y={eventY[index] - 16} width="205" height="33" rx="8" fill="#ffffff" stroke="#e4e4e7" />
+          <text x="114" y={eventY[index] - 2} fill="#27272a" fontSize="10" fontWeight="700">{action}</text>
+          <text x="114" y={eventY[index] + 10} fill={eventColors[index]} fontSize="8.8" fontWeight="800">{t.statuses[index]}</text>
         </g>
-        <rect x="152" y="98" width="176" height="102" rx="14" fill="none" stroke="#ff6b35" strokeWidth="1.6" strokeDasharray="7 6" className="lc-fence" />
-
-        <text x="240" y="236" textAnchor="middle" fill="#71717a" fontSize="10.5">{t.assets}</text>
-        <g transform="translate(130, 258)">
-          <rect width="220" height="30" rx="15" fill="#0a0a0a" />
-          <text x="110" y="20" textAnchor="middle" fill="#ffffff" fontSize="10.5" fontWeight="600">{t.banner}</text>
-        </g>
-        </g>
+      ))}
+      <path className="audit-branch" d="M306 220 C332 220 338 191 354 191" fill="none" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#audit-arrow)" />
+      <g className="audit-attention">
+        <rect x="354" y="157" width="146" height="68" rx="12" fill="#fffbeb" stroke="#f59e0b" strokeWidth="1.5" />
+        <circle cx="372" cy="179" r="5" fill="#f59e0b" />
+        <text x="385" y="183" fill="#92400e" fontSize="9.5" fontWeight="800">{t.attention}</text>
+        <text x="370" y="207" fill="#a16207" fontSize="9.2">{t.resume}</text>
       </g>
+      <g className="audit-evidence">
+        <rect x="28" y="268" width="464" height="38" rx="12" fill="#f8fafc" stroke="#e4e4e7" />
+        <text x="44" y="284" fill="#71717a" fontSize="9.2" fontWeight="800">{t.evidence}</text>
+        <text x="44" y="298" fill="#27272a" fontSize="10" fontWeight="700">{t.review}</text>
+        <text x="476" y="292" textAnchor="end" fill="#c2410c" fontSize="9.4" fontWeight="800">{t.recorded}</text>
+      </g>
+      <text x="260" y="323" textAnchor="middle" fill="#71717a" fontSize="10.5" fontWeight="700">{t.caption}</text>
     </svg>
   );
 }
@@ -430,7 +379,7 @@ function IllusFingerprint({ t }: { t: Figures["fingerprint"] }) {
 function IllusSkill({ t }: { t: Figures["skill"] }) {
   const runSteps = [
     { module: "Page", fn: "navigate", args: "(url)" },
-    { module: "DOM", fn: "getAXTree", args: "()" },
+    { module: "Page", fn: "inspect", args: "()" },
     { module: "Input", fn: "click", args: "(.btn)" },
     { module: "Page", fn: "getState", args: "()" },
   ];

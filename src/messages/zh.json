@@ -6,6 +6,7 @@
   },
   "nav": {
     "product": "产品介绍",
+    "guide": "使用指南",
     "downloadSection": "下载",
     "download": "下载客户端",
     "github": "GitHub"
@@ -20,6 +21,10 @@
     "product": {
       "title": "WebCross · 协助智能体完成繁杂的网页工作",
       "description": "WebCross 是搭载定制页面引擎的智能体浏览器，以低 Token 成本完成网页自动化，让账号与任务过程保持自主可控。"
+    },
+    "guide": {
+      "title": "使用指南 · WebCross",
+      "description": "WebCross 极简使用指南：从启动自动装载 Skill，到创建专属浏览器及在 AI Agent 中直接调用。"
     },
     "company": {
       "title": "关于公司 · WebCross",
@@ -36,6 +41,7 @@
     "thesisLead": "将协助您的智能体",
     "thesisRest": "完成繁杂的网页工作",
     "ctaPrimary": "免费下载 WebCross",
+    "ctaGuide": "三分钟使用指南",
     "assurances": [
       "是的，公测阶段全功能免费",
       "关键过程，自主可控"
@@ -857,6 +863,134 @@
     "closing": {
       "title": "让您的智能体，**从今天起开始干活**",
       "sub": "下载 WebCross，体验关键过程自主可控的智能体浏览器。"
+    }
+  },
+  "guide": {
+    "title": "使用指南",
+    "eyebrow": "QUICK START GUIDE",
+    "heading": "三分钟极简上手指南",
+    "subheading": "无需繁杂配置，跟随三步轻松赋予 AI 真实的浏览器操控能力。",
+    "ctaDownload": "免费下载 WebCross",
+    "ctaProduct": "了解核心产品特性",
+    "steps": [
+      {
+        "id": 1,
+        "title": "启动软件并确认安装 Skill",
+        "desc": "首次打开 WebCross，根据弹窗提示确认安装技能。",
+        "tag": "步骤 01 · 快速就绪",
+        "previewTitle": "Skill 就绪状态",
+        "previewCode": "[WebCross Launcher]\n✓ 检查本地控制环境...\n✓ webcross-browser Skill 已就绪\n● 状态: 等待 Agent 调用 (本地回路运行中)"
+      },
+      {
+        "id": 2,
+        "title": "创建专属浏览器",
+        "desc": "点击“新建浏览器”，输入名称保存即可使用。",
+        "tag": "步骤 02 · 独立沙箱",
+        "previewTitle": "浏览器实例配置",
+        "previewCode": "浏览器名称: 竞品调研\n环境指纹: 独立环境指纹 (跟随系统)\n网络配置: 直连 (或绑定自定义 SOCKS5/HTTP 代理)\n就绪状态: 已保存，点击“打开”即可启动"
+      },
+      {
+        "id": 3,
+        "title": "在 AI Agent 中直接呼唤",
+        "desc": "在 AI 助手中输入 /webcross-browser 或直接对话，吩咐 AI 操控浏览器完成任务。",
+        "tag": "步骤 03 · 实时调用",
+        "previewTitle": "AI 对话与执行模拟",
+        "previewCode": "用户: 用 WebCross 帮我搜索最新的行业趋势研报并下载。\nAgent: 正在通过 webcross-browser 调度浏览器...\n✓ 打开目标网页\n✓ 提取要点并保存结果到本地"
+      }
+    ],
+    "tipsTitle": "核心特性与安全边界",
+    "tips": [
+      {
+        "title": "纯本地优先架构",
+        "desc": "所有 Cookie、历史记录及登录凭证均 100% 存放在本机设备，绝不上传云端服务器。"
+      },
+      {
+        "title": "专属提示词约束",
+        "desc": "可为每个浏览器定制 AI 行为指南，AI 每次介入操作自动读取，不误点、不越权。"
+      },
+      {
+        "title": "防关联独立环境",
+        "desc": "各浏览器拥有独立的 Cookie、缓存与代理网络，一人轻松管理多个高敏业务账号。"
+      }
+    ],
+    "faq": {
+      "badge": "FAQ",
+      "title": "**常见问题**",
+      "subtitle": "关于安装、环境配置与安全边界的解答。",
+      "items": [
+        {
+          "q": "为什么修改了浏览器的代理或指纹，没有立即生效？",
+          "a": [
+            "为了保护当前运行中浏览器会话的数据一致性，指纹与网络代理的变更会在重新打开该浏览器后生效；浏览器提示词则会在下一次 AI 建立连接时即时刷新。"
+          ]
+        },
+        {
+          "q": "我的个人登录密码和 Cookie 会被上传吗？",
+          "a": [
+            "绝不会。WebCross 严格实行纯本地优先架构，所有浏览数据与会话凭据均保存在你的电脑本地。"
+          ]
+        },
+        {
+          "q": "在第三方 AI Agent 中使用需要额外配置吗？",
+          "a": [
+            "完全不需要。WebCross 在启动时会自动就绪 webcross-browser Skill。在任意支持 Skills 的 AI Agent 中输入 / 即可直接选择调用，或直接用日常自然语言吩咐即可。"
+          ]
+        }
+      ]
+    },
+    "mockup": {
+      "userBadge": "Development user",
+      "groupWorkspace": "工作区",
+      "navBrowsers": "浏览器",
+      "navAgentChat": "任务编排",
+      "badgeComingSoon": "即将",
+      "groupSystem": "系统",
+      "navSettings": "设置",
+      "sideAccess": "接入",
+      "sideInvite": "邀请",
+      "connWs": "Websocket",
+      "connMcp": "MCP",
+      "connCli": "CLI",
+      "statusNotConnected": "未连接",
+      "statusCallable": "可调用",
+      "dialogTitle": "安装浏览器技能",
+      "dialogDesc": "为兼容的 AI 助手提供浏览器操作指南。",
+      "sectionLabel": "安装到",
+      "target1Name": "通用",
+      "target2Name": "Claude",
+      "target3Name": "Codex",
+      "badgeRecommended": "推荐",
+      "badgeInstall": "安装",
+      "dialogNote": "仅更新所选目录，更新前自动备份。",
+      "btnDismiss": "暂不安装",
+      "btnInstall": "安装",
+      "backText": "返回",
+      "editorTitle": "新建浏览器",
+      "editorDesc": "为浏览器命名后即可保存，展开高级选项可进行个性化设置。",
+      "nameLabel": "名字",
+      "namePlaceholder": "例如：跨境电商账号、社媒运营、竞品调研、日常办公",
+      "nameValue": "竞品调研",
+      "advancedOptions": "高级选项",
+      "btnCancel": "取消",
+      "btnSave": "保存",
+      "agentTitle": "AI Assistant",
+      "userPrompt": "帮我打开某电商网站，搜索“无线降噪耳机”并整理前两款的价格与评分",
+      "toolTitle": "WebCross · 竞品调研",
+      "toolStatus": "已完成自动化检索",
+      "toolStep1": "已唤起“竞品调研”专属浏览器并访问目标商城",
+      "toolStep2": "已自动化检索并完成商品数据结构化提炼",
+      "toolStep3": "已完成数据结构化提炼",
+      "assistantReply": "已通过 WebCross 完成页面检索与数据提取，精选热门型号如下：",
+      "item1Title": "旗舰降噪耳机 Pro",
+      "item1Price": "¥1,999",
+      "item1Score": "4.9 分 · 深度降噪 · 30h 续航",
+      "item2Title": "头戴式智能无线耳机",
+      "item2Price": "¥2,499",
+      "item2Score": "4.8 分 · 空间音频 · 40h 续航",
+      "item3Title": "轻量运动防水耳机",
+      "item3Price": "¥899",
+      "item3Score": "4.6 分 · 长续航",
+      "inputPlaceholder": "继续对比这两款的电池续航与用户评价..."
     }
   },
   "company": {

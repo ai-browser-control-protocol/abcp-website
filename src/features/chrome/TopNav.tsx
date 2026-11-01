@@ -88,6 +88,15 @@ export function TopNav({ chrome, github }: { chrome: ChromeCopy; github: GithubN
           </Link>
 
           <Link
+            className={`nav-link${chapter === "guide" ? " is-current" : ""}`}
+            href={chapterPath("guide")}
+            aria-current={chapter === "guide" ? "page" : undefined}
+            onClick={closeAll}
+          >
+            {chrome.nav.guide}
+          </Link>
+
+          <Link
             className={`nav-link${chapter === "download" ? " is-current" : ""}`}
             href={`${chapterPath("download")}#download-platforms`}
             aria-current={chapter === "download" ? "page" : undefined}

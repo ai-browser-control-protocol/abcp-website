@@ -37,6 +37,19 @@ function DownloadButton({ label }: { label: string }) {
   );
 }
 
+/** Secondary button routing directly to the Quick Start / User Guide subpage. */
+function GuideButton({ label }: { label: string }) {
+  return (
+    <Link className="ui-button-ghost hero-btn-guide" href={chapterPath("guide")}>
+      <span>{label}</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </svg>
+    </Link>
+  );
+}
+
 export function ProductChapter({
   copy,
 }: {
@@ -68,6 +81,7 @@ export function ProductChapter({
 
         <div className="hero-cta-cluster">
           <DownloadButton label={copy.ctaPrimary} />
+          <GuideButton label={copy.ctaGuide} />
         </div>
 
         <PixelScene assurances={copy.assurances} />
@@ -93,6 +107,7 @@ export function ProductChapter({
         <p className="closing-cta-sub">{copy.closing.sub}</p>
         <div className="hero-cta-cluster">
           <DownloadButton label={copy.ctaPrimary} />
+          <GuideButton label={copy.ctaGuide} />
         </div>
 
         <GiftClip className="closing-folk" />

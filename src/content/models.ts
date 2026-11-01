@@ -19,6 +19,7 @@ export interface ChromeCopy {
   tagline: string;
   nav: {
     product: string;
+    guide: string;
     downloadSection: string;
     download: string;
     github: string;
@@ -41,6 +42,7 @@ export interface ChapterViewModel {
   seoTitle: string;
   seoDescription: string;
   product?: Messages["product"];
+  guide?: Messages["guide"];
   download?: Messages["download"];
   company?: {
     title: string;
@@ -64,6 +66,7 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
     tagline: t.brand.tagline,
     nav: {
       product: t.nav.product,
+      guide: t.nav.guide,
       downloadSection: t.nav.downloadSection,
       download: t.nav.download,
       github: t.nav.github,
@@ -92,6 +95,7 @@ export function getChapterModel(chapter: ChapterId, locale: Locale): ChapterView
     seoDescription: seo.description,
   };
   if (chapter === "product") model.product = t.product;
+  if (chapter === "guide") model.guide = t.guide;
   if (chapter === "download") model.download = t.download;
   if (chapter === "company") {
     model.company = {
@@ -112,6 +116,7 @@ export function getChapterModel(chapter: ChapterId, locale: Locale): ChapterView
 
 function chapterTitle(t: Messages, chapter: ChapterId): string {
   if (chapter === "product") return t.product.title;
+  if (chapter === "guide") return t.guide.title;
   if (chapter === "company") return t.company.title;
   return t.seo.download.title;
 }

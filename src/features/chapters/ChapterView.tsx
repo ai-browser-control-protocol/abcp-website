@@ -5,12 +5,15 @@ import type { ChapterViewModel } from "@/content/models";
 import { jsonLd } from "@/features/seo/buildMetadata";
 import { CompanyChapter } from "./CompanyChapter";
 import { DownloadChapter } from "./DownloadChapter";
+import { GuideChapter } from "./GuideChapter";
 import { ProductChapter } from "./ProductChapter";
 
 export function ChapterView({ model }: { model: ChapterViewModel }) {
   const content =
     model.id === "product" && model.product ? (
       <ProductChapter copy={model.product} />
+    ) : model.id === "guide" && model.guide ? (
+      <GuideChapter locale={model.locale} copy={model.guide} />
     ) : model.id === "company" && model.company ? (
       <CompanyChapter copy={model.company} />
     ) : model.id === "download" && model.download ? (

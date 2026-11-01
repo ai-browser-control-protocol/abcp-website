@@ -12,6 +12,7 @@ describe("parseChapter", () => {
 
   it("maps a layout segment", () => {
     expect(chapterFromSegment(null)).toBe("product");
+    expect(chapterFromSegment("guide")).toBe("guide");
     expect(chapterFromSegment("company")).toBe("company");
     expect(chapterFromSegment("download")).toBe("download");
   });
@@ -19,6 +20,8 @@ describe("parseChapter", () => {
   it("reads slugs with or without a locale prefix", () => {
     expect(parseChapter("/zh/company")).toBe("company");
     expect(parseChapter("/company")).toBe("company");
+    expect(parseChapter("/zh/guide")).toBe("guide");
+    expect(parseChapter("/guide")).toBe("guide");
     expect(parseChapter("/ja/download")).toBe("download");
   });
 });

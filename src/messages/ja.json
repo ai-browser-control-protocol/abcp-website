@@ -6,6 +6,7 @@
   },
   "nav": {
     "product": "製品紹介",
+    "guide": "利用ガイド",
     "downloadSection": "ダウンロード",
     "download": "ダウンロード",
     "github": "GitHub"
@@ -20,6 +21,10 @@
     "product": {
       "title": "WebCross · 自律 Web エージェントブラウザ",
       "description": "WebCross は専用ページエンジンを搭載したエージェントブラウザです。低い Token コストで Web 自動化を実現し、アカウント利用とタスクの進行を自分で管理しやすくします。"
+    },
+    "guide": {
+      "title": "利用ガイド · WebCross",
+      "description": "WebCrossの利用ガイド：起動時のSkill自動準備から専用ブラウザの作成、AI Agentからの直接操作まで。"
     },
     "company": {
       "title": "会社情報 · WebCross",
@@ -36,6 +41,7 @@
     "thesisLead": "があなたのエージェントを支援し",
     "thesisRest": "煩雑なウェブ作業を完了させます",
     "ctaPrimary": "WebCross を無料でダウンロード",
+    "ctaGuide": "3分利用ガイド",
     "assurances": [
       "はい、公開ベータ期間中は全機能が無料です",
       "重要なプロセスを、自分で管理"
@@ -857,6 +863,134 @@
     "closing": {
       "title": "**今日から**エージェントに働いてもらいましょう",
       "sub": "WebCross をダウンロードして、重要なプロセスを自分で管理できるエージェントブラウザを体験してください。"
+    }
+  },
+  "guide": {
+    "title": "利用ガイド",
+    "eyebrow": "QUICK START GUIDE",
+    "heading": "3分でわかるクイックスタートガイド",
+    "subheading": "面倒な設定なし。3つのシンプルなステップで、AIに本物のブラウザ操作力を授けます。",
+    "ctaDownload": "WebCross を無料体験",
+    "ctaProduct": "主要機能を見る",
+    "steps": [
+      {
+        "id": 1,
+        "title": "アプリを起動してスキルを導入",
+        "desc": "WebCross を初回起動し、ポップアップに従ってスキルをインストールします。",
+        "tag": "ステップ 01 · かんたん準備",
+        "previewTitle": "Skill 準備状況",
+        "previewCode": "[WebCross Launcher]\n✓ ローカルランタイムの確認中...\n✓ webcross-browser Skill が準備完了\n● ステータス: Agentからの接続待機中 (Local)"
+      },
+      {
+        "id": 2,
+        "title": "専用ブラウザを作成",
+        "desc": "「新規ブラウザ」をクリックし、名前を入力して保存するだけで完了です。",
+        "tag": "ステップ 02 · 独立サンドボックス",
+        "previewTitle": "ブラウザ構成情報",
+        "previewCode": "ブラウザ名: 競合リサーチ\n指紋設定: 独立指紋プロファイル (システム準拠)\nネットワーク: 直接接続 (またはSOCKS5/HTTPを指定)\nステータス: 保存済み、「開く」で即起動"
+      },
+      {
+        "id": 3,
+        "title": "AI Agent から直接呼び出し",
+        "desc": "AI アシスタントで /webcross-browser を入力するか自然言語で話しかけ、ブラウザを自動操作します。",
+        "tag": "ステップ 03 · 即座に実行",
+        "previewTitle": "AI 対話・実行シミュレーション",
+        "previewCode": "ユーザー: WebCrossで最新の業界トレンド資料を検索してダウンロードして。\nAgent: webcross-browser 経由でブラウザを操作中...\n✓ 対象ページを開きました\n✓ 要点を抽出してローカルに保存しました"
+      }
+    ],
+    "tipsTitle": "主要な特徴と安全基準",
+    "tips": [
+      {
+        "title": "完全ローカルファースト",
+        "desc": "すべてのCookie、認証情報、履歴は100%お手元のPCに保存され、クラウドへ送信されることはありません。"
+      },
+      {
+        "title": "専用プロンプトによる制約",
+        "desc": "ブラウザごとに行動ルールを設定でき、AIが接続時に自動読み込みするため誤操作を防ぎます。"
+      },
+      {
+        "title": "マルチ環境の安全な分離",
+        "desc": "各ブラウザが独立したCookie・キャッシュ・プロキシを持ち、アカウント間の関連付けリスクを遮断します。"
+      }
+    ],
+    "faq": {
+      "badge": "FAQ",
+      "title": "利用ガイド · **よくあるご質問**",
+      "subtitle": "インストール、環境設定、プライバシーに関するFAQ。",
+      "items": [
+        {
+          "q": "プロキシや指纹を変更しても、すぐに反映されないのはなぜですか？",
+          "a": [
+            "実行中のセッション整合性を保護するため、指紋とプロキシの変更はブラウザ再起動後に反映されます。プロンプトは次回接続時に自動更新されます。"
+          ]
+        },
+        {
+          "q": "パスワードやCookieがクラウドへ送信されることはありますか？",
+          "a": [
+            "一切ありません。WebCrossは厳格なローカルファースト設計を採用しており、オフラインでも安全に稼働します。"
+          ]
+        },
+        {
+          "q": "外部の AI Agent で使う際、追加の設定は必要ですか？",
+          "a": [
+            "不要です。WebCrossの起動時に webcross-browser Skill が自動準備されます。Agentで / を入力するか、自然言語で指示するだけで即座に利用可能です。"
+          ]
+        }
+      ]
+    },
+    "mockup": {
+      "userBadge": "Development user",
+      "groupWorkspace": "ワークスペース",
+      "navBrowsers": "ブラウザ",
+      "navAgentChat": "タスク編成",
+      "badgeComingSoon": "近日",
+      "groupSystem": "システム",
+      "navSettings": "設定",
+      "sideAccess": "接続",
+      "sideInvite": "招待",
+      "connWs": "Websocket",
+      "connMcp": "MCP",
+      "connCli": "CLI",
+      "statusNotConnected": "未接続",
+      "statusCallable": "利用可能",
+      "dialogTitle": "ブラウザスキルをインストール",
+      "dialogDesc": "互換性のある AI アシスタントにブラウザ操作ガイドを提供します。",
+      "sectionLabel": "インストール先",
+      "target1Name": "汎用",
+      "target2Name": "Claude",
+      "target3Name": "Codex",
+      "badgeRecommended": "推奨",
+      "badgeInstall": "インストール",
+      "dialogNote": "選択したディレクトリのみ更新し、更新前に自動バックアップします。",
+      "btnDismiss": "後で",
+      "btnInstall": "インストール",
+      "backText": "戻る",
+      "editorTitle": "新規ブラウザ",
+      "editorDesc": "ブラウザに名前を付ければすぐに保存できます。詳細設定で個別設定も可能です。",
+      "nameLabel": "名前",
+      "namePlaceholder": "例：ECアカウント、SNS運用、競合調査、日常業務",
+      "nameValue": "競合市場調査",
+      "advancedOptions": "詳細設定",
+      "btnCancel": "キャンセル",
+      "btnSave": "保存",
+      "agentTitle": "AI Assistant",
+      "userPrompt": "ECサイトを開き、「ノイズキャンセリングヘッドホン」を検索して上位2件の価格と評価を抽出して",
+      "toolTitle": "WebCross · 競合市場調査",
+      "toolStatus": "自動化処理完了",
+      "toolStep1": "「競合市場調査」専用ブラウザを起動しストアにアクセス",
+      "toolStep2": "対象サイトを開き商品データを自動検索・抽出",
+      "toolStep3": "上位商品の主要データを構造化抽出",
+      "assistantReply": "WebCross を通じてページの検索とデータ抽出を完了しました。注目モデルは以下の通りです：",
+      "item1Title": "フラッグシップ ANC Pro",
+      "item1Price": "¥34,800",
+      "item1Score": "4.9点 · 高性能ノイズ低減 · 30時間駆動",
+      "item2Title": "スタジオワイヤレス オーバーイヤー",
+      "item2Price": "¥42,000",
+      "item2Score": "4.8点 · 空間オーディオ · 40時間駆動",
+      "item3Title": "スポーツ防水イヤホン",
+      "item3Price": "¥14,800",
+      "item3Score": "4.6点 · 長時間バッテリー",
+      "inputPlaceholder": "この2モデルのバッテリー駆動時間とレビューを比較して..."
     }
   },
   "company": {

@@ -6,6 +6,7 @@
   },
   "nav": {
     "product": "Product",
+    "guide": "User Guide",
     "downloadSection": "Download",
     "download": "Download",
     "github": "GitHub"
@@ -20,6 +21,10 @@
     "product": {
       "title": "WebCross · Autonomous Web Agent Browser",
       "description": "WebCross is an agent browser powered by a dedicated page engine, automating the web with a low token cost while keeping account use and task activity under your control."
+    },
+    "guide": {
+      "title": "User Guide · WebCross",
+      "description": "Learn how to use WebCross: from auto-loading skills on launch to managing isolated browsers and controlling them from AI agents."
     },
     "company": {
       "title": "About Company · WebCross",
@@ -36,6 +41,7 @@
     "thesisLead": "helps your agent",
     "thesisRest": "finish the tedious web work",
     "ctaPrimary": "Download WebCross — Free",
+    "ctaGuide": "3-Min Quick Start",
     "assurances": [
       "Yes — every feature is free during the public beta",
       "Critical tasks, under your control"
@@ -857,6 +863,134 @@
     "closing": {
       "title": "Put your agent to work **today**",
       "sub": "Download WebCross and try an agent browser that keeps critical tasks under your control."
+    }
+  },
+  "guide": {
+    "title": "User Guide",
+    "eyebrow": "QUICK START GUIDE",
+    "heading": "Three-Minute Quick Start Guide",
+    "subheading": "Give your AI agent real web-control superpowers in three simple steps without configuration fatigue.",
+    "ctaDownload": "Download WebCross Free",
+    "ctaProduct": "Explore Product Features",
+    "steps": [
+      {
+        "id": 1,
+        "title": "Launch App & Install Skill",
+        "desc": "Open WebCross and confirm the prompt to install the browser skill.",
+        "tag": "Step 01 · Quick Start",
+        "previewTitle": "Skill Readiness",
+        "previewCode": "[WebCross Launcher]\n✓ Checking local control runtime...\n✓ webcross-browser Skill ready in environment.\n● Status: Listening for Agent calls (Local)"
+      },
+      {
+        "id": 2,
+        "title": "Create Your Browser",
+        "desc": "Click \"New Browser\", enter a name, and save to start using it.",
+        "tag": "Step 02 · Isolated Sandbox",
+        "previewTitle": "Browser Profile Config",
+        "previewCode": "Browser Name: Market Research\nProfile: Isolated Fingerprint (Follows System)\nNetwork: Direct (or bind custom SOCKS5/HTTP proxy)\nStatus: Saved, click \"Open\" to launch"
+      },
+      {
+        "id": 3,
+        "title": "Call from Your AI Agent",
+        "desc": "Type /webcross-browser or chat naturally in your AI Assistant to automate browser tasks.",
+        "tag": "Step 03 · Instant Automation",
+        "previewTitle": "AI Conversation Simulation",
+        "previewCode": "User: Use WebCross to search for the latest tech report and summarize.\nAgent: Operating browser via webcross-browser...\n✓ Navigating to target site\n✓ Extracting key data and saving locally"
+      }
+    ],
+    "tipsTitle": "Key Features & Safety Boundaries",
+    "tips": [
+      {
+        "title": "Strictly Local-First",
+        "desc": "All cookies, credentials, and browsing history stay 100% on your personal machine and are never uploaded."
+      },
+      {
+        "title": "Dedicated Prompt Rules",
+        "desc": "Define custom guidelines per browser; AI assistants read and obey them on every connection to prevent mistakes."
+      },
+      {
+        "title": "Anti-Detect Isolation",
+        "desc": "Each browser maintains separate cookies, storage, and proxies, enabling safe multi-account management."
+      }
+    ],
+    "faq": {
+      "badge": "FAQ",
+      "title": "**FAQ**",
+      "subtitle": "Common questions regarding setup, environments, and local privacy.",
+      "items": [
+        {
+          "q": "Why didn't my proxy or fingerprint changes take effect immediately?",
+          "a": [
+            "To protect session consistency, proxy and fingerprint changes take effect after reopening the browser. Prompts update on the next connection."
+          ]
+        },
+        {
+          "q": "Are my passwords and cookies uploaded anywhere?",
+          "a": [
+            "Never. WebCross is built on a strict local-first architecture. All browsing data and session credentials stay on your machine."
+          ]
+        },
+        {
+          "q": "Do I need complex configuration in external AI agents?",
+          "a": [
+            "Not at all. WebCross automatically loads the webcross-browser Skill upon launch. Simply type / in any skill-capable agent or instruct it in natural language."
+          ]
+        }
+      ]
+    },
+    "mockup": {
+      "userBadge": "Development user",
+      "groupWorkspace": "Workspace",
+      "navBrowsers": "Browsers",
+      "navAgentChat": "Workflows",
+      "badgeComingSoon": "Soon",
+      "groupSystem": "System",
+      "navSettings": "Settings",
+      "sideAccess": "Access",
+      "sideInvite": "Invite",
+      "connWs": "Websocket",
+      "connMcp": "MCP",
+      "connCli": "CLI",
+      "statusNotConnected": "Disconnected",
+      "statusCallable": "Ready",
+      "dialogTitle": "Install Browser Skill",
+      "dialogDesc": "Provide browser automation instructions for compatible AI assistants.",
+      "sectionLabel": "Install to",
+      "target1Name": "Universal",
+      "target2Name": "Claude",
+      "target3Name": "Codex",
+      "badgeRecommended": "Recommended",
+      "badgeInstall": "Install",
+      "dialogNote": "Only updates selected directories; automatically backed up beforehand.",
+      "btnDismiss": "Not Now",
+      "btnInstall": "Install",
+      "backText": "Back",
+      "editorTitle": "New Browser",
+      "editorDesc": "Save after naming the browser. Expand advanced options for customized settings.",
+      "nameLabel": "Name",
+      "namePlaceholder": "e.g.: E-commerce account, Social media, Market research, Daily office",
+      "nameValue": "Market Research",
+      "advancedOptions": "Advanced Options",
+      "btnCancel": "Cancel",
+      "btnSave": "Save",
+      "agentTitle": "AI Assistant",
+      "userPrompt": "Open the store, search for 'noise-cancelling headphones', and extract top 2 models with pricing & rating",
+      "toolTitle": "WebCross · Market Research",
+      "toolStatus": "Automation Complete",
+      "toolStep1": "Launched 'Market Research' dedicated browser",
+      "toolStep2": "Completed automated search & extracted structured data",
+      "toolStep3": "Extracted and structured top product metrics",
+      "assistantReply": "Retrieved and parsed page data via WebCross. Here are the top models:",
+      "item1Title": "Flagship ANC Headphones Pro",
+      "item1Price": "$299",
+      "item1Score": "4.9 / 5.0 · Active ANC · 30h Battery",
+      "item2Title": "Studio Wireless Over-Ear",
+      "item2Price": "$349",
+      "item2Score": "4.8 / 5.0 · Spatial Audio · 40h Battery",
+      "item3Title": "Sport Waterproof Earbuds",
+      "item3Price": "$129",
+      "item3Score": "4.6 / 5.0 · Long Battery",
+      "inputPlaceholder": "Compare battery life and reviews for these 2 models..."
     }
   },
   "company": {

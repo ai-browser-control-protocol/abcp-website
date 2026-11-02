@@ -883,11 +883,11 @@
       },
       {
         "id": 2,
-        "title": "専用ブラウザを作成",
-        "desc": "「新規ブラウザ」をクリックし、名前を入力して保存するだけで完了です。",
+        "title": "ブラウザを作成",
+        "desc": "ブラウザに名前を付ければすぐに開けます。詳細設定で個別設定も可能です。",
         "tag": "ステップ 02 · 独立サンドボックス",
         "previewTitle": "ブラウザ構成情報",
-        "previewCode": "ブラウザ名: 競合リサーチ\n指紋設定: 独立指紋プロファイル (システム準拠)\nネットワーク: 直接接続 (またはSOCKS5/HTTPを指定)\nステータス: 保存済み、「開く」で即起動"
+        "previewCode": "ブラウザ名: 競合リサーチ\n指紋設定: 独立指紋プロファイル (システム準拠)\nネットワーク: 直接接続 (またはSOCKS5/HTTPを指定)\nステータス: 「開く」をクリックして起動"
       },
       {
         "id": 3,
@@ -946,6 +946,8 @@
       "badgeComingSoon": "近日",
       "groupSystem": "システム",
       "navSettings": "設定",
+      "navGuide": "ガイド",
+      "navLogin": "ログイン",
       "sideAccess": "接続",
       "sideInvite": "招待",
       "connWs": "Websocket",
@@ -965,20 +967,21 @@
       "btnDismiss": "後で",
       "btnInstall": "インストール",
       "backText": "戻る",
-      "editorTitle": "新規ブラウザ",
-      "editorDesc": "ブラウザに名前を付ければすぐに保存できます。詳細設定で個別設定も可能です。",
+      "editorTitle": "ブラウザを開く",
+      "editorDesc": "ブラウザに名前を付ければすぐに開けます。詳細設定で個別設定も可能です。",
       "nameLabel": "名前",
       "namePlaceholder": "例：ECアカウント、SNS運用、競合調査、日常業務",
       "nameValue": "競合市場調査",
       "advancedOptions": "詳細設定",
       "btnCancel": "キャンセル",
-      "btnSave": "保存",
-      "agentTitle": "AI Assistant",
-      "userPrompt": "ECサイトを開き、「ノイズキャンセリングヘッドホン」を検索して上位2件の価格と評価を抽出して",
-      "toolTitle": "WebCross · 競合市場調査",
-      "toolStatus": "自動化処理完了",
-      "toolStep1": "「競合市場調査」専用ブラウザを起動しストアにアクセス",
-      "toolStep2": "対象サイトを開き商品データを自動検索・抽出",
+      "btnSave": "開く",
+      "agentTitle": "AI アシスタント チャット画面",
+      "agentStatus": "再生中…",
+      "userPrompt": "ECサイトを開いて「ノイズキャンセリングイヤホン」を検索し、上位3件の価格と評価をまとめて",
+      "toolTitle": "WebCross · ブラウザを呼び出して実行中",
+      "toolStatus": "実行中",
+      "toolStep1": "専用ブラウザ環境を起動しました",
+      "toolStep2": "対象ウェブページを開き商品を自動検索しました",
       "toolStep3": "上位商品の主要データを構造化抽出",
       "assistantReply": "WebCross を通じてページの検索とデータ抽出を完了しました。注目モデルは以下の通りです：",
       "item1Title": "フラッグシップ ANC Pro",
@@ -990,7 +993,7 @@
       "item3Title": "スポーツ防水イヤホン",
       "item3Price": "¥14,800",
       "item3Score": "4.6点 · 長時間バッテリー",
-      "inputPlaceholder": "この2モデルのバッテリー駆動時間とレビューを比較して..."
+      "inputPlaceholder": "バッテリー持ちの比較やレビュー抽出などの追加指示を入力…"
     }
   },
   "company": {

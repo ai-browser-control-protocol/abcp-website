@@ -883,11 +883,11 @@
       },
       {
         "id": 2,
-        "title": "전용 브라우저 생성",
-        "desc": "'새 브라우저'를 클릭하고 이름을 입력한 후 저장하면 바로 사용할 수 있습니다.",
+        "title": "브라우저 만들기",
+        "desc": "브라우저 이름을 지정한 후 바로 열 수 있으며, 고급 옵션에서 맞춤 설정이 가능합니다.",
         "tag": "단계 02 · 독립 샌드박스",
         "previewTitle": "브라우저 구성 정보",
-        "previewCode": "브라우저 이름: 경쟁사 분석\n환경 핑거프린트: 독립 핑거프린트 (시스템 설정 연동)\n네트워크: 직접 연결 (또는 커스텀 프록시 지정)\n상태: 저장됨, \"열기\"를 누르면 즉시 실행"
+        "previewCode": "브라우저 이름: 경쟁사 분석\n환경 핑거프린트: 독립 핑거프린트 (시스템 설정 연동)\n네트워크: 직접 연결 (또는 커스텀 프록시 지정)\n상태: '열기'를 클릭하여 시작"
       },
       {
         "id": 3,
@@ -946,6 +946,8 @@
       "badgeComingSoon": "곧 출시",
       "groupSystem": "시스템",
       "navSettings": "설정",
+      "navGuide": "가이드",
+      "navLogin": "로그인",
       "sideAccess": "연결",
       "sideInvite": "초대",
       "connWs": "Websocket",
@@ -965,20 +967,21 @@
       "btnDismiss": "나중에",
       "btnInstall": "설치",
       "backText": "돌아가기",
-      "editorTitle": "새 브라우저",
-      "editorDesc": "브라우저 이름을 지정한 후 바로 저장할 수 있으며, 고급 옵션에서 맞춤 설정이 가능합니다.",
+      "editorTitle": "브라우저 열기",
+      "editorDesc": "브라우저 이름을 지정한 후 바로 열 수 있으며, 고급 옵션에서 맞춤 설정이 가능합니다.",
       "nameLabel": "이름",
       "namePlaceholder": "예: 이커머스 계정, SNS 운영, 경쟁사 리서치, 일상 업무",
       "nameValue": "시장 경쟁사 리서치",
       "advancedOptions": "고급 옵션",
       "btnCancel": "취소",
-      "btnSave": "저장",
-      "agentTitle": "AI Assistant",
-      "userPrompt": "쇼핑몰 사이트를 열고 '노이즈 캔슬링 헤드폰'을 검색하여 상위 2개 제품의 모델명, 가격 및 평점을 추출해줘",
-      "toolTitle": "WebCross · 시장 경쟁사 리서치",
-      "toolStatus": "자동화 완료",
-      "toolStep1": "'시장 경쟁사 리서치' 전용 브라우저 실행 및 스토어 접속 완료",
-      "toolStep2": "대상 사이트 접속 및 정형 데이터 추출 완료",
+      "btnSave": "열기",
+      "agentTitle": "AI 어시스턴트 대화창",
+      "agentStatus": "시연 중…",
+      "userPrompt": "이커머스 쇼핑몰을 열어 '노이즈 캔슬링 이어폰'을 검색하고 상위 3개 상품의 가격과 평점을 정리해 줘",
+      "toolTitle": "WebCross · 브라우저를 호출하여 실행 중",
+      "toolStatus": "실행 중",
+      "toolStep1": "전용 브라우저 환경을 실행했습니다",
+      "toolStep2": "대상 웹페이지를 열고 상품을 자동으로 검색했습니다",
       "toolStep3": "상위 상품 핵심 지표 구조화 추출 완료",
       "assistantReply": "WebCross를 통해 페이지 검색 및 데이터 추출을 완료했습니다. 추천 모델 결과는 다음과 같습니다:",
       "item1Title": "플래그십 ANC 헤드폰 Pro",
@@ -990,7 +993,7 @@
       "item3Title": "스포츠 방수 이어폰",
       "item3Price": "₩169,000",
       "item3Score": "4.6점 · 고용량 배터리",
-      "inputPlaceholder": "이 두 모델의 배터리 지속 시간과 사용자 리뷰를 비교해줘..."
+      "inputPlaceholder": "배터리 수명 비교나 리뷰 추출 등 추가 명령을 입력하세요…"
     }
   },
   "company": {

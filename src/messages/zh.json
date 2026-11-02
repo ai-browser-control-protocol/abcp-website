@@ -24,7 +24,7 @@
     },
     "guide": {
       "title": "使用指南 · WebCross",
-      "description": "WebCross 极简使用指南：从启动自动装载 Skill，到创建专属浏览器及在 AI Agent 中直接调用。"
+      "description": "WebCross 极简使用指南：从启动自动装载 Skill，到创建浏览器及在 AI Agent 中直接调用。"
     },
     "company": {
       "title": "关于公司 · WebCross",
@@ -883,11 +883,11 @@
       },
       {
         "id": 2,
-        "title": "创建专属浏览器",
-        "desc": "点击“新建浏览器”，输入名称保存即可使用。",
+        "title": "创建浏览器",
+        "desc": "为浏览器命名后即可打开，展开高级选项可进行个性化设置。",
         "tag": "步骤 02 · 独立沙箱",
         "previewTitle": "浏览器实例配置",
-        "previewCode": "浏览器名称: 竞品调研\n环境指纹: 独立环境指纹 (跟随系统)\n网络配置: 直连 (或绑定自定义 SOCKS5/HTTP 代理)\n就绪状态: 已保存，点击“打开”即可启动"
+        "previewCode": "浏览器名称: 竞品调研\n环境指纹: 独立环境指纹 (跟随系统)\n网络配置: 直连 (或绑定自定义 SOCKS5/HTTP 代理)\n就绪状态: 点击“打开”即可启动"
       },
       {
         "id": 3,
@@ -946,6 +946,8 @@
       "badgeComingSoon": "即将",
       "groupSystem": "系统",
       "navSettings": "设置",
+      "navGuide": "指南",
+      "navLogin": "登录",
       "sideAccess": "接入",
       "sideInvite": "邀请",
       "connWs": "Websocket",
@@ -965,20 +967,21 @@
       "btnDismiss": "暂不安装",
       "btnInstall": "安装",
       "backText": "返回",
-      "editorTitle": "新建浏览器",
-      "editorDesc": "为浏览器命名后即可保存，展开高级选项可进行个性化设置。",
+      "editorTitle": "打开浏览器",
+      "editorDesc": "为浏览器命名后即可打开，展开高级选项可进行个性化设置。",
       "nameLabel": "名字",
       "namePlaceholder": "例如：跨境电商账号、社媒运营、竞品调研、日常办公",
       "nameValue": "竞品调研",
       "advancedOptions": "高级选项",
       "btnCancel": "取消",
-      "btnSave": "保存",
-      "agentTitle": "AI Assistant",
-      "userPrompt": "帮我打开某电商网站，搜索“无线降噪耳机”并整理前两款的价格与评分",
-      "toolTitle": "WebCross · 竞品调研",
-      "toolStatus": "已完成自动化检索",
-      "toolStep1": "已唤起“竞品调研”专属浏览器并访问目标商城",
-      "toolStep2": "已自动化检索并完成商品数据结构化提炼",
+      "btnSave": "打开",
+      "agentTitle": "AI 助手对话窗口",
+      "agentStatus": "演示中...",
+      "userPrompt": "帮我打开电商网站，搜索“无线降噪耳机”并整理前 3 款的价格与评分",
+      "toolTitle": "WebCross · 正在调用浏览器执行",
+      "toolStatus": "执行中",
+      "toolStep1": "已唤起专属浏览器环境",
+      "toolStep2": "已打开目标网页并自动搜索目标商品",
       "toolStep3": "已完成数据结构化提炼",
       "assistantReply": "已通过 WebCross 完成页面检索与数据提取，精选热门型号如下：",
       "item1Title": "旗舰降噪耳机 Pro",
@@ -990,7 +993,7 @@
       "item3Title": "轻量运动防水耳机",
       "item3Price": "¥899",
       "item3Score": "4.6 分 · 长续航",
-      "inputPlaceholder": "继续对比这两款的电池续航与用户评价..."
+      "inputPlaceholder": "继续下发对比续航或提取评价指令..."
     }
   },
   "company": {

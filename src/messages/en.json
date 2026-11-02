@@ -883,11 +883,11 @@
       },
       {
         "id": 2,
-        "title": "Create Your Browser",
-        "desc": "Click \"New Browser\", enter a name, and save to start using it.",
+        "title": "Create Browser",
+        "desc": "Name the browser and open it directly; expand advanced options for customized settings.",
         "tag": "Step 02 · Isolated Sandbox",
         "previewTitle": "Browser Profile Config",
-        "previewCode": "Browser Name: Market Research\nProfile: Isolated Fingerprint (Follows System)\nNetwork: Direct (or bind custom SOCKS5/HTTP proxy)\nStatus: Saved, click \"Open\" to launch"
+        "previewCode": "Browser Name: Market Research\nProfile: Isolated Fingerprint (Follows System)\nNetwork: Direct (or bind custom SOCKS5/HTTP proxy)\nStatus: Click \"Open\" to launch"
       },
       {
         "id": 3,
@@ -946,6 +946,8 @@
       "badgeComingSoon": "Soon",
       "groupSystem": "System",
       "navSettings": "Settings",
+      "navGuide": "Guide",
+      "navLogin": "Log in",
       "sideAccess": "Access",
       "sideInvite": "Invite",
       "connWs": "Websocket",
@@ -965,20 +967,21 @@
       "btnDismiss": "Not Now",
       "btnInstall": "Install",
       "backText": "Back",
-      "editorTitle": "New Browser",
-      "editorDesc": "Save after naming the browser. Expand advanced options for customized settings.",
+      "editorTitle": "Open Browser",
+      "editorDesc": "Name the browser and open it directly; expand advanced options for customized settings.",
       "nameLabel": "Name",
       "namePlaceholder": "e.g.: E-commerce account, Social media, Market research, Daily office",
       "nameValue": "Market Research",
       "advancedOptions": "Advanced Options",
       "btnCancel": "Cancel",
-      "btnSave": "Save",
-      "agentTitle": "AI Assistant",
-      "userPrompt": "Open the store, search for 'noise-cancelling headphones', and extract top 2 models with pricing & rating",
-      "toolTitle": "WebCross · Market Research",
-      "toolStatus": "Automation Complete",
-      "toolStep1": "Launched 'Market Research' dedicated browser",
-      "toolStep2": "Completed automated search & extracted structured data",
+      "btnSave": "Open",
+      "agentTitle": "AI Assistant Chat",
+      "agentStatus": "Demonstrating…",
+      "userPrompt": "Open the e-commerce store, search for 'noise-cancelling headphones' and summarize the top 3 items",
+      "toolTitle": "WebCross · Calling browser for execution",
+      "toolStatus": "Executing",
+      "toolStep1": "Launched dedicated browser environment",
+      "toolStep2": "Navigated to target page and performed product search",
       "toolStep3": "Extracted and structured top product metrics",
       "assistantReply": "Retrieved and parsed page data via WebCross. Here are the top models:",
       "item1Title": "Flagship ANC Headphones Pro",
@@ -990,7 +993,7 @@
       "item3Title": "Sport Waterproof Earbuds",
       "item3Price": "$129",
       "item3Score": "4.6 / 5.0 · Long Battery",
-      "inputPlaceholder": "Compare battery life and reviews for these 2 models..."
+      "inputPlaceholder": "Send further commands to compare battery life or extract customer reviews…"
     }
   },
   "company": {

@@ -29,7 +29,7 @@ function UserAppTitlebar({ mockup }: { mockup: GuideMockupCopy }) {
         <span className="user-traffic-dot yellow" />
         <span className="user-traffic-dot green" />
       </div>
-      <span className="user-identity-badge">{mockup.userBadge}</span>
+      <span className="user-login-badge">{mockup.navLogin}</span>
     </div>
   );
 }
@@ -74,6 +74,9 @@ function UserAppSidebar({ mockup }: { mockup: GuideMockupCopy }) {
           <div className="user-nav-items-group">
             <button type="button" className="user-nav-item-btn">
               <span>{mockup.navSettings}</span>
+            </button>
+            <button type="button" className="user-nav-item-btn">
+              <span>{mockup.navGuide}</span>
             </button>
           </div>
         </div>
@@ -370,94 +373,105 @@ function AgentStep3ChatMockup({ mockup }: { mockup: GuideMockupCopy }) {
         <div className="agent-window-heading">
           <span className="agent-window-title">{mockup.agentTitle}</span>
         </div>
-        <div style={{ width: 44 }} aria-hidden="true" />
+        <div className="agent-window-status">
+          <span>{mockup.agentStatus}</span>
+        </div>
       </div>
 
       <div className="agent-chat-feed">
         {/* User Prompt */}
         <div className="agent-bubble-user">
           <span className="agent-cmd-pill">/webcross-browser</span>
-          <span>{mockup.userPrompt}</span>
+          <span className="agent-bubble-user-text">{mockup.userPrompt}</span>
         </div>
 
         {/* Assistant Response & Execution Trace */}
         <div className="agent-bubble-assistant">
-          <div className="agent-header-row">
-            <span className="agent-avatar-icon">✦</span>
-            <span className="agent-name">AI Assistant</span>
+          <div className="agent-avatar-icon" aria-hidden="true">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect width="18" height="12" x="3" y="6" rx="2" />
+              <path d="M12 2v4" />
+              <line x1="8" x2="8" y1="12" y2="12" />
+              <line x1="16" x2="16" y1="12" y2="12" />
+              <path d="M9 16h6" />
+            </svg>
           </div>
 
-          {/* High-level Tool Execution Card: Human-readable, NO raw code action calls */}
-          <div className="agent-tool-card">
-            <div className="agent-tool-head">
-              <span className="agent-tool-head-title">
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                </svg>
-                <span>{mockup.toolTitle}</span>
-              </span>
-              <span className="agent-tool-status-pill">
-                ✓ {mockup.toolStatus}
-              </span>
-            </div>
-            <div className="agent-tool-step-row">
-              <span className="agent-tool-step-check">✓</span>
-              <span>{mockup.toolStep1}</span>
-            </div>
-            <div className="agent-tool-step-row">
-              <span className="agent-tool-step-check">✓</span>
-              <span>{mockup.toolStep2}</span>
-            </div>
-          </div>
-
-          <p className="agent-reply-text">
-            {mockup.assistantReply}
-          </p>
-
-          {/* Structured Result Cards */}
-          <div className="agent-result-grid">
-            <div className="agent-result-item">
-              <div className="agent-result-item-left">
-                <span className="agent-result-num">01</span>
-                <div>
-                  <div className="agent-result-name">{mockup.item1Title}</div>
-                  <div className="agent-result-tag">{mockup.item1Score}</div>
-                </div>
+          <div className="agent-assistant-body">
+            {/* Tool Execution Card: Matches Screenshot 3 */}
+            <div className="agent-tool-card">
+              <div className="agent-tool-head">
+                <span className="agent-tool-head-title">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ea580c"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                  <span>{mockup.toolTitle}</span>
+                </span>
+                <span className="agent-tool-status-text">
+                  {mockup.toolStatus}
+                </span>
               </div>
-              <span className="agent-result-price">{mockup.item1Price}</span>
+              <div className="agent-tool-step-row">
+                <span className="agent-tool-step-check">✓</span>
+                <span>{mockup.toolStep1}</span>
+              </div>
+              <div className="agent-tool-step-row">
+                <span className="agent-tool-step-check">✓</span>
+                <span>{mockup.toolStep2}</span>
+              </div>
             </div>
 
-            <div className="agent-result-item">
-              <div className="agent-result-item-left">
-                <span className="agent-result-num">02</span>
-                <div>
-                  <div className="agent-result-name">{mockup.item2Title}</div>
-                  <div className="agent-result-tag">{mockup.item2Score}</div>
-                </div>
-              </div>
-              <span className="agent-result-price">{mockup.item2Price}</span>
+            {/* Loading dots indicator from Screenshot 3 */}
+            <div className="agent-loading-dots" aria-hidden="true">
+              <span className="agent-dot" />
+              <span className="agent-dot" />
+              <span className="agent-dot" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Input Dock */}
+      {/* Bottom Input Dock: Matches Screenshot 3 */}
       <div className="agent-input-dock">
-        <div className="agent-input-placeholder">
+        <div className="agent-input-capsule">
           <span className="agent-cmd-pill">/webcross-browser</span>
-          <span>{mockup.inputPlaceholder}</span>
-          <span className="guide-cursor" />
+          <span className="agent-input-placeholder">{mockup.inputPlaceholder}</span>
+          <span className="guide-cursor" aria-hidden="true" />
         </div>
-        <div className="agent-send-btn">↑</div>
+        <div className="agent-send-btn" aria-label="Send">
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+        </div>
       </div>
     </div>
   );

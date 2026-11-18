@@ -63,6 +63,8 @@
                   <code id="copy-file-path">–</code>
                   <span class="dot-sep">·</span>
                   <span id="copy-file-total">–</span>
+                  <span class="dot-sep" id="usage-sep" hidden>·</span>
+                  <span class="file-usage" id="copy-usage-total" hidden></span>
                   <span class="dot-sep">·</span>
                   <span class="file-locale" id="copy-file-locale"></span>
                 </div>
@@ -91,6 +93,17 @@
                   <button class="link-btn" id="expand-all" type="button">全部展开</button>
                   <span class="toolbar-sep">/</span>
                   <button class="link-btn" id="collapse-all" type="button">全部收起</button>
+                </span>
+              </div>
+              <div class="usage-bar" id="usage-bar" hidden>
+                <label class="check-row usage-toggle" for="hide-missing">
+                  <input type="checkbox" id="hide-missing" autocomplete="off">
+                  <span class="check-box" aria-hidden="true"></span>
+                  <span>隐藏未出现的文案</span>
+                </label>
+                <span class="usage-right">
+                  <span class="usage-status" id="usage-status"></span>
+                  <button class="link-btn usage-refresh" id="usage-refresh" type="button" hidden>重新检查</button>
                 </span>
               </div>
               <div class="copy-groups" id="copy-groups"></div>

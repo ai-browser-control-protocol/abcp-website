@@ -72,8 +72,11 @@ Requests are `Content-Type: application/json`.
 - `field.section` is the second path segment (or `null`), used for sub-grouping long
   groups.
 - `field.label` is the last segment prettified (`items.3.q` → `items[3] › q`).
-- `fallbackFrom` is `"en"` when the requested locale reuses English copy; the UI should
-  show a notice and open the `en` copy of that file instead.
+- `fallbackFrom` is the *requested* locale (e.g. `"ja"`) when that locale has no copy of
+  its own; `locale` is then the source locale actually being edited (`"en"`). The UI
+  shows a notice ("ja 还没有独立文案，正在编辑 en 版") and saves with the resolved locale.
+- The `fields` used by the usage endpoint are exactly this payload's groups, so the two
+  responses line up by `path`.
 - Values are plain strings (may contain markdown, e.g. `**粗体**`, or `\n` inside).
 
 ## POST /api/copy/save
@@ -142,6 +145,50 @@ A timestamped backup is written under `artifacts/copy-editor-backups/`.
 
 The overrides file is imported last in `src/app/[locale]/layout.tsx`, so any selector
 wins. This is where the user fine-tunes individual font sizes beyond the token scale.
+
+## GET /api/usage?file=<id>&locale=<zh|en|ja|ko>[&refresh=1]
+
+Empirical page-occurrence check: renders the locale's pages from the local site and
+reports whether each string appears in that HTML. Catalogs still carry copy from
+retired layouts (e.g. `messages.product.demo`, 509 fields, no longer rendered), so
+this is how the UI can label fields honestly instead of guessing from source.
+
+Pages per file: `messages-*` → `/<locale>`, `/guide`, `/solutions`, `/download`,
+`/privacy`, `/agreement`; `content-home` → `/<locale>`; `content-solutions` →
+`/<locale>/solutions`; `content-legal` → `/<locale>/privacy` + `/agreement`.
+Matching ignores tags, HTML entities and whitespace, so copy split across spans still
+matches. Results are cached for 120s per file+locale and invalidated by any save.
+
+```json
+{
+  "ok": true,
+  "reachable": true,
+  "file": "messages-zh",
+  "locale": "zh",
+  "checkedAt": "2026-11-18T11:36:12.000Z",
+  "base": "http://localhost:3000",
+  "pages": ["http://localhost:3000/zh", "..."],
+  "missingPages": [],
+  "totals": { "total": 680, "found": 235, "missing": 376, "unknown": 69 },
+  "groups": [
+    { "id": "brand", "found": 3, "total": 3, "unknown": 0 },
+    { "id": "product", "found": 88, "total": 509, "unknown": 49 }
+  ],
+  "fields": {
+    "brand.tagline": true,
+    "product.demo.scenes.A.browser.results.1.title": false,
+    "a11y.githubStars": null
+  }
+}
+```
+
+- `true` — the string is present in the rendered HTML.
+- `false` — it never appears on those pages: either copy from a retired layout, or
+  text that only exists in an interactive state the static HTML does not contain.
+- `null` — cannot be decided (interpolated `{...}` placeholders, very short values).
+
+When the local site is down the endpoint answers `{ ok: false, reachable: false,
+error: "..." }` and invents nothing.
 
 ## GET /api/diff?file=<id | relative path>
 

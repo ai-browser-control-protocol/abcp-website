@@ -88,6 +88,13 @@
     groupIdByPath: new Map(),
     expanded: new Set(),
     search: '',
+    usage: null,
+    usageKey: null,
+    usageLoading: false,
+    usageError: null,
+    usageRequestId: 0,
+    hideMissing: false,
+    expandedBeforeFilter: null,
     fieldNodes: new Map(),
     groupNodes: new Map(),
     busy: false,
@@ -549,9 +556,22 @@
 
   async function openFile(file, options = {}) {
     S.file = file;
+    S.payload = null;
     S.edits.clear();
     S.search = '';
+    S.usage = null;
+    S.usageKey = null;
+    S.usageError = null;
+    S.usageLoading = false;
+    S.usageRequestId += 1;
+    S.hideMissing = false;
+    S.expandedBeforeFilter = null;
+    const hideToggle = $('#hide-missing');
+    if (hideToggle) hideToggle.checked = false;
     $('#copy-search').value = '';
+    updateUsageBar();
+    updateUsageToggle();
+    updateUsageHeader();
     renderFileList();
     renderLoadingInto('#copy-groups', file.kind === 'ts' ? '读取内容模块…' : '读取语言文件…');
     try {
@@ -585,10 +605,16 @@
       S.search = '';
       $('#copy-search').value = '';
     }
+    if (S.usageKey !== `${file.id}::${S.locale}`) {
+      S.usage = null;
+      S.usageKey = null;
+      S.usageError = null;
+    }
     renderFileHeader();
     renderGroups();
     updateDirtyUI();
     updateTabs();
+    if (file && S.locale) loadUsage(file, S.locale);
     if (options.scrollTop != null) {
       const scroller = $('#copy-scroll');
       requestAnimationFrame(() => {
@@ -616,7 +642,7 @@
     $('#copy-file-kind').textContent = KIND_LABELS[S.file.kind] || S.file.kind;
     $('#copy-file-path').textContent = S.file.path;
     const groupCount = (S.payload.groups || []).length;
-    $('#copy-file-total').textContent = `${S.payload.total} 个字段 · ${groupCount} 个分组`;
+    $('#copy-file-total').textContent = `${S.payload.total} 条 · ${groupCount} 个分组`;
     $('#copy-file-locale').textContent = S.locale ? `${S.locale} · ${LOCALE_NAMES[S.locale] || S.locale}` : '';
 
     const localeRow = $('#locale-row');
@@ -641,6 +667,9 @@
       localeRow.hidden = true;
     }
     renderFallbackNotice();
+    updateUsageHeader();
+    updateUsageBar();
+    updateUsageToggle();
   }
 
   function renderFallbackNotice() {
@@ -730,10 +759,297 @@
     $('#copy-empty').hidden = true;
   }
 
-  function filterFields(fields, query) {
+  // ----------------------------------------------------------------- usage ----
+
+  function currentUsageKey() {
+    return S.file && S.locale ? `${S.file.id}::${S.locale}` : null;
+  }
+
+  function activeUsage() {
+    if (!S.usage || S.usageKey !== currentUsageKey()) return null;
+    return S.usage;
+  }
+
+  function usageFieldMap() {
+    const usage = activeUsage();
+    return usage && usage.fields ? usage.fields : null;
+  }
+
+  function usageGroupFor(groupId) {
+    const usage = activeUsage();
+    if (!usage || !Array.isArray(usage.groups)) return null;
+    return usage.groups.find((group) => group.id === groupId) || null;
+  }
+
+  function fieldUsage(path) {
+    const map = usageFieldMap();
+    return map ? map[path] : undefined;
+  }
+
+  function formatCheckedAt(iso) {
+    if (!iso) return '';
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return '';
+    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+  }
+
+  async function loadUsage(file, locale, options = {}) {
+    if (!file || !locale) return;
+    const requestId = ++S.usageRequestId;
+    S.usageLoading = true;
+    S.usageError = null;
+    updateUsageBar();
+    updateUsageToggle();
+    const url = `/api/usage?file=${encodeURIComponent(file.id)}&locale=${encodeURIComponent(locale)}${options.refresh ? '&refresh=1' : ''}`;
+    try {
+      const response = await fetch(url, { headers: { Accept: 'application/json' } });
+      let data = null;
+      try {
+        data = await response.json();
+      } catch (error) {
+        data = null;
+      }
+      if (requestId !== S.usageRequestId) return;
+      const unreachable = !response.ok || !data || data.ok === false || data.reachable === false;
+      if (unreachable) {
+        S.usage = null;
+        S.usageKey = null;
+        S.usageError = data && data.reachable === false ? 'site-down' : (data && data.error) || `HTTP ${response.status}`;
+        const filterReset = S.hideMissing;
+        if (filterReset) resetMissingFilter();
+        refreshUsageDecorations();
+        if (filterReset) renderGroups();
+        return;
+      }
+      S.usage = data;
+      S.usageKey = `${file.id}::${S.locale}`;
+      S.usageError = null;
+      refreshUsageDecorations();
+      if (S.hideMissing) {
+        const scroller = $('#copy-scroll');
+        const scrollTop = scroller.scrollTop;
+        renderGroups();
+        requestAnimationFrame(() => {
+          scroller.scrollTop = scrollTop;
+        });
+      }
+    } catch (error) {
+      if (requestId !== S.usageRequestId) return;
+      S.usage = null;
+      S.usageKey = null;
+      S.usageError = error && error.message ? error.message : String(error);
+      const filterReset = S.hideMissing;
+      if (filterReset) resetMissingFilter();
+      refreshUsageDecorations();
+      if (filterReset) renderGroups();
+    } finally {
+      if (requestId === S.usageRequestId) {
+        S.usageLoading = false;
+        updateUsageBar();
+        updateUsageToggle();
+      }
+    }
+  }
+
+  function resetMissingFilter() {
+    S.hideMissing = false;
+    S.expandedBeforeFilter = null;
+    const toggle = $('#hide-missing');
+    if (toggle) toggle.checked = false;
+  }
+
+  function onToggleMissing(event) {
+    const next = Boolean(event.target.checked);
+    if (next && !activeUsage()) {
+      event.target.checked = false;
+      return;
+    }
+    S.hideMissing = next;
+    const scroller = $('#copy-scroll');
+    const scrollTop = scroller.scrollTop;
+    if (next) {
+      S.expandedBeforeFilter = new Set(S.expanded);
+      const groups = ((S.payload && S.payload.groups) || []).filter((group) =>
+        (group.fields || []).some((field) => fieldUsage(field.path) !== false)
+      );
+      const nextExpanded = new Set();
+      let budget = 0;
+      for (const group of groups) {
+        if (budget > 0 && budget + (group.fields || []).length > 32) break;
+        nextExpanded.add(group.id);
+        budget += (group.fields || []).length;
+      }
+      S.expanded = nextExpanded;
+    } else if (S.expandedBeforeFilter) {
+      S.expanded = S.expandedBeforeFilter;
+      S.expandedBeforeFilter = null;
+    }
+    renderGroups();
+    growAllVisible();
+    requestAnimationFrame(() => {
+      scroller.scrollTop = scrollTop;
+    });
+    updateUsageBar();
+    updateUsageToggle();
+  }
+
+  function updateUsageBar() {
+    const bar = $('#usage-bar');
+    if (!bar) return;
+    if (!S.payload) {
+      bar.hidden = true;
+      return;
+    }
+    bar.hidden = false;
+    const status = $('#usage-status');
+    const refreshButton = $('#usage-refresh');
+    const usage = activeUsage();
+    if (S.usageLoading) {
+      status.textContent = '正在检查页面出现情况…';
+      status.classList.remove('is-error');
+      status.removeAttribute('title');
+      refreshButton.hidden = true;
+      return;
+    }
+    if (S.usageError) {
+      status.textContent = S.usageError === 'site-down'
+        ? '本地站点未运行，暂时无法检查文案是否出现在页面上。'
+        : `无法检查文案是否出现在页面上：${S.usageError}`;
+      status.classList.add('is-error');
+      status.title = status.textContent;
+      refreshButton.hidden = false;
+      refreshButton.textContent = '重试';
+      return;
+    }
+    if (usage) {
+      const pages = Array.isArray(usage.pages) ? usage.pages.length : 0;
+      const totals = usage.totals || { found: 0, total: 0, missing: 0, unknown: 0 };
+      status.textContent = `已检查 ${pages} 个页面 · ${totals.found}/${totals.total} 在用${formatCheckedAt(usage.checkedAt) ? ` · ${formatCheckedAt(usage.checkedAt)}` : ''}`;
+      status.classList.remove('is-error');
+      status.title = `出现 ${totals.found} 条 · 未出现 ${totals.missing} 条 · 无法判断 ${totals.unknown} 条`;
+      refreshButton.hidden = false;
+      refreshButton.textContent = '重新检查';
+      return;
+    }
+    status.textContent = '尚未检查页面出现情况';
+    status.classList.remove('is-error');
+    status.removeAttribute('title');
+    refreshButton.hidden = false;
+    refreshButton.textContent = '检查';
+  }
+
+  function updateUsageToggle() {
+    const toggle = $('#hide-missing');
+    if (!toggle) return;
+    const available = Boolean(activeUsage());
+    toggle.checked = S.hideMissing;
+    toggle.disabled = S.usageLoading || !available;
+  }
+
+  function updateUsageHeader() {
+    const usageSpan = $('#copy-usage-total');
+    const separator = $('#usage-sep');
+    if (!usageSpan || !separator) return;
+    const usage = activeUsage();
+    if (!usage) {
+      usageSpan.hidden = true;
+      separator.hidden = true;
+      usageSpan.textContent = '';
+      usageSpan.removeAttribute('title');
+      return;
+    }
+    const totals = usage.totals || { found: 0, total: 0, missing: 0, unknown: 0 };
+    separator.hidden = false;
+    usageSpan.hidden = false;
+    usageSpan.textContent = `页面出现 ${totals.found} 条`;
+    usageSpan.title = `${totals.total} 条中：${totals.found} 条出现 · ${totals.missing} 条未出现 · ${totals.unknown} 条无法判断`;
+  }
+
+  function refreshUsageDecorations() {
+    if (!S.payload) return;
+    updateUsageHeader();
+    updateUsageBar();
+    updateUsageToggle();
+    for (const [path, node] of S.fieldNodes) applyFieldUsage(node, path);
+    for (const group of S.payload.groups || []) {
+      const section = S.groupNodes.get(group.id);
+      if (!section) continue;
+      const stats = section.querySelector('.group-stats');
+      if (!stats) continue;
+      stats.replaceWith(buildGroupStats(group, visibleCountForGroup(group, section)));
+    }
+    updateDirtyUI();
+  }
+
+  function applyFieldUsage(node, path) {
+    if (!node || !node.usageChip) return;
+    const value = fieldUsage(path);
+    if (value === false) {
+      node.usageChip.hidden = false;
+      node.usageChip.textContent = '未出现';
+      node.usageChip.title = '这段文案没有出现在任何已检查页面的渲染 HTML 中，可能来自已下线的旧版页面。';
+      node.pathLabel.title = `${path} — 未出现在页面`;
+    } else {
+      node.usageChip.hidden = true;
+      node.usageChip.textContent = '';
+      node.usageChip.removeAttribute('title');
+      node.pathLabel.title = value === null ? `${path} — 无法判断（可能包含插值或文案过短）` : path;
+    }
+  }
+
+  function visibleCountForGroup(group, section) {
+    const filtering = Boolean(S.search.trim()) || S.hideMissing;
+    if (!filtering) return (group.fields || []).length;
+    if (S.search.trim()) {
+      const matches = filterByQuery(group.fields || [], S.search.trim());
+      return S.hideMissing ? matches.filter((field) => fieldUsage(field.path) !== false).length : matches.length;
+    }
+    return (group.fields || []).filter((field) => fieldUsage(field.path) !== false).length;
+  }
+
+  function buildGroupStats(group, visibleCount) {
+    const filtering = Boolean(S.search.trim()) || S.hideMissing;
+    const groupUsage = usageGroupFor(group.id);
+    const stats = el('span', { class: 'group-stats' });
+    if (groupUsage) {
+      const found = groupUsage.found || 0;
+      const total = groupUsage.total || 0;
+      const unknown = groupUsage.unknown || 0;
+      stats.append(
+        el('span', {
+          class: 'group-usage',
+          text: `${found}/${total} 在用`,
+          title: `${found} 条出现 · ${Math.max(total - found - unknown, 0)} 条未出现 · ${unknown} 条无法判断`,
+        })
+      );
+      if (total >= 10 && found / total < 0.2) {
+        stats.append(
+          el('span', {
+            class: 'group-legacy',
+            text: '旧版残留',
+            title: `仅 ${Math.round((found / total) * 100)}% 的文案出现在当前渲染页面，可能来自已下线的旧版布局`,
+          })
+        );
+      }
+    }
+    if (filtering) stats.append(el('span', { class: 'group-visible', text: `${visibleCount} 条可见` }));
+    else if (!groupUsage) stats.append(el('span', { class: 'group-count', text: `${(group.fields || []).length} 字段` }));
+    const changed = countGroupChanges(group);
+    stats.append(el('span', { class: 'group-changed', hidden: changed === 0, text: `${changed} 处改动` }));
+    return stats;
+  }
+
+  function filterByQuery(fields, query) {
     if (!query) return fields;
     const needle = query.toLowerCase();
     return fields.filter((field) => `${field.path} ${field.label || ''} ${field.value}`.toLowerCase().includes(needle));
+  }
+
+  function filterFields(fields, query) {
+    let result = filterByQuery(fields, query);
+    const map = usageFieldMap();
+    if (S.hideMissing && map) result = result.filter((field) => map[field.path] !== false);
+    return result;
   }
 
   function renderGroups() {
@@ -746,19 +1062,43 @@
     container.hidden = false;
 
     const query = S.search.trim();
-    const groups = (S.payload.groups || []).map((group) => ({
-      group,
-      fields: filterFields(group.fields || [], query),
-    }));
-    const visibleGroups = query ? groups.filter((entry) => entry.fields.length > 0) : groups;
-    const matched = visibleGroups.reduce((sum, entry) => sum + entry.fields.length, 0);
+    const usageMap = usageFieldMap();
+    const filtering = Boolean(query) || S.hideMissing;
+    const groups = (S.payload.groups || []).map((group) => {
+      const all = group.fields || [];
+      const queryMatched = filterByQuery(all, query);
+      const fields = S.hideMissing && usageMap
+        ? queryMatched.filter((field) => usageMap[field.path] !== false)
+        : queryMatched;
+      return { group, fields, queryMatchedCount: queryMatched.length };
+    });
+    const visibleGroups = filtering ? groups.filter((entry) => entry.fields.length > 0) : groups;
+    const shown = visibleGroups.reduce((sum, entry) => sum + entry.fields.length, 0);
+    const hiddenMissing = S.hideMissing && usageMap
+      ? groups.reduce((sum, entry) => sum + (entry.queryMatchedCount - entry.fields.length), 0)
+      : 0;
 
     if (visibleGroups.length === 0) {
       empty.hidden = false;
-      $('#copy-empty-title').textContent = '没有匹配的字段';
-      $('#copy-empty-hint').textContent = `“${S.search}” 在当前文件里没有结果，试试别的关键词。`;
-      $('#groups-summary').textContent = `0 匹配 / ${S.payload.total} 字段`;
-      $('#search-count').textContent = '0 匹配';
+      if (query) {
+        $('#copy-empty-title').textContent = '没有匹配的字段';
+        $('#copy-empty-hint').textContent = hiddenMissing > 0
+          ? `“${query}” 匹配到的文案都还没有出现在页面上（已隐藏 ${hiddenMissing} 条）。`
+          : `“${query}” 在当前文件里没有结果，试试别的关键词。`;
+        $('#groups-summary').textContent = `0 匹配 / ${S.payload.total} 字段`;
+        $('#search-count').textContent = hiddenMissing > 0 ? `0 匹配 · 隐藏 ${hiddenMissing}` : '0 匹配';
+      } else if (S.hideMissing) {
+        $('#copy-empty-title').textContent = '没有出现在页面上的文案';
+        $('#copy-empty-hint').textContent = '关闭「隐藏未出现的文案」可以查看全部字段。';
+        $('#groups-summary').textContent = `${S.payload.total} 字段 · 全部未出现或无法判断`;
+        $('#search-count').textContent = '';
+      } else {
+        $('#copy-empty-title').textContent = '这个文件没有可编辑字段';
+        $('#copy-empty-hint').textContent = '检查文件内容或刷新页面。';
+        $('#groups-summary').textContent = '0 字段';
+      }
+      updateUsageBar();
+      updateUsageToggle();
       return;
     }
     empty.hidden = true;
@@ -770,16 +1110,19 @@
       S.groupNodes.set(group.id, section);
     }
 
-    $('#groups-summary').textContent = query
-      ? `${visibleGroups.length} 个分组 · ${matched} 匹配 / ${S.payload.total} 字段`
-      : `${(S.payload.groups || []).length} 个分组 · ${S.payload.total} 字段`;
-    $('#search-count').textContent = query ? `${matched} 匹配` : '';
+    if (filtering) {
+      $('#groups-summary').textContent = `${visibleGroups.length} 个分组 · ${shown} 条可见${hiddenMissing ? ` · 已隐藏 ${hiddenMissing} 条未出现` : ''}`;
+    } else {
+      $('#groups-summary').textContent = `${groups.length} 个分组 · ${S.payload.total} 字段`;
+    }
+    $('#search-count').textContent = query ? `${shown} 匹配${hiddenMissing ? ` · 隐藏 ${hiddenMissing}` : ''}` : '';
     $('#expand-all').disabled = Boolean(query);
     $('#collapse-all').disabled = Boolean(query);
+    updateUsageBar();
+    updateUsageToggle();
   }
 
   function buildGroupSection(group, fields, open) {
-    const changed = countGroupChanges(group);
     const section = el('section', { class: `group${open ? ' is-open' : ''}`, dataset: { groupId: group.id } });
     const header = el('button', {
       class: 'group-head',
@@ -791,10 +1134,7 @@
       el('span', { class: 'group-label', text: group.label || group.id }),
       el('span', { class: 'group-id', text: group.id }),
     ]);
-    const stats = el('span', { class: 'group-stats' }, [
-      el('span', { class: 'group-count', text: `${fields.length} 字段` }),
-      el('span', { class: 'group-changed', hidden: changed === 0, text: `${changed} 处改动` }),
-    ]);
+    const stats = buildGroupStats(group, fields.length);
     header.append(chevron, title, stats);
     section.append(header);
 
@@ -872,9 +1212,11 @@
       'aria-label': `重置 ${field.path}`,
       title: '恢复为文件中的原文',
     });
+    const usageChip = el('span', { class: 'usage-chip', hidden: true });
     const top = el('div', { class: 'field-top' }, [
       pathLabel,
       el('span', { class: 'field-line', text: `L${field.line}` }),
+      usageChip,
       el('span', { class: 'changed-dot' }),
       reset,
     ]);
@@ -889,7 +1231,8 @@
     const bottom = el('div', { class: 'field-bottom' }, [count]);
     wrap.append(top, input, bottom);
 
-    S.fieldNodes.set(field.path, { wrap, input, count, reset });
+    S.fieldNodes.set(field.path, { wrap, input, count, reset, pathLabel, usageChip });
+    applyFieldUsage(S.fieldNodes.get(field.path), field.path);
 
     input.addEventListener('input', () => {
       const value = input.value;
@@ -1018,7 +1361,7 @@
       fileLabel = tokenCount > 0 ? S.typeScalePath : overrides ? S.overridesPath : '';
       diffButton.textContent = '查看 tokens diff';
       diffButton.disabled = !S.typePayload || S.busy;
-      discardButton.disabled = tokenCount === 0 || S.busy;
+      discardButton.disabled = (tokenCount === 0 && !overrides) || S.busy;
     }
 
     actionCount.textContent = String(count);
@@ -1051,6 +1394,7 @@
         preserveSearch: true,
         scrollTop,
       });
+      loadUsage(file, S.locale, { refresh: true });
       if (S.autoRefresh) refreshPreview(true);
     } catch (error) {
       toast('error', '保存失败', error.message);
@@ -1091,6 +1435,7 @@
       const response = await API.revert(file.id);
       toast('success', '已还原文件', response.path || file.path);
       await loadCopy(file, S.requestedLocale, { preserveExpanded: true, preserveSearch: false });
+      loadUsage(file, S.locale, { refresh: true });
       if (S.autoRefresh) refreshPreview(true);
     } catch (error) {
       toast('error', '还原失败', error.message);
@@ -1524,6 +1869,10 @@
     $('#btn-revert').addEventListener('click', () => revertFile());
     $('#copy-search').addEventListener('input', debounce(onSearchInput, 90));
     $('#copy-search').addEventListener('search', onSearchInput);
+    $('#hide-missing').addEventListener('change', onToggleMissing);
+    $('#usage-refresh').addEventListener('click', () => {
+      if (S.file && S.locale) loadUsage(S.file, S.locale, { refresh: true });
+    });
     $('#expand-all').addEventListener('click', () => {
       if (!S.payload) return;
       S.expanded = new Set((S.payload.groups || []).map((group) => group.id));

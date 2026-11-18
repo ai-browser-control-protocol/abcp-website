@@ -13,6 +13,7 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { gitDiff, gitRevert, gitStatus } from "./lib/git.mjs";
+import { checkUsage, invalidateUsage } from "./lib/usage.mjs";
 import { EditorError, REPO, filePath, publicFiles, readCopy, saveCopy } from "./lib/copy-store.mjs";
 import {
   OVERRIDES_PATH,
@@ -200,7 +201,34 @@ async function handleApi(request, response, url) {
 
   if (route === "POST /api/copy/save") {
     const body = await readBody(request);
-    return sendJson(response, 200, saveCopy(body.file, body.locale, body.changes));
+    const result = saveCopy(body.file, body.locale, body.changes);
+    invalidateUsage(body.file, body.locale);
+    return sendJson(response, 200, result);
+  }
+
+  if (route === "GET /api/usage") {
+    const file = url.searchParams.get("file");
+    const requested = url.searchParams.get("locale") || undefined;
+    const payload = readCopy(file, requested);
+    const reachable = await checkSite();
+    if (!reachable) {
+      return sendJson(response, 200, {
+        ok: false,
+        reachable: false,
+        file: payload.file,
+        locale: payload.locale,
+        error: "本地站点没有响应，无法检查文案是否出现在页面上",
+        pages: [],
+      });
+    }
+    const usage = await checkUsage({
+      base: previewBase,
+      file: payload.file,
+      locale: payload.locale,
+      payload,
+      refresh: url.searchParams.get("refresh") === "1",
+    });
+    return sendJson(response, 200, usage);
   }
 
   if (route === "GET /api/type-scale") {

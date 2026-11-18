@@ -4,7 +4,7 @@
  * One narrative, seven beats:
  *   hero (stealth browser) → environment isolation → fingerprint & residential
  *   IP → Chromium fork / direct engine → semantic tree token savings →
- *   1000+ environment matrix → auditable action records → reusable JS scripts.
+ *   100+ environment matrix → auditable action records → reusable JS scripts.
  *
  * Section components live next to this file (`*Section.tsx`) and all receive a
  * slice of `getSolutionsCopy(locale)` as their `copy` prop. Shared rhythm and

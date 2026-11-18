@@ -1405,7 +1405,7 @@
   text-wrap: pretty;
 }
 
-/* The fleet title is written as two phrases ("1000+ 个物理隔离环境" /
+/* The fleet title is written as two phrases ("100+ 个物理隔离环境" /
    "统一管理"). In the wider centred head both fit on one line, which leaves a
    stray space mid-sentence; the intended break is kept instead. */
 @media (min-width: 721px) {

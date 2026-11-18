@@ -1,5 +1,5 @@
 /**
- * Section 05 — 1000+ physically isolated environments, managed in one place.
+ * Section 05 — 100+ physically isolated environments, managed in one place.
  *
  * The visual is a CSS/DOM mockup of the real WebCross client "窗口" page:
  * app titlebar, sidebar (工作区 / 系统 / 接入), page header with 工作台 and
@@ -29,7 +29,7 @@ interface FleetWindow {
   running: number;
 }
 
-/** Six sample windows; real fleets keep thousands, hence the 1,000+ counters. */
+/** Six sample windows; real fleets keep hundreds, hence the 100+ counters. */
 const WINDOWS: FleetWindow[] = [
   { id: "67af68f1", tabs: 5, running: 0 },
   { id: "28a9a41c", tabs: 1, running: 0 },
@@ -177,7 +177,7 @@ export function FleetSection({ copy }: { copy: SolutionsCopy["fleet"] }) {
 
             <div className="flt-toolbar">
               <p className="flt-counters">
-                <b>1,000+</b> 个窗口
+                <b>100+</b> 个窗口
                 <i>·</i>6 个已打开
                 <i>·</i>3 个执行中
               </p>

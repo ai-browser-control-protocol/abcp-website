@@ -1,10 +1,10 @@
 /* ==========================================================================
-   Fleet section — 1000+ isolated environments managed in one window.
+   Fleet section — 100+ isolated environments managed in one window.
 
    Layout: shared section head (title | lead), a three-up bullet row, then a
    faithful WebCross client "窗口" page built entirely in CSS/DOM: titlebar,
    sidebar, page header, fleet counters, view toolbar and six window cards.
-   A live caption under the client carries the 窗口管理 label and the 1,000+
+   A live caption under the client carries the 窗口管理 label and the 100+
    figure. Everything is scoped under `.flt-`; the client itself is decorative
    (aria-hidden) so the section copy stays the accessible content.
 

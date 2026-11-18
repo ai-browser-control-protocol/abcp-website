@@ -3,7 +3,7 @@
  *
  * The page argues one story in seven beats: stealth (IP / fingerprint / CAPTCHA),
  * fingerprint + residential geography, a Chromium fork that drives the engine
- * directly, a semantic tree that keeps Token cost down, a 1000+ environment
+ * directly, a semantic tree that keeps Token cost down, a 100+ environment
  * matrix, auditable action records with human takeover, and finally reusable JS
  * scripts wired into agent workflows.
  *
@@ -165,7 +165,7 @@ const zh: SolutionsCopy = {
   seo: {
     title: "解决方案",
     description:
-      "从账号隔离、真实指纹与独立 IP，到自研 Chromium 直驱、语义树省 Token、1000+ 环境并发、AI 行动留痕与可复用 JS Script——WebCross 如何把网页自动化做成可交付的业务能力。",
+      "从账号隔离、真实指纹与独立 IP，到自研 Chromium 直驱、语义树省 Token、100+ 环境并发、AI 行动留痕与可复用 JS Script——WebCross 如何把网页自动化做成可交付的业务能力。",
   },
   eyebrow: "",
   hero: {
@@ -319,12 +319,12 @@ const zh: SolutionsCopy = {
   },
   fleet: {
     kicker: "",
-    title: "1000+ 个物理隔离环境统一管理",
-    lead: "每个账号拥有独立的浏览器环境：独立指纹、独立出口 IP、独立存储，互不串号。窗口集中管理，千级环境像管理一台浏览器一样简单。",
+    title: "100+ 个物理隔离环境统一管理",
+    lead: "每个账号拥有独立的浏览器环境：独立指纹、独立出口 IP、独立存储，互不串号。窗口集中管理，百级环境像管理一台浏览器一样简单。",
     bullets: [
       "每环境独立指纹、Cookie 与本地存储，物理隔离",
       "独立出口 IP，可绑定固定地区与网络通道",
-      "统一窗口管理，批量就绪，1000+ 环境互不干扰",
+      "统一窗口管理，批量就绪，100+ 环境互不干扰",
     ],
     panelLabel: "窗口管理",
   },
@@ -374,7 +374,7 @@ const en: SolutionsCopy = {
   seo: {
     title: "Solutions",
     description:
-      "Account isolation, real fingerprints and residential IPs, a Chromium fork that drives the engine directly, a semantic tree that cuts Token cost, 1000+ concurrent environments, auditable action records and reusable JS scripts — how WebCross turns web automation into deliverable business capability.",
+      "Account isolation, real fingerprints and residential IPs, a Chromium fork that drives the engine directly, a semantic tree that cuts Token cost, 100+ concurrent environments, auditable action records and reusable JS scripts — how WebCross turns web automation into deliverable business capability.",
   },
   eyebrow: "",
   hero: {
@@ -526,12 +526,12 @@ const en: SolutionsCopy = {
   },
   fleet: {
     kicker: "",
-    title: "1,000+ physically isolated environments, managed together",
-    lead: "Every account owns a separate browser environment: its own fingerprint, its own residential exit IP, its own storage. Windows are managed in one place, so a thousand environments feel like one.",
+    title: "100+ physically isolated environments, managed together",
+    lead: "Every account owns a separate browser environment: its own fingerprint, its own residential exit IP, its own storage. Windows are managed in one place, so a hundred environments feel like one.",
     bullets: [
       "Per-environment fingerprint, cookies and local storage, physically isolated",
       "Dedicated residential exit IP with pinned region and network path",
-      "Clone templates into a ready fleet; 1,000+ concurrent runs never cross",
+      "Clone templates into a ready fleet; 100+ concurrent runs never cross",
     ],
     panelLabel: "Window management",
   },

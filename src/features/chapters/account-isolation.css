@@ -1,18 +1,26 @@
-/* Account isolation: one shared browser versus isolated account environments.
-   Color is functional here: the ordinary path stays neutral, while the WebCross
-   path uses orange as its brand signal and the four accents to tag each row. */
+/* ==========================================================================
+   Account isolation — an unboxed ledger, not a pair of cards.
+
+   The comparison sits directly on the page's paper ground: two lanes share
+   one row rhythm (01–05), a single hairline seam divides them, and the only
+   filled surfaces are the two flat product mocks at the top of each lane.
+   Colour is functional, not decorative: the shared-session lane stays neutral
+   while WebCross owns the orange checks and the only warm rules in the ledger.
+   ========================================================================== */
+
 .home-section.accounts-section {
   width: 100%;
   max-width: 1248px;
   margin: 0 auto;
-  padding: 104px 32px;
+  padding: 100px 32px;
   background: transparent;
   border: 0;
   scroll-margin-top: calc(var(--nav-h) + 12px);
 }
+
 .accounts-heading {
   max-width: 820px;
-  margin-bottom: 46px;
+  margin-bottom: 52px;
 }
 .accounts-heading h2 {
   max-width: 760px;
@@ -24,266 +32,289 @@
   margin-right: auto;
   margin-left: auto;
   color: var(--home-body);
-  font-size: 18px;
+  font-size: var(--fs-lead);
   line-height: 1.7;
 }
 
-.account-duel {
+/* ---- The ledger ----------------------------------------------------------
+   Two equal lanes with one seam in the middle. Rows are separated by hairlines
+   only, so the whole block scans as a single table rather than two panels. */
+.account-ledger {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 96px;
   max-width: 1120px;
   margin: 0 auto;
 }
-.duel-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: 28px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--glass-border);
-  border-radius: 26px;
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: var(--glass-filter);
-  -webkit-backdrop-filter: var(--glass-filter);
-}
-.duel-card--ordinary {
-  color: var(--text-secondary);
-  background: linear-gradient(155deg, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0.38));
-}
-.duel-card--webcross {
-  background:
-    linear-gradient(155deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.4) 48%, rgba(255, 107, 53, 0.12) 100%);
-  border-color: rgba(255, 107, 53, 0.34);
-  box-shadow: 0 30px 72px -46px rgba(178, 70, 25, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.94);
-}
-.duel-card--webcross::after {
+
+.ledger-seam {
   position: absolute;
-  top: -120px;
-  right: -90px;
-  width: 260px;
-  height: 260px;
-  background: radial-gradient(circle, rgba(255, 228, 92, 0.28), rgba(255, 107, 53, 0.1) 48%, transparent 70%);
-  border-radius: 50%;
-  content: "";
-  filter: blur(12px);
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 0.5px);
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 17, 0) 0%,
+    rgba(17, 17, 17, 0.17) 12%,
+    rgba(17, 17, 17, 0.17) 88%,
+    rgba(17, 17, 17, 0) 100%
+  );
   pointer-events: none;
 }
 
-.duel-head {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
-  gap: 14px;
-  align-items: center;
-  min-height: 88px;
+.ledger-lane {
+  min-width: 0;
 }
-.duel-icon {
+
+/* ---- Lane head ----------------------------------------------------------- */
+.lane-head {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  column-gap: 13px;
+  align-items: start;
+  min-height: 92px;
+  padding-bottom: 26px;
+}
+
+.lane-glyph {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
-  color: #74746d;
-  background: rgba(255, 255, 255, 0.66);
-  border: 1px solid rgba(255, 255, 255, 0.82);
-  border-radius: 14px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  width: 34px;
+  height: 34px;
+  color: #6d6960;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(17, 17, 17, 0.13);
+  border-radius: 9px;
 }
-.duel-icon svg {
-  width: 25px;
-  height: 25px;
+.lane-glyph svg {
+  width: 19px;
+  height: 19px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.5;
 }
-.duel-icon--agent {
-  color: #ffffff;
-  background: linear-gradient(135deg, #ff733d 0%, #ff5722 100%);
-  border-color: rgba(255, 107, 53, 0.4);
-  box-shadow: 0 10px 22px -12px rgba(255, 87, 34, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.28);
-}
-.duel-heading { min-width: 0; }
-.duel-kicker {
-  display: block;
-  margin-bottom: 5px;
-  color: #8b8b84;
-  font: 9px/1.4 var(--font-mono);
-  letter-spacing: 0.08em;
-}
-.duel-card--webcross .duel-kicker { color: var(--oxide-text); }
-.duel-heading h3 {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 750;
-  line-height: 1.28;
-  letter-spacing: -0.025em;
-}
-.duel-card--webcross .duel-heading h3 {
-  max-width: 460px;
-  font-size: 21px;
-  text-wrap: balance;
+.lane-glyph--webcross {
+  color: var(--oxide-text);
+  background: rgba(255, 107, 53, 0.07);
+  border-color: rgba(255, 107, 53, 0.3);
 }
 
-.duel-visual {
-  position: relative;
-  z-index: 1;
+.lane-heading {
+  min-width: 0;
+  padding-top: 5px;
+}
+.lane-heading h3 {
+  margin: 0;
+  color: #4a4741;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 680;
+  line-height: 1.32;
+  letter-spacing: -0.02em;
+}
+.ledger-lane--webcross .lane-heading h3 {
+  color: #1d1b18;
+  font-weight: 720;
+}
+.lane-subtitle {
+  max-width: 400px;
+  margin: 6px 0 0;
+  color: #8d8478;
+  font-size: 12px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* ---- Lane visuals --------------------------------------------------------
+   Flat mocks: one shared session window on the left, three isolated
+   environments on the right. No glass, no shadow, no coloured edge strips. */
+.lane-visual {
   display: flex;
   flex-direction: column;
-  height: 174px;
-  margin-top: 19px;
-  padding: 13px;
-  background: rgba(255, 255, 255, 0.34);
-  border: 1px solid rgba(255, 255, 255, 0.64);
-  border-radius: 17px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  height: 150px;
 }
-.duel-card--webcross .duel-visual { background: rgba(255, 255, 255, 0.28); }
-.duel-visual-meta {
+
+.lane-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  margin-bottom: 9px;
-  color: #7b7b74;
-  font: 8px/1.4 var(--font-mono);
-  letter-spacing: 0.03em;
+  padding-bottom: 9px;
+  color: #8a857b;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.16);
+  font: 9px/1.4 var(--font-mono);
+  letter-spacing: 0.09em;
 }
-.duel-visual-meta span { display: inline-flex; align-items: center; gap: 6px; }
-.duel-visual-meta i {
-  width: 6px;
-  height: 6px;
-  background: #9b9b94;
+.lane-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.lane-meta i {
+  flex: 0 0 auto;
+  width: 5px;
+  height: 5px;
+  background: #a8a29a;
   border-radius: 50%;
 }
-.duel-card--webcross .duel-visual-meta i {
-  background: var(--accent-orange);
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.12);
+.ledger-lane--webcross .lane-meta {
+  border-bottom-color: rgba(255, 107, 53, 0.2);
+  color: #9c7c66;
 }
-.duel-visual-meta small { color: #93938c; font-size: 8px; }
+.ledger-lane--webcross .lane-meta i {
+  background: var(--oxide);
+}
+.lane-meta small {
+  color: #9c968c;
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.ledger-lane--webcross .lane-meta small {
+  color: #a98772;
+}
 
-.single-session-browser {
+.session-window {
   display: flex;
   flex: 1;
   flex-direction: column;
+  margin-top: 12px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.68);
-  border: 1px solid rgba(17, 17, 17, 0.07);
-  border-radius: 12px;
-  box-shadow: 0 12px 26px -24px rgba(24, 25, 22, 0.4);
+  background: rgba(255, 255, 255, 0.52);
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 7px;
 }
-.single-session-bar {
+.session-window-bar {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-height: 29px;
-  padding: 0 11px;
-  color: #999991;
-  background: rgba(246, 246, 243, 0.7);
+  min-height: 26px;
+  padding: 0 10px;
+  background: rgba(247, 246, 242, 0.72);
   border-bottom: 1px solid rgba(17, 17, 17, 0.06);
-  font-size: 8px;
 }
-.single-session-bar > span { font-size: 6px; letter-spacing: 2px; }
-.single-session-bar small { margin-left: auto; font: 7px var(--font-mono); }
-.single-session-body {
+.window-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+.window-dots i {
+  width: 5px;
+  height: 5px;
+  background: #d6d2c9;
+  border-radius: 50%;
+}
+.session-window-bar small {
+  margin-left: auto;
+  color: #9f998f;
+  font: 7.5px var(--font-mono);
+}
+.session-window-body {
   display: grid;
   flex: 1;
-  grid-template-columns: 32px minmax(0, 1fr) auto;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
   gap: 10px;
   align-items: center;
-  padding: 13px;
+  padding: 0 12px;
 }
-.single-session-avatar {
+.session-avatar {
   display: grid;
   place-items: center;
-  width: 31px;
-  height: 31px;
-  color: #77776f;
-  background: #ecece6;
-  border-radius: 9px;
-  font-size: 9px;
+  width: 30px;
+  height: 30px;
+  color: #75706a;
+  background: #eeede7;
+  border: 1px solid rgba(17, 17, 17, 0.06);
+  border-radius: 7px;
+  font-size: 10px;
   font-weight: 700;
 }
-.single-session-body strong,
-.single-session-body small { display: block; }
-.single-session-body strong { font-size: 9px; letter-spacing: 0.02em; }
-.single-session-body small { margin-top: 4px; color: #989890; font-size: 7px; line-height: 1.45; }
-.single-session-switch {
+.session-id strong,
+.session-id small {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.session-id strong {
+  color: #57544d;
+  font-size: 9px;
+  letter-spacing: 0.03em;
+}
+.session-id small {
+  margin-top: 3px;
+  color: #96918a;
+  font-size: 8px;
+  line-height: 1.4;
+}
+.session-switch {
   display: grid;
   place-items: center;
-  width: 25px;
-  height: 25px;
-  color: #8c8c84;
-  border: 1px solid rgba(17, 17, 17, 0.1);
+  width: 24px;
+  height: 24px;
+  color: #8e8a83;
+  border: 1px solid rgba(17, 17, 17, 0.12);
   border-radius: 50%;
   font-size: 11px;
 }
 
-.environment-layers {
+.isolation-stack {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 6px;
+  margin-top: 12px;
 }
-.environment-layer {
+.isolation-row {
   display: grid;
-  grid-template-columns: 27px minmax(0, 1fr) auto auto;
-  gap: 8px;
+  flex: 1;
+  grid-template-columns: 7px 13px minmax(0, 1fr) auto auto;
+  gap: 9px;
   align-items: center;
-  min-height: 36px;
-  padding: 6px 9px;
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
+  min-height: 0;
+  border-bottom: 1px solid rgba(255, 107, 53, 0.12);
 }
-.environment-layer-0 { box-shadow: inset 3px 0 0 var(--accent-sky); }
-.environment-layer-1 { box-shadow: inset 3px 0 0 var(--accent-green); }
-.environment-layer-2 { box-shadow: inset 3px 0 0 var(--accent-purple); }
-.environment-letter {
-  display: grid;
-  place-items: center;
-  width: 25px;
-  height: 25px;
-  color: #37454c;
-  background: var(--pastel-sky);
-  border-radius: 7px;
-  font-size: 8px;
-  font-weight: 700;
+.isolation-row:last-child {
+  border-bottom: 0;
 }
-.environment-layer-1 .environment-letter { color: #174934; background: var(--pastel-green); }
-.environment-layer-2 .environment-letter { color: #393166; background: var(--pastel-lilac); }
-.environment-layer strong {
+.isolation-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-sky);
+  border-radius: 50%;
+}
+.isolation-row-1 .isolation-dot { background: var(--accent-green); }
+.isolation-row-2 .isolation-dot { background: var(--accent-purple); }
+.isolation-letter {
+  color: #8d8177;
+  font: 9px var(--font-mono);
+}
+.isolation-row strong {
   overflow: hidden;
-  color: #40403c;
+  color: #403c37;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.isolation-row small {
+  color: #9b9289;
   font-size: 9px;
-  font-weight: 650;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
-.environment-layer > small {
-  overflow: hidden;
-  color: #8e8e86;
-  font: 7px var(--font-mono);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.environment-isolated {
+.isolation-flag {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 3px 5px;
-  color: #2d6f50;
-  background: rgba(126, 232, 181, 0.26);
-  border-radius: 999px;
-  font: 6px var(--font-mono);
-  letter-spacing: 0.02em;
+  gap: 4px;
+  color: #2f6b4f;
+  font: 7.5px var(--font-mono);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
-.environment-isolated svg {
+.isolation-flag svg {
   width: 9px;
   height: 9px;
   fill: none;
@@ -293,255 +324,166 @@
   stroke-width: 1.6;
 }
 
-.duel-list {
-  position: relative;
-  z-index: 1;
+/* ---- Row ledger ----------------------------------------------------------
+   index · statement · mark. Both lanes use the same grid, so each pair of
+   rows sits on one baseline and the middle seam reads as the hinge. */
+.lane-list {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  justify-content: space-between;
-  margin: 20px 0 0;
+  margin: 14px 0 0;
   padding: 0;
-  border-top: 1px solid rgba(17, 17, 17, 0.08);
+  border-top: 1px solid rgba(17, 17, 17, 0.24);
   list-style: none;
 }
-.duel-list li {
+
+.lane-list li {
   display: grid;
-  grid-template-columns: 23px 23px minmax(0, 1fr);
-  gap: 10px;
-  align-items: start;
-  min-height: 80px;
-  padding: 15px 0;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+  grid-template-columns: 24px minmax(0, 1fr) 22px;
+  gap: 12px;
+  align-items: center;
+  min-height: 60px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.095);
+  transition: background-color 180ms ease;
 }
-.duel-row-index {
-  padding-top: 5px;
-  color: #9b9b93;
-  font: 9px var(--font-mono);
+
+.lane-index {
+  color: #99938a;
+  font: 9px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  transition: color 180ms ease;
 }
-.duel-row-mark {
+
+.lane-list li p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.ledger-lane--ordinary .lane-list li p { color: #6f6b63; }
+.ledger-lane--webcross .lane-list li p {
+  color: #2c2924;
+  font-weight: 540;
+}
+
+.ledger-lane--webcross .lane-list li {
+  border-bottom-color: rgba(255, 107, 53, 0.14);
+}
+
+.lane-mark {
   display: grid;
+  justify-self: end;
   place-items: center;
-  width: 22px;
-  height: 22px;
-  color: #85857d;
-  background: rgba(17, 17, 17, 0.045);
-  border-radius: 50%;
+  width: 18px;
+  height: 18px;
 }
-.duel-row-mark svg {
-  width: 12px;
-  height: 12px;
+.lane-mark svg {
+  width: 13px;
+  height: 13px;
   fill: none;
-  stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.8;
 }
-.duel-list li p {
-  color: #52524d;
-  font-size: 14.5px;
-  line-height: 1.65;
+.lane-mark--quiet {
+  color: #aca69c;
 }
-.duel-card--webcross .duel-list { border-top-color: rgba(255, 107, 53, 0.16); }
-.duel-card--webcross .duel-list li { border-bottom-color: rgba(255, 107, 53, 0.13); }
-.duel-card--webcross .duel-list li p { color: #30302c; font-weight: 520; }
-.duel-list--webcross li:nth-child(1) { --row-accent: var(--accent-orange); --row-ink: #ffffff; }
-.duel-list--webcross li:nth-child(2) { --row-accent: var(--accent-sky); --row-ink: #163c4d; }
-.duel-list--webcross li:nth-child(3) { --row-accent: var(--accent-purple); --row-ink: #ffffff; }
-.duel-list--webcross li:nth-child(4) { --row-accent: var(--accent-green); --row-ink: #103c2b; }
-.duel-list--webcross li:nth-child(5) { --row-accent: var(--accent-yellow); --row-ink: #433800; }
-.duel-list--webcross .duel-row-mark {
-  color: var(--row-ink);
-  background: var(--row-accent);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+.lane-mark--quiet svg { stroke-width: 1.6; }
+.lane-mark--yes {
+  color: var(--oxide-text);
+}
+.lane-mark--yes svg { stroke-width: 2.2; }
+
+/* ---- Pointer polish ------------------------------------------------------ */
+.lane-list li:hover { background: rgba(255, 255, 255, 0.52); }
+.ledger-lane--webcross .lane-list li:hover { background: rgba(255, 107, 53, 0.055); }
+.lane-list li:hover .lane-index { color: var(--oxide-text); }
+.lane-list li:hover .lane-mark--quiet { color: #8a847a; }
+
+.isolation-row { transition: background-color 180ms ease, padding 200ms var(--ease-expo); }
+.isolation-row:hover { background: rgba(255, 107, 53, 0.05); }
+.session-window { transition: border-color 180ms ease; }
+.session-window:hover { border-color: rgba(17, 17, 17, 0.16); }
+
+/* ---- One-time arrival: the WebCross checks settle row by row ------------- */
+.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-mark--yes {
+  animation: accountCheckIn 420ms var(--ease-expo) both;
+}
+.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(1) .lane-mark--yes { animation-delay: 90ms; }
+.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(2) .lane-mark--yes { animation-delay: 170ms; }
+.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(3) .lane-mark--yes { animation-delay: 250ms; }
+.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(4) .lane-mark--yes { animation-delay: 330ms; }
+.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(5) .lane-mark--yes { animation-delay: 410ms; }
+
+@keyframes accountCheckIn {
+  from {
+    opacity: 0;
+    scale: 0.55;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 }
 
-.account-duel-foot {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: 1120px;
-  margin: 18px auto 0;
-  padding: 12px 17px;
-  color: #5e5e57;
-  background: rgba(255, 255, 255, 0.42);
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  font-size: 12px;
-}
-.account-duel-agent {
-  display: grid;
-  flex: 0 0 auto;
-  place-items: center;
-  width: 25px;
-  height: 25px;
-  color: var(--oxide);
-}
-.account-duel-agent svg {
-  width: 21px;
-  height: 21px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.3;
-}
-.account-duel-foot p { flex: 1; line-height: 1.5; }
-.account-swatches { display: inline-flex; flex: 0 0 auto; gap: 5px; }
-.account-swatches i {
-  width: 7px;
-  height: 7px;
-  background: var(--accent-orange);
-  border-radius: 50%;
-}
-.account-swatches i:nth-child(2) { background: var(--accent-sky); }
-.account-swatches i:nth-child(3) { background: var(--accent-purple); }
-.account-swatches i:nth-child(4) { background: var(--accent-green); }
-.account-swatches i:nth-child(5) { background: var(--accent-yellow); }
-
-@media (max-width: 1100px) {
-  .home-section.accounts-section { padding: 88px 28px; }
-  .duel-card { padding: 24px; }
-  .duel-head { min-height: 84px; }
-  .duel-heading h3 { font-size: 20px; }
-  .duel-card--webcross .duel-heading h3 { font-size: 19px; }
-  .duel-list li { grid-template-columns: 21px 22px minmax(0, 1fr); gap: 8px; min-height: 86px; }
-  .duel-list li p { font-size: 14px; }
-  .environment-layer { grid-template-columns: 25px minmax(0, 1fr) auto; }
-  .environment-layer > small { display: none; }
+/* ---- Responsive ---------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .account-ledger { column-gap: 64px; }
 }
 
-@media (max-width: 850px) {
-  .home-section.accounts-section { padding: 80px 24px; }
-  .home-section.accounts-section .accounts-heading p { font-size: 17px; }
-  .accounts-heading { margin-bottom: 34px; }
-  .account-duel { grid-template-columns: 1fr; gap: 18px; max-width: 680px; }
-  .duel-card { padding: 24px; }
-  .duel-head { min-height: 0; }
-  .duel-heading h3,
-  .duel-card--webcross .duel-heading h3 { font-size: 21px; }
-  .duel-visual { height: 180px; }
-  .duel-list { margin-top: 18px; }
-  .duel-list li { min-height: 0; padding: 13px 0; }
-  .duel-list li p { font-size: 14px; }
-  .account-duel-foot { border-radius: 18px; }
+@media (max-width: 980px) {
+  .home-section.accounts-section { padding: 84px 28px; }
+  .account-ledger {
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 0;
+    max-width: 640px;
+  }
+  .ledger-seam { display: none; }
+  .lane-head {
+    min-height: 0;
+    padding-bottom: 22px;
+  }
+  .ledger-lane--webcross {
+    margin-top: 42px;
+    padding-top: 38px;
+    border-top: 1px solid rgba(17, 17, 17, 0.11);
+  }
+  .lane-visual { height: 158px; }
 }
 
-@media (max-width: 600px) {
-  .home-section.accounts-section { padding: 64px 18px; }
-  .home-section.accounts-section .accounts-heading p { font-size: 15px; line-height: 1.65; }
-  .duel-card { padding: 19px; border-radius: 22px; }
-  .duel-icon { width: 42px; height: 42px; border-radius: 13px; }
-  .duel-icon svg { width: 23px; height: 23px; }
-  .duel-head { grid-template-columns: 42px minmax(0, 1fr); gap: 11px; }
-  .duel-heading h3,
-  .duel-card--webcross .duel-heading h3 { font-size: 19px; }
-  .duel-kicker { font-size: 8px; }
-  .duel-visual { height: 176px; margin-top: 16px; padding: 10px; }
-  .duel-visual-meta { font-size: 7px; }
-  .environment-layer { grid-template-columns: 25px minmax(0, 1fr) auto; gap: 6px; padding-right: 7px; padding-left: 7px; }
-  .environment-isolated { padding: 3px 4px; font-size: 5.5px; }
-  .duel-list { margin-top: 15px; }
-  .duel-list li { grid-template-columns: 20px 21px minmax(0, 1fr); gap: 7px; padding: 12px 0; }
-  .duel-list li p { font-size: 13.5px; line-height: 1.62; }
-  .duel-row-mark { width: 21px; height: 21px; }
-  .account-duel-foot { padding: 11px 13px; font-size: 11px; border-radius: 16px; }
-  .account-swatches { display: none; }
-}
-
-.duel-card-subtitle {
-  max-width: 360px;
-  margin-top: 7px;
-  color: #8f8277;
-  font-size: 10.5px;
-  line-height: 1.55;
-}
-
-/* Tighter comparison rows: the list reads as one block, not spaced cards. */
-.duel-list li {
-  align-items: center;
-  min-height: 0;
-  padding: 11px 0;
-  gap: 9px;
-}
-.duel-list li p { font-size: 13.5px; line-height: 1.45; }
-.duel-list { border-top-width: 1px; }
-
-/* ==========================================================================
-   Hover only
-   The duel is a side-by-side comparison, so it responds to the pointer instead
-   of looping on its own: the card lifts, the hovered row gets a quiet wash, and
-   an isolated environment steps out from the stack. No entrance sequence.
-   ========================================================================== */
-.duel-card {
-  transition:
-    transform 260ms var(--ease-expo),
-    box-shadow 260ms var(--ease-expo),
-    border-color 200ms ease;
-}
-
-.duel-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 34px 70px -46px rgba(60, 45, 30, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.94);
-}
-
-.duel-card--webcross:hover {
-  border-color: rgba(255, 107, 53, 0.5);
-  box-shadow: 0 36px 80px -44px rgba(178, 70, 25, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.94);
-}
-
-.duel-list li {
-  position: relative;
-  isolation: isolate;
-}
-
-.duel-list li::before {
-  position: absolute;
-  z-index: -1;
-  inset: 1px -9px;
-  background: rgba(255, 255, 255, 0.58);
-  border-radius: 9px;
-  opacity: 0;
-  transition: opacity 180ms ease;
-  content: "";
-}
-
-.duel-list li:hover::before {
-  opacity: 1;
-}
-
-.duel-card--webcross .duel-list li::before {
-  background: rgba(255, 107, 53, 0.075);
-}
-
-.environment-layer {
-  transition:
-    transform 200ms var(--ease-expo),
-    background-color 180ms ease,
-    border-color 180ms ease;
-}
-
-.environment-layer:hover {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(255, 107, 53, 0.26);
-  transform: translateX(2px);
-}
-
-.single-session-browser {
-  transition: border-color 180ms ease, box-shadow 180ms ease;
-}
-
-.single-session-browser:hover {
-  border-color: rgba(17, 17, 17, 0.14);
-  box-shadow: 0 16px 30px -22px rgba(24, 25, 22, 0.45);
+@media (max-width: 700px) {
+  .home-section.accounts-section { padding: 72px 22px; }
+  .accounts-heading { margin-bottom: 38px; }
+  .home-section.accounts-section .accounts-heading p { font-size: 15px; line-height: 1.66; }
+  .lane-head { grid-template-columns: 30px minmax(0, 1fr); column-gap: 11px; }
+  .lane-glyph { width: 30px; height: 30px; border-radius: 8px; }
+  .lane-glyph svg { width: 17px; height: 17px; }
+  .lane-heading { padding-top: 4px; }
+  .lane-heading h3,
+  .ledger-lane--webcross .lane-heading h3 { font-size: 17px; }
+  .lane-subtitle { font-size: 11.5px; }
+  .lane-meta { font-size: 8px; }
+  .lane-meta small { font-size: 8px; }
+  .lane-visual { height: 156px; }
+  .isolation-row { gap: 8px; }
+  .isolation-row strong { font-size: 11px; }
+  .isolation-row small { font-size: 8.5px; }
+  .isolation-flag { font-size: 7px; }
+  .lane-list { margin-top: 12px; }
+  .lane-list li { grid-template-columns: 20px minmax(0, 1fr) 20px; gap: 9px; min-height: 56px; padding: 8px 0; }
+  .lane-list li p { font-size: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .duel-card:hover,
-  .environment-layer:hover {
-    transform: none;
+  .lane-list li,
+  .lane-index,
+  .isolation-row,
+  .session-window {
+    transition: none;
+  }
+
+  .account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-mark--yes {
+    animation: none;
   }
 }

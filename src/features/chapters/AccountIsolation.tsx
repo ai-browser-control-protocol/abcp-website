@@ -1,12 +1,23 @@
 import type { HomeCopy } from "@/content/home";
 import "./account-isolation.css";
 
-function Check() {
-  return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-9" /></svg>;
+/**
+ * Account isolation — one ledger, two lanes.
+ *
+ * The section used to be a pair of glass cards. It now reads as a single
+ * comparison ledger on the paper ground: two lanes share one row rhythm
+ * (01–05), a hairline seam divides them, and the marks are typographic
+ * (a muted dash for the shared-session path, an orange check for WebCross)
+ * instead of sticker chips. The only filled surfaces left are the two flat
+ * product mocks above the rows.
+ */
+
+function CheckMark() {
+  return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4.6 10.4 3.6 3.6L15.4 6.2" /></svg>;
 }
 
-function Minus() {
-  return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10" /></svg>;
+function DashMark() {
+  return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.4 10h7.2" /></svg>;
 }
 
 function BrowserSymbol() {
@@ -30,71 +41,86 @@ export function AccountIsolation({ copy }: { copy: HomeCopy }) {
         <p>{content.description}</p>
       </div>
 
-      <div className="account-duel">
-        <article className="duel-card duel-card--ordinary">
-          <header className="duel-head">
-            <span className="duel-icon"><BrowserSymbol /></span>
-            <div className="duel-heading">
+      <div className="account-ledger" data-reveal>
+        <span className="ledger-seam" aria-hidden="true" />
+
+        <div className="ledger-lane ledger-lane--ordinary">
+          <header className="lane-head">
+            <span className="lane-glyph"><BrowserSymbol /></span>
+            <div className="lane-heading">
               <h3>{content.ordinaryTitle}</h3>
             </div>
           </header>
 
-          <div className="duel-visual" aria-hidden="true">
-            <div className="duel-visual-meta"><span><i />CURRENT SESSION</span><small>1 SESSION</small></div>
-            <div className="single-session-browser">
-              <div className="single-session-bar"><span>● ● ●</span><small>browser / current-session</small></div>
-              <div className="single-session-body">
-                <span className="single-session-avatar">A</span>
-                <div><strong>CURRENT ACCOUNT</strong><small>One cookie jar · one cache · one login state</small></div>
-                <span className="single-session-switch">↻</span>
+          <div className="lane-visual" aria-hidden="true">
+            <div className="lane-meta">
+              <span><i />CURRENT SESSION</span>
+              <small>1 SESSION</small>
+            </div>
+            <div className="session-window">
+              <div className="session-window-bar">
+                <span className="window-dots"><i /><i /><i /></span>
+                <small>browser / current-session</small>
+              </div>
+              <div className="session-window-body">
+                <span className="session-avatar">A</span>
+                <div className="session-id">
+                  <strong>CURRENT ACCOUNT</strong>
+                  <small>One cookie jar · one cache · one login state</small>
+                </div>
+                <span className="session-switch" aria-hidden="true">↻</span>
               </div>
             </div>
           </div>
 
-          <ol className="duel-list">
+          <ol className="lane-list">
             {content.comparisonRows.map((row, index) => (
               <li key={row.ordinary}>
-                <span className="duel-row-index">0{index + 1}</span>
-                <span className="duel-row-mark"><Minus /></span>
+                <span className="lane-index">{`0${index + 1}`}</span>
                 <p>{row.ordinary}</p>
+                <span className="lane-mark lane-mark--quiet" aria-hidden="true"><DashMark /></span>
               </li>
             ))}
           </ol>
-        </article>
+        </div>
 
-        <article className="duel-card duel-card--webcross">
-          <header className="duel-head">
-            <span className="duel-icon duel-icon--agent"><AgentSymbol /></span>
-            <div className="duel-heading">
+        <div className="ledger-lane ledger-lane--webcross">
+          <header className="lane-head">
+            <span className="lane-glyph lane-glyph--webcross"><AgentSymbol /></span>
+            <div className="lane-heading">
               <h3>{content.webcrossTitle}</h3>
-              <p className="duel-card-subtitle">{content.webcrossSubtitle}</p>
+              <p className="lane-subtitle">{content.webcrossSubtitle}</p>
             </div>
           </header>
 
-          <div className="duel-visual" aria-hidden="true">
-            <div className="duel-visual-meta"><span><i />ISOLATED ENVIRONMENTS</span><small>3 ACCOUNTS</small></div>
-            <div className="environment-layers">
+          <div className="lane-visual" aria-hidden="true">
+            <div className="lane-meta">
+              <span><i />ISOLATED ENVIRONMENTS</span>
+              <small>3 ACCOUNTS</small>
+            </div>
+            <div className="isolation-stack">
               {content.accounts.map((account, index) => (
-                <div className={`environment-layer environment-layer-${index}`} key={account.name}>
-                  <span className="environment-letter">{String.fromCharCode(65 + index)}</span>
+                <div className={`isolation-row isolation-row-${index}`} key={account.name}>
+                  <span className="isolation-dot" />
+                  <span className="isolation-letter">{String.fromCharCode(65 + index)}</span>
                   <strong>{account.name.split(" · ")[0]}</strong>
                   <small>{account.status}</small>
-                  <span className="environment-isolated"><LockSymbol />ISOLATED</span>
+                  <span className="isolation-flag"><LockSymbol />ISOLATED</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <ol className="duel-list duel-list--webcross">
+          <ol className="lane-list">
             {content.comparisonRows.map((row, index) => (
               <li key={row.webcross}>
-                <span className="duel-row-index">0{index + 1}</span>
-                <span className="duel-row-mark"><Check /></span>
+                <span className="lane-index">{`0${index + 1}`}</span>
                 <p>{row.webcross}</p>
+                <span className="lane-mark lane-mark--yes" aria-hidden="true"><CheckMark /></span>
               </li>
             ))}
           </ol>
-        </article>
+        </div>
       </div>
     </section>
   );

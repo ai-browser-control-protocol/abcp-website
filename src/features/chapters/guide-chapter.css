@@ -1201,7 +1201,7 @@
 .user-nav-item-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   padding: 7px 8px;
   border-radius: 6px;
   font-size: 12.5px;
@@ -1218,6 +1218,15 @@
 
 .user-nav-item-btn:hover {
   background: var(--user-surface-hover);
+}
+
+/* The mock's labels are real UI words and the rail is narrow: keep each item
+   on one line so the "即将" badge never stacks under a wrapped label. */
+.user-nav-item-btn > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .user-nav-item-btn.is-active {
@@ -1238,11 +1247,13 @@
 }
 
 .user-coming-soon-badge {
+  flex: 0 0 auto;
   margin-left: auto;
-  font-size: 9.5px;
-  padding: 1px 5px;
+  padding: 1px 4px;
   border-radius: 4px;
   background: #fef3c7;
+  font-size: 9px;
+  white-space: nowrap;
   color: #b45309;
   border: 1px solid #fde68a;
   display: inline-flex;

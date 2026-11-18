@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>文案与字号编辑器 · WebCross</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111111'/%3E%3Ctext x='7' y='22' font-family='monospace' font-size='15' font-weight='700' fill='%23ffffff'%3EAa%3C/text%3E%3Crect x='7' y='25' width='18' height='2' fill='%23ff6b35'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <symbol id="i-chevron" viewBox="0 0 16 16"><path d="M3.5 5.5 8 10l4.5-4.5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 16 16"><path d="M13.2 6.1A5.3 5.3 0 1 0 13.4 9.6"/><path d="M13.4 2.6v3.6h-3.6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.3"/><path d="m10.3 10.3 3.2 3.2"/></symbol>
+    <symbol id="i-close" viewBox="0 0 16 16"><path d="m3.5 3.5 9 9M12.5 3.5l-9 9"/></symbol>
+    <symbol id="i-external" viewBox="0 0 16 16"><path d="M6 3.5h6.5V10"/><path d="M12.5 3.5 5 11"/><path d="M11 12.5H4a.5.5 0 0 1-.5-.5V5"/></symbol>
+  </svg>
+
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">Aa</span>
+        <div class="brand-copy">
+          <span class="eyebrow eyebrow-brand">WebCross · 本地编辑台</span>
+          <h1>文案与字号</h1>
+        </div>
+      </div>
+      <div class="header-meta">
+        <span class="meta-chip meta-repo" id="repo-chip" title="仓库"><span class="meta-label">repo</span><span id="repo-text" class="meta-value">…</span></span>
+        <span class="meta-chip meta-git" id="git-chip" title="git 状态"><span class="dot" id="git-dot"></span><span id="git-text">git</span></span>
+        <span class="meta-chip meta-service" id="service-chip" title="本地编辑服务"><span class="dot dot-live" id="service-dot"></span><span id="service-text">编辑服务</span></span>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="editor-pane" aria-label="编辑器">
+        <nav class="tabs" role="tablist" aria-label="编辑模式">
+          <button id="tab-copy" class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-copy" data-tab="copy">
+            <span class="tab-index">01</span><span class="tab-name">文案</span><span class="tab-count" id="tab-copy-count">–</span>
+          </button>
+          <button id="tab-type" class="tab" role="tab" aria-selected="false" aria-controls="panel-type" data-tab="type">
+            <span class="tab-index">02</span><span class="tab-name">字号</span><span class="tab-count" id="tab-type-count">–</span>
+          </button>
+          <span class="tabs-hint"><kbd>Ctrl</kbd><span>/</span><kbd>⌘</kbd><span>+</span><kbd>S</kbd><span class="hint-text">保存当前标签</span></span>
+        </nav>
+
+        <div class="panel is-active" id="panel-copy" role="tabpanel" aria-labelledby="tab-copy">
+          <aside class="file-rail">
+            <div class="rail-head">
+              <span class="eyebrow">文件 · Files</span>
+              <span class="rail-count" id="file-count">–</span>
+            </div>
+            <div class="file-list" id="file-list"></div>
+            <div class="rail-foot">改动直接写入 <code>src/</code> 源文件</div>
+          </aside>
+
+          <section class="copy-main" aria-label="文案字段">
+            <header class="file-head">
+              <div class="file-head-copy">
+                <span class="eyebrow eyebrow-accent" id="copy-file-kind">文案</span>
+                <h2 id="copy-file-label">正在加载…</h2>
+                <div class="file-head-meta">
+                  <code id="copy-file-path">–</code>
+                  <span class="dot-sep">·</span>
+                  <span id="copy-file-total">–</span>
+                  <span class="dot-sep">·</span>
+                  <span class="file-locale" id="copy-file-locale"></span>
+                </div>
+              </div>
+              <div class="file-head-tools">
+                <div class="locale-row" id="locale-row" hidden>
+                  <span class="locale-label">语言</span>
+                  <div class="locale-switch" id="locale-switch" role="group" aria-label="切换文案语言"></div>
+                </div>
+                <label class="search-field" for="copy-search">
+                  <svg class="icon icon-search" aria-hidden="true"><use href="#i-search"></use></svg>
+                  <input id="copy-search" type="search" placeholder="搜索 path 或文案…" autocomplete="off" spellcheck="false">
+                  <span class="search-count" id="search-count"></span>
+                </label>
+              </div>
+            </header>
+
+            <div class="copy-scroll" id="copy-scroll">
+              <div class="notice notice-fallback" id="fallback-notice" hidden>
+                <span class="notice-mark">!</span>
+                <span class="notice-text" id="fallback-notice-text"></span>
+              </div>
+              <div class="groups-toolbar" id="groups-toolbar">
+                <span class="groups-summary" id="groups-summary">–</span>
+                <span class="groups-actions">
+                  <button class="link-btn" id="expand-all" type="button">全部展开</button>
+                  <span class="toolbar-sep">/</span>
+                  <button class="link-btn" id="collapse-all" type="button">全部收起</button>
+                </span>
+              </div>
+              <div class="copy-groups" id="copy-groups"></div>
+              <div class="empty-state" id="copy-empty" hidden>
+                <span class="empty-mark">∅</span>
+                <p class="empty-title" id="copy-empty-title">没有匹配的字段</p>
+                <p class="empty-hint" id="copy-empty-hint">试试别的关键词，或清空搜索。</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="panel" id="panel-type" role="tabpanel" aria-labelledby="tab-type" hidden>
+          <div class="type-main">
+            <div class="type-scroll" id="type-scroll">
+              <header class="type-head">
+                <span class="eyebrow eyebrow-accent">Type scale · 字号系统</span>
+                <h2>字号阶梯</h2>
+                <p class="type-sub">定义在 <code id="type-path">src/styles/tokens.css</code>。拖动滑杆或直接输入数字，保存后写入源文件。</p>
+                <div class="type-legend">
+                  <span class="legend-chip"><span class="swatch swatch-clamp"></span>clamp · 最小 / 首选 / 最大</span>
+                  <span class="legend-chip"><span class="swatch swatch-length"></span>固定 px</span>
+                  <span class="legend-chip"><span class="swatch swatch-number"></span>无单位数值</span>
+                </div>
+              </header>
+              <div class="type-groups" id="type-groups"></div>
+              <section class="overrides-card">
+                <header class="overrides-head">
+                  <div class="overrides-title">
+                    <span class="eyebrow">Overrides · 样式覆盖</span>
+                    <h3>自定义样式覆盖（font-size 等）</h3>
+                  </div>
+                  <div class="overrides-meta">
+                    <span class="changed-dot" id="overrides-dot" aria-label="有未保存修改"></span>
+                    <code id="overrides-path">src/styles/editor-overrides.css</code>
+                  </div>
+                </header>
+                <p class="hint">这段 CSS 在所有样式之后加载，用来微调单个元素的 font-size / line-height。保存会写入源文件。</p>
+                <textarea id="overrides-text" class="overrides-input" spellcheck="false" placeholder="/* 例：.home-hero h1 { font-size: 48px; } */"></textarea>
+                <footer class="overrides-foot">
+                  <span class="overrides-count" id="overrides-count">–</span>
+                  <button class="btn btn-ghost" id="overrides-save" type="button" disabled>保存覆盖样式</button>
+                </footer>
+              </section>
+              <div class="type-note">保存会直接修改 <code>src/styles/tokens.css</code> 与 <code>src/styles/editor-overrides.css</code>，并在 <code>artifacts/copy-editor-backups/</code> 留一份备份。需要撤销请用 git。</div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="action-bar" id="action-bar" aria-label="保存操作">
+          <div class="action-summary">
+            <span class="action-count" id="action-count">0</span>
+            <span class="action-copy">
+              <span class="action-text" id="action-summary-text">没有未保存的修改</span>
+              <span class="action-file" id="action-dirty-file"></span>
+            </span>
+          </div>
+          <div class="action-buttons">
+            <button class="btn btn-ghost" id="btn-diff" type="button">查看 git diff</button>
+            <button class="btn btn-ghost btn-danger" id="btn-revert" type="button">还原此文件</button>
+            <button class="btn btn-ghost" id="btn-discard" type="button" disabled>放弃改动</button>
+            <button class="btn btn-primary" id="btn-save" type="button" disabled>保存 0 处修改</button>
+          </div>
+        </footer>
+      </section>
+
+      <aside class="preview-pane" aria-label="实时预览">
+        <header class="preview-head">
+          <div class="preview-title-row">
+            <div class="preview-title">
+              <span class="eyebrow">Live preview · 实时预览</span>
+              <h2>本地站点</h2>
+            </div>
+            <span class="preview-state" id="preview-state"><span class="dot" id="preview-state-dot"></span><span id="preview-state-text">加载中</span></span>
+          </div>
+          <div class="preview-controls">
+            <label class="page-select" for="preview-page">
+              <span class="sr-only">预览页面</span>
+              <select id="preview-page"></select>
+            </label>
+            <button class="btn btn-quiet" id="preview-refresh" type="button" title="刷新预览（附带缓存参数）">
+              <svg class="icon" aria-hidden="true"><use href="#i-refresh"></use></svg><span>刷新</span>
+            </button>
+          </div>
+          <label class="check-row" for="auto-refresh">
+            <input type="checkbox" id="auto-refresh" checked>
+            <span class="check-box" aria-hidden="true"></span>
+            <span>保存后自动刷新预览</span>
+          </label>
+        </header>
+        <div class="preview-banner" id="site-banner" hidden>
+          <span class="banner-mark">!</span>
+          <span class="banner-text" id="site-banner-text">本地站点连不上，预览不可用。编辑不受影响。</span>
+          <button class="btn btn-tiny" id="site-retry" type="button">重试</button>
+        </div>
+        <div class="preview-frame-wrap">
+          <iframe id="preview-frame" title="本地站点实时预览" loading="eager"></iframe>
+        </div>
+        <footer class="preview-foot">
+          <code id="preview-url">…</code>
+          <button class="link-btn" id="preview-open" type="button"><svg class="icon" aria-hidden="true"><use href="#i-external"></use></svg><span>新窗口</span></button>
+        </footer>
+      </aside>
+    </main>
+  </div>
+
+  <div class="toast-stack" id="toast-stack" aria-live="polite" aria-atomic="false"></div>
+
+  <div class="overlay" id="overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal-head">
+        <div class="modal-head-copy">
+          <span class="eyebrow" id="modal-eyebrow">Git diff</span>
+          <h3 id="modal-title">文件改动</h3>
+        </div>
+        <button class="icon-btn" id="modal-close" type="button" aria-label="关闭">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+        </button>
+      </header>
+      <div class="modal-body" id="modal-body"></div>
+      <footer class="modal-foot" id="modal-foot"></footer>
+    </div>
+  </div>
+
+  <noscript><div class="noscript">这个编辑台需要开启 JavaScript。</div></noscript>
+  <script src="./app.js" defer></script>
+</body>
+</html>

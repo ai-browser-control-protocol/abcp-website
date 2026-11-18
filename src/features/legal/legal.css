@@ -19,6 +19,11 @@
   letter-spacing: 0.1em;
 }
 
+.legal-publication {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
 .legal-hero h1 {
   font-size: var(--fs-hero);
   font-weight: var(--fw-hero);

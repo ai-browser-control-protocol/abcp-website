@@ -1166,6 +1166,12 @@ const ko: Record<LegalKind, LegalCopy> = {
 
 const copies: Record<Locale, Record<LegalKind, LegalCopy>> = { zh, en, ja, ko };
 
-export function getLegalCopy(kind: LegalKind, locale: Locale): LegalCopy {
-  return copies[locale][kind];
+const publishedOn: Record<LegalKind, string> = {
+  privacy: "2026-11-18",
+  agreement: "2026-11-18",
+};
+
+export function getLegalCopy(kind: LegalKind, locale: Locale) {
+  const copy = copies[locale][kind];
+  return { ...copy, publishedOn: publishedOn[kind] };
 }

@@ -1,19 +1,34 @@
-import type { LegalCopy } from "@/content/legal";
+import type { getLegalCopy } from "@/content/legal";
 import type { Locale } from "@/content/types";
 import "./legal.css";
+
+const publishedLabel: Record<Locale, string> = {
+  zh: "发布时间",
+  en: "Published",
+  ja: "公開日",
+  ko: "게시일",
+};
 
 export function LegalDocument({
   locale,
   copy,
 }: {
   locale: Locale;
-  copy: LegalCopy;
+  copy: ReturnType<typeof getLegalCopy>;
 }) {
   return (
     <article className={`chapter legal-page locale-${locale}`}>
       <header className="legal-hero">
         <p className="legal-eyebrow">{copy.eyebrow}</p>
         <h1>{copy.title}</h1>
+        <p className="legal-publication">
+          {publishedLabel[locale]}{" "}
+          <time dateTime={copy.publishedOn}>
+            {new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(
+              new Date(copy.publishedOn),
+            )}
+          </time>
+        </p>
       </header>
 
       {copy.preamble ? (

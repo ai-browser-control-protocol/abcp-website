@@ -2,7 +2,7 @@
  * Locale layout: fonts, chrome, and the exhibition shell around chapter pages.
  */
 import type { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -18,6 +18,14 @@ import "@/styles/common.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const accent = Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["600"],
+  style: ["italic"],
+  variable: "--font-source-serif",
   display: "swap",
 });
 
@@ -39,7 +47,7 @@ export default async function LocaleLayout({
   const chrome = getChromeCopy(typed);
   const github = toGithubNavDisplay(await getGithubNavStats());
   return (
-    <html lang={HTML_LANG[typed]} className={inter.variable}>
+    <html lang={HTML_LANG[typed]} className={`${inter.variable} ${accent.variable}`}>
       <body>
         <NextIntlClientProvider locale={typed} messages={{}}>
           <SiteFrame chrome={chrome} github={github}>

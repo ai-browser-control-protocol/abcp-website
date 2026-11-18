@@ -3,7 +3,7 @@
  */
 import type { Metadata } from "next";
 import { chapterHref } from "@/content/chapters";
-import { company } from "@/content/company";
+import { getHomeCopy } from "@/content/home";
 import { getChapterModel, type ChapterViewModel } from "@/content/models";
 import { site, siteUrl } from "@/content/site";
 import {
@@ -81,11 +81,11 @@ export function jsonLd(model: ChapterViewModel) {
         "@type": "ImageObject",
         url: siteUrl("icon.png"),
       },
-      email: company.email,
+      email: site.email,
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",
-        email: company.email,
+        email: site.email,
         availableLanguage: ["en", "zh-CN", "ja", "ko"],
       },
     },
@@ -124,17 +124,18 @@ export function jsonLd(model: ChapterViewModel) {
   ];
 
   if (model.id === "product" && model.product) {
+    const faq = getHomeCopy(model.locale).faq;
     graph.push({
       "@type": "FAQPage",
       "@id": `${canonical}#faq`,
       url: `${canonical}#faq`,
       isPartOf: { "@id": pageId },
-      mainEntity: model.product.faq.items.map((item) => ({
+      mainEntity: faq.items.map((item) => ({
         "@type": "Question",
         name: item.q,
         acceptedAnswer: {
           "@type": "Answer",
-          text: faqAnswer(item.a),
+          text: item.a,
         },
       })),
     });
@@ -146,12 +147,3 @@ export function jsonLd(model: ChapterViewModel) {
   };
 }
 
-function faqAnswer(parts: string[]): string {
-  // Convert the existing localized Markdown-like copy into crawler-friendly plain text.
-  return parts
-    .join(" ")
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
-    .replace(/[*_`#]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}

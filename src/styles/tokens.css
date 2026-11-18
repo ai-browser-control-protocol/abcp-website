@@ -1,41 +1,49 @@
 :root {
   /* Canvas & Surfaces — white/black/orange three-color system */
-  --desk: #ffffff;
-  --bg-canvas: #ffffff;
+  --desk: #f6f6f3;
+  --bg-canvas: #f6f6f3;
   --bg-surface: #ffffff;
   --bg-surface-elevated: #fafafa;
   --bg-surface-hover: #f4f4f5;
-  --bg-glass: rgba(255, 255, 255, 0.78);
-  --bg-glass-card: rgba(255, 255, 255, 0.92);
-  --bg-glass-card-hover: rgba(255, 255, 255, 0.98);
+  --bg-glass: rgba(255, 255, 255, 0.56);
+  --bg-glass-card: rgba(255, 255, 255, 0.54);
+  --bg-glass-card-hover: rgba(255, 255, 255, 0.72);
   --bg-accent-subtle: rgba(255, 107, 53, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.72);
+  --glass-filter: blur(24px) saturate(140%);
+  --glass-shadow: 0 24px 64px -44px rgba(29, 31, 26, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.86);
 
   /* Legacy aliases remapped to the white theme */
-  --paper: #ffffff;
+  --paper: #f6f6f3;
   --paper-card: #ffffff;
-  --paper-callout: #fafafa;
-  --paper-deep: #f4f4f5;
-  --paper-slot: #f7f7f8;
-  --ink: #0a0a0a;
+  --paper-callout: #f6f6f3;
+  --paper-deep: #eeeeea;
+  --paper-slot: #f1f1ed;
+  --ink: #111111;
   --pale: #52525b;
   --mute: #71717a;
   --mute-slate: #a1a1aa;
 
   /* Typography & Foreground (ink scale) */
-  --text-primary: #0a0a0a;
-  --text-secondary: #3f3f46;
-  --text-muted: #71717a;
-  --text-faint: #d4d4d8;
+  --text-primary: #111111;
+  --text-secondary: #343432;
+  --text-muted: #696963;
+  --text-faint: #d4d4d0;
   /* Warm-tinted neutrals for footnotes and captions. Pure grey at small sizes
      reads as greyed-out; these carry the same warmth as the page ground. */
   --text-note: #6c635a;
   --text-soft: #5b5349;
 
-  /* Brand accent — orange (sole accent color) */
+  /* Brand accent — saturated WebCross orange, plus four local accents. */
   --oxide: #ff6b35;
   --oxide-hover: #ea580c;
   --oxide-subtle: rgba(255, 107, 53, 0.1);
   --oxide-glow: rgba(255, 107, 53, 0.25);
+  --accent-orange: var(--oxide);
+  --accent-sky: #8fd3ff;
+  --accent-purple: #9b8cff;
+  --accent-green: #7ee8b5;
+  --accent-yellow: #ffe45c;
   /* #ff6b35 is the brand fill, but it only reaches 2.84:1 on white — too low to
      carry text. These two split the job: the fill never changes, the letters do.
        --oxide-text : orange AS text/icon on a light ground   (>=4.66:1)
@@ -82,6 +90,13 @@
   --card-ink-soft: #17181d;
   --card-peach: #fff1e8;
   --card-cream: #fdf8f4;
+
+  /* Tinted glass grounds derived from the accent colors. */
+  --pastel-peach: #ffe2d3;
+  --pastel-sky: #c9ebff;
+  --pastel-lilac: #ddd8ff;
+  --pastel-green: #d2f8e7;
+  --pastel-yellow: #fff4b8;
 
   /* Shadows & Inset Highlights (softer for light theme) */
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 18px -4px rgba(0, 0, 0, 0.06);
@@ -141,13 +156,61 @@
   --radius-2xl: 28px;
   --radius-3xl: 36px;
   --radius-full: 9999px;
+  --radius-button: 9999px;
+  --radius-button-panel: 16px;
   --radius: var(--radius-md);
 
-  /* Typography */
-  --font-en: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-zh: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "Noto Sans SC", sans-serif;
-  --font-ui: var(--font-en), var(--font-zh);
+  /* ===== Typography =====
+
+     Latin comes from the self-hosted Inter, Chinese from the platform UI face
+     (PingFang SC on macOS, Microsoft YaHei on Windows, Noto Sans SC on Linux).
+     The CJK families must be listed *before* the generic `sans-serif`: a generic
+     at that position swallows every Chinese glyph and the explicit list after it
+     is never consulted, which is how the three chapters ended up rendering
+     Chinese in whatever the OS default happened to be.
+
+     `--font-accent` (serif) is reserved for exactly one thing: the highlighted
+     phrase in a hero, where the change of face is the emphasis. */
+  --font-latin: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  --font-zh: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "Noto Sans SC",
+    "Source Han Sans SC";
+  --font-en: var(--font-latin), var(--font-zh), sans-serif;
+  --font-ui: var(--font-en);
+  --font-display: var(--font-en);
+  --font-accent: var(--font-source-serif), "Songti SC", "Noto Serif SC", STSong, SimSun, Georgia,
+    serif;
   --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
-  --font-mark: var(--font-en);
+  --font-mark: var(--font-latin);
+
+  /* One type ladder for every page. A role keeps the same size, weight and
+     tracking on the homepage, the guide and the solutions chapter; pages never
+     invent their own step. Sizes are clamped, so the mobile step is the same
+     curve, not a per-page override. */
+  --fs-hero: clamp(34px, 4.4vw, 64px);
+  --fs-hero-lead: clamp(16px, 1.3vw, 18px);
+  --fs-closing: clamp(26px, 3vw, 40px);
+  --fs-h2: clamp(28px, 2.9vw, 38px);
+  --fs-h3: 17px;
+  --fs-lead: 16px;
+  --fs-body: 14px;
+  --fs-small: 13px;
+  --fs-note: 11.5px;
+  --fs-eyebrow: 11px;
+
+  --lh-hero: 1.18;
+  --lh-h2: 1.26;
+  --lh-lead: 1.8;
+  --lh-body: 1.75;
+
+  --ls-hero: -0.04em;
+  --ls-h2: -0.028em;
+  --ls-h3: -0.015em;
+
+  /* Chinese resolves 700+ to the platform's semibold, so there is nothing to
+     gain from 730/750/780/790 variants: three weights, chosen by role. */
+  --fw-hero: 800;
+  --fw-h2: 700;
+  --fw-h3: 700;
   --nav-h: 60px;
 }

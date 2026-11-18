@@ -42,6 +42,14 @@ next-env.d.ts
 
 # local verification screenshots
 /screenshots
+/artifacts
 
 .agents
 .claude
+dev-server.log
+
+# agent scratch files and local QA harnesses
+AGENTS.md
+CLAUDE.md
+/scripts/*.cjs
+!/scripts/snap.cjs

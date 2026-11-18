@@ -6,15 +6,15 @@ import { DURATION, shouldAnimate } from "./controller";
 
 describe("shouldAnimate", () => {
   it("skips when reduced motion is on", () => {
-    expect(shouldAnimate("product", "company", true)).toBe(false);
+    expect(shouldAnimate("product", "guide", true)).toBe(false);
   });
 
   it("skips when the chapter does not change", () => {
-    expect(shouldAnimate("company", "company", false)).toBe(false);
+    expect(shouldAnimate("guide", "guide", false)).toBe(false);
   });
 
   it("plays when the chapter changes", () => {
-    expect(shouldAnimate("product", "company", false)).toBe(true);
+    expect(shouldAnimate("product", "guide", false)).toBe(true);
   });
 });
 

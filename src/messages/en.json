@@ -2,7 +2,7 @@
   "brand": {
     "name": "WebCross",
     "thesis": "WebCross helps your agent",
-    "tagline": "A faster, lower-token web executor for your agent. Runs quietly in the background, never interrupts you."
+    "tagline": "The best Agentic fingerprint browser."
   },
   "nav": {
     "product": "Product",
@@ -19,16 +19,12 @@
   },
   "seo": {
     "product": {
-      "title": "WebCross · Autonomous Web Agent Browser",
-      "description": "WebCross is an agent browser powered by a dedicated page engine, automating the web with a low token cost while keeping account use and task activity under your control."
+      "title": "WebCross · Hand urgent tasks to AI. Save repeated work as workflows.",
+      "description": "WebCross lets your agent operate a full browser for product listings, campaign checks and comment analysis. Work runs in the background, remains available for human takeover, and recurring steps can be saved for reuse."
     },
     "guide": {
       "title": "User Guide · WebCross",
       "description": "Learn how to use WebCross: from auto-loading skills on launch to managing isolated browsers and controlling them from AI agents."
-    },
-    "company": {
-      "title": "About Company · WebCross",
-      "description": "Learn about WebCross, an agent browser for reliable web automation and human-controlled execution."
     },
     "download": {
       "title": "Download WebCross · Desktop Client",
@@ -425,10 +421,10 @@
       "items": [
         {
           "key": "speed",
-          "eyebrow": "Custom Page Engine",
+          "eyebrow": "Forked Chromium Kernel",
           "title": "Native Direct-Drive, Millisecond Response",
-          "body": "Traditional automation relies on injected scripts or external protocols, suffering severe latency and fragile sync. WebCross embeds its execution core directly into a custom page engine, rebuilding the control pipeline so agent actions take effect as instantaneously as human input.",
-          "figure": "Dedicated Page Engine vs Vanilla Browser + JS Shim",
+          "body": "Traditional automation relies on injected scripts or external protocols, suffering severe latency and fragile sync. WebCross embeds its execution core directly into a forked Chromium kernel, rebuilding the control pipeline so agent actions take effect as instantaneously as human input.",
+          "figure": "Forked Chromium Kernel vs Vanilla Browser + JS Shim",
           "bullets": [
             "Commands reach the render pipeline directly — no injected scripts",
             "Zero protocol translation or RPC round trips, eliminating idle latency",
@@ -498,8 +494,8 @@
       ],
       "figures": {
         "speed": {
-          "alt": "Dedicated page engine vs adapter layer execution chain",
-          "kernel": "Dedicated page engine",
+          "alt": "Forked Chromium kernel vs adapter layer execution chain",
+          "kernel": "Forked Chromium kernel",
           "adapter": "+ JavaScript adapter layer",
           "serialize": "Serialization · IPC round trip",
           "caption": "Same task chain · execution time"
@@ -594,7 +590,7 @@
       "products": [
         {
           "name": "WebCross",
-          "tagline": "Custom Page Engine",
+          "tagline": "Forked Chromium Kernel",
           "highlight": true,
           "values": {
             "tokens": {
@@ -771,16 +767,16 @@
         {
           "q": "What is WebCross?",
           "a": [
-            "WebCross is an agent browser built for web automation. Powered by a dedicated page engine, it lets your agent take tasks in plain language and handle tedious web work for you — price patrols, bulk form filing, cross-platform collection, and engagement. Everything runs in the background: fast, token-efficient, and out of your way; account use and task activity stay clear and manageable.",
-            "Unlike conventional browsers, WebCross is designed for agent drive with a dedicated page engine: instructions reach the rendering pipeline directly, rather than through a JavaScript adapter bolted onto stock Chrome."
+            "WebCross is an agent browser built for web automation. Powered by a forked Chromium kernel, it lets your agent take tasks in plain language and handle tedious web work for you — price patrols, bulk form filing, cross-platform collection, and engagement. Everything runs in the background: fast, token-efficient, and out of your way; account use and task activity stay clear and manageable.",
+            "Unlike conventional browsers, WebCross is designed for agent drive with a forked Chromium kernel: instructions reach the rendering pipeline directly, rather than through a JavaScript adapter bolted onto stock Chrome."
           ]
         },
         {
           "q": "How is this different from Playwright or Puppeteer?",
           "a": [
             "Playwright and Puppeteer are automation libraries you embed in code, and they drive the page through CSS selectors. The moment a site changes its DOM the script can break, and every step has to be written by hand.",
-            "WebCross adopts a dedicated page engine direct-drive approach instead:",
-            "- Built directly on a dedicated page engine, instructions reach the rendering pipeline with zero external JS adapters or RPC round trips, making the same task chain **over 3× faster** end to end;",
+            "WebCross adopts a forked Chromium kernel direct-drive approach instead:",
+            "- Built directly on a forked Chromium kernel, instructions reach the rendering pipeline with zero external JS adapters or RPC round trips, making the same task chain **over 3× faster** end to end;",
             "- One observation creates a versioned page overview with content, control state, page relationships, and visible scope; page changes are called out, and only identified elements open text, attributes, or state for closer inspection;",
             "- A task in plain language is enough to run it — **no script to write**."
           ]
@@ -788,7 +784,7 @@
         {
           "q": "How is this different from Browser Use, Claude for Chrome and other AI browsers?",
           "a": [
-            "- **Execution environment**: most comparable tools add an extension or an adapter layer on top of stock Chrome, so every step pays a round trip. WebCross drives page elements directly via its dedicated page engine.",
+            "- **Execution environment**: most comparable tools add an extension or an adapter layer on top of stock Chrome, so every step pays a round trip. WebCross drives page elements directly via its forked Chromium kernel.",
             "- **Token cost**: comparable tools routinely spend six figures of tokens on a single task (Browser Use around 120–220k per task, Perplexity Comet six figures per task, Claude for Chrome 1k+ Token, 1–3 s). Versioned page overviews, page changes, element detail, and workflow reuse reduce repeated exploration and context; actual savings depend on the task and page state.",
             "- **Control & governance**: WebCross supports isolated account sessions, auditable run records, and human takeover at sensitive steps so critical tasks stay visible and manageable.",
             "- **Account safety**: custom fingerprints and a switchable IP pool, so concurrent accounts never cross.",
@@ -871,7 +867,8 @@
     "heading": "Three-Minute Quick Start Guide",
     "subheading": "Give your AI agent real web-control superpowers in three simple steps without configuration fatigue.",
     "ctaDownload": "Download WebCross Free",
-    "ctaProduct": "Explore Product Features",
+    "heroMeta": "Supports macOS 13+ and Windows 10 / 11 · All features free during the public beta",
+    "stepsTitle": "Three steps to get connected",
     "steps": [
       {
         "id": 1,
@@ -885,14 +882,14 @@
         "id": 2,
         "title": "Create Browser",
         "desc": "Name the browser and open it directly; expand advanced options for customized settings.",
-        "tag": "Step 02 · Isolated Sandbox",
+        "tag": "Step 02 · Isolated Runtime",
         "previewTitle": "Browser Profile Config",
         "previewCode": "Browser Name: Market Research\nProfile: Isolated Fingerprint (Follows System)\nNetwork: Direct (or bind custom SOCKS5/HTTP proxy)\nStatus: Click \"Open\" to launch"
       },
       {
         "id": 3,
-        "title": "Call from Your AI Agent",
-        "desc": "Type /webcross-browser or chat naturally in your AI Assistant to automate browser tasks.",
+        "title": "Call it from Claude Code / Codex and other Agents",
+        "desc": "Type /webcross-browser in Claude Code, Codex or any other AI agent — or just ask in plain language — and the agent drives the browser for you.",
         "tag": "Step 03 · Instant Automation",
         "previewTitle": "AI Conversation Simulation",
         "previewCode": "User: Use WebCross to search for the latest tech report and summarize.\nAgent: Operating browser via webcross-browser...\n✓ Navigating to target site\n✓ Extracting key data and saving locally"
@@ -931,13 +928,23 @@
           ]
         },
         {
-          "q": "Do I need complex configuration in external AI agents?",
+          "q": "Will the AI model ever get my account name and password?",
           "a": [
-            "Not at all. WebCross automatically loads the webcross-browser Skill upon launch. Simply type / in any skill-capable agent or instruct it in natural language."
+            "No. Account names and passwords are entered and used directly in your local browser environment. The model only receives the information it needs — page structure, control state, and execution results — and never sees your plaintext credentials.",
+            "Cookies, sessions, and login credentials also stay entirely local. At sensitive steps such as CAPTCHAs, two-factor verification, or payment confirmation, you can switch to human takeover — your critical credentials never leave your device."
+          ]
+        },
+        {
+          "q": "How do I configure WebCross for third-party AI agents?",
+          "a": [
+            "WebCross prepares the webcross-browser Skill automatically when it starts. On first launch (or from the install dialog) you can install it into the Universal, Claude and Codex directories with one click — several agents can be selected at once, and existing files are backed up before updating.",
+            "Once installed, type / in Claude Code, Codex or any other Skills-aware agent and pick webcross-browser, or simply ask in plain language. If an already-running agent does not see the Skill, restart that agent once. No SDK integration and no manual file copying are required."
           ]
         }
       ]
     },
+    "closingTitle": "Hand your next repetitive task **to AI**",
+    "closingDesc": "Download WebCross and let everyday agents like Claude Code and Codex drive your own browser directly.",
     "mockup": {
       "userBadge": "Development user",
       "groupWorkspace": "Workspace",
@@ -977,6 +984,8 @@
       "btnSave": "Open",
       "agentTitle": "AI Assistant Chat",
       "agentStatus": "Demonstrating…",
+      "agentPrompt": "Fix the shipping cost calculation on the checkout page for me, then rerun the tests",
+      "agentHint": "Type /webcross-browser in any AI Agent to summon it",
       "userPrompt": "Open the e-commerce store, search for 'noise-cancelling headphones' and summarize the top 3 items",
       "toolTitle": "WebCross · Calling browser for execution",
       "toolStatus": "Executing",
@@ -995,17 +1004,6 @@
       "item3Score": "4.6 / 5.0 · Long Battery",
       "inputPlaceholder": "Send further commands to compare battery life or extract customer reviews…"
     }
-  },
-  "company": {
-    "title": "About Company",
-    "subtitle": "WebCross · Agent Browser for Web Automation",
-    "lead": "WebCross builds a reliable agent browser that helps people complete repetitive web work while keeping critical tasks under their control.",
-    "storyTitle": "Mission & Engineering Ethos",
-    "story": "We believe the true power of AI lies not in endless chatbot conversations, but in navigating real-world digital applications to eliminate tedious, repetitive tasks. Through high-throughput proprietary page engines and continuously evolving runtime governance, we help users keep critical tasks under their control while returning time and focus to creators.",
-    "productLabel": "Core Product",
-    "productName": "WebCross",
-    "emailLabel": "Business & Support",
-    "figure": "WebCross product environment"
   },
   "download": {
     "eyebrow": "DOWNLOAD CLIENT / DESKTOP",
@@ -1060,13 +1058,17 @@
   },
   "footer": {
     "localFirst": "Critical tasks · Under your control",
-    "get": "Download",
-    "productTitle": "Product & System",
-    "desc": "Web automation for macOS 13+ and Windows 10 / 11, designed for businesses and power users who value reliable control.",
-    "securityBadge": "A controllable agent execution environment"
+    "productColumn": "Product",
+    "pricing": "Pricing",
+    "devColumn": "Developers",
+    "docs": "Docs",
+    "legalColumn": "Legal",
+    "privacy": "Privacy Policy",
+    "agreement": "Terms of Service"
   },
   "a11y": {
     "mainNav": "Main navigation",
+    "footerNav": "Footer navigation",
     "localeNav": "Language switcher",
     "stage": "Main content area",
     "menu": "Toggle mobile menu",

@@ -15,7 +15,6 @@ export const DEFAULT_LOCALE: Locale = "en";
 export const CHAPTER_IDS = [
   "product",
   "guide",
-  "company",
   "download",
 ] as const;
 export type ChapterId = (typeof CHAPTER_IDS)[number];

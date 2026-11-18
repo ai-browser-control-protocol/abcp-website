@@ -1,0 +1,885 @@
+/* ==========================================================================
+   Fleet section — 1000+ isolated environments managed in one window.
+
+   Layout: shared section head (title | lead), a three-up bullet row, then a
+   faithful WebCross client "窗口" page built entirely in CSS/DOM: titlebar,
+   sidebar, page header, fleet counters, view toolbar and six window cards.
+   A live caption under the client carries the 窗口管理 label and the 1,000+
+   figure. Everything is scoped under `.flt-`; the client itself is decorative
+   (aria-hidden) so the section copy stays the accessible content.
+
+   Palette: the client's own warm shell — paper, hairline borders, one orange
+   accent — plus the page's shared `.solutions-page` tokens for copy.
+   ========================================================================== */
+
+/* The fleet title is a single uninterrupted clause; shrink the display cut a
+   touch so it stays on one line at the 1248px stage width. */
+.solutions-page .flt-head .sol-heading {
+  font-size: clamp(31px, 3.3vw, 42px);
+  letter-spacing: -0.048em;
+}
+
+/* The zh title is split into two nowrap phrases so the line breaks between
+   words on phones; at desktop both phrases sit on one line. */
+.solutions-page .flt-head .flt-title-seg {
+  white-space: nowrap;
+}
+
+/* ===== Bullets =====
+   The three isolation claims close the section instead of leading it: the
+   client window above is the proof, the claims read as its captions. */
+.solutions-page .flt-bullets {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 34px;
+  margin: 30px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--sol-line);
+}
+
+.solutions-page .flt-bullets li {
+  color: #4a4740;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+/* ===== Stage ===== */
+.flt-stage {
+  position: relative;
+}
+
+.flt-stage::before {
+  position: absolute;
+  z-index: -1;
+  inset: 6% -2% -5%;
+  background:
+    radial-gradient(56% 58% at 12% 0%, rgba(255, 107, 53, 0.16), transparent 70%),
+    radial-gradient(48% 56% at 50% 34%, rgba(245, 158, 11, 0.14), transparent 72%),
+    radial-gradient(52% 60% at 92% 92%, rgba(46, 139, 98, 0.16), transparent 72%);
+  filter: blur(14px);
+  content: "";
+  pointer-events: none;
+}
+
+/* ===== Client window ===== */
+/* The window keeps the desktop client's own light shell: warm paper, hairline
+   borders, one orange accent — never the marketing palette. */
+.flt-client {
+  display: grid;
+  grid-template-columns: 192px minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  background: #fffdfa;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 20px;
+  box-shadow:
+    0 46px 90px -60px rgba(31, 30, 27, 0.5),
+    0 10px 26px -22px rgba(31, 30, 27, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Titlebar: 登录 + window controls, like the desktop client */
+.flt-titlebar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 11px;
+  height: 26px;
+  padding: 0 14px;
+  color: #9aa0b4;
+  background: #ffffff;
+  border-bottom: 1px solid #f4efe5;
+}
+
+.flt-titlebar-login {
+  margin-right: 2px;
+  color: #6f6a60;
+  font-size: 9px;
+}
+
+.flt-winctl {
+  display: block;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.flt-winctl--min {
+  width: 9px;
+  height: 1.5px;
+  background: #bab2a5;
+  border-radius: 1px;
+}
+
+.flt-winctl--max {
+  width: 8px;
+  height: 8px;
+  border: 1.2px solid #bab2a5;
+  border-radius: 1.5px;
+}
+
+.flt-winctl--close {
+  width: 10px;
+  height: 10px;
+}
+
+.flt-winctl--close::before,
+.flt-winctl--close::after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.2px;
+  background: #bab2a5;
+  border-radius: 1px;
+  content: "";
+}
+
+.flt-winctl--close::before {
+  transform: rotate(45deg);
+}
+
+.flt-winctl--close::after {
+  transform: rotate(-45deg);
+}
+
+/* ===== Sidebar ===== */
+.flt-side {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 14px 12px 14px 16px;
+  background: #fffdf8;
+  border-right: 1px solid #f1ebe1;
+}
+
+.flt-brand {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #17160f;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.flt-brand-logo {
+  width: auto;
+  height: 13px;
+}
+
+.flt-brand-mark {
+  width: 11px;
+  height: 11px;
+  background: #17160f;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.flt-side-group {
+  display: grid;
+  gap: 1px;
+  margin-top: 16px;
+}
+
+.flt-side-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 0 8px 5px;
+  color: #a8a196;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+}
+
+.flt-side-label em {
+  color: #ff6b35;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.flt-side-item {
+  display: flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 8px;
+  color: #57534b;
+  border-radius: 7px;
+  font-size: 11.5px;
+}
+
+.flt-side-item--active {
+  position: relative;
+  color: #c2410c;
+  background: rgba(255, 107, 53, 0.09);
+  font-weight: 650;
+}
+
+.flt-side-item--active::before {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: -6px;
+  width: 2.5px;
+  background: linear-gradient(180deg, #ff6b35, #f59e0b);
+  border-radius: 3px;
+  content: "";
+}
+
+.flt-side-foot {
+  display: grid;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.flt-side-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 18px;
+  padding: 0 8px;
+  color: #57534b;
+  font-size: 9.5px;
+}
+
+.flt-side-status i {
+  flex: 0 0 auto;
+  width: 4.5px;
+  height: 4.5px;
+  background: #c6bdb0;
+  border-radius: 50%;
+}
+
+.flt-side-status em {
+  margin-left: auto;
+  color: #a8a196;
+  font-style: normal;
+}
+
+.flt-side-status--on i {
+  background: #22a06b;
+  box-shadow: 0 0 0 2.5px rgba(34, 160, 107, 0.14);
+}
+
+.flt-side-status--on em {
+  color: #1c8a5b;
+  font-weight: 600;
+}
+
+/* ===== Main column ===== */
+.flt-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 15px 18px 18px;
+  background:
+    radial-gradient(520px 240px at 92% -20%, rgba(255, 107, 53, 0.07), transparent 72%),
+    linear-gradient(180deg, #ffffff 0%, #fffdf8 58%, #fcf8f0 100%);
+}
+
+.flt-page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.flt-page-copy {
+  min-width: 0;
+}
+
+.flt-page-title {
+  display: block;
+  color: var(--sol-ink);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.flt-page-desc {
+  max-width: 520px;
+  margin: 5px 0 0;
+  color: #6f6a60;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.flt-page-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  padding-top: 3px;
+}
+
+.flt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  color: #343432;
+  background: #fffdfa;
+  border: 1px solid #e8e2d6;
+  border-radius: 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.flt-btn--ghost {
+  position: relative;
+  box-shadow: 0 1px 2px rgba(31, 30, 27, 0.05);
+}
+
+.flt-btn-badge {
+  position: absolute;
+  top: -6px;
+  right: -7px;
+  padding: 1px 4px;
+  color: #ffffff;
+  background: linear-gradient(140deg, #ff6b35, #f59e0b);
+  border-radius: 4px;
+  font-size: 6.5px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.flt-btn--primary {
+  color: #ffffff;
+  background: linear-gradient(180deg, #ff7a45 0%, #f4661f 100%);
+  border-color: #e85a12;
+  box-shadow: 0 8px 18px -10px rgba(232, 90, 18, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+/* ===== Toolbar ===== */
+.flt-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #f4efe5;
+}
+
+.flt-counters {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  color: #57534b;
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+.flt-counters b {
+  color: var(--sol-ink);
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.flt-counters i {
+  color: #cbc2b4;
+  font-style: normal;
+}
+
+.flt-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.flt-search {
+  display: flex;
+  flex: 0 1 240px;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  height: 28px;
+  padding: 0 10px;
+  overflow: hidden;
+  color: #a8a196;
+  background: #ffffff;
+  border: 1px solid var(--sol-line);
+  border-radius: 8px;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flt-search-icon {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border: 1.4px solid #bab2a5;
+  border-radius: 50%;
+}
+
+.flt-seg {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 2px;
+  background: #f6f1e8;
+  border: 1px solid #ece6db;
+  border-radius: 8px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.flt-seg b {
+  padding: 4px 8px;
+  color: #c2410c;
+  background: rgba(255, 107, 53, 0.12);
+  border: 1px solid rgba(255, 107, 53, 0.28);
+  border-radius: 6px;
+  font-weight: 650;
+}
+
+.flt-seg span {
+  padding: 4px 8px;
+  color: #6f6a60;
+}
+
+.flt-btn--sort {
+  padding: 6px 10px;
+  font-size: 10px;
+  box-shadow: 0 1px 2px rgba(31, 30, 27, 0.05);
+}
+
+/* ===== Window cards ===== */
+.flt-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  margin-top: 12px;
+}
+
+.flt-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: #fffdfa;
+  border: 1px solid #ece6db;
+  border-radius: 11px;
+  box-shadow: 0 1px 2px rgba(31, 30, 27, 0.04);
+}
+
+.flt-card-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 8px 9px;
+  border-bottom: 1px solid #f4efe5;
+}
+
+.flt-win-icon {
+  flex: 0 0 auto;
+  width: 11px;
+  height: 9px;
+  border: 1.3px solid #ff6b35;
+  border-radius: 2px;
+}
+
+.flt-win-icon::before {
+  display: block;
+  height: 2.4px;
+  background: #ff6b35;
+  content: "";
+}
+
+.flt-card-name {
+  overflow: hidden;
+  color: var(--sol-ink);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flt-card-name b {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.flt-card-id {
+  flex: 0 0 auto;
+  padding: 1px 3px;
+  color: #a8a196;
+  border: 1px solid #f1ebe1;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  font-style: normal;
+  letter-spacing: 0.04em;
+}
+
+.flt-card-tabrec {
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: #6f6a60;
+  font-size: 9.5px;
+  white-space: nowrap;
+}
+
+/* The preview stays quiet — the client's own "not captured yet" state, with no
+   error-like copy of our own. */
+.flt-card-preview {
+  display: grid;
+  place-items: center;
+  height: 84px;
+  color: #b3ac9f;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255, 107, 53, 0.05), transparent 70%),
+    #f7f3ea;
+  border-bottom: 1px solid #f4efe5;
+  font-size: 9px;
+}
+
+.flt-card-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 8px 9px 9px;
+}
+
+.flt-card-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  color: #57534b;
+  font-size: 9.5px;
+  white-space: nowrap;
+}
+
+.flt-card-tabs b {
+  color: var(--sol-ink);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.flt-card-tabs i {
+  color: #cbc2b4;
+  font-style: normal;
+}
+
+.flt-card-tabs .flt-card-running {
+  color: #c2410c;
+}
+
+.flt-card-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.flt-mini {
+  padding: 3px 8px;
+  color: #343432;
+  background: #fffdfa;
+  border: 1px solid var(--sol-line);
+  border-radius: 5px;
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.flt-mini--open {
+  color: #c2410c;
+  background: rgba(255, 107, 53, 0.07);
+  border-color: rgba(255, 107, 53, 0.32);
+}
+
+.flt-mini--danger {
+  color: #d94b3f;
+  background: #fdf1ef;
+  border-color: #f8ded9;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1180px) {
+  .flt-client {
+    grid-template-columns: 168px minmax(0, 1fr);
+  }
+
+  .flt-main {
+    padding: 13px 14px 16px;
+  }
+
+  .flt-toolbar {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .flt-search {
+    flex-basis: 190px;
+  }
+
+  .flt-cards {
+    gap: 9px;
+  }
+
+  .solutions-page .flt-bullets {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .flt-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .flt-search {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .flt-side {
+    padding: 12px 10px 12px 13px;
+  }
+
+  .flt-page-title {
+    font-size: 22px;
+  }
+
+  .flt-page-desc {
+    font-size: 10.5px;
+  }
+}
+
+@media (max-width: 760px) {
+  .solutions-page .flt-head .sol-heading {
+    font-size: clamp(24px, 7.4vw, 32px);
+  }
+
+  .solutions-page .flt-bullets {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .flt-client {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flt-side {
+    display: none;
+  }
+
+  .flt-titlebar {
+    height: 22px;
+    padding: 0 10px;
+    gap: 9px;
+  }
+
+  .flt-main {
+    padding: 12px 12px 14px;
+  }
+
+  .flt-page-head {
+    gap: 10px;
+  }
+
+  .flt-page-title {
+    font-size: 21px;
+  }
+
+  .flt-page-desc {
+    display: none;
+  }
+
+  .flt-page-actions {
+    gap: 6px;
+  }
+
+  .flt-btn {
+    padding: 6px 9px;
+    font-size: 9.5px;
+  }
+
+  .flt-btn--ghost {
+    display: none;
+  }
+
+  .flt-toolbar {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  .flt-counters {
+    font-size: 9.5px;
+  }
+
+  .flt-counters b {
+    font-size: 11px;
+  }
+
+  .flt-tools {
+    gap: 6px;
+  }
+
+  .flt-seg {
+    font-size: 8.5px;
+  }
+
+  .flt-seg b,
+  .flt-seg span {
+    padding: 3px 6px;
+  }
+
+  .flt-btn--sort {
+    display: none;
+  }
+
+  .flt-cards {
+    margin-top: 10px;
+    gap: 8px;
+  }
+
+  .flt-card-preview {
+    height: 66px;
+  }
+}
+
+@media (max-width: 620px) {
+  .flt-card-id,
+  .flt-card-tabrec {
+    display: none;
+  }
+
+  .flt-card-head {
+    padding: 7px 8px;
+  }
+
+  .flt-card-name {
+    font-size: 9px;
+  }
+
+  .flt-card-preview {
+    height: 58px;
+    font-size: 8px;
+  }
+
+  .flt-card-foot {
+    gap: 6px;
+    padding: 7px 8px 8px;
+  }
+
+  .flt-card-tabs {
+    font-size: 8px;
+  }
+
+  .flt-card-tabs b {
+    font-size: 9px;
+  }
+
+  .flt-mini {
+    padding: 3px 6px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 430px) {
+  .flt-titlebar {
+    display: none;
+  }
+
+  .flt-page-title {
+    font-size: 19px;
+  }
+
+  .flt-counters {
+    gap: 4px;
+    font-size: 9px;
+  }
+
+  .flt-seg {
+    display: none;
+  }
+
+  .flt-card-actions {
+    gap: 4px;
+  }
+
+  .flt-mini {
+    padding: 3px 5px;
+    font-size: 7.5px;
+  }
+}
+
+/* ===== First-view motion =====
+   The client window settles in, then the six window cards arrive in a short
+   cascade — the fleet populating, not a slideshow. */
+@keyframes fltClientIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fltCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[data-motion="armed"] .flt-client {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+[data-motion="live"] .flt-client {
+  animation: fltClientIn 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+[data-motion="armed"] .flt-card {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+[data-motion="live"] .flt-card {
+  animation: fltCardIn 440ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+[data-motion="live"] .flt-card:nth-child(1) { animation-delay: 120ms; }
+[data-motion="live"] .flt-card:nth-child(2) { animation-delay: 170ms; }
+[data-motion="live"] .flt-card:nth-child(3) { animation-delay: 220ms; }
+[data-motion="live"] .flt-card:nth-child(4) { animation-delay: 270ms; }
+[data-motion="live"] .flt-card:nth-child(5) { animation-delay: 320ms; }
+[data-motion="live"] .flt-card:nth-child(6) { animation-delay: 370ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion="armed"] .flt-client,
+  [data-motion="armed"] .flt-card {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-motion="live"] .flt-client,
+  [data-motion="live"] .flt-card {
+    animation: none;
+  }
+}

@@ -19,21 +19,15 @@ body {
   line-height: 1.6;
 }
 
-html:lang(en) {
-  font-family: var(--font-en);
-}
-
-html:lang(zh-CN),
-html:lang(zh) {
-  font-family: var(--font-zh), var(--font-en);
-}
-
+/* `--font-ui` already puts the Chinese faces ahead of the generic, so zh needs
+   no override. Japanese and Korean do: their kanji/hanja must come from their
+   own faces, never from the Chinese ones. */
 html:lang(ja) {
-  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", var(--font-en);
+  font-family: var(--font-latin), "Hiragino Sans", "Yu Gothic", "Noto Sans JP", Meiryo, sans-serif;
 }
 
 html:lang(ko) {
-  font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", var(--font-en);
+  font-family: var(--font-latin), "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
 }
 
 a {
@@ -74,6 +68,24 @@ h2,
 h3,
 p {
   margin: 0;
+}
+
+/* WebCross button language: compact actions are capsules, icon actions are
+   circles, and large selectable panels use a softer 16px radius. The explicit
+   !important keeps third-party/chapter styles from accidentally reverting the
+   global button shape. */
+.site button,
+.site [role="button"],
+.site a[class*="button"],
+.site a[class*="btn"],
+.site .nav-download-btn {
+  border-radius: var(--radius-button) !important;
+}
+
+.site .workflow-v2-steps > button,
+.site .account-switcher button,
+.site .marketplace-section .market-card {
+  border-radius: var(--radius-button-panel) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

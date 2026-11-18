@@ -22,10 +22,6 @@ export const figures = {
     "Minimalist desktop workspace on a warm paper-toned desk, a laptop displaying a web browser being operated automatically by an unseen AI agent, soft oxide-orange accents, editorial product photography, muted warm tones, shallow depth of field, high detail",
     "landscape_16_9",
   ),
-  company: fig(
-    "Hangzhou West Lake cityscape at golden hour, warm muted tones, misty skyline with gentle hills, calm editorial travel photography",
-    "landscape_4_3",
-  ),
   download: fig(
     "Desktop computer showing a console window and a browser window side by side on a warm paper-toned desk, oxide-orange accents, editorial product photography, muted warm tones",
     "landscape_16_9",

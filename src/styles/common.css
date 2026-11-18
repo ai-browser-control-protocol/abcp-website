@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  background: #ffffff;
+  background: var(--paper);
   color: var(--text-primary);
   /* clip (not hidden) keeps position:sticky alive for the nav and the demo stage */
   overflow-x: clip;
@@ -72,13 +72,13 @@
   gap: 8px;
   min-height: 44px;
   padding: 0 22px;
-  color: var(--on-oxide);
+  color: #ffffff;
   font-size: 14px;
-  font-weight: 600;
-  background: var(--oxide);
-  border: 1px solid var(--oxide);
+  font-weight: 650;
+  background: linear-gradient(180deg, #ff733d 0%, #ff5722 100%);
+  border: 1px solid rgba(255, 107, 53, 0.9);
   border-radius: var(--radius-full);
-  box-shadow: var(--shadow-button-primary);
+  box-shadow: 0 10px 24px -14px rgba(217, 80, 31, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.24);
   cursor: pointer;
   /* `all` also transitions colour and shadow on the same curve; naming the
      properties lets the lift overshoot while the paint stays linear-ish. */
@@ -89,11 +89,11 @@
 }
 
 .ui-button-primary:hover {
-  background: var(--oxide-hover);
-  border-color: var(--oxide-hover);
-  color: var(--on-oxide);
+  background: linear-gradient(180deg, #ff7e4a 0%, #ea580c 100%);
+  border-color: #ea580c;
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-glow-button);
+  box-shadow: 0 14px 28px -14px rgba(217, 80, 31, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .ui-button-primary:active {
@@ -119,9 +119,12 @@
   color: var(--text-primary);
   font-size: 14px;
   font-weight: 500;
-  background: #ffffff;
-  border: 1px solid var(--rule-strong);
+  background: rgba(255, 255, 255, 0.52);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-full);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   cursor: pointer;
   transition: background var(--dur-hover) ease, border-color var(--dur-hover) ease,
     color var(--dur-hover) ease, transform var(--dur-hover) var(--ease-back);
@@ -135,8 +138,8 @@
 }
 
 .ui-button-ghost:hover {
-  background: #fff7f2;
-  border-color: var(--oxide);
+  background: rgba(255, 255, 255, 0.74);
+  border-color: rgba(255, 107, 53, 0.42);
   color: var(--oxide-text);
   transform: translateY(-2px);
 }

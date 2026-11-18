@@ -4,8 +4,10 @@
  * Implements:
  *   - Real WebCross User desktop app mockup for Step 1 (Skill Installation Dialog)
  *   - Real WebCross User desktop app mockup for Step 2 (FleetEditor / New Browser)
- *   - Standard AI Agent chat interface mockup for Step 3 (Slash command & Tool Trace)
- *   - Unified website FAQ section (FaqSection)
+ *   - Two real agent terminals for Step 3 (Claude Code pane + Codex pane, ego-style
+ *     workspace: browser Space cards behind, foreground terminal window, agent dock)
+ *   - Homepage-matched shell: aura hero, numbered steps section, tips cards, FAQ,
+ *     closing CTA band.
  */
 "use client";
 
@@ -16,9 +18,69 @@ import { chapterPath } from "@/content/chapters";
 import type { Locale } from "@/content/types";
 import type { Messages } from "@/i18n/messages";
 import { Link } from "@/i18n/navigation";
+import { GuideStep3Agents } from "./GuideStep3Agents";
 import "./guide-chapter.css";
 
 type GuideMockupCopy = Messages["guide"]["mockup"];
+
+function DownloadGlyph() {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3v12" />
+      <path d="m7 11 5 5 5-5" />
+      <path d="M4 20h16" />
+    </svg>
+  );
+}
+
+/** Tip icon 1 — local-first: a laptop the agent never leaves. */
+function LocalDeviceGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="4" y="4.5" width="16" height="11" rx="1.6" />
+      <path d="M2.5 19h19" />
+      <path d="M9.2 8.2h5.6" />
+      <path d="M9.2 11.4h3.4" />
+      <path d="m14.6 9.6 1 1 1.8-2" />
+    </svg>
+  );
+}
+
+/** Tip icon 2 — dedicated prompt rules: a command line wearing a badge. */
+function PromptRuleGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="14.5" rx="2.2" />
+      <path d="m7 9 2.6 2.6L7 14.2" />
+      <path d="M12.4 14.2h4.4" />
+      <path d="M8.5 21h7" />
+    </svg>
+  );
+}
+
+/** Tip icon 3 — anti-detect isolation: separate environments side by side. */
+function IsolationGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="4.5" width="8" height="15" rx="2" />
+      <rect x="13" y="4.5" width="8" height="15" rx="2" />
+      <path d="M6 8h2M6 11h2M16 8h2M16 11h2" />
+      <path d="M11 12h2" />
+    </svg>
+  );
+}
+
+const TIP_GLYPHS = [LocalDeviceGlyph, PromptRuleGlyph, IsolationGlyph];
 
 /** Common User Application Window Titlebar */
 function UserAppTitlebar({ mockup }: { mockup: GuideMockupCopy }) {
@@ -128,14 +190,8 @@ function UserStep1SkillMockup({ mockup }: { mockup: GuideMockupCopy }) {
         <UserAppSidebar mockup={mockup} />
 
         {/* Background Main Surface (faintly visible behind blur) */}
-        <div
-          className="user-workbench-content"
-          style={{ opacity: 0.35, filter: "blur(1.5px)" }}
-          aria-hidden="true"
-        >
-          <div className="user-page-back-btn">
-            ‹ {mockup.backText}
-          </div>
+        <div className="user-workbench-content is-dimmed" aria-hidden="true">
+          <div className="user-page-back-btn">‹ {mockup.backText}</div>
           <div className="user-editor-head-title">{mockup.editorTitle}</div>
         </div>
 
@@ -360,123 +416,6 @@ function UserStep2BrowserMockup({ mockup }: { mockup: GuideMockupCopy }) {
   );
 }
 
-/** Step 3: 常规 AI Agent 界面示意图 — 白天模式 & 无具体模型 / 虚假状态 */
-function AgentStep3ChatMockup({ mockup }: { mockup: GuideMockupCopy }) {
-  return (
-    <div className="agent-mockup-frame">
-      <div className="agent-titlebar">
-        <div className="user-traffic-lights">
-          <span className="user-traffic-dot red" />
-          <span className="user-traffic-dot yellow" />
-          <span className="user-traffic-dot green" />
-        </div>
-        <div className="agent-window-heading">
-          <span className="agent-window-title">{mockup.agentTitle}</span>
-        </div>
-        <div className="agent-window-status">
-          <span>{mockup.agentStatus}</span>
-        </div>
-      </div>
-
-      <div className="agent-chat-feed">
-        {/* User Prompt */}
-        <div className="agent-bubble-user">
-          <span className="agent-cmd-pill">/webcross-browser</span>
-          <span className="agent-bubble-user-text">{mockup.userPrompt}</span>
-        </div>
-
-        {/* Assistant Response & Execution Trace */}
-        <div className="agent-bubble-assistant">
-          <div className="agent-avatar-icon" aria-hidden="true">
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect width="18" height="12" x="3" y="6" rx="2" />
-              <path d="M12 2v4" />
-              <line x1="8" x2="8" y1="12" y2="12" />
-              <line x1="16" x2="16" y1="12" y2="12" />
-              <path d="M9 16h6" />
-            </svg>
-          </div>
-
-          <div className="agent-assistant-body">
-            {/* Tool Execution Card: Matches Screenshot 3 */}
-            <div className="agent-tool-card">
-              <div className="agent-tool-head">
-                <span className="agent-tool-head-title">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#ea580c"
-                    strokeWidth="2.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                  </svg>
-                  <span>{mockup.toolTitle}</span>
-                </span>
-                <span className="agent-tool-status-text">
-                  {mockup.toolStatus}
-                </span>
-              </div>
-              <div className="agent-tool-step-row">
-                <span className="agent-tool-step-check">✓</span>
-                <span>{mockup.toolStep1}</span>
-              </div>
-              <div className="agent-tool-step-row">
-                <span className="agent-tool-step-check">✓</span>
-                <span>{mockup.toolStep2}</span>
-              </div>
-            </div>
-
-            {/* Loading dots indicator from Screenshot 3 */}
-            <div className="agent-loading-dots" aria-hidden="true">
-              <span className="agent-dot" />
-              <span className="agent-dot" />
-              <span className="agent-dot" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Input Dock: Matches Screenshot 3 */}
-      <div className="agent-input-dock">
-        <div className="agent-input-capsule">
-          <span className="agent-cmd-pill">/webcross-browser</span>
-          <span className="agent-input-placeholder">{mockup.inputPlaceholder}</span>
-          <span className="guide-cursor" aria-hidden="true" />
-        </div>
-        <div className="agent-send-btn" aria-label="Send">
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M12 19V5M5 12l7-7 7 7" />
-          </svg>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function GuideChapter({
   copy,
 }: {
@@ -487,138 +426,138 @@ export function GuideChapter({
 
   return (
     <article className="chapter guide-page">
-      <div className="guide-ambient-glow" aria-hidden="true" />
+      <div className="guide-aura" aria-hidden="true" />
 
-      {/* ===== Hero Header ===== */}
-      <header className="guide-header-center">
-        <span className="guide-eyebrow">{copy.eyebrow}</span>
-        <h1 className="guide-hero-title">{copy.heading}</h1>
-        <p className="guide-hero-lead">{copy.subheading}</p>
+      {/* ===== Hero Header — a single frosted "quick start card" slab:
+             centred copy above, a three-step readiness strip below. This is a
+             different composition from both the flat centred homepage hero and
+             the solutions page's floating-card collage, while sharing the same
+             glass + breathing-gradient material. ===== */}
+      <header className="guide-hero">
+        <div className="guide-hero-slab">
+          <span className="guide-eyebrow">{copy.eyebrow}</span>
+          <h1 className="guide-hero-title">{copy.heading}</h1>
+          <p className="guide-hero-lead">{copy.subheading}</p>
 
-        <div className="guide-cta-row">
-          <Link
-            className="guide-btn-primary"
-            href={`${chapterPath("download")}#download-platforms`}
-          >
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
+          <div className="guide-cta-row">
+            <Link
+              className="guide-btn-primary"
+              href={`${chapterPath("download")}#download-platforms`}
             >
-              <path d="M12 3v12" />
-              <path d="m7 11 5 5 5-5" />
-              <path d="M4 20h16" />
-            </svg>
-            <span>{copy.ctaDownload}</span>
-          </Link>
+              <DownloadGlyph />
+              <span>{copy.ctaDownload}</span>
+            </Link>
+          </div>
 
-          <Link className="guide-btn-secondary" href={chapterPath("product")}>
-            <span>{copy.ctaProduct}</span>
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-          </Link>
+          <p className="guide-hero-meta">{copy.heroMeta}</p>
+
+          <ol className="guide-hero-steps">
+            {copy.steps.map((step, index) => (
+              <li key={step.id} className="guide-hero-step">
+                <span className="guide-hero-step-index">
+                  {String(step.id).padStart(2, "0")}
+                </span>
+                <span className="guide-hero-step-body">
+                  <b>{step.title}</b>
+                  <small>{step.tag}</small>
+                </span>
+                {index < copy.steps.length - 1 ? (
+                  <span className="guide-hero-step-arrow" aria-hidden="true">
+                    →
+                  </span>
+                ) : null}
+              </li>
+            ))}
+          </ol>
         </div>
       </header>
 
       {/* ===== Interactive Stepper Section ===== */}
-      <section
-        className="guide-stepper-container"
-        aria-label={copy.heading}
-      >
-        {/* Left Column: Interactive Step Cards */}
-        <div className="guide-steps-column" role="tablist">
-          {copy.steps.map((step) => {
-            const isSelected = activeStepId === step.id;
-            return (
-              <div
-                key={step.id}
-                role="tab"
-                tabIndex={0}
-                aria-selected={isSelected}
-                className={`guide-step-card${isSelected ? " is-active" : ""}`}
-                onClick={() => setActiveStepId(step.id)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActiveStepId(step.id);
-                  }
-                }}
-              >
-                <div className="guide-step-header">
-                  <span className="guide-step-id-badge">{step.id}</span>
-                  <span className="guide-step-tag">{step.tag}</span>
-                </div>
-                <h2 className="guide-step-title">{step.title}</h2>
-                <p className="guide-step-desc">{step.desc}</p>
-              </div>
-            );
-          })}
+      <section className="guide-steps-section" aria-label={copy.stepsTitle}>
+        <div className="guide-section-heading guide-section-heading--solo">
+          <h2>{copy.stepsTitle}</h2>
         </div>
 
-        {/* Right Column: Dynamic Mockup Preview */}
-        <div aria-live="polite" className="guide-mockup-column">
-          {activeStepId === 1 && (
-            <UserStep1SkillMockup mockup={copy.mockup} />
-          )}
-          {activeStepId === 2 && (
-            <UserStep2BrowserMockup mockup={copy.mockup} />
-          )}
-          {activeStepId === 3 && (
-            <AgentStep3ChatMockup mockup={copy.mockup} />
-          )}
+        <div className="guide-stepper-container">
+          {/* Left Column: Interactive Step Cards */}
+          <div className="guide-steps-column" role="tablist">
+            {copy.steps.map((step) => {
+              const isSelected = activeStepId === step.id;
+              return (
+                <div
+                  key={step.id}
+                  role="tab"
+                  tabIndex={0}
+                  aria-selected={isSelected}
+                  className={`guide-step-card${isSelected ? " is-active" : ""}`}
+                  onClick={() => setActiveStepId(step.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveStepId(step.id);
+                    }
+                  }}
+                >
+                  <div className="guide-step-header">
+                    <span className="guide-step-id-badge">
+                      {String(step.id).padStart(2, "0")}
+                    </span>
+                    <span className="guide-step-tag">{step.tag}</span>
+                  </div>
+                  <h3 className="guide-step-title">{step.title}</h3>
+                  <p className="guide-step-desc">{step.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right Column: Dynamic Mockup Preview */}
+          <div aria-live="polite" className="guide-mockup-column">
+            <div className="guide-mockup-swap" key={activeStepId}>
+              {activeStepId === 1 && (
+                <UserStep1SkillMockup mockup={copy.mockup} />
+              )}
+              {activeStepId === 2 && (
+                <UserStep2BrowserMockup mockup={copy.mockup} />
+              )}
+              {activeStepId === 3 && <GuideStep3Agents copy={copy.mockup} />}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ===== Tips Bento Section ===== */}
       <section className="guide-tips-section">
-        <h2 className="guide-section-heading">{copy.tipsTitle}</h2>
+        <div className="guide-section-heading guide-section-heading--center">
+          <h2>{copy.tipsTitle}</h2>
+        </div>
         <div className="guide-tips-grid">
-          {copy.tips.map((tip, idx) => (
-            <div key={idx} className="guide-tip-card">
-              <h3 className="guide-tip-title">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="var(--brand, #ff6b35)"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-                </svg>
-                {tip.title}
-              </h3>
-              <p className="guide-tip-desc">{tip.desc}</p>
-            </div>
-          ))}
+          {copy.tips.map((tip, idx) => {
+            const TipGlyph = TIP_GLYPHS[idx % TIP_GLYPHS.length];
+            return (
+              <div
+                key={idx}
+                className={`guide-tip-card guide-tip-card-${idx % 3}`}
+              >
+                <h3 className="guide-tip-title">
+                  <span className="guide-tip-icon">
+                    <TipGlyph />
+                  </span>
+                  {tip.title}
+                </h3>
+                <p className="guide-tip-desc">{tip.desc}</p>
+              </div>
+            );
+          })}
         </div>
       </section>
 
       {/* ===== Unified FAQ Section (Matching Official QA Accordion Style) ===== */}
-      <section style={{ marginTop: 40 }}>
+      <section className="guide-faq-section">
         <FaqSection copy={copy.faq} />
       </section>
+
+      {/* Closing CTA is rendered once by SiteFrame, shared with every chapter. */}
     </article>
   );
 }

@@ -6,6 +6,7 @@
 import type { ReactNode } from "react";
 import type { ChromeCopy, GithubNavDisplay } from "@/content/models";
 import { PageStage } from "@/features/exhibition/PageStage";
+import { ClosingCta } from "./ClosingCta";
 import { Footer } from "./Footer";
 import { TopNav } from "./TopNav";
 
@@ -22,7 +23,8 @@ export function SiteFrame({
     <div className="site">
       <TopNav chrome={chrome} github={github} />
       <PageStage chrome={chrome}>{children}</PageStage>
-      <Footer chrome={chrome} />
+      <ClosingCta />
+      <Footer chrome={chrome} github={github} />
     </div>
   );
 }

@@ -6,7 +6,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 import { chapterFromSegment, chapterPath } from "@/content/chapters";
 import type { ChromeCopy, GithubNavDisplay } from "@/content/models";
 import { LOCALES } from "@/content/types";
@@ -15,6 +15,11 @@ import "./top-nav.css";
 
 export function TopNav({ chrome, github }: { chrome: ChromeCopy; github: GithubNavDisplay }) {
   const chapter = chapterFromSegment(useSelectedLayoutSegment());
+  const pathname = usePathname();
+  const solutionsActive = pathname.includes("/solutions");
+  const legalPath = pathname.match(/\/(privacy|agreement)\/?$/)?.[0];
+  const productActive = chapter === "product" && !solutionsActive && !legalPath;
+  const localizedChapterPath = solutionsActive ? "/solutions" : (legalPath ?? chapterPath(chapter));
   const [navOpen, setNavOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -79,9 +84,9 @@ export function TopNav({ chrome, github }: { chrome: ChromeCopy; github: GithubN
 
         <nav className="top-nav-links" aria-label={chrome.a11y.mainNav}>
           <Link
-            className={`nav-link${chapter === "product" ? " is-current" : ""}`}
+            className={`nav-link${productActive ? " is-current" : ""}`}
             href={chapterPath("product")}
-            aria-current={chapter === "product" ? "page" : undefined}
+            aria-current={productActive ? "page" : undefined}
             onClick={closeAll}
           >
             {chrome.nav.product}
@@ -97,9 +102,18 @@ export function TopNav({ chrome, github }: { chrome: ChromeCopy; github: GithubN
           </Link>
 
           <Link
-            className={`nav-link${chapter === "download" ? " is-current" : ""}`}
+            className={`nav-link${solutionsActive ? " is-current" : ""}`}
+            href="/solutions"
+            aria-current={solutionsActive ? "page" : undefined}
+            onClick={closeAll}
+          >
+            {chrome.nav.solutions}
+          </Link>
+
+          <Link
+            className={`nav-link${chapter === "download" && !solutionsActive ? " is-current" : ""}`}
             href={`${chapterPath("download")}#download-platforms`}
-            aria-current={chapter === "download" ? "page" : undefined}
+            aria-current={chapter === "download" && !solutionsActive ? "page" : undefined}
             onClick={closeAll}
           >
             {chrome.nav.downloadSection}
@@ -112,7 +126,7 @@ export function TopNav({ chrome, github }: { chrome: ChromeCopy; github: GithubN
                 <Link
                   key={locale}
                   className={`locale-link${locale === chrome.locale ? " is-current" : ""}`}
-                  href={chapterPath(chapter)}
+                  href={localizedChapterPath}
                   hrefLang={locale}
                   locale={locale}
                   aria-current={locale === chrome.locale ? "true" : undefined}
@@ -173,7 +187,7 @@ export function TopNav({ chrome, github }: { chrome: ChromeCopy; github: GithubN
                     role="menuitemradio"
                     aria-checked={locale === chrome.locale}
                     className={`lang-option${locale === chrome.locale ? " is-current" : ""}`}
-                    href={chapterPath(chapter)}
+                    href={localizedChapterPath}
                     hrefLang={locale}
                     locale={locale}
                     onClick={closeAll}

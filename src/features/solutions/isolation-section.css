@@ -1,0 +1,396 @@
+/* ==========================================================================
+   Section 01 — "websites always check three signals" isolation cards.
+
+   Two cards ship today and read as before → after dioramas (muted line art
+   with a ✕ → ink line art with a ✓). The CAPTCHA card is a roadmap
+   item: same anatomy, but the "after" half is a dashed clock, the badge is a
+   clock instead of a check, and an amber "coming soon" pill marks the state.
+
+   Palette: ink and the brand orange (#ff6b35 / #c2410c / #17160f) on warm
+   paper; amber is reserved for "soon".
+   ========================================================================== */
+
+.iso-section {
+  --iso-accent: #ff6b35;
+  --iso-accent-strong: #c2410c;
+  --iso-ink: var(--sol-ink, #17160f);
+  --iso-muted: #5f5a51;
+  --iso-faint: #7d766a;
+  --iso-line: var(--sol-line, #e7e2d8);
+  --iso-line-strong: var(--sol-line-strong, #d3c9ba);
+  --iso-soon: #92400e;
+  --iso-soon-soft: rgba(251, 191, 36, 0.16);
+  --iso-soon-line: rgba(146, 64, 14, 0.3);
+}
+
+/* The shared heading drops word-break: keep-all below 720px, which splits CJK
+   words like 信息 / 交给 mid-word. Both of this section's headlines fit on one
+   clause per line, so keep the clause-break behaviour at every width. */
+.iso-section .sol-heading {
+  word-break: keep-all;
+}
+
+/* ---------- grid: 3 cards from 1024, one wide card below ---------- */
+.iso-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.iso-section .iso-card {
+  /* overrides the shared .sol-panel background with a soft peach wash */
+  background:
+    radial-gradient(240px 200px at 92% -6%, rgba(255, 107, 53, 0.09), transparent 70%),
+    #fff;
+  transition:
+    transform 260ms var(--ease-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 200ms ease,
+    box-shadow 260ms ease;
+}
+
+.iso-section .iso-card--soon {
+  background:
+    radial-gradient(240px 200px at 92% -6%, rgba(251, 191, 36, 0.14), transparent 70%),
+    #fff;
+}
+
+@media (min-width: 1024px) {
+  .iso-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- card anatomy ---------- */
+.iso-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(20px, 2.1vw, 28px);
+  overflow: clip;
+}
+
+.iso-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.iso-mark {
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  background: var(--iso-accent);
+  border-radius: 2px;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.14);
+}
+
+.iso-card-title {
+  min-width: 0;
+  margin: 0;
+  color: var(--iso-ink);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-h3);
+  line-height: 1.4;
+  letter-spacing: var(--ls-h3);
+  word-break: keep-all;
+}
+
+/* roadmap pill: the only warm accent in the section */
+.iso-soon-pill {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  padding: 4px 9px 4px 8px;
+  color: var(--iso-soon);
+  background: var(--iso-soon-soft);
+  border: 1px solid var(--iso-soon-line);
+  border-radius: 9999px;
+  font: 700 9.5px/1 var(--font-mono);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.iso-soon-pill-glyph {
+  display: inline-flex;
+}
+
+.iso-soon-pill-glyph svg {
+  display: block;
+  width: 10px;
+  height: 10px;
+  stroke-width: 2.2;
+}
+
+.iso-question {
+  margin: 7px 0 0;
+  color: var(--iso-muted);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+.iso-card:hover {
+  border-color: #c6bdb0;
+  box-shadow: 0 34px 74px -50px rgba(60, 45, 30, 0.42);
+  transform: translateY(-3px);
+}
+
+/* ---------- before → after stage ---------- */
+.iso-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 50px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+  justify-items: center;
+  min-width: 0;
+  margin: 24px 0 0;
+}
+
+.iso-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.iso-figure--before { grid-area: 1 / 1; }
+.iso-figure--after { grid-area: 1 / 3; }
+
+.iso-art {
+  position: relative;
+  width: 100%;
+  max-width: 112px;
+  color: #b5ada0;
+}
+
+.iso-figure--after .iso-art {
+  color: #1c1a14;
+}
+
+.iso-section .iso-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* line-art stroke roles */
+.iso-section .iso-ground {
+  stroke: #dfe4f1;
+  stroke-width: 1.4;
+  stroke-dasharray: 2 6;
+}
+
+.iso-section .iso-soft {
+  stroke: #d3c9ba;
+  stroke-width: 1.5;
+}
+
+.iso-section .iso-line {
+  stroke-width: 3;
+}
+
+.iso-section .iso-dash-ring {
+  stroke: #d3c9ba;
+  stroke-width: 1.5;
+}
+
+.iso-section .iso-hand {
+  stroke: #4b5177;
+  stroke-width: 2.3;
+}
+
+.iso-section .iso-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
+.iso-section .iso-accent {
+  stroke: var(--iso-accent);
+}
+
+.iso-section .iso-accent-fill {
+  fill: var(--iso-accent);
+  stroke: var(--iso-accent);
+}
+
+.iso-section .iso-accent-dot {
+  fill: var(--iso-accent);
+  stroke: none;
+}
+
+.iso-section .iso-white {
+  stroke: #fff;
+}
+
+/* state badge over each figure's top-right corner */
+.iso-badge {
+  position: absolute;
+  top: -5px;
+  right: -3px;
+  display: grid;
+  place-items: center;
+  width: 21px;
+  height: 21px;
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(60, 45, 30, 0.16);
+}
+
+.iso-badge--before {
+  background: #b3bacd;
+}
+
+.iso-badge--after {
+  background: linear-gradient(180deg, #ff8a5c 0%, #c2410c 100%);
+  box-shadow: 0 5px 12px -4px rgba(194, 65, 12, 0.5);
+}
+
+.iso-badge--soon {
+  color: var(--iso-soon);
+  background: #fff8e9;
+  border: 1.5px dashed var(--iso-soon-line);
+  box-shadow: 0 2px 6px rgba(60, 45, 30, 0.08);
+}
+
+.iso-badge svg {
+  width: 11px;
+  height: 11px;
+  stroke-width: 2.7;
+}
+
+.iso-badge--soon svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2.2;
+}
+
+/* dotted "→" between the two states */
+.iso-arrow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: var(--iso-accent);
+  grid-area: 1 / 2;
+}
+
+.iso-arrow-line {
+  flex: 1 1 auto;
+  border-top: 1.5px dotted rgba(255, 107, 53, 0.55);
+}
+
+.iso-arrow svg {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 12px;
+  stroke-width: 2.3;
+  opacity: 0.9;
+}
+
+/* before / after labels */
+.iso-state {
+  margin-top: 12px;
+  color: var(--iso-faint);
+  font: 650 10px/1.5 var(--font-mono);
+  letter-spacing: 0.09em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.iso-state--before { grid-area: 2 / 1; }
+.iso-state--after { grid-area: 2 / 3; color: var(--iso-accent-strong); }
+
+/* ---------- takeaway under a hairline ---------- */
+.iso-note {
+  margin: 18px 0 0;
+  padding-top: 15px;
+  color: #4a4740;
+  border-top: 1px solid var(--iso-line);
+  font-size: var(--fs-body);
+  font-weight: 560;
+  line-height: 1.72;
+}
+
+/* ---------- coming-soon card: planned, not broken ---------- */
+.iso-card--soon .iso-arrow {
+  opacity: 0.6;
+}
+
+.iso-card--soon .iso-figure--after .iso-art {
+  color: #8b93a8;
+  opacity: 0.7;
+}
+
+.iso-card--soon .iso-state--after {
+  color: var(--iso-faint);
+}
+
+.iso-card--soon .iso-note {
+  color: #4a5168;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+/* One wide card: copy on the left, diorama on the right. */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .iso-card {
+    display: grid;
+    grid-template-areas:
+      "head stage"
+      "question stage"
+      "note stage";
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+    align-content: center;
+    align-items: center;
+    column-gap: 40px;
+  }
+
+  .iso-card-head { grid-area: head; }
+  .iso-question { grid-area: question; }
+  .iso-note { grid-area: note; margin-top: 16px; }
+  .iso-stage { grid-area: stage; align-self: center; margin: 0; }
+
+  .iso-art { max-width: 124px; }
+}
+
+/* The 3-up row gets narrow around 1024 — trim the stage a touch. */
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .iso-grid { gap: 14px; }
+  .iso-card { padding: 20px; }
+  .iso-stage { grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr); }
+  .iso-art { max-width: 104px; }
+  .iso-card-title { font-size: 16px; }
+  .iso-soon-pill { padding: 3px 7px 3px 7px; font-size: 9px; }
+}
+
+/* Roomy desktop cards: let the line art carry the card. */
+@media (min-width: 1181px) {
+  .iso-art { max-width: 126px; }
+  .iso-state { margin-top: 14px; }
+}
+
+@media (max-width: 639px) {
+  .iso-stage {
+    grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
+    margin-top: 22px;
+  }
+
+  .iso-art { max-width: 112px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iso-section .iso-card {
+    transition: none;
+  }
+
+  .iso-section .iso-card:hover {
+    transform: none;
+  }
+}

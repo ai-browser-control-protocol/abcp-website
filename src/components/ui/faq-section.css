@@ -1,41 +1,52 @@
 /* ==========================================================================
-   FAQ — heading rail on the left, questions on the right
+   FAQ — the homepage's centred stack, shared by every chapter
 
-   Every other section on this page centres its heading over a full-width block.
-   Ten accordions are narrow by nature, so that treatment would have left a
-   column of empty page down one side. Splitting it puts the heading in that
-   space and keeps it in view while the answers are read.
+   The chapters used to split this block into a sticky heading rail plus a
+   numbered list. The homepage uses a centred heading and a plain hairline
+   accordion, and that is the reference now: one title, one subtitle, then the
+   questions down one column. Numbers and the circular +/− badge are dropped so
+   the row rhythm matches the homepage exactly.
 
-   Ordering note: narrow-screen overrides live at the BOTTOM of this file. A
-   media query adds no specificity, so a mobile rule placed above a base rule
-   silently loses to it.
+   Ordering note: narrow-screen overrides live at the BOTTOM of this file.
    ========================================================================== */
 
 .faq-section {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.6fr);
-  gap: clamp(32px, 5vw, 80px);
-  align-items: start;
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-/* Sticky rather than merely top-aligned: by question eight the heading would
-   otherwise be far off-screen with nothing saying what this list is. */
 .faq-rail {
-  position: sticky;
-  top: 96px;
-  display: grid;
-  justify-items: start;
-  gap: 14px;
+  position: static;
+  display: block;
+  max-width: 780px;
+  margin: 0 auto 18px;
+  text-align: center;
 }
 
-.faq-title {
-  text-align: left;
+.faq-rail .badge-pill {
+  display: none;
+}
+
+.faq-section .faq-title {
+  text-align: center;
+  font-size: clamp(28px, 2.9vw, 38px);
+  line-height: 1.26;
   text-wrap: balance;
 }
 
+/* The homepage FAQ heading is one ink colour; keep the chapter copies from
+   splitting into a second accent colour just because the string has **. */
+.faq-section .faq-title .em-accent {
+  color: inherit;
+  font-style: normal;
+}
+
 .faq-subtitle {
-  margin: 0;
-  text-align: left;
+  max-width: 620px;
+  margin: 12px auto 0;
+  text-align: center;
   text-wrap: pretty;
 }
 
@@ -43,6 +54,9 @@
 
 .faq-list {
   display: grid;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .faq-item {
@@ -57,13 +71,13 @@
 
 .faq-q {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
-  gap: 14px;
-  padding: 20px 4px;
+  gap: 16px;
+  padding: 15px 0;
   cursor: pointer;
   list-style: none;
-  font-size: 16.5px;
+  font-size: 16px;
   font-weight: 650;
   line-height: 1.5;
   color: var(--text-primary);
@@ -75,9 +89,13 @@
   display: none;
 }
 
-.faq-q:hover,
-.faq-item[open] > .faq-q {
+.faq-q:hover {
   color: var(--oxide-text);
+}
+
+/* The homepage keeps the open question in ink; only the mark changes state. */
+.faq-item[open] > .faq-q {
+  color: var(--text-primary);
 }
 
 .faq-q:focus-visible {
@@ -86,17 +104,9 @@
   border-radius: var(--radius-sm);
 }
 
+/* Numbers belong to the old rail layout; the homepage list is unnumbered. */
 .faq-num {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--text-faint);
-  transition: color 160ms ease;
-}
-
-.faq-item[open] > .faq-q .faq-num {
-  color: var(--oxide);
+  display: none;
 }
 
 .faq-q-text {
@@ -104,25 +114,20 @@
 }
 
 /* ===== Open / closed mark =====
-   A plus that loses its vertical bar rather than a rotating chevron: the state
-   is readable at a glance without having to judge which way an arrow points. */
+   A bare plus that loses its vertical bar, exactly like the homepage. */
 
 .faq-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
   align-self: center;
   color: var(--text-muted);
-  background: var(--bg-surface-hover);
-  border-radius: 50%;
-  transition: color 160ms ease, background-color 160ms ease;
+  transition: color 160ms ease;
 }
 
 .faq-item[open] > .faq-q .faq-mark {
-  color: var(--oxide);
-  background: var(--oxide-subtle);
+  color: var(--text-muted);
+  background: none;
 }
 
 .faq-mark-bar {
@@ -140,8 +145,8 @@
 .faq-a {
   display: grid;
   gap: 12px;
-  padding: 0 4px 24px 46px;
-  font-size: 15px;
+  padding: 0 30px 20px 0;
+  font-size: 13.5px;
   line-height: 1.75;
   color: var(--text-secondary);
   text-wrap: pretty;
@@ -207,34 +212,20 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .faq-section {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-6);
-  }
-  /* Nothing to stay beside once it is stacked, and a heading that follows the
-     page down while the answers scroll under it would just be in the way. */
-  .faq-rail {
-    position: static;
-    justify-items: center;
-    text-align: center;
-  }
-  .faq-title,
-  .faq-subtitle {
-    text-align: center;
-  }
   .faq-q {
+    gap: 12px;
+    padding: 14px 0;
     font-size: 15.5px;
-    gap: 11px;
-    padding: 17px 2px;
   }
+
   .faq-a {
-    padding: 0 2px 20px 39px;
-    font-size: 14.5px;
+    padding: 0 20px 18px 0;
+    font-size: 14px;
   }
 }
 
 @media (max-width: 520px) {
   .faq-a {
-    padding-left: 2px;
+    padding-right: 8px;
   }
 }

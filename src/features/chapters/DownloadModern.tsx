@@ -67,15 +67,6 @@ function DownloadIcon() {
   );
 }
 
-function ReturnIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 19V5" />
-      <path d="m6 11 6-6 6 6" />
-    </svg>
-  );
-}
-
 export function DownloadModern({
   locale,
   copy,
@@ -219,7 +210,7 @@ export function DownloadModern({
 
             <div className="faq-list">
               {copy.faq.map((item, index) => (
-                <details className="faq-item" key={item.question} open>
+                <details className="faq-item" key={item.question} open={index === 0}>
                   <summary className="faq-q">
                     <span className="faq-num" aria-hidden="true">
                       {String(index + 1).padStart(2, "0")}
@@ -239,20 +230,6 @@ export function DownloadModern({
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="download-modern-closing" aria-label="再次下载">
-        <div className="download-modern-shell download-modern-closing-inner">
-          <h2>
-            {copy.closingQuestion}
-            <br />
-            <span>{copy.closingTitle}</span>
-          </h2>
-          <a className="download-modern-closing-link" href="#download-console">
-            {copy.closingCta}
-            <ReturnIcon />
-          </a>
         </div>
       </section>
 
@@ -296,8 +273,10 @@ function PlatformCard({
 }) {
   return (
     <article className={`download-modern-platform-card${recommended ? " is-recommended" : ""}`} data-platform-card={platform}>
-      {recommended ? <span className="download-modern-recommendation">{recommendation}</span> : null}
       <div>
+        <div className="download-modern-platform-badge-row">
+          {recommended ? <span className="download-modern-recommendation">{recommendation}</span> : null}
+        </div>
         <div className="download-modern-platform-head">
           <div className="download-modern-platform-name">
             <span className={`download-modern-platform-icon${platform === "windows" ? " windows" : ""}`} aria-hidden="true">

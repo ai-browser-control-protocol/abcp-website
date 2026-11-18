@@ -1,0 +1,863 @@
+/* ==========================================================================
+   Section 04 — AXTree compression.
+
+   One calm panel for one claim: a wide full-page DOM block settles into a
+   small AXTree block, the 85% ratio counts up between them, the kept/dropped
+   key sits directly under the diagram, and the two measurements close the
+   panel with the fine print as their caption. The palette is the homepage's
+   warm glass family: cream panels, an orange hairline accent, and green only
+   where the tree "keeps" something.
+
+   Motion: on first view the DOM block compresses (with one filter sweep), the
+   tree block fades in, and the ratio counts 0 → 98. Reduced motion / no JS
+   render the settled panel.
+   ========================================================================== */
+
+@property --sem-ratio {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.sem-section {
+  --sem-ink: var(--sol-ink, #17160f);
+  --sem-mut: #6f6a60;
+  --sem-faint: #8a8377;
+  --sem-line: #e7e2d8;
+  --sem-line-soft: #f0eae0;
+  --sem-accent: #ff6b35;
+  --sem-accent-soft: #ffefdf;
+  --sem-amber: #f0a86a;
+  --sem-ok: #2e8b62;
+  --sem-faint-line: #c6bdb0;
+  --sem-panel-tint: #fbf7ef;
+}
+
+/* ===== Panel ===== */
+.sem-panel {
+  position: relative;
+  padding: 30px 34px 24px;
+  overflow: hidden;
+  background-color: #fff;
+  background-image:
+    radial-gradient(620px 300px at 88% -20%, rgba(124, 196, 232, 0.09), transparent 70%),
+    radial-gradient(520px 280px at 6% -14%, rgba(108, 195, 164, 0.07), transparent 72%),
+    radial-gradient(420px 240px at 96% 110%, rgba(255, 107, 53, 0.05), transparent 72%);
+  border: 1px solid var(--sem-line);
+  border-radius: 22px;
+  box-shadow:
+    0 40px 90px -66px rgba(60, 45, 30, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.sem-panel-title {
+  margin: 0 0 24px;
+  color: var(--sem-ink);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-h3);
+  line-height: 1.4;
+  letter-spacing: var(--ls-h3);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* ===== Stage: DOM block → ratio → AXTree block ===== */
+.sem-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(148px, 0.34fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.sem-block {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: 16px 18px 18px;
+  border-radius: 16px;
+  transform-origin: left center;
+}
+
+.sem-block--dom {
+  min-height: 206px;
+  background: linear-gradient(180deg, #fcf8f0 0%, #eef2f8 100%);
+  border: 1px solid #ebe5da;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.sem-block--tree {
+  min-height: 168px;
+  background: linear-gradient(180deg, #fdf9f2 0%, #f0f4f8 100%);
+  border: 1px solid #eae4d9;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.sem-block-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 14px;
+  color: #6f7a92;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+}
+
+.sem-block-tag::before {
+  width: 6px;
+  height: 6px;
+  background: #c6bdb0;
+  border-radius: 2px;
+  content: "";
+}
+
+.sem-block--tree .sem-block-tag::before {
+  background: linear-gradient(135deg, var(--sem-amber) 0%, var(--sem-ok) 100%);
+}
+
+/* The "nodes" of the full DOM: many quiet bars, a few tinted as the nodes the
+   AXTree keeps. */
+.sem-dom-lines {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: start;
+  gap: 11px 18px;
+  flex: 1;
+}
+
+.sem-dom-lines i {
+  display: block;
+  width: var(--w);
+  height: 3px;
+  background: #e0d7c9;
+  border-radius: 2px;
+}
+
+.sem-dom-lines i.is-kept {
+  background: #a9cdc0;
+}
+
+.sem-dom-sweep {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.92) 45%, rgba(124, 196, 232, 0.22) 52%, transparent 66%);
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+/* The middle column: three converging flow lines + the ratio badge. */
+.sem-middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.sem-flow {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 12px;
+}
+
+.sem-flow i {
+  position: absolute;
+  left: 0;
+  height: 0;
+  border-top: 1px dashed #c9c0b2;
+}
+
+.sem-flow i:nth-child(1) {
+  top: 1px;
+  width: 64%;
+}
+
+.sem-flow i:nth-child(2) {
+  top: 6px;
+  width: 100%;
+}
+
+.sem-flow i:nth-child(3) {
+  top: 11px;
+  width: 64%;
+}
+
+.sem-flow::after {
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid #aba396;
+  border-right: 1px solid #aba396;
+  transform: translateY(-50%) rotate(45deg);
+  content: "";
+}
+
+.sem-ratio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 11px 12px 12px;
+  background: linear-gradient(180deg, #f7f8fd 0%, #f1f3fb 100%);
+  border: 1px solid #e1e5f2;
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.sem-ratio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #7f786c;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.sem-ratio-label::before {
+  width: 12px;
+  height: 2px;
+  background: var(--sem-accent);
+  border-radius: 2px;
+  content: "";
+}
+
+.sem-ratio-value {
+  display: inline-flex;
+  align-items: baseline;
+  color: #1c1a14;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 780;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+/* CSS-counter count-up for the ratio; the number itself comes from the copy's
+   `ratioValue` digits, so the surrounding prefix/suffix stay locale-correct. */
+.sem-ratio-count {
+  --sem-ratio: var(--sem-ratio-final, 85);
+  counter-reset: sem-ratio var(--sem-ratio);
+}
+
+.sem-ratio-count::after {
+  content: counter(sem-ratio);
+}
+
+/* The AXTree: a handful of structured rows on a rail. */
+.sem-tree-vis {
+  position: relative;
+  display: grid;
+  gap: 9px;
+  flex: 1;
+  align-content: start;
+  padding: 4px 0 0 22px;
+}
+
+.sem-tree-vis::before {
+  position: absolute;
+  top: 14px;
+  bottom: 12px;
+  left: 7px;
+  width: 1px;
+  background: #e7e2d8;
+  content: "";
+}
+
+.sem-tree-node {
+  position: relative;
+  width: 88%;
+  height: 26px;
+  background: #fffdf7;
+  border: 1px solid #ece6dc;
+  border-radius: 7px;
+}
+
+.sem-tree-node::before {
+  position: absolute;
+  top: 50%;
+  left: -19px;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  background: #cbc2b4;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #fdf9f2;
+  content: "";
+}
+
+.sem-tree-node--root {
+  width: 96%;
+  background: #f1f5fa;
+  border-color: #dde4ef;
+}
+
+.sem-tree-node--root::before {
+  background: #9fb0c9;
+}
+
+.sem-tree-node--short {
+  width: 68%;
+}
+
+.sem-tree-node--accent {
+  width: 84%;
+  background: #eef6ef;
+  border-color: #d8e8db;
+}
+
+.sem-tree-node--accent::before {
+  background: var(--sem-ok);
+}
+
+/* ===== The key: sits right under the diagram it explains ===== */
+.sem-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 28px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sem-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #7d766a;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.sem-legend-swatch {
+  width: 14px;
+  height: 3px;
+  flex: 0 0 auto;
+  border-radius: 2px;
+}
+
+.sem-legend-item--kept .sem-legend-swatch {
+  background: #7fbfa8;
+}
+
+.sem-legend-item--dropped .sem-legend-swatch {
+  background: #dcd2c2;
+}
+
+.sem-legend-text b {
+  margin-right: 1px;
+  color: #57534b;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.sem-legend-item--kept .sem-legend-text b {
+  color: #256e4f;
+}
+
+.sem-legend-item--dropped .sem-legend-text b {
+  color: #7d766a;
+}
+
+/* ===== Footer: the two measurements, with the fine print as their caption ==== */
+.sem-foot {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px 32px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--sem-line-soft);
+}
+
+.sem-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin: 0;
+  min-width: 0;
+}
+
+.sem-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.sem-stat dt {
+  color: #7f786c;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+}
+
+.sem-stat dd {
+  margin: 0;
+  color: var(--sem-ink);
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.sem-stat dd i {
+  margin-left: 3px;
+  color: #8a8377;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.sem-stat-arrow {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  align-self: center;
+  width: 22px;
+  height: 22px;
+  color: #a08876;
+  background: #fffdf9;
+  border: 1px solid var(--sem-line);
+  border-radius: 50%;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.sem-note {
+  justify-self: end;
+  max-width: 620px;
+  margin: 0;
+  color: #8a8377;
+  text-align: right;
+  text-wrap: pretty;
+}
+
+/* ===== Compact principle legend =====
+   The three claims have different lengths, so a plain three-column list left
+   the first one ragged onto a second line while its neighbours stayed on one.
+   As equal cards they share a top baseline, wrap inside their own box and
+   still read as one row of evidence under the panel. */
+.solutions-page .sem-bullets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 12px;
+  margin: 18px 0 0;
+}
+
+.solutions-page .sem-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  min-height: 82px;
+  padding: 16px 18px;
+  color: var(--sol-body);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.solutions-page .sem-bullets li::before {
+  position: static;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  margin-top: 0.16em;
+  color: var(--oxide-text, #c2410c);
+  background: rgba(255, 107, 53, 0.13);
+  border-radius: 50%;
+  content: "✓";
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ===== Motion =====
+   `armed` holds the opening frame; `live` plays the compression exactly once.
+   The rules above are the settled state, so reduced motion and no-JS readers
+   never see anything incomplete. */
+@keyframes semDomSettle {
+  from {
+    transform: scaleX(1.13) scaleY(1.02);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes semDomSweep {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes semTreeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-18px) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes semFlowIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes semRatioIn {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes semRatioCount {
+  from {
+    --sem-ratio: 0;
+  }
+
+  to {
+    --sem-ratio: var(--sem-ratio-final, 85);
+  }
+}
+
+@keyframes semFootIn {
+  from {
+    opacity: 0.3;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[data-motion="armed"] .sem-block--dom {
+  transform: scaleX(1.13) scaleY(1.02);
+}
+
+[data-motion="armed"] .sem-block--tree {
+  opacity: 0;
+  transform: translateX(-18px) scale(0.94);
+}
+
+[data-motion="armed"] .sem-flow,
+[data-motion="armed"] .sem-ratio {
+  opacity: 0;
+}
+
+[data-motion="armed"] .sem-flow {
+  transform: scaleX(0.5);
+  transform-origin: left center;
+}
+
+[data-motion="armed"] .sem-ratio {
+  transform: scale(0.88);
+}
+
+[data-motion="armed"] .sem-ratio-count {
+  --sem-ratio: 0;
+}
+
+[data-motion="armed"] .sem-foot,
+[data-motion="armed"] .sem-legend {
+  opacity: 0.3;
+  transform: translateY(6px);
+}
+
+[data-motion="live"] .sem-block--dom {
+  animation: semDomSettle 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+[data-motion="live"] .sem-dom-sweep {
+  animation: semDomSweep 1100ms cubic-bezier(0.4, 0, 0.2, 1) 260ms both;
+}
+
+[data-motion="live"] .sem-block--tree {
+  animation: semTreeIn 640ms cubic-bezier(0.16, 1, 0.3, 1) 460ms both;
+}
+
+[data-motion="live"] .sem-flow {
+  animation: semFlowIn 480ms cubic-bezier(0.16, 1, 0.3, 1) 320ms both;
+}
+
+[data-motion="live"] .sem-ratio {
+  animation: semRatioIn 560ms cubic-bezier(0.34, 1.4, 0.64, 1) 640ms both;
+}
+
+[data-motion="live"] .sem-ratio-count {
+  animation: semRatioCount 900ms cubic-bezier(0.16, 1, 0.3, 1) 700ms both;
+}
+
+[data-motion="live"] .sem-foot {
+  animation: semFootIn 520ms cubic-bezier(0.16, 1, 0.3, 1) 980ms both;
+}
+
+[data-motion="live"] .sem-legend {
+  animation: semFootIn 520ms cubic-bezier(0.16, 1, 0.3, 1) 880ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion="armed"] .sem-block--dom {
+    transform: none;
+  }
+
+  [data-motion="armed"] .sem-block--tree {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-motion="armed"] .sem-flow,
+  [data-motion="armed"] .sem-ratio,
+  [data-motion="armed"] .sem-foot,
+  [data-motion="armed"] .sem-legend {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-motion="armed"] .sem-ratio-count {
+    --sem-ratio: var(--sem-ratio-final, 85);
+  }
+
+  [data-motion="live"] .sem-block--dom,
+  [data-motion="live"] .sem-dom-sweep,
+  [data-motion="live"] .sem-block--tree,
+  [data-motion="live"] .sem-flow,
+  [data-motion="live"] .sem-ratio,
+  [data-motion="live"] .sem-ratio-count,
+  [data-motion="live"] .sem-foot,
+  [data-motion="live"] .sem-legend {
+    animation: none;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1080px) {
+  .sem-panel {
+    padding: 26px 26px 22px;
+  }
+
+  .sem-stage {
+    grid-template-columns: minmax(0, 1.42fr) minmax(136px, 0.36fr) minmax(0, 0.95fr);
+    gap: 15px;
+  }
+
+  .sem-block--dom {
+    min-height: 190px;
+  }
+
+  .sem-ratio-value {
+    font-size: 26px;
+  }
+}
+
+/* Below 860 the three blocks stack: DOM on top, then the ratio as a horizontal
+   junction, then the AXTree. */
+@media (max-width: 860px) {
+  .sem-stage {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    overflow: visible;
+  }
+
+  .sem-block--dom {
+    min-height: 168px;
+  }
+
+  .sem-block--tree {
+    min-height: 0;
+  }
+
+  .sem-middle {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .sem-ratio {
+    width: auto;
+    min-width: 176px;
+  }
+
+  .sem-flow {
+    width: 76px;
+    height: 12px;
+  }
+
+  .sem-flow i:nth-child(1) {
+    display: none;
+  }
+
+  .sem-flow i:nth-child(3) {
+    display: none;
+  }
+
+  .sem-flow i:nth-child(2) {
+    top: 6px;
+    width: 100%;
+  }
+
+  .sem-foot {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+    padding-top: 16px;
+  }
+
+  .sem-note {
+    justify-self: start;
+    max-width: none;
+    text-align: left;
+  }
+
+  .solutions-page .sem-bullets {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .solutions-page .sem-bullets li {
+    min-height: 0;
+    padding: 13px 15px;
+  }
+}
+
+@media (max-width: 560px) {
+  .sem-panel {
+    padding: 20px 16px 18px;
+    border-radius: 18px;
+  }
+
+  .sem-panel-title {
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+
+  .sem-block {
+    padding: 13px 14px 15px;
+    border-radius: 14px;
+  }
+
+  .sem-block--dom {
+    min-height: 150px;
+  }
+
+  .sem-dom-lines {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 14px;
+  }
+
+  .sem-tree-node {
+    height: 24px;
+  }
+
+  .sem-ratio {
+    flex: 1;
+    min-width: 0;
+    padding: 9px 10px 10px;
+  }
+
+  .sem-ratio-label {
+    font-size: 8.5px;
+  }
+
+  .sem-ratio-value {
+    font-size: 24px;
+  }
+
+  .sem-flow {
+    width: 42px;
+  }
+
+  .sem-foot {
+    gap: 12px;
+  }
+
+  .sem-stats {
+    gap: 8px 10px;
+  }
+
+  .sem-stat {
+    gap: 7px;
+  }
+
+  .sem-stat dd {
+    font-size: 16px;
+  }
+
+  .sem-stat-arrow {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .sem-legend {
+    gap: 7px 14px;
+    margin-top: 12px;
+  }
+
+  .sem-legend-item {
+    gap: 7px;
+    font-size: 10px;
+    white-space: normal;
+  }
+
+  .sem-legend-swatch {
+    width: 12px;
+  }
+}

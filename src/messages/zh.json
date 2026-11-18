@@ -2,7 +2,7 @@
   "brand": {
     "name": "WebCross",
     "thesis": "WebCross 将协助您的智能体",
-    "tagline": "让您的智能体更快、更省 Token 地完成繁杂的网页工作，全程后台运行，零干扰。"
+    "tagline": "最好的 Agentic 指纹浏览器"
   },
   "nav": {
     "product": "产品介绍",
@@ -19,16 +19,12 @@
   },
   "seo": {
     "product": {
-      "title": "WebCross · 协助智能体完成繁杂的网页工作",
-      "description": "WebCross 是搭载定制页面引擎的智能体浏览器，以低 Token 成本完成网页自动化，让账号与任务过程保持自主可控。"
+      "title": "WebCross · 紧急任务交给 AI，重复工作保存成流程",
+      "description": "WebCross 让熟悉的 Agent 操作完整浏览器，完成商品上架、活动巡检与评论分析；后台运行，可随时人工接手，并将重复步骤保存成流程复用。"
     },
     "guide": {
       "title": "使用指南 · WebCross",
       "description": "WebCross 极简使用指南：从启动自动装载 Skill，到创建浏览器及在 AI Agent 中直接调用。"
-    },
-    "company": {
-      "title": "关于公司 · WebCross",
-      "description": "了解 WebCross：面向可靠网页自动化、支持人工掌控关键流程的智能体浏览器。"
     },
     "download": {
       "title": "下载客户端 · WebCross",
@@ -425,10 +421,10 @@
       "items": [
         {
           "key": "speed",
-          "eyebrow": "定制页面引擎",
+          "eyebrow": "fork Chromium 内核",
           "title": "原生直驱，毫秒级极速响应",
-          "body": "传统方案依赖外挂脚本或中转协议控制浏览器，面临显著的延迟与卡顿。WebCross 将自动化能力直接内嵌于定制页面引擎底层，重构执行通道，让智能体的复杂多步操作如同真人交互般即时生效。",
-          "figure": "定制页面引擎直驱 vs 传统浏览器 + JS 适配层",
+          "body": "传统方案依赖外挂脚本或中转协议控制浏览器，面临显著的延迟与卡顿。WebCross 将自动化能力直接内嵌于fork Chromium 内核底层，重构执行通道，让智能体的复杂多步操作如同真人交互般即时生效。",
+          "figure": "fork Chromium 内核直驱 vs 传统浏览器 + JS 适配层",
           "bullets": [
             "指令直通渲染管线，无需外部脚本注入",
             "剔除协议转换与 RPC 往返，零中间内耗",
@@ -498,8 +494,8 @@
       ],
       "figures": {
         "speed": {
-          "alt": "定制页面引擎直驱与适配层链路对比",
-          "kernel": "定制页面引擎直驱",
+          "alt": "fork Chromium 内核直驱与适配层链路对比",
+          "kernel": "fork Chromium 内核直驱",
           "adapter": "+ JavaScript 适配层",
           "serialize": "序列化 · IPC 往返",
           "caption": "同一条任务链路 · 耗时对比"
@@ -594,7 +590,7 @@
       "products": [
         {
           "name": "WebCross",
-          "tagline": "定制专用页面引擎",
+          "tagline": "fork Chromium 内核",
           "highlight": true,
           "values": {
             "tokens": {
@@ -771,16 +767,16 @@
         {
           "q": "什么是 WebCross？",
           "a": [
-            "WebCross 是一款面向网页自动化的智能体浏览器。它基于定制页面引擎构建，让您的智能体用自然语言接收任务，替您完成繁杂的网页工作——商品价格巡检、批量表单填报、跨平台内容采集与互动。任务全程后台执行，速度快、Token 省、零干扰；账号使用与任务过程保持清晰可控。",
-            "与传统浏览器不同，WebCross 从底层专为智能体驱动而设计专用页面引擎：指令直达渲染进程，而不是在原版 Chrome 之上再包一层 JavaScript 适配。"
+            "WebCross 是一款面向网页自动化的智能体浏览器。它基于fork Chromium 内核构建，让您的智能体用自然语言接收任务，替您完成繁杂的网页工作——商品价格巡检、批量表单填报、跨平台内容采集与互动。任务全程后台执行，速度快、Token 省、零干扰；账号使用与任务过程保持清晰可控。",
+            "与传统浏览器不同，WebCross 从底层专为智能体驱动而设计fork Chromium 内核：指令直达渲染进程，而不是在原版 Chrome 之上再包一层 JavaScript 适配。"
           ]
         },
         {
           "q": "与 Playwright、Puppeteer 这类自动化工具有什么不同？",
           "a": [
             "Playwright 和 Puppeteer 是嵌入代码的浏览器自动化库，依赖 CSS 选择器驱动页面。网站一调整 DOM，脚本就可能失效，而且每一步都需要人工编写。",
-            "WebCross 采用的是定制页面引擎直驱：",
-            "- 基于定制页面引擎底层，指令直通渲染管线，剔除外挂 JS 适配与 RPC 往返开销，同一任务链路端到端 **快 3 倍以上**；",
+            "WebCross 采用的是fork Chromium 内核直驱：",
+            "- 基于fork Chromium 内核底层，指令直通渲染管线，剔除外挂 JS 适配与 RPC 往返开销，同一任务链路端到端 **快 3 倍以上**；",
             "- 一次观测即可建立带版本的页面全景，涵盖内容、控件状态、页面关系与可见范围；页面变化会被标出，已识别元素才按需查看文本、属性或状态详情；",
             "- 用自然语言下达任务即可执行，**无需编写脚本**。"
           ]
@@ -788,7 +784,7 @@
         {
           "q": "与 Browser Use、Claude for Chrome 这类 AI 浏览器方案有什么不同？",
           "a": [
-            "- **执行环境**：多数同类方案在原版 Chrome 上加一层扩展或适配层，每一步都有往返开销；WebCross 专用页面引擎直驱页面元素。",
+            "- **执行环境**：多数同类方案在原版 Chrome 上加一层扩展或适配层，每一步都有往返开销；WebCross fork Chromium 内核直驱页面元素。",
             "- **Token 消耗**：同类方案单任务动辄十万级 Token（Browser Use 约 12–22 万/任务，Perplexity Comet 单任务十万级，Claude for Chrome 1k+ Token、1–3 秒）；WebCross 通过带版本的页面全景、页面变化、元素详情和 Workflow 复用减少重复探索与上下文，实际节省取决于任务和页面状态。",
             "- **自主可控**：WebCross 支持账号会话隔离、执行记录审计与敏感节点人工接管，让关键任务过程更清晰、更可管理。",
             "- **账号安全**：支持指纹定制与 IP 池切换，多账号并发互不串号。",
@@ -871,7 +867,8 @@
     "heading": "三分钟极简上手指南",
     "subheading": "无需繁杂配置，跟随三步轻松赋予 AI 真实的浏览器操控能力。",
     "ctaDownload": "免费下载 WebCross",
-    "ctaProduct": "了解核心产品特性",
+    "heroMeta": "支持 macOS 13+ / Windows 10、11 · 公测阶段全功能免费",
+    "stepsTitle": "三步完成接入",
     "steps": [
       {
         "id": 1,
@@ -885,14 +882,14 @@
         "id": 2,
         "title": "创建浏览器",
         "desc": "为浏览器命名后即可打开，展开高级选项可进行个性化设置。",
-        "tag": "步骤 02 · 独立沙箱",
+        "tag": "步骤 02 · 独立运行环境",
         "previewTitle": "浏览器实例配置",
         "previewCode": "浏览器名称: 竞品调研\n环境指纹: 独立环境指纹 (跟随系统)\n网络配置: 直连 (或绑定自定义 SOCKS5/HTTP 代理)\n就绪状态: 点击“打开”即可启动"
       },
       {
         "id": 3,
-        "title": "在 AI Agent 中直接呼唤",
-        "desc": "在 AI 助手中输入 /webcross-browser 或直接对话，吩咐 AI 操控浏览器完成任务。",
+        "title": "在 Claude Code / Codex 等Agent中直接呼唤",
+        "desc": "在 Claude Code、Codex 等 AI 助手中输入 /webcross-browser，或直接用自然语言吩咐，AI 即可操控浏览器完成任务。",
         "tag": "步骤 03 · 实时调用",
         "previewTitle": "AI 对话与执行模拟",
         "previewCode": "用户: 用 WebCross 帮我搜索最新的行业趋势研报并下载。\nAgent: 正在通过 webcross-browser 调度浏览器...\n✓ 打开目标网页\n✓ 提取要点并保存结果到本地"
@@ -915,7 +912,7 @@
     ],
     "faq": {
       "badge": "FAQ",
-      "title": "**常见问题**",
+      "title": "**FAQ**",
       "subtitle": "关于安装、环境配置与安全边界的解答。",
       "items": [
         {
@@ -931,13 +928,23 @@
           ]
         },
         {
-          "q": "在第三方 AI Agent 中使用需要额外配置吗？",
+          "q": "账号密码会被大模型拿到吗？",
           "a": [
-            "完全不需要。WebCross 在启动时会自动就绪 webcross-browser Skill。在任意支持 Skills 的 AI Agent 中输入 / 即可直接选择调用，或直接用日常自然语言吩咐即可。"
+            "不会。账号密码在本机浏览器环境中直接输入和使用，大模型只接收页面结构、操作状态与执行结果等必要信息，接触不到明文凭据。",
+            "Cookie、会话与登录凭证同样只保存在本地；遇到验证码、二次验证或支付确认等敏感环节，可切换为人工接管，关键凭据不会离开你的设备。"
+          ]
+        },
+        {
+          "q": "在第三方 AI Agent 中使用需要如何配置吗？",
+          "a": [
+            "WebCross 启动时会自动就绪 webcross-browser Skill。首次启动或安装环节，按弹窗提示即可把 Skill 一键安装到通用、Claude、Codex 对应目录；可同时安装到多个 Agent，更新前会自动备份。",
+            "安装完成后，在 Claude Code、Codex 等支持 Skills 的 Agent 中输入 / 就能直接选择 webcross-browser，也可以直接用日常自然语言吩咐。若已在运行的 Agent 没有识别到 Skill，重启一次对应 Agent 即可；无需 SDK 集成，也无需手动拷贝文件。"
           ]
         }
       ]
     },
+    "closingTitle": "把下一次重复操作**交给 AI**",
+    "closingDesc": "下载 WebCross，让 Claude Code、Codex 等常用 Agent 直接操控属于你的浏览器。",
     "mockup": {
       "userBadge": "Development user",
       "groupWorkspace": "工作区",
@@ -977,6 +984,8 @@
       "btnSave": "打开",
       "agentTitle": "AI 助手对话窗口",
       "agentStatus": "演示中...",
+      "agentPrompt": "帮我把结账页的运费计算修好，再重新跑一遍测试",
+      "agentHint": "在任意 AI Agent 中输入 /webcross-browser 即可召唤",
       "userPrompt": "帮我打开电商网站，搜索“无线降噪耳机”并整理前 3 款的价格与评分",
       "toolTitle": "WebCross · 正在调用浏览器执行",
       "toolStatus": "执行中",
@@ -995,17 +1004,6 @@
       "item3Score": "4.6 分 · 长续航",
       "inputPlaceholder": "继续下发对比续航或提取评价指令..."
     }
-  },
-  "company": {
-    "title": "关于公司",
-    "subtitle": "WebCross · 面向网页自动化的智能体浏览器",
-    "lead": "WebCross 致力于打造可靠的智能体浏览器，帮助用户完成繁杂的网页工作，并保持对关键任务的自主控制。",
-    "storyTitle": "企业使命与技术初心",
-    "story": "我们深信，人工智能的真正价值不在于制造无休止的文字对话，而在于深入真实的数字世界替人类解决繁复、机械的琐碎劳作。通过高可用自研页面引擎与持续完善的运行治理机制，我们致力于让用户对关键任务保持自主可控，将双手与宝贵时间归还给每一位热爱生活与创造的人。",
-    "productLabel": "核心产品",
-    "productName": "WebCross",
-    "emailLabel": "商务与技术支持",
-    "figure": "WebCross 产品环境"
   },
   "download": {
     "eyebrow": "客户端下载 / DESKTOP",
@@ -1060,13 +1058,17 @@
   },
   "footer": {
     "localFirst": "关键过程 · 自主可控",
-    "get": "下载客户端",
-    "productTitle": "产品与系统",
-    "desc": "支持 macOS 13+ 和 Windows 10 / 11，为企业团队和专业用户提供可靠的网页自动化能力。",
-    "securityBadge": "自主可控执行环境"
+    "productColumn": "产品",
+    "pricing": "价格",
+    "devColumn": "开发者",
+    "docs": "文档",
+    "legalColumn": "法律法规",
+    "privacy": "隐私政策",
+    "agreement": "用户服务协议"
   },
   "a11y": {
     "mainNav": "主导航栏",
+    "footerNav": "页脚导航",
     "localeNav": "语言切换菜单",
     "stage": "主要内容区域",
     "menu": "展开移动端菜单",

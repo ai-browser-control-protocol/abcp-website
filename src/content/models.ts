@@ -1,7 +1,6 @@
 /**
  * Assembles read-only view models from locale catalogs. Pages pass these down.
  */
-import { company } from "./company";
 import { type ChapterId, type Locale } from "./types";
 import { getMessages, type Messages } from "@/i18n/messages";
 
@@ -20,13 +19,14 @@ export interface ChromeCopy {
   nav: {
     product: string;
     guide: string;
+    solutions: string;
     downloadSection: string;
     download: string;
     github: string;
   };
   localeLabels: Record<Locale, string>;
   footer: Messages["footer"];
-  a11y: Pick<Messages["a11y"], "mainNav" | "localeNav" | "stage" | "menu" | "github" | "githubStars">;
+  a11y: Pick<Messages["a11y"], "mainNav" | "footerNav" | "localeNav" | "stage" | "menu" | "github" | "githubStars">;
 }
 
 /** Top-nav GitHub control: always a repo URL; compact count only when past 1k. */
@@ -44,18 +44,6 @@ export interface ChapterViewModel {
   product?: Messages["product"];
   guide?: Messages["guide"];
   download?: Messages["download"];
-  company?: {
-    title: string;
-    subtitle: string;
-    lead: string;
-    storyTitle: string;
-    story: string;
-    productLabel: string;
-    productName: string;
-    emailLabel: string;
-    email: string;
-    figure: string;
-  };
 }
 export function getChromeCopy(locale: Locale): ChromeCopy {
   const t = getMessages(locale);
@@ -67,6 +55,7 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
     nav: {
       product: t.nav.product,
       guide: t.nav.guide,
+      solutions: locale === "zh" ? "解决方案" : locale === "ja" ? "ソリューション" : locale === "ko" ? "솔루션" : "Solutions",
       downloadSection: t.nav.downloadSection,
       download: t.nav.download,
       github: t.nav.github,
@@ -75,6 +64,7 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
     footer: t.footer,
     a11y: {
       mainNav: t.a11y.mainNav,
+      footerNav: t.a11y.footerNav,
       localeNav: t.a11y.localeNav,
       stage: t.a11y.stage,
       menu: t.a11y.menu,
@@ -97,26 +87,11 @@ export function getChapterModel(chapter: ChapterId, locale: Locale): ChapterView
   if (chapter === "product") model.product = t.product;
   if (chapter === "guide") model.guide = t.guide;
   if (chapter === "download") model.download = t.download;
-  if (chapter === "company") {
-    model.company = {
-      title: t.company.title,
-      subtitle: t.company.subtitle,
-      lead: t.company.lead,
-      storyTitle: t.company.storyTitle,
-      story: t.company.story,
-      productLabel: t.company.productLabel,
-      productName: t.company.productName,
-      emailLabel: t.company.emailLabel,
-      email: company.email,
-      figure: t.company.figure,
-    };
-  }
   return model;
 }
 
 function chapterTitle(t: Messages, chapter: ChapterId): string {
   if (chapter === "product") return t.product.title;
   if (chapter === "guide") return t.guide.title;
-  if (chapter === "company") return t.company.title;
   return t.seo.download.title;
 }

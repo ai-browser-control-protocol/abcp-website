@@ -5,11 +5,28 @@
     "tagline": "최고의 Agentic 핑거프린트 브라우저"
   },
   "nav": {
+    "useCases": "활용 사례",
     "product": "제품 소개",
     "guide": "사용 가이드",
     "downloadSection": "다운로드",
     "download": "다운로드",
     "github": "GitHub"
+  },
+  "caseLibrary": {
+    "headline": "WebCross가 도와드릴게요!",
+    "intro": "지금 해야 할 일을 하나 골라 보세요. WebCross가 상품 목록으로 등록 초안을 만들고 인기 게시물에서 다음 콘텐츠의 소재를 찾는 과정을 살펴보세요.",
+    "all": "전체 사례",
+    "filters": "업무별 필터",
+    "count": "사례 {count}개",
+    "categories": {
+      "commerce": "전자상거래",
+      "social": "소셜 미디어",
+      "data": "데이터 수집",
+      "marketing": "디지털 마케팅",
+      "career": "채용 및 구직"
+    },
+    "prompt": "Agent에게 이렇게 요청하세요",
+    "close": "사례 닫기"
   },
   "locales": {
     "zh": "简体中文",
@@ -24,7 +41,7 @@
     },
     "guide": {
       "title": "사용 가이드 · WebCross",
-      "description": "WebCross 사용 가이드: 최초 실행 시 Skill 자동 준비부터 전용 브라우저 생성 및 AI Agent 직접 호출까지."
+      "description": "WebCross 내장 AI 도우미를 설정하거나 Skill로 Claude Code, Codex 같은 외부 에이전트를 연결하는 방법을 알아보세요."
     },
     "download": {
       "title": "WebCross 다운로드 · 데스크톱 클라이언트",
@@ -864,10 +881,38 @@
   "guide": {
     "title": "사용 가이드",
     "eyebrow": "QUICK START GUIDE",
-    "heading": "3분 만에 끝내는 초간단 사용 가이드",
-    "subheading": "복잡한 세팅 없이, 세 가지 단계만 거치면 AI에게 실제 웹 브라우징 제어 능력을 부여할 수 있습니다.",
-    "ctaDownload": "WebCross 무료 다운로드",
-    "heroMeta": "macOS 13+ 및 Windows 10 / 11 지원 · 공개 베타 기간 모든 기능 무료",
+    "heading": "3분 만에 WebCross 시작하기",
+    "subheading": "WebCross의 내장 AI 도우미와 대화하거나 평소 쓰던 에이전트를 연결하세요.",
+    "externalTitle": "외부 에이전트 연결하기",
+    "externalIntro": "Skill을 설치하고 브라우저를 만든 다음 에이전트에 첫 작업을 맡겨 보세요.",
+    "assistant": {
+      "title": "내장 AI 도우미 사용하기",
+      "steps": [
+        {
+          "title": "모델 서비스 열기",
+          "body": "앱에서 ‘설정 → AI 도우미’로 이동하거나 대화 화면에서 ‘모델 구성’을 선택하세요. ‘모델 서비스’에서 제공업체를 추가하거나 기존 설정을 편집하세요."
+        },
+        {
+          "title": "모델 선택 및 저장",
+          "body": "OpenRouter나 DeepSeek 같은 제공업체를 선택하고 API 키와 API 주소를 입력하세요. ‘사용 가능한 모델 가져오기’를 누른 뒤 원하는 모델을 선택하고 저장하세요. ‘모델 추가’에서 모델 ID와 표시 이름을 직접 입력할 수도 있습니다."
+        },
+        {
+          "title": "첫 요청 보내기",
+          "body": "‘AI 도우미’로 돌아가 활성화한 모델을 선택하세요. 읽고 싶은 글을 열고 다음과 같이 요청해 보세요."
+        }
+      ],
+      "example": "“이 글의 핵심 세 가지를 목록으로 정리해 줘.”",
+      "demoTitle": "모델 설정 데모",
+      "provider": "제공업체",
+      "apiKey": "API 키",
+      "endpoint": "API 주소",
+      "models": "예시 모델 목록",
+      "noExamples": "이 제공업체에 해당하는 모델은 일곱 가지 예시에 포함되어 있지 않습니다.",
+      "fetch": "사용 가능한 모델 가져오기",
+      "save": "저장",
+      "saved": "선택한 모델을 저장했습니다",
+      "replay": "다시 해보기"
+    },
     "stepsTitle": "3단계로 연결 완료",
     "steps": [
       {
@@ -1062,7 +1107,6 @@
     "pricing": "가격",
     "devColumn": "개발자",
     "docs": "문서",
-    "legalColumn": "법규",
     "privacy": "개인정보 처리방침",
     "agreement": "서비스 이용약관"
   },

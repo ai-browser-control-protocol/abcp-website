@@ -5,11 +5,28 @@
     "tagline": "The best Agentic fingerprint browser."
   },
   "nav": {
+    "useCases": "Use cases",
     "product": "Product",
     "guide": "User Guide",
     "downloadSection": "Download",
     "download": "Download",
     "github": "GitHub"
+  },
+  "caseLibrary": {
+    "headline": "WebCross can help!",
+    "intro": "Pick a task on your list. See how WebCross turns a product spreadsheet into a draft listing or a popular discussion into ideas for your next post.",
+    "all": "All cases",
+    "filters": "Filter by workflow",
+    "count": "{count} cases",
+    "categories": {
+      "commerce": "E-commerce",
+      "social": "Social media",
+      "data": "Data collection",
+      "marketing": "Digital marketing",
+      "career": "Hiring & job search"
+    },
+    "prompt": "Try this task with your agent",
+    "close": "Close case"
   },
   "locales": {
     "zh": "简体中文",
@@ -24,7 +41,7 @@
     },
     "guide": {
       "title": "User Guide · WebCross",
-      "description": "Learn how to use WebCross: from auto-loading skills on launch to managing isolated browsers and controlling them from AI agents."
+      "description": "Configure the built-in WebCross AI assistant or connect an external agent such as Claude Code or Codex with a Skill."
     },
     "download": {
       "title": "Download WebCross · Desktop Client",
@@ -864,10 +881,38 @@
   "guide": {
     "title": "User Guide",
     "eyebrow": "QUICK START GUIDE",
-    "heading": "Three-Minute Quick Start Guide",
-    "subheading": "Give your AI agent real web-control superpowers in three simple steps without configuration fatigue.",
-    "ctaDownload": "Download WebCross Free",
-    "heroMeta": "Supports macOS 13+ and Windows 10 / 11 · All features free during the public beta",
+    "heading": "Get started in three minutes",
+    "subheading": "Chat with the built-in AI assistant or connect the agent you already use.",
+    "externalTitle": "Connect an external agent",
+    "externalIntro": "Install the Skill, create a browser, and give your agent its first task.",
+    "assistant": {
+      "title": "Use the built-in AI assistant",
+      "steps": [
+        {
+          "title": "Open model services",
+          "body": "In the desktop app, go to Settings → AI Assistant, or choose Configure model in a chat. Under Model services, add a provider or edit an existing one."
+        },
+        {
+          "title": "Choose and save your models",
+          "body": "Choose a provider such as OpenRouter or DeepSeek and enter its API key and endpoint. Choose Get available models, check the models you want, and save. To add one manually, choose Add model and enter its ID and display name."
+        },
+        {
+          "title": "Send your first request",
+          "body": "Return to AI Assistant and select a model you enabled. Open an article you want to read and try this request."
+        }
+      ],
+      "example": "“Summarize the three main points of this article as a list.”",
+      "demoTitle": "Model setup demo",
+      "provider": "Provider",
+      "apiKey": "API key",
+      "endpoint": "API endpoint",
+      "models": "Example model catalog",
+      "noExamples": "This provider has no models in this seven-model demo.",
+      "fetch": "Get available models",
+      "save": "Save",
+      "saved": "Selected models saved",
+      "replay": "Try again"
+    },
     "stepsTitle": "Three steps to get connected",
     "steps": [
       {
@@ -1062,7 +1107,6 @@
     "pricing": "Pricing",
     "devColumn": "Developers",
     "docs": "Docs",
-    "legalColumn": "Legal",
     "privacy": "Privacy Policy",
     "agreement": "Terms of Service"
   },

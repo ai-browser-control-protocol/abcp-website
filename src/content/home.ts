@@ -7,6 +7,8 @@ export interface ComparisonCell {
   mark?: "check" | "dash";
 }
 
+export type ComparisonFeature = "tokens" | "agents" | "accounts" | "fingerprint" | "parallel" | "foreground" | "code" | "local" | "setup";
+
 export interface HomeCopy {
   navHow: string;
   common: {
@@ -24,18 +26,6 @@ export interface HomeCopy {
   hero: {
     titleA: string;
     titleB: string;
-    description: string;
-    taskLabel: string;
-    task: string;
-    taskTitle: string;
-    running: string;
-    complete: string;
-    steps: string[];
-    stores: { name: string; sku: string; price: string; stock: string; state: string }[];
-    result: string;
-    save: string;
-    saved: string;
-    footnote: string;
   };
   workflow: {
     title: string;
@@ -114,17 +104,17 @@ export interface HomeCopy {
       resultNote: string;
     };
   };
+  /** Multi-account comparison: one pair of headline claims per lane. */
   background: {
     title: string;
     description: string;
     ordinaryTitle: string;
     ordinaryItems: string[];
     webcrossTitle: string;
-    webcrossSubtitle: string;
+    ordinaryScope: string;
+    webcrossScope: string;
     comparisonRows: { ordinary: string; webcross: string }[];
-    accounts: { name: string; task: string; status: string; log: string }[];
-    dispatch: string;
-    advantages: { title: string; description: string }[];
+    accounts: { name: string; task: string; status: string }[];
   };
   cases: {
     title: string;
@@ -148,7 +138,8 @@ export interface HomeCopy {
     agents: string[];
     accountsTitle: string;
     accountsText: string;
-    accounts: { account: string; session: string; region: string; ip: string; fingerprint: string }[];
+    accountLabels: { login: string; session: string; network: string; fingerprint: string };
+    accounts: { name: string; account: string; session: string; region: string; ip: string; fingerprint: string }[];
     localTitle: string;
     localLines: string[];
     localFlow: {
@@ -171,16 +162,21 @@ export interface HomeCopy {
     comingSoon: string;
     sidebarTitle: string;
     searchPlaceholder: string;
-    filters: { all: string; skill: string; script: string };
     creatorAction: string;
     creatorTitle: string;
     creatorText: string;
     previewNote: string;
+    downloadDemo: { count: string; action: string; downloading: string; complete: string };
     footerNote: string;
     categories: {
       id: string;
       name: string;
-      cards: { title: string; description: string; kind: "skill" | "script" }[];
+      cards: {
+        title: string;
+        description: string;
+        kind: "skill" | "script";
+        preview: { columns: [string, string, string]; rows: [string, string, string][] };
+      }[];
     }[];
   };
   comparison: {
@@ -189,7 +185,7 @@ export interface HomeCopy {
     promo: string;
     note: string;
     columns: { name: string; meta: string }[];
-    dimensions: { label: string; webcross: ComparisonCell; values: ComparisonCell[] }[];
+    dimensions: { feature: ComparisonFeature; label: string; webcross: ComparisonCell; values: ComparisonCell[] }[];
   };
   faq: {
     title: string;
@@ -235,34 +231,18 @@ export interface TechCopy {
 
 const zh: HomeCopy = {
   navHow: "工作原理",
-  common: { download: "免费下载 WebCross", guide: "使用指南", how: "了解工作原理", replay: "重新演示", pause: "暂停", play: "播放", next: "下一步", input: "你提供", action: "实际执行", output: "最终得到" },
+  common: { download: "免费下载 WebCross", guide: "使用指南", how: "了解技术原理", replay: "重新演示", pause: "暂停", play: "播放", next: "下一步", input: "你提供", action: "实际执行", output: "最终得到" },
   hero: {
     titleA: "把重复工作交给 WebCross，",
     titleB: "把时间还给生活",
-    description: "一句话描述任务，剩下的交给 Agent 掌控你的浏览器，全程透明可控",
-    taskLabel: "紧急任务 · 活动即将开始",
-    task: "帮我检查这批商品的活动价格与库存，列出需要处理的差异。",
-    taskTitle: "活动上线前检查",
-    running: "AI 正在核对页面",
-    complete: "检查完成，发现 2 项差异",
-    steps: ["读取商品清单", "核对店铺页面", "整理差异清单"],
-    stores: [
-      { name: "店铺 A", sku: "HRB-MUG-500", price: "$29.00", stock: "库存 12", state: "一致" },
-      { name: "店铺 B", sku: "HRB-MUG-500", price: "$32.00", stock: "库存 8", state: "价格不同" },
-      { name: "店铺 C", sku: "HRB-MUG-500", price: "$29.00", stock: "库存 0", state: "需要补货" },
-    ],
-    result: "差异清单已生成，保留商品与店铺链接。",
-    save: "保存为活动巡检流程",
-    saved: "已保存 · 下次更换商品清单即可运行",
-    footnote: "浏览器控制由 WebCross 提供；任务理解、判断与流程创建体验取决于你连接的 Agent 和创建工具。",
   },
   workflow: {
     title: "完成一次任务，下次不必从零开始",
     subtitle: "让 AI 将验证后的任务封装为可复用的脚本与 Skill，告别手动编写RPA的烦恼。",
     steps: [
-      { title: "AI 直接驱动浏览器", description: "用一句自然语言描述任务，让 AI 浏览 X、Reddit、Threads 等平台，关注指定话题并总结内容趋势，为你的下一期自媒体提供选题参考。" },
-      { title: "创建并保存流程", description: "AI 将执行路径整理成可复用工作流，编写 JavaScript 脚本，在 WebCross 真实环境中测试通过，并保存为可复用的 Skill。" },
-      { title: "下次任务可复用", description: "在 WebCross AI 的自动化任务中，选择上一步生成的 Skill 与脚本，输入新需求并按回车，等待任务自动完成。" },
+      { title: "AI 驱动浏览器", description: "" },
+      { title: "创建并保存流程", description: "" },
+      { title: "下次任务复用", description: "" },
     ],
     product: "Harbor Goods 陶瓷杯",
     productMeta: "HRB-MUG-500 · 500ml · 商品图片 6 张",
@@ -280,7 +260,7 @@ const zh: HomeCopy = {
       prompts: [
         "帮我浏览 X、Reddit 和 Threads 上关于 AI Agent 与一人公司的近期内容，总结趋势，并给我三个下周自媒体选题。",
         "基于刚才的任务，把浏览、采集、总结和生成选题的步骤整理成可复用工作流；给出业务建议，编写 JS 脚本，并在 WebCross 真实环境中测试，通过后保存 Skill。",
-        "请帮我在x、reddit、threads搜索关于2026年black Friday的提前优惠折扣信息",
+        "复用刚保存的 Skill，把主题换成 2026 年 Black Friday 提前优惠。汇总 X、Reddit 和 Threads 的结果，整理成表。",
       ],
       taskTitle: "社媒趋势与选题研究",
       taskSteps: ["浏览 X 热门讨论", "读取 Reddit 高赞帖", "浏览 Threads 创作者动态", "生成趋势与选题建议"],
@@ -328,7 +308,7 @@ const zh: HomeCopy = {
       reuse: {
         skill: "social-topic-research",
         script: "research.js",
-        requirement: "请帮我在x、reddit、threads搜索关于2026年black Friday的提前优惠折扣信息",
+        requirement: "复用刚保存的 Skill，把主题换成 2026 年 Black Friday 提前优惠。汇总 X、Reddit 和 Threads 的结果，整理成表。",
         enterHint: "按 Enter 开始任务",
         steps: ["载入 Skill 与脚本", "搜索 x · reddit · threads", "汇总提前优惠信息", "导出折扣信息表"],
         findings: [
@@ -375,30 +355,28 @@ const zh: HomeCopy = {
         '});',
         'const digest = await browser.summarize(posts);',
         'await browser.export(digest, "weekly-ideas.md");',
-        'export const skill = browser.toSkill("social-research");',
+        'export const skill = browser.toSkill("social-topic-research");',
       ],
       inputFile: "social-topic-research", runTitle: "自动化 / 新任务", running: "正在搜索并汇总优惠信息", complete: "任务完成 · 报告已保存",
       resultRows: [],
-      resultTitle: "black-friday-2026-early-deals.md", resultNote: "12 条提前优惠 + 6 个可验证来源已归档",
+      resultTitle: "black-friday-2026-early-deals.md", resultNote: "已汇总 X、Reddit 和 Threads 的优惠线索",
     },
   },
   background: {
-    title: "多账号任务，不用反复切换和登录",
-    description: "为跨境电商、广告投放与社媒运营团队提供彻底隔离的浏览器环境；AI Agent 沿用各账号登录状态独立执行，并完整记录过程与结果。",
+    title: "一台设备安全管理100+账号",
+    description: "WebCross AI Agent 可以调用各账号已有的独立环境，沿用对应的指纹、代理和登录状态，不用来回切换登录，省时省力。",
     ordinaryTitle: "AI Agent + 普通浏览器",
-    ordinaryItems: ["依赖当前页面与登录状态", "切换账号时需要重新登录", "账号数据共用同一浏览器环境", "任务围绕当前账号依次执行", "操作过程难以按账号追溯"],
+    ordinaryItems: ["使用当前浏览器的页面和状态", "任务围绕当前账号进行", "切换账号时需要重新确认状态", "返回当前任务结果"],
     webcrossTitle: "WebCross AI Agent",
-    webcrossSubtitle: "基于 DeepSeek Harness 开发，兼容 DeepSeek Harness 插件生态",
+    ordinaryScope: "当前会话 · 单账号",
+    webcrossScope: "独立环境 · 多账号",
     comparisonRows: [
-      { ordinary: "共用当前浏览器与登录状态", webcross: "每个账号独立环境，Cookie、缓存、登录态隔离" },
-      { ordinary: "切换账号需重新登录", webcross: "按账号批量执行任务" },
-      { ordinary: "纯视觉识别，操作成本高", webcross: "语义树理解，执行成本低" },
-      { ordinary: "脚本或 API 控制容易留痕", webcross: "拟人键鼠操作，保留完整交互" },
-      { ordinary: "只返回最终任务结果", webcross: "过程实时可见，可查看、可介入" },
+      { ordinary: "只能使用当前会话的浏览器环境", webcross: "调用每个账号已有的独立环境" },
+      { ordinary: "换号时需手动切换配置、确认登录", webcross: "沿用指纹、代理和登录状态" },
+      { ordinary: "多个账号的任务需逐个委派", webcross: "按账号批量委派任务" },
+      { ordinary: "只能查看当前账号的进度和结果", webcross: "分别记录每个账号的进度和结果" },
     ],
-    accounts: [{ name: "美国店铺 · 账号 A", task: "检查活动价格与库存", status: "执行中", log: "正在读取第 3 个商品" }, { name: "英国店铺 · 账号 B", task: "复核优惠券状态", status: "已完成", log: "结果与操作记录已保存" }, { name: "社媒账号 · 账号 C", task: "整理帖子与评论", status: "等待调度", log: "独立环境已就绪" }],
-    dispatch: "AI Agent 统一调度 · 各环境分别返回进度与结果",
-    advantages: [{ title: "极速执行", description: "原生驱动浏览器，减少中间环节，页面操作快速响应。" }, { title: "节省 Token", description: "复用页面状态与已验证流程，减少重复探索和上下文消耗。" }, { title: "独立数据", description: "Cookie、缓存与登录会话按环境物理隔离，账号之间互不串用。" }, { title: "拟人键鼠", description: "以贴近真人的键鼠方式操作页面，保留完整交互过程。" }, { title: "批量执行", description: "按账号或分组调度任务，分别返回执行进度与结果。" }, { title: "安全受控", description: "每一步操作均清晰记录、实时可见，关键时刻可查看、可介入。" }],
+    accounts: [{ name: "美国店铺 · 账号 A", task: "检查活动价格与库存", status: "执行中" }, { name: "英国店铺 · 账号 B", task: "复核优惠券状态", status: "已完成" }, { name: "社媒账号 · 账号 C", task: "整理帖子与评论", status: "等待调度" }],
   },
   cases: {
     title: "从你每天打开浏览器做的工作开始",
@@ -417,9 +395,10 @@ const zh: HomeCopy = {
     agents: ["Claude Code", "Codex", "WebCross AI", "Skill / CLI / MCP"],
     accountsTitle: "多个账号，独立会话",
     accountsText: "店铺 A 与店铺 B 各自使用独立 IP 和浏览器指纹，账号之间互不串用。",
+    accountLabels: { login: "已登录账号", session: "当前会话", network: "代理出口", fingerprint: "浏览器指纹" },
     accounts: [
-      { account: "店铺 A · ops•••@brand.com", session: "实例 A", region: "美国 · 住宅代理", ip: "34.212.•••.128", fingerprint: "Chrome 143 · macOS 15" },
-      { account: "店铺 B · uk•••@brand.com", session: "实例 B", region: "英国 · 住宅代理", ip: "51.140.•••.42", fingerprint: "Chrome 143 · Windows 11" },
+      { name: "店铺 A", account: "店铺 A · ops•••@brand.com", session: "实例 A", region: "美国 · 住宅代理", ip: "34.212.•••.128", fingerprint: "Chrome 143 · macOS 15" },
+      { name: "店铺 B", account: "店铺 B · uk•••@brand.com", session: "实例 B", region: "英国 · 住宅代理", ip: "51.140.•••.42", fingerprint: "Chrome 143 · Windows 11" },
     ],
     localTitle: "数据本地存放，你的数据你做主",
     localLines: [
@@ -442,88 +421,232 @@ const zh: HomeCopy = {
   marketplace: {
     eyebrow: "COMING SOON · SKILL MARKET",
     title: "Skill 开放市场",
-    description: "多个可复用的 Agentic Skill 等你来用，覆盖 100+ 站点场景\n跑通过一次的任务，下一次直接调用",
+    description: "可复用的 Skill，覆盖 100+ 站点场景\n跑通过一次的任务，下一次直接调用",
     comingSoon: "敬请期待",
     sidebarTitle: "站点分类",
     searchPlaceholder: "搜索 Skill、脚本或站点",
-    filters: { all: "全部", skill: "Agentic Skill", script: "JS Script" },
     creatorAction: "提交你的 Skill / 脚本",
     creatorTitle: "成为首批 Skill 创作者",
-    creatorText: "市场开放后，你可以在这里发布 Agentic Skill 与 JavaScript 脚本，让下一次任务直接复用",
+    creatorText: "市场开放后，你可以在这里发布 Skill，让下一次任务直接复用",
+    downloadDemo: { count: "已选 {count} 项", action: "下载到本地", downloading: "正在下载", complete: "下载演示完成 · {count} 项" },
     previewNote: "个预览",
     footerNote: "首批 Skill 与脚本正在整理中，开放时间以官方通知为准",
     categories: [
       { id: "amazon", name: "Amazon", cards: [
-        { title: "商品价格与库存巡检", description: "批量读取商品页价格、库存与促销状态，输出带时间戳的差异表", kind: "script" },
-        { title: "竞品评论差评归因", description: "整理公开可见差评，归纳产品缺陷、物流与客服问题", kind: "skill" },
-        { title: "Listing 全流程上架", description: "从商品资料到标题、规格、图片与平台反馈，完整记录上架过程", kind: "skill" },
-        { title: "促销活动一致性核验", description: "核对活动价、优惠券和前台展示，标记异常并保留来源", kind: "script" },
+        {
+          title: "商品价格与库存巡检", description: "批量读取商品页价格、库存与促销状态，输出带时间戳的差异表", kind: "script",
+          preview: { columns: ["商品", "当前价", "变化"], rows: [["帆布托特包", "$24.00", "−$4.00"], ["随行杯", "$18.50", "持平"], ["桌面灯", "$39.00", "+$2.00"]] },
+        },
+        {
+          title: "竞品评论差评归因", description: "整理公开可见差评，归纳产品缺陷、物流与客服问题", kind: "skill",
+          preview: { columns: ["问题", "样本数", "代表性反馈"], rows: [["包装破损", "8 / 36", "杯盖在运输中开裂"]] },
+        },
+        {
+          title: "Listing 全流程上架", description: "从商品资料到标题、规格、图片与平台反馈，完整记录上架过程", kind: "skill",
+          preview: { columns: ["商品", "提交状态", "平台反馈"], rows: [["陶瓷杯 · 蓝", "待补充", "缺少容量规格"]] },
+        },
+        {
+          title: "促销活动一致性核验", description: "核对活动价、优惠券和前台展示，标记异常并保留来源", kind: "script",
+          preview: { columns: ["项目", "活动价", "页面显示"], rows: [["随行杯优惠券", "$15.00", "$18.50 · 待核对"]] },
+        },
       ] },
       { id: "tiktok-shop", name: "TikTok Shop", cards: [
-        { title: "商品与价格采集", description: "读取目标店铺商品、价格与活动信息，生成可对比清单", kind: "skill" },
-        { title: "上传带货视频", description: "上传本地带货视频并关联商品，记录发布状态与平台反馈", kind: "script" },
-        { title: "评论与售后问题归因", description: "汇总公开评论与售后关键词，识别高频问题与产品机会", kind: "skill" },
-        { title: "店铺状态巡检", description: "定时检查商品上架、库存和活动状态，记录异常并输出报告", kind: "script" },
+        {
+          title: "商品与价格采集", description: "读取目标店铺商品、价格与活动信息，生成可对比清单", kind: "skill",
+          preview: { columns: ["商品", "当前价", "变化"], rows: [["折叠支架", "¥39.00", "−¥10.00"], ["收纳袋", "¥29.90", "持平"], ["桌面灯", "¥89.00", "+¥5.00"]] },
+        },
+        {
+          title: "上传带货视频", description: "上传本地带货视频并关联商品，记录发布状态与平台反馈", kind: "script",
+          preview: { columns: ["视频", "关联商品", "上传结果"], rows: [["折叠支架开箱", "桌面支架", "草稿已保存"]] },
+        },
+        {
+          title: "评论与售后问题归因", description: "汇总公开评论与售后关键词，识别高频问题与产品机会", kind: "skill",
+          preview: { columns: ["问题", "频次", "建议"], rows: [["尺码偏小", "9 条", "补充尺码对照表"]] },
+        },
+        {
+          title: "店铺状态巡检", description: "定时检查商品上架、库存和活动状态，记录异常并输出报告", kind: "script",
+          preview: { columns: ["项目", "状态", "待办"], rows: [["桌面灯库存", "剩余 3 件", "复核补货"]] },
+        },
       ] },
       { id: "airbnb", name: "Airbnb", cards: [
-        { title: "房源价格与可订日历", description: "采集公开房源价格、可订日期和基础信息，导出为表格", kind: "script" },
-        { title: "竞品房源对比", description: "对比同区域房源价格、评分与设施，生成可复用的竞品观察", kind: "skill" },
-        { title: "区域搜索页采集", description: "按地区与日期读取搜索结果，保留房源链接与关键字段", kind: "skill" },
-        { title: "评论与设施抽取", description: "整理公开评论中的设施反馈与体验问题，输出结构化摘要", kind: "script" },
+        {
+          title: "房源价格与可订日历", description: "采集公开房源价格、可订日期和基础信息，导出为表格", kind: "script",
+          preview: { columns: ["房源", "每晚价格", "可订日期"], rows: [["河畔一居室", "$135", "12月2日至5日"]] },
+        },
+        {
+          title: "竞品房源对比", description: "对比同区域房源价格、评分与设施，生成可复用的竞品观察", kind: "skill",
+          preview: { columns: ["房源", "房型", "价格差"], rows: [["花园公寓", "两居室", "低于同区中位数 $12"]] },
+        },
+        {
+          title: "区域搜索页采集", description: "按地区与日期读取搜索结果，保留房源链接与关键字段", kind: "skill",
+          preview: { columns: ["区域", "匹配房源", "筛选条件"], rows: [["北岸", "18 套", "整套 · 可做饭"]] },
+        },
+        {
+          title: "评论与设施抽取", description: "整理公开评论中的设施反馈与体验问题，输出结构化摘要", kind: "script",
+          preview: { columns: ["关注点", "提及次数", "房客反馈"], rows: [["自助入住", "11 次", "深夜到达也方便"]] },
+        },
       ] },
       { id: "youtube", name: "YouTube", cards: [
-        { title: "频道更新与视频筛选", description: "跟踪频道新视频，按发布时间与主题筛选值得关注的条目", kind: "script" },
-        { title: "字幕与摘要导出", description: "读取公开字幕或转写结果，生成摘要与来源链接", kind: "skill" },
-        { title: "评论观点聚类", description: "整理高相关评论，归纳观众观点、争议与内容机会", kind: "skill" },
-        { title: "竞品选题分析", description: "收集竞品近期视频表现与标题模式，输出选题参考", kind: "script" },
+        {
+          title: "频道更新与视频筛选", description: "跟踪频道新视频，按发布时间与主题筛选值得关注的条目", kind: "script",
+          preview: { columns: ["视频", "主题", "发布时间"], rows: [["我的一周工作流", "效率工具", "11月17日"]] },
+        },
+        {
+          title: "字幕与摘要导出", description: "读取公开字幕或转写结果，生成摘要与来源链接", kind: "skill",
+          preview: { columns: ["时间点", "字幕内容", "摘要"], rows: [["02:18", "打开任务历史", "从上次运行恢复"]] },
+        },
+        {
+          title: "评论观点聚类", description: "整理高相关评论，归纳观众观点、争议与内容机会", kind: "skill",
+          preview: { columns: ["观点", "评论数", "代表问题"], rows: [["安装配置", "16 条", "首次连接要多久？"]] },
+        },
+        {
+          title: "竞品选题分析", description: "收集竞品近期视频表现与标题模式，输出选题参考", kind: "script",
+          preview: { columns: ["选题", "视频数", "观察"], rows: [["一人团队的周报", "4 条", "实操演示互动较高"]] },
+        },
       ] },
       { id: "reddit", name: "Reddit", cards: [
-        { title: "子版块主题追踪", description: "按关键词和版块筛选帖子，保留热度、时间与链接", kind: "script" },
-        { title: "高赞评论与争议点", description: "读取公开评论，提炼高赞观点、反方意见和讨论焦点", kind: "skill" },
-        { title: "品牌与产品提及监控", description: "跟踪品牌词与产品名提及，整理情绪和问题类型", kind: "skill" },
-        { title: "帖子与评论来源导出", description: "将帖子、评论与 permalink 导出为可复核的来源表", kind: "script" },
+        {
+          title: "子版块主题追踪", description: "按关键词和版块筛选帖子，保留热度、时间与链接", kind: "script",
+          preview: { columns: ["版块", "主题", "互动"], rows: [["r/SideProject", "每周研究流程", "32 条回复"]] },
+        },
+        {
+          title: "高赞评论与争议点", description: "读取公开评论，提炼高赞观点、反方意见和讨论焦点", kind: "skill",
+          preview: { columns: ["讨论点", "支持观点", "反方观点"], rows: [["自动周报", "整理更快", "来源需复核"]] },
+        },
+        {
+          title: "品牌与产品提及监控", description: "跟踪品牌词与产品名提及，整理情绪和问题类型", kind: "skill",
+          preview: { columns: ["提及", "情绪", "原因"], rows: [["模板导入", "正向", "省去重复配置"]] },
+        },
+        {
+          title: "帖子与评论来源导出", description: "将帖子、评论与 permalink 导出为可复核的来源表", kind: "script",
+          preview: { columns: ["来源", "内容类型", "摘要"], rows: [["r/productivity", "回复", "按主题归档资料"]] },
+        },
       ] },
       { id: "x", name: "X", cards: [
-        { title: "关键词与话题追踪", description: "监控关键词、话题和账号动态，按时间整理相关帖子", kind: "script" },
-        { title: "帖子与评论采集", description: "读取公开帖子与可见回复，提炼观点和传播线索", kind: "skill" },
-        { title: "趋势与情绪摘要", description: "汇总热门话题与情绪变化，保留代表性帖子作为依据", kind: "script" },
-        { title: "竞品账号动态观察", description: "整理竞品近期发布、互动与内容方向，形成观察笔记", kind: "skill" },
+        {
+          title: "关键词与话题追踪", description: "监控关键词、话题和账号动态，按时间整理相关帖子", kind: "script",
+          preview: { columns: ["关键词", "匹配帖子", "趋势"], rows: [["独立开发", "24 条", "较上周 +6"]] },
+        },
+        {
+          title: "帖子与评论采集", description: "读取公开帖子与可见回复，提炼观点和传播线索", kind: "skill",
+          preview: { columns: ["帖子", "可见回复", "讨论点"], rows: [["展示工作流", "19 条", "如何复用步骤"]] },
+        },
+        {
+          title: "趋势与情绪摘要", description: "汇总热门话题与情绪变化，保留代表性帖子作为依据", kind: "script",
+          preview: { columns: ["话题", "倾向", "代表观点"], rows: [["本地自动化", "正向", "可复查过程"]] },
+        },
+        {
+          title: "竞品账号动态观察", description: "整理竞品近期发布、互动与内容方向，形成观察笔记", kind: "skill",
+          preview: { columns: ["账号", "更新", "内容方向"], rows: [["Studio North", "3 条", "公开产品演示"]] },
+        },
       ] },
       { id: "whatsapp", name: "WhatsApp", cards: [
-        { title: "群消息整理与待办", description: "把群内待办、时间点和负责人整理成清晰清单", kind: "skill" },
-        { title: "客户问题归类", description: "按主题归类客户消息，识别高频问题并输出处理建议", kind: "script" },
-        { title: "会话摘要与跟进", description: "提炼会话结论、未完成事项和下一步跟进动作", kind: "skill" },
-        { title: "消息批量导出", description: "在授权范围内导出可检索的消息记录", kind: "script" },
+        {
+          title: "群消息整理与待办", description: "把群内待办、时间点和负责人整理成清晰清单", kind: "skill",
+          preview: { columns: ["事项", "负责人", "时间"], rows: [["核对发货清单", "Mia", "周五"]] },
+        },
+        {
+          title: "客户问题归类", description: "按主题归类客户消息，识别高频问题并输出处理建议", kind: "script",
+          preview: { columns: ["主题", "消息数", "处理建议"], rows: [["配送时效", "12 条", "补充预计到达时间"]] },
+        },
+        {
+          title: "会话摘要与跟进", description: "提炼会话结论、未完成事项和下一步跟进动作", kind: "skill",
+          preview: { columns: ["会话", "结论", "跟进"], rows: [["春季样品", "颜色已确认", "周三发样"]] },
+        },
+        {
+          title: "消息批量导出", description: "在授权范围内导出可检索的消息记录", kind: "script",
+          preview: { columns: ["会话", "记录数", "导出格式"], rows: [["项目小组", "28 条", "CSV"]] },
+        },
       ] },
       { id: "facebook", name: "Facebook", cards: [
-        { title: "主页内容与互动采集", description: "收集公开主页帖子、互动数据与发布时间", kind: "script" },
-        { title: "广告素材观察", description: "整理公开广告素材与落地页线索，保留来源", kind: "skill" },
-        { title: "群组讨论主题", description: "归纳公开群组讨论的热门问题与用户需求", kind: "skill" },
-        { title: "评论线索整理", description: "提取公开评论中的购买意向、问题与联系方式线索", kind: "script" },
+        {
+          title: "主页内容与互动采集", description: "收集公开主页帖子、互动数据与发布时间", kind: "script",
+          preview: { columns: ["帖子", "互动", "发布时间"], rows: [["新品试用记录", "38 次", "11月16日"]] },
+        },
+        {
+          title: "广告素材观察", description: "整理公开广告素材与落地页线索，保留来源", kind: "skill",
+          preview: { columns: ["素材", "落地页", "观察"], rows: [["桌灯短片", "桌灯详情页", "首屏突出亮度调节"]] },
+        },
+        {
+          title: "群组讨论主题", description: "归纳公开群组讨论的热门问题与用户需求", kind: "skill",
+          preview: { columns: ["主题", "讨论数", "常见需求"], rows: [["家庭办公", "8 条", "小桌面布置"]] },
+        },
+        {
+          title: "评论线索整理", description: "提取公开评论中的购买意向、问题与联系方式线索", kind: "script",
+          preview: { columns: ["评论", "需求", "下一步"], rows: [["请问有白色款吗？", "颜色咨询", "回复库存信息"]] },
+        },
       ] },
       { id: "instagram", name: "Instagram", cards: [
-        { title: "账号主页数据采集", description: "采集公开主页资料、帖子与互动数据", kind: "script" },
-        { title: "帖子与评论分析", description: "提炼内容主题、评论反馈与可借鉴的表达", kind: "skill" },
-        { title: "竞品内容选题", description: "对比竞品近期选题与互动表现，输出内容机会", kind: "skill" },
-        { title: "达人合作线索", description: "按领域和互动质量筛选公开达人账号，整理合作线索", kind: "script" },
+        {
+          title: "账号主页数据采集", description: "采集公开主页资料、帖子与互动数据", kind: "script",
+          preview: { columns: ["账号", "帖子数", "可见互动"], rows: [["Studio North", "12 条", "426 次"]] },
+        },
+        {
+          title: "帖子与评论分析", description: "提炼内容主题、评论反馈与可借鉴的表达", kind: "skill",
+          preview: { columns: ["内容", "反馈主题", "建议"], rows: [["新品演示", "尺寸咨询", "加入尺寸对照"]] },
+        },
+        {
+          title: "竞品内容选题", description: "对比竞品近期选题与互动表现，输出内容机会", kind: "skill",
+          preview: { columns: ["选题", "近期样本", "观察"], rows: [["小空间收纳", "6 条", "改造前后对比"]] },
+        },
+        {
+          title: "达人合作线索", description: "按领域和互动质量筛选公开达人账号，整理合作线索", kind: "script",
+          preview: { columns: ["账号", "领域", "互动率"], rows: [["North Studio", "家居", "3.8%"]] },
+        },
       ] },
       { id: "linkedin", name: "LinkedIn", cards: [
-        { title: "职位列表采集", description: "按关键词和地点收集公开职位，保留发布时间与链接", kind: "script" },
-        { title: "自动投递岗位申请", description: "按你的条件筛选职位并自动填写申请，提交前保留确认", kind: "skill" },
-        { title: "行业内容监测", description: "跟踪行业账号与话题，汇总值得关注的观点", kind: "skill" },
-        { title: "招聘流程自动跟进", description: "整理候选人状态与待办，按节点提醒下一步动作", kind: "script" },
+        {
+          title: "职位列表采集", description: "按关键词和地点收集公开职位，保留发布时间与链接", kind: "script",
+          preview: { columns: ["职位", "地点", "发布日期"], rows: [["产品设计师", "上海", "11月15日"]] },
+        },
+        {
+          title: "自动投递岗位申请", description: "按你的条件筛选职位并自动填写申请，提交前保留确认", kind: "skill",
+          preview: { columns: ["职位", "材料", "状态"], rows: [["产品设计师", "简历、作品集", "等待确认提交"]] },
+        },
+        {
+          title: "行业内容监测", description: "跟踪行业账号与话题，汇总值得关注的观点", kind: "skill",
+          preview: { columns: ["话题", "来源", "观察"], rows: [["本地工作流", "3 篇文章", "关注可审计性"]] },
+        },
+        {
+          title: "招聘流程自动跟进", description: "整理候选人状态与待办，按节点提醒下一步动作", kind: "script",
+          preview: { columns: ["候选编号", "当前阶段", "下一步"], rows: [["C-012", "作品集已收", "安排评审"]] },
+        },
       ] },
       { id: "zillow", name: "Zillow", cards: [
-        { title: "房源列表与价格采集", description: "读取公开房源价格、面积、卧室数和链接，导出表格", kind: "script" },
-        { title: "区域市场对比", description: "对比同区域房源的挂牌价与特征，生成市场观察", kind: "skill" },
-        { title: "房源详情抽取", description: "抓取指定房源的设施、税费与历史价格信息", kind: "skill" },
-        { title: "租金与历史价格追踪", description: "定期记录租金与挂牌价变化，保留时间序列", kind: "script" },
+        {
+          title: "房源列表与价格采集", description: "读取公开房源价格、面积、卧室数和链接，导出表格", kind: "script",
+          preview: { columns: ["房源", "挂牌价", "面积"], rows: [["North Ave 12", "$485,000", "1,250 ft²"]] },
+        },
+        {
+          title: "区域市场对比", description: "对比同区域房源的挂牌价与特征，生成市场观察", kind: "skill",
+          preview: { columns: ["区域", "中位挂牌价", "样本"], rows: [["北区", "$465,000", "12 套"]] },
+        },
+        {
+          title: "房源详情抽取", description: "抓取指定房源的设施、税费与历史价格信息", kind: "skill",
+          preview: { columns: ["房源", "卧室", "设施"], rows: [["Lake St 8", "3 间", "车库、露台"]] },
+        },
+        {
+          title: "租金与历史价格追踪", description: "定期记录租金与挂牌价变化，保留时间序列", kind: "script",
+          preview: { columns: ["房源", "本月租金", "变化"], rows: [["Park Ave 22", "$1,950", "−$50"]] },
+        },
       ] },
       { id: "google-bing-serp", name: "Google & Bing SERP", cards: [
-        { title: "搜索结果与排名采集", description: "读取公开搜索结果页，记录排名、标题与链接", kind: "script" },
-        { title: "品牌词曝光监控", description: "跟踪品牌词在搜索中的曝光与结果变化", kind: "skill" },
-        { title: "竞品广告位观察", description: "记录公开广告位与落地页线索，保留查询条件", kind: "script" },
-        { title: "长尾关键词拓展", description: "从搜索结果与相关词中整理长尾关键词机会", kind: "skill" },
+        {
+          title: "搜索结果与排名采集", description: "读取公开搜索结果页，记录排名、标题与链接", kind: "script",
+          preview: { columns: ["关键词", "位置", "页面"], rows: [["桌面收纳", "第 3 位", "收纳指南"]] },
+        },
+        {
+          title: "品牌词曝光监控", description: "跟踪品牌词在搜索中的曝光与结果变化", kind: "skill",
+          preview: { columns: ["品牌词", "结果页", "曝光位置"], rows: [["North Studio", "官网首页", "第 1 位"]] },
+        },
+        {
+          title: "竞品广告位观察", description: "记录公开广告位与落地页线索，保留查询条件", kind: "script",
+          preview: { columns: ["查询", "广告位置", "落地页"], rows: [["折叠支架", "页首", "支架系列"]] },
+        },
+        {
+          title: "长尾关键词拓展", description: "从搜索结果与相关词中整理长尾关键词机会", kind: "skill",
+          preview: { columns: ["种子词", "相关词", "意图"], rows: [["桌面灯", "小户型桌面灯", "选购"]] },
+        },
       ] },
     ],
   },
@@ -541,6 +664,7 @@ const zh: HomeCopy = {
     ],
     dimensions: [
       {
+        feature: "tokens",
         label: "Token 消耗",
         webcross: { value: "中低", note: "Agent 直驱比一般的云浏览器更省；复用 JS Skill 后极低", tone: "good" },
         values: [
@@ -552,6 +676,7 @@ const zh: HomeCopy = {
         ],
       },
       {
+        feature: "agents",
         label: "适配不同 AI Agent",
         webcross: { value: "高", note: "Skill / CLI / MCP 可接多类 Agent", tone: "good" },
         values: [
@@ -563,6 +688,7 @@ const zh: HomeCopy = {
         ],
       },
       {
+        feature: "accounts",
         label: "多账号登录",
         webcross: { value: "支持", mark: "check", tone: "good" },
         values: [
@@ -574,6 +700,7 @@ const zh: HomeCopy = {
         ],
       },
       {
+        feature: "fingerprint",
         label: "指纹与独立代理 IP",
         webcross: { value: "支持", mark: "check", tone: "good" },
         values: [
@@ -585,6 +712,7 @@ const zh: HomeCopy = {
         ],
       },
       {
+        feature: "parallel",
         label: "多任务并发",
         webcross: { value: "支持", mark: "check", tone: "good" },
         values: [
@@ -596,6 +724,7 @@ const zh: HomeCopy = {
         ],
       },
       {
+        feature: "foreground",
         label: "不影响电脑前台工作",
         webcross: { value: "支持", mark: "check", tone: "good" },
         values: [
@@ -607,6 +736,7 @@ const zh: HomeCopy = {
         ],
       },
       {
+        feature: "code",
         label: "可复用的 JS Skill",
         webcross: { value: "支持", mark: "check", tone: "good" },
         values: [
@@ -618,6 +748,7 @@ const zh: HomeCopy = {
         ],
       },
       {
+        feature: "local",
         label: "数据保存本地",
         webcross: { value: "支持", mark: "check", tone: "good" },
         values: [
@@ -629,6 +760,7 @@ const zh: HomeCopy = {
         ],
       },
       {
+        feature: "setup",
         label: "配置与学习门槛",
         webcross: { value: "低", note: "自然语言即可，零配置", tone: "good" },
         values: [
@@ -694,27 +826,15 @@ const zh: HomeCopy = {
 
 const en: HomeCopy = {
   navHow: "How it works",
-  common: { download: "Download WebCross", guide: "User Guide", how: "How it works", replay: "Replay demo", pause: "Pause", play: "Play", next: "Next", input: "You provide", action: "What happens", output: "You receive" },
+  common: { download: "Download WebCross", guide: "User Guide", how: "Explore the technology", replay: "Replay demo", pause: "Pause", play: "Play", next: "Next", input: "You provide", action: "What happens", output: "You receive" },
   hero: {
     titleA: "Give repetitive work to WebCross.",
     titleB: "Give time back to life.",
-    description: "Describe the task in one sentence. Your agent takes control of the browser, with a transparent, controllable process throughout.",
-    taskLabel: "Urgent task · campaign starts soon",
-    task: "Check campaign prices and stock for these products. List the differences I need to handle.",
-    taskTitle: "Pre-launch campaign check",
-    running: "AI is checking the pages",
-    complete: "Check complete · 2 differences found",
-    steps: ["Read product list", "Check store pages", "Prepare exception report"],
-    stores: [{ name: "Store A", sku: "HRB-MUG-500", price: "$29.00", stock: "12 in stock", state: "Match" }, { name: "Store B", sku: "HRB-MUG-500", price: "$32.00", stock: "8 in stock", state: "Price differs" }, { name: "Store C", sku: "HRB-MUG-500", price: "$29.00", stock: "0 in stock", state: "Restock needed" }],
-    result: "Exception report ready, with product and store links.",
-    save: "Save as campaign-check workflow",
-    saved: "Saved · use a new product list next time",
-    footnote: "WebCross controls the browser. Task interpretation, judgment and workflow authoring depend on your connected agent and authoring tool.",
   },
   workflow: {
     title: "Finish the task once, don't start over next time",
     subtitle: "Let AI turn validated work into reusable scripts and Skills—no more hand-written RPA.",
-    steps: [{ title: "Let AI drive the browser", description: "Describe the task in one sentence. AI browses X, Reddit, Threads and other platforms, follows the topics you care about, summarizes the conversation, and gives you topics for your next post." }, { title: "Create and save the workflow", description: "AI turns the execution path into a reusable workflow, writes JavaScript, tests it in the real WebCross environment, and saves the finished script and Skill." }, { title: "Reuse it on the next task", description: "In WebCross AI, open Automation, choose the saved Skill and script, enter the new brief, press Enter, and let the task finish on its own." }],
+    steps: [{ title: "AI drives the browser", description: "" }, { title: "Create and save the workflow", description: "" }, { title: "Reuse it next time", description: "" }],
     product: "Harbor Goods ceramic mug",
     productMeta: "HRB-MUG-500 · 500ml · 6 product images",
     nextProduct: "Harbor Goods bottle · HRB-BOTTLE-750",
@@ -731,7 +851,7 @@ const en: HomeCopy = {
       prompts: [
         "Browse recent discussions about AI agents and solo businesses on X, Reddit and Threads, summarize the trends, and give me three topic ideas for next week.",
         "Turn the browsing, collection, research and topic-generation steps into a reusable workflow. Add business guidance, write the JS script, test it in the real WebCross environment, then save the Skill.",
-        "Please search x, reddit and threads for early Black Friday 2026 deals and discount information.",
+        "Reuse the saved Skill with a new topic: early Black Friday 2026 deals. Put the findings from X, Reddit and Threads in a table.",
       ],
       taskTitle: "Social trend and topic research",
       taskSteps: ["Browse trending posts on X", "Read top Reddit threads", "Browse Threads creator posts", "Summarize trends and topics"],
@@ -779,7 +899,7 @@ const en: HomeCopy = {
       reuse: {
         skill: "social-topic-research",
         script: "research.js",
-        requirement: "Please search x, reddit and threads for early Black Friday 2026 deals and discount information.",
+        requirement: "Reuse the saved Skill with a new topic: early Black Friday 2026 deals. Put the findings from X, Reddit and Threads in a table.",
         enterHint: "Press Enter to start",
         steps: ["Load the Skill and script", "Search x · reddit · threads", "Summarize early deal information", "Export the discount report"],
         findings: [
@@ -826,30 +946,28 @@ const en: HomeCopy = {
         '});',
         'const digest = await browser.summarize(posts);',
         'await browser.export(digest, "weekly-ideas.md");',
-        'export const skill = browser.toSkill("social-research");',
+        'export const skill = browser.toSkill("social-topic-research");',
       ],
       inputFile: "social-topic-research", runTitle: "Automation / New task", running: "Searching and summarizing deals", complete: "Complete · report saved",
       resultRows: [],
-      resultTitle: "black-friday-2026-early-deals.md", resultNote: "12 early offers + 6 verifiable sources archived",
+      resultTitle: "black-friday-2026-early-deals.md", resultNote: "Findings from X, Reddit and Threads",
     },
   },
   background: {
     title: "Multi-account tasks without repeated switching and sign-ins",
-    description: "Isolated browser environments for every account across commerce, ads and social teams. AI agents reuse each login state, run independently and keep a complete record of the process and results.",
+    description: "The AI Agent calls each account's existing isolated environment, keeps that account's fingerprint, proxy and login state, runs tasks by account or group, and returns progress and results separately.",
     ordinaryTitle: "AI Agent + a standard browser",
-    ordinaryItems: ["Depends on the current page and login", "Requires another sign-in when switching accounts", "Accounts share the same browser environment", "Tasks run one account at a time", "Actions are difficult to trace by account"],
+    ordinaryItems: ["Uses the current browser page and state", "Tasks revolve around the current account", "Switching accounts means re-confirming state", "Returns the current task's result"],
     webcrossTitle: "WebCross AI Agent",
-    webcrossSubtitle: "Built on DeepSeek Harness and compatible with the DeepSeek Harness plugin ecosystem",
+    ordinaryScope: "Current session · Single account",
+    webcrossScope: "Isolated environments · Multiple accounts",
     comparisonRows: [
-      { ordinary: "One shared browser and login state", webcross: "Per-account environments with isolated cookies, cache and sessions" },
-      { ordinary: "Sign in again when switching accounts", webcross: "Run tasks in batches by account" },
-      { ordinary: "Visual recognition is expensive to operate", webcross: "Semantic page trees lower execution cost" },
-      { ordinary: "Scripts and APIs leave automation traces", webcross: "Human-like input preserves the full interaction" },
-      { ordinary: "Only the final task result is returned", webcross: "Every step is visible and reviewable in real time" },
+      { ordinary: "Limited to the current browser session", webcross: "Calls each account's existing isolated environment" },
+      { ordinary: "Switch settings and check sign-in manually", webcross: "Keeps each account's fingerprint, proxy and login state" },
+      { ordinary: "Assign tasks one account at a time", webcross: "Assigns tasks to multiple accounts at once" },
+      { ordinary: "See progress and results for the current account only", webcross: "Records progress and results for every account" },
     ],
-    accounts: [{ name: "US store · Account A", task: "Check campaign prices and stock", status: "Running", log: "Reading product 3" }, { name: "UK store · Account B", task: "Verify coupon status", status: "Complete", log: "Results and actions recorded" }, { name: "Social · Account C", task: "Organize posts and comments", status: "Queued", log: "Isolated environment ready" }],
-    dispatch: "Coordinated by AI Agent · separate progress and results for every environment",
-    advantages: [{ title: "Fast execution", description: "Native browser control reduces intermediate steps for responsive page actions." }, { title: "Fewer tokens", description: "Reuse page state and validated workflows instead of repeatedly exploring the same pages." }, { title: "Isolated data", description: "Cookies, cache and login sessions are physically isolated by environment." }, { title: "Natural input", description: "Operate pages with human-like keyboard and mouse interactions, preserving the full process." }, { title: "Batch tasks", description: "Schedule work by account or group, with separate progress and results." }, { title: "Visible control", description: "Every action is clearly recorded and visible in real time, ready for review or intervention." }],
+    accounts: [{ name: "US store · Account A", task: "Check campaign prices and stock", status: "Running" }, { name: "UK store · Account B", task: "Verify coupon status", status: "Complete" }, { name: "Social · Account C", task: "Organize posts and comments", status: "Queued" }],
   },
   cases: {
     title: "Start with the work you already do in a browser",
@@ -865,9 +983,10 @@ const en: HomeCopy = {
     description: "Keep your way of working while giving every account its own session, regional IP and browser fingerprint.",
     agentsTitle: "Bring an agent you know", agentsText: "Control the browser through a compatible Skill, CLI or MCP. You can also use WebCross AI to assist with the work.", agents: ["Claude Code", "Codex", "WebCross AI", "Skill / CLI / MCP"],
     accountsTitle: "Multiple accounts, isolated sessions", accountsText: "Store A and Store B use separate IPs and browser fingerprints. Nothing is shared between them.",
+    accountLabels: { login: "Signed in as", session: "Session", network: "Proxy", fingerprint: "Browser fingerprint" },
     accounts: [
-      { account: "Store A · ops•••@brand.com", session: "Instance A", region: "US · residential proxy", ip: "34.212.•••.128", fingerprint: "Chrome 143 · macOS 15" },
-      { account: "Store B · uk•••@brand.com", session: "Instance B", region: "UK · residential proxy", ip: "51.140.•••.42", fingerprint: "Chrome 143 · Windows 11" },
+      { name: "Store A", account: "Store A · ops•••@brand.com", session: "Instance A", region: "US · residential proxy", ip: "34.212.•••.128", fingerprint: "Chrome 143 · macOS 15" },
+      { name: "Store B", account: "Store B · uk•••@brand.com", session: "Instance B", region: "UK · residential proxy", ip: "51.140.•••.42", fingerprint: "Chrome 143 · Windows 11" },
     ],
     localTitle: "Your data stays local—you stay in control",
     localLines: [
@@ -890,88 +1009,232 @@ const en: HomeCopy = {
   marketplace: {
     eyebrow: "COMING SOON · SKILL MARKET",
     title: "Open Skill Marketplace",
-    description: "Reusable Agentic Skills for 100+ site scenarios\nRun a task once, then call it again whenever you need it",
+    description: "Reusable Skills for 100+ site scenarios\nRun a task once, then call it again whenever you need it",
     comingSoon: "Coming soon",
     sidebarTitle: "Site categories",
     searchPlaceholder: "Search Skills, scripts or sites",
-    filters: { all: "All", skill: "Agentic Skill", script: "JS Script" },
     creatorAction: "Submit your Skill / script",
     creatorTitle: "Become an early Skill creator",
-    creatorText: "When the market opens, publish your Agentic Skills and JavaScript scripts here so the next task can reuse them",
+    creatorText: "When the market opens, publish your Skills here so the next task can reuse them",
+    downloadDemo: { count: "Selected: {count}", action: "Download locally", downloading: "Downloading", complete: "Download demo complete · {count}" },
     previewNote: "previews",
     footerNote: "The first Skills and scripts are being prepared. Launch timing will be announced officially",
     categories: [
       { id: "amazon", name: "Amazon", cards: [
-        { title: "Price and stock check", description: "Read product prices, stock and promotions in batches, then export a timestamped difference table", kind: "script" },
-        { title: "Competitor review triage", description: "Collect publicly visible negative reviews and group product, shipping and support issues", kind: "skill" },
-        { title: "End-to-end listing", description: "Turn product inputs into titles, specs, images and a recorded platform response", kind: "skill" },
-        { title: "Campaign consistency audit", description: "Compare campaign prices, coupons and storefront display, then flag exceptions with sources", kind: "script" },
+        {
+          title: "Price and stock check", description: "Read product prices, stock and promotions in batches, then export a timestamped difference table", kind: "script",
+          preview: { columns: ["Product", "Current price", "Change"], rows: [["Canvas tote", "$24.00", "−$4.00"], ["Travel cup", "$18.50", "No change"], ["Desk lamp", "$39.00", "+$2.00"]] },
+        },
+        {
+          title: "Competitor review triage", description: "Collect publicly visible negative reviews and group product, shipping and support issues", kind: "skill",
+          preview: { columns: ["Issue", "Reviews", "Example"], rows: [["Damaged packaging", "8 of 36", "Lid cracked in transit"]] },
+        },
+        {
+          title: "End-to-end listing", description: "Turn product inputs into titles, specs, images and a recorded platform response", kind: "skill",
+          preview: { columns: ["Product", "Status", "Feedback"], rows: [["Blue mug", "Needs details", "Capacity missing"]] },
+        },
+        {
+          title: "Campaign consistency audit", description: "Compare campaign prices, coupons and storefront display, then flag exceptions with sources", kind: "script",
+          preview: { columns: ["Item", "Offer price", "Displayed"], rows: [["Travel cup coupon", "$15.00", "$18.50 · review"]] },
+        },
       ] },
       { id: "tiktok-shop", name: "TikTok Shop", cards: [
-        { title: "Product and price collection", description: "Read store products, prices and campaign details, then build a comparable list", kind: "skill" },
-        { title: "Upload shoppable video", description: "Upload a local shoppable video, attach products and record the platform response", kind: "script" },
-        { title: "Review and support triage", description: "Group public comments and support keywords into recurring issues and product opportunities", kind: "skill" },
-        { title: "Shop status monitor", description: "Check listing, inventory and campaign status, then log exceptions in a report", kind: "script" },
+        {
+          title: "Product and price collection", description: "Read store products, prices and campaign details, then build a comparable list", kind: "skill",
+          preview: { columns: ["Product", "Current price", "Change"], rows: [["Folding stand", "¥39.00", "−¥10.00"], ["Organizer pouch", "¥29.90", "No change"], ["Desk lamp", "¥89.00", "+¥5.00"]] },
+        },
+        {
+          title: "Upload shoppable video", description: "Upload a local shoppable video, attach products and record the platform response", kind: "script",
+          preview: { columns: ["Video", "Product", "Upload"], rows: [["Stand unboxing", "Folding stand", "Draft saved"]] },
+        },
+        {
+          title: "Review and support triage", description: "Group public comments and support keywords into recurring issues and product opportunities", kind: "skill",
+          preview: { columns: ["Issue", "Mentions", "Action"], rows: [["Runs small", "9", "Add size chart"]] },
+        },
+        {
+          title: "Shop status monitor", description: "Check listing, inventory and campaign status, then log exceptions in a report", kind: "script",
+          preview: { columns: ["Item", "Status", "Action"], rows: [["Lamp stock", "3 left", "Review restock"]] },
+        },
       ] },
       { id: "airbnb", name: "Airbnb", cards: [
-        { title: "Price and availability", description: "Collect public listing prices, available dates and core details into a table", kind: "script" },
-        { title: "Competitor listing compare", description: "Compare local listings by price, rating and amenities for reusable market notes", kind: "skill" },
-        { title: "Regional search collection", description: "Read search results by area and date while retaining listing links and key fields", kind: "skill" },
-        { title: "Review and amenity extract", description: "Turn public review feedback into structured amenity and experience summaries", kind: "script" },
+        {
+          title: "Price and availability", description: "Collect public listing prices, available dates and core details into a table", kind: "script",
+          preview: { columns: ["Listing", "Nightly rate", "Available"], rows: [["Riverside flat", "$135", "Dec 2–5"]] },
+        },
+        {
+          title: "Competitor listing compare", description: "Compare local listings by price, rating and amenities for reusable market notes", kind: "skill",
+          preview: { columns: ["Listing", "Type", "Difference"], rows: [["Garden flat", "2 bedrooms", "$12 below local median"]] },
+        },
+        {
+          title: "Regional search collection", description: "Read search results by area and date while retaining listing links and key fields", kind: "skill",
+          preview: { columns: ["Area", "Matches", "Filters"], rows: [["North Shore", "18 listings", "Entire home · kitchen"]] },
+        },
+        {
+          title: "Review and amenity extract", description: "Turn public review feedback into structured amenity and experience summaries", kind: "script",
+          preview: { columns: ["Topic", "Mentions", "Guest feedback"], rows: [["Self check-in", "11", "Easy late arrival"]] },
+        },
       ] },
       { id: "youtube", name: "YouTube", cards: [
-        { title: "Channel update screening", description: "Follow new uploads and shortlist videos by publish time and topic", kind: "script" },
-        { title: "Transcript and summary export", description: "Read public captions or transcripts, then produce summaries with source links", kind: "skill" },
-        { title: "Comment theme clustering", description: "Organize relevant comments into audience views, disputes and content opportunities", kind: "skill" },
-        { title: "Competitor topic analysis", description: "Collect recent competitor performance and title patterns for topic planning", kind: "script" },
+        {
+          title: "Channel update screening", description: "Follow new uploads and shortlist videos by publish time and topic", kind: "script",
+          preview: { columns: ["Video", "Topic", "Published"], rows: [["My weekly workflow", "Productivity", "Nov 17"]] },
+        },
+        {
+          title: "Transcript and summary export", description: "Read public captions or transcripts, then produce summaries with source links", kind: "skill",
+          preview: { columns: ["Timestamp", "Transcript", "Summary"], rows: [["02:18", "Open task history", "Resume a previous run"]] },
+        },
+        {
+          title: "Comment theme clustering", description: "Organize relevant comments into audience views, disputes and content opportunities", kind: "skill",
+          preview: { columns: ["Topic", "Comments", "Question"], rows: [["Setup", "16", "How long to connect?"]] },
+        },
+        {
+          title: "Competitor topic analysis", description: "Collect recent competitor performance and title patterns for topic planning", kind: "script",
+          preview: { columns: ["Topic", "Videos", "Finding"], rows: [["Solo team reports", "4", "Demos drew more replies"]] },
+        },
       ] },
       { id: "reddit", name: "Reddit", cards: [
-        { title: "Subreddit topic tracking", description: "Filter posts by keyword and community while keeping score, time and links", kind: "script" },
-        { title: "Top comments and disputes", description: "Read public comments and extract top viewpoints, counterpoints and discussion focus", kind: "skill" },
-        { title: "Brand mention monitor", description: "Track brand and product mentions, then group sentiment and issue types", kind: "skill" },
-        { title: "Post and comment export", description: "Export posts, comments and permalinks into a reviewable source table", kind: "script" },
+        {
+          title: "Subreddit topic tracking", description: "Filter posts by keyword and community while keeping score, time and links", kind: "script",
+          preview: { columns: ["Community", "Topic", "Activity"], rows: [["r/SideProject", "Weekly research", "32 replies"]] },
+        },
+        {
+          title: "Top comments and disputes", description: "Read public comments and extract top viewpoints, counterpoints and discussion focus", kind: "skill",
+          preview: { columns: ["Topic", "In favor", "Concern"], rows: [["Weekly reports", "Less sorting", "Sources need review"]] },
+        },
+        {
+          title: "Brand mention monitor", description: "Track brand and product mentions, then group sentiment and issue types", kind: "skill",
+          preview: { columns: ["Mention", "Sentiment", "Reason"], rows: [["Template import", "Positive", "Less setup"]] },
+        },
+        {
+          title: "Post and comment export", description: "Export posts, comments and permalinks into a reviewable source table", kind: "script",
+          preview: { columns: ["Source", "Type", "Summary"], rows: [["r/productivity", "Reply", "Archive by topic"]] },
+        },
       ] },
       { id: "x", name: "X", cards: [
-        { title: "Keyword and topic tracking", description: "Monitor keywords, topics and accounts, then organize posts over time", kind: "script" },
-        { title: "Post and reply collection", description: "Read public posts and visible replies to extract viewpoints and propagation clues", kind: "skill" },
-        { title: "Trend and sentiment digest", description: "Summarize trending topics and sentiment shifts with representative posts as evidence", kind: "script" },
-        { title: "Competitor account watch", description: "Organize competitor posts, engagement and content direction into observation notes", kind: "skill" },
+        {
+          title: "Keyword and topic tracking", description: "Monitor keywords, topics and accounts, then organize posts over time", kind: "script",
+          preview: { columns: ["Keyword", "Posts", "Trend"], rows: [["Indie building", "24", "Up 6 this week"]] },
+        },
+        {
+          title: "Post and reply collection", description: "Read public posts and visible replies to extract viewpoints and propagation clues", kind: "skill",
+          preview: { columns: ["Post", "Replies", "Topic"], rows: [["Workflow demo", "19", "Reusing steps"]] },
+        },
+        {
+          title: "Trend and sentiment digest", description: "Summarize trending topics and sentiment shifts with representative posts as evidence", kind: "script",
+          preview: { columns: ["Topic", "Sentiment", "Example"], rows: [["Local automation", "Positive", "Reviewable history"]] },
+        },
+        {
+          title: "Competitor account watch", description: "Organize competitor posts, engagement and content direction into observation notes", kind: "skill",
+          preview: { columns: ["Account", "Updates", "Focus"], rows: [["Studio North", "3", "Public demos"]] },
+        },
       ] },
       { id: "whatsapp", name: "WhatsApp", cards: [
-        { title: "Group message to-dos", description: "Turn group to-dos, deadlines and owners into a clean action list", kind: "skill" },
-        { title: "Customer issue grouping", description: "Group customer messages by topic, identify recurring issues and suggest next steps", kind: "script" },
-        { title: "Conversation summary", description: "Extract conclusions, unfinished items and follow-up actions from a conversation", kind: "skill" },
-        { title: "Authorized message export", description: "Export messages within an approved scope into searchable records", kind: "script" },
+        {
+          title: "Group message to-dos", description: "Turn group to-dos, deadlines and owners into a clean action list", kind: "skill",
+          preview: { columns: ["Task", "Owner", "Due"], rows: [["Check shipment list", "Mia", "Friday"]] },
+        },
+        {
+          title: "Customer issue grouping", description: "Group customer messages by topic, identify recurring issues and suggest next steps", kind: "script",
+          preview: { columns: ["Topic", "Messages", "Action"], rows: [["Delivery timing", "12", "Add arrival estimate"]] },
+        },
+        {
+          title: "Conversation summary", description: "Extract conclusions, unfinished items and follow-up actions from a conversation", kind: "skill",
+          preview: { columns: ["Conversation", "Decision", "Follow-up"], rows: [["Spring samples", "Color approved", "Ship on Wednesday"]] },
+        },
+        {
+          title: "Authorized message export", description: "Export messages within an approved scope into searchable records", kind: "script",
+          preview: { columns: ["Chat", "Records", "Export"], rows: [["Project group", "28", "CSV"]] },
+        },
       ] },
       { id: "facebook", name: "Facebook", cards: [
-        { title: "Page content and engagement", description: "Collect public page posts, engagement and publish times", kind: "script" },
-        { title: "Ad creative watch", description: "Organize public ad creatives and landing-page clues with source references", kind: "skill" },
-        { title: "Group discussion themes", description: "Summarize popular questions and needs from public group discussions", kind: "skill" },
-        { title: "Comment lead extraction", description: "Extract purchase intent, questions and contact clues from public comments", kind: "script" },
+        {
+          title: "Page content and engagement", description: "Collect public page posts, engagement and publish times", kind: "script",
+          preview: { columns: ["Post", "Interactions", "Published"], rows: [["Product trial", "38", "Nov 16"]] },
+        },
+        {
+          title: "Ad creative watch", description: "Organize public ad creatives and landing-page clues with source references", kind: "skill",
+          preview: { columns: ["Creative", "Destination", "Observation"], rows: [["Desk lamp video", "Lamp detail page", "Starts with dimmer demo"]] },
+        },
+        {
+          title: "Group discussion themes", description: "Summarize popular questions and needs from public group discussions", kind: "skill",
+          preview: { columns: ["Topic", "Discussions", "Need"], rows: [["Home office", "8", "Small desk layouts"]] },
+        },
+        {
+          title: "Comment lead extraction", description: "Extract purchase intent, questions and contact clues from public comments", kind: "script",
+          preview: { columns: ["Comment", "Intent", "Follow-up"], rows: [["Available in white?", "Color options", "Reply with stock"]] },
+        },
       ] },
       { id: "instagram", name: "Instagram", cards: [
-        { title: "Profile data collection", description: "Collect public profile details, posts and engagement data", kind: "script" },
-        { title: "Post and comment analysis", description: "Extract content themes, audience feedback and reusable wording patterns", kind: "skill" },
-        { title: "Competitor content planning", description: "Compare recent competitor topics and engagement to surface content opportunities", kind: "skill" },
-        { title: "Creator partnership leads", description: "Filter public creator accounts by niche and engagement quality into a lead list", kind: "script" },
+        {
+          title: "Profile data collection", description: "Collect public profile details, posts and engagement data", kind: "script",
+          preview: { columns: ["Account", "Posts", "Interactions"], rows: [["Studio North", "12", "426"]] },
+        },
+        {
+          title: "Post and comment analysis", description: "Extract content themes, audience feedback and reusable wording patterns", kind: "skill",
+          preview: { columns: ["Content", "Feedback", "Action"], rows: [["Product demo", "Size questions", "Add dimensions"]] },
+        },
+        {
+          title: "Competitor content planning", description: "Compare recent competitor topics and engagement to surface content opportunities", kind: "skill",
+          preview: { columns: ["Topic", "Samples", "Finding"], rows: [["Small spaces", "6", "Before-and-after views"]] },
+        },
+        {
+          title: "Creator partnership leads", description: "Filter public creator accounts by niche and engagement quality into a lead list", kind: "script",
+          preview: { columns: ["Creator", "Category", "Engagement"], rows: [["North Studio", "Home", "3.8%"]] },
+        },
       ] },
       { id: "linkedin", name: "LinkedIn", cards: [
-        { title: "Job listing collection", description: "Collect public roles by keyword and location with dates and links", kind: "script" },
-        { title: "Auto-submit job applications", description: "Filter roles and fill applications from your profile, pausing before each submission", kind: "skill" },
-        { title: "Industry content monitor", description: "Follow industry accounts and topics to collect viewpoints worth reviewing", kind: "skill" },
-        { title: "Recruiting follow-up", description: "Track candidate status and reminders by stage", kind: "script" },
+        {
+          title: "Job listing collection", description: "Collect public roles by keyword and location with dates and links", kind: "script",
+          preview: { columns: ["Role", "Location", "Posted"], rows: [["Product designer", "Shanghai", "Nov 15"]] },
+        },
+        {
+          title: "Auto-submit job applications", description: "Filter roles and fill applications from your profile, pausing before each submission", kind: "skill",
+          preview: { columns: ["Role", "Documents", "Status"], rows: [["Product designer", "CV and portfolio", "Awaiting confirmation"]] },
+        },
+        {
+          title: "Industry content monitor", description: "Follow industry accounts and topics to collect viewpoints worth reviewing", kind: "skill",
+          preview: { columns: ["Topic", "Sources", "Finding"], rows: [["Local workflows", "3 articles", "Interest in audit trails"]] },
+        },
+        {
+          title: "Recruiting follow-up", description: "Track candidate status and reminders by stage", kind: "script",
+          preview: { columns: ["Candidate", "Stage", "Next step"], rows: [["C-012", "Portfolio received", "Schedule review"]] },
+        },
       ] },
       { id: "zillow", name: "Zillow", cards: [
-        { title: "Listing and price collection", description: "Read public prices, area, bedroom count and links, then export a table", kind: "script" },
-        { title: "Regional market compare", description: "Compare asking prices and features across an area for a market snapshot", kind: "skill" },
-        { title: "Listing detail extraction", description: "Extract amenities, taxes and price history from selected listings", kind: "skill" },
-        { title: "Rent and price tracking", description: "Record rent and asking-price changes over time as a time series", kind: "script" },
+        {
+          title: "Listing and price collection", description: "Read public prices, area, bedroom count and links, then export a table", kind: "script",
+          preview: { columns: ["Listing", "Asking price", "Area"], rows: [["12 North Ave", "$485,000", "1,250 ft²"]] },
+        },
+        {
+          title: "Regional market compare", description: "Compare asking prices and features across an area for a market snapshot", kind: "skill",
+          preview: { columns: ["Area", "Median price", "Sample"], rows: [["North district", "$465,000", "12 listings"]] },
+        },
+        {
+          title: "Listing detail extraction", description: "Extract amenities, taxes and price history from selected listings", kind: "skill",
+          preview: { columns: ["Listing", "Bedrooms", "Amenities"], rows: [["8 Lake St", "3", "Garage, patio"]] },
+        },
+        {
+          title: "Rent and price tracking", description: "Record rent and asking-price changes over time as a time series", kind: "script",
+          preview: { columns: ["Listing", "Monthly rent", "Change"], rows: [["22 Park Ave", "$1,950", "−$50"]] },
+        },
       ] },
       { id: "google-bing-serp", name: "Google & Bing SERP", cards: [
-        { title: "Search ranking collection", description: "Read public search result pages and record rank, title and link", kind: "script" },
-        { title: "Brand visibility monitor", description: "Track brand results and visibility changes across searches", kind: "skill" },
-        { title: "Competitor ad position watch", description: "Record public ad positions and landing-page clues with the query used", kind: "script" },
-        { title: "Long-tail keyword ideas", description: "Organize long-tail opportunities from search results and related queries", kind: "skill" },
+        {
+          title: "Search ranking collection", description: "Read public search result pages and record rank, title and link", kind: "script",
+          preview: { columns: ["Query", "Rank", "Page"], rows: [["Desk storage", "3", "Storage guide"]] },
+        },
+        {
+          title: "Brand visibility monitor", description: "Track brand results and visibility changes across searches", kind: "skill",
+          preview: { columns: ["Brand query", "Result", "Rank"], rows: [["North Studio", "Homepage", "1"]] },
+        },
+        {
+          title: "Competitor ad position watch", description: "Record public ad positions and landing-page clues with the query used", kind: "script",
+          preview: { columns: ["Query", "Ad position", "Destination"], rows: [["Folding stand", "Top of page", "Stand collection"]] },
+        },
+        {
+          title: "Long-tail keyword ideas", description: "Organize long-tail opportunities from search results and related queries", kind: "skill",
+          preview: { columns: ["Seed", "Related query", "Intent"], rows: [["Desk lamp", "Desk lamps for small spaces", "Shopping"]] },
+        },
       ] },
     ],
   },
@@ -988,6 +1251,7 @@ const en: HomeCopy = {
     ],
     dimensions: [
       {
+        feature: "tokens",
         label: "Token usage",
         webcross: { value: "Low–Mid", note: "Agent drive costs less than an unoptimized cloud browser; near zero after reusing a JS Skill", tone: "good" },
         values: [
@@ -999,6 +1263,7 @@ const en: HomeCopy = {
         ],
       },
       {
+        feature: "agents",
         label: "Works with different AI agents",
         webcross: { value: "High", note: "Skill / CLI / MCP for many agents", tone: "good" },
         values: [
@@ -1009,6 +1274,7 @@ const en: HomeCopy = {
         ],
       },
       {
+        feature: "accounts",
         label: "Multiple account logins",
         webcross: { value: "Yes", mark: "check", tone: "good" },
         values: [
@@ -1020,6 +1286,7 @@ const en: HomeCopy = {
         ],
       },
       {
+        feature: "fingerprint",
         label: "Fingerprint and independent proxy IP",
         webcross: { value: "Yes", mark: "check", tone: "good" },
         values: [
@@ -1031,6 +1298,7 @@ const en: HomeCopy = {
         ],
       },
       {
+        feature: "parallel",
         label: "Parallel tasks",
         webcross: { value: "Yes", mark: "check", tone: "good" },
         values: [
@@ -1042,6 +1310,7 @@ const en: HomeCopy = {
         ],
       },
       {
+        feature: "foreground",
         label: "Doesn't take over your foreground",
         webcross: { value: "Yes", mark: "check", tone: "good" },
         values: [
@@ -1053,6 +1322,7 @@ const en: HomeCopy = {
         ],
       },
       {
+        feature: "code",
         label: "Reusable JS Skills",
         webcross: { value: "Yes", mark: "check", tone: "good" },
         values: [
@@ -1064,6 +1334,7 @@ const en: HomeCopy = {
         ],
       },
       {
+        feature: "local",
         label: "Data stored locally",
         webcross: { value: "Yes", mark: "check", tone: "good" },
         values: [
@@ -1075,6 +1346,7 @@ const en: HomeCopy = {
         ],
       },
       {
+        feature: "setup",
         label: "Setup and learning curve",
         webcross: { value: "Low", note: "Plain language, no configuration", tone: "good" },
         values: [

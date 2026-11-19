@@ -123,7 +123,10 @@
 
 .legal-section h2 span {
   flex: 0 0 auto;
-  color: var(--oxide-text);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  background: var(--apricot);
+  color: var(--apricot-ink);
   font-family: var(--font-mono);
   font-size: var(--fs-note);
   letter-spacing: 0;

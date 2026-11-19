@@ -5,11 +5,28 @@
     "tagline": "最好的 Agentic 指纹浏览器"
   },
   "nav": {
+    "useCases": "用户案例",
     "product": "产品介绍",
     "guide": "使用指南",
     "downloadSection": "下载",
     "download": "下载客户端",
     "github": "GitHub"
+  },
+  "caseLibrary": {
+    "headline": "Webcross可以帮你！",
+    "intro": "挑一个手头的任务，看看 WebCross 怎样把商品表变成上架草稿，把热门讨论整理成选题清单。",
+    "all": "全部案例",
+    "filters": "按工作场景筛选",
+    "count": "{count} 个案例",
+    "categories": {
+      "commerce": "电商",
+      "social": "社交媒体",
+      "data": "数据采集",
+      "marketing": "数字营销",
+      "career": "招聘与应聘"
+    },
+    "prompt": "可以这样交给 Agent",
+    "close": "关闭案例"
   },
   "locales": {
     "zh": "简体中文",
@@ -24,7 +41,7 @@
     },
     "guide": {
       "title": "使用指南 · WebCross",
-      "description": "WebCross 极简使用指南：从启动自动装载 Skill，到创建浏览器及在 AI Agent 中直接调用。"
+      "description": "跟随使用指南配置 WebCross 内置 AI 助手，或通过 Skill 接入 Claude Code、Codex 等外部 Agent。"
     },
     "download": {
       "title": "下载客户端 · WebCross",
@@ -864,10 +881,38 @@
   "guide": {
     "title": "使用指南",
     "eyebrow": "QUICK START GUIDE",
-    "heading": "三分钟极简上手指南",
-    "subheading": "无需繁杂配置，跟随三步轻松赋予 AI 真实的浏览器操控能力。",
-    "ctaDownload": "免费下载 WebCross",
-    "heroMeta": "支持 macOS 13+ / Windows 10、11 · 公测阶段全功能免费",
+    "heading": "三分钟上手 WebCross",
+    "subheading": "在 WebCross 里直接和 AI 助手对话，也可以接入你常用的 Agent。",
+    "externalTitle": "接入外部 Agent",
+    "externalIntro": "安装 Skill，创建浏览器，把第一条任务交给你的 Agent。",
+    "assistant": {
+      "title": "使用内置 AI 助手",
+      "steps": [
+        {
+          "title": "打开模型服务",
+          "body": "在客户端进入「设置 → AI 助手」，也可以从对话页点击「配置模型」。在「模型服务」中添加提供商，或编辑已有配置。"
+        },
+        {
+          "title": "选择模型并保存",
+          "body": "选择提供商（如 OpenRouter 或 DeepSeek），填写 API 密钥和 API 地址。点击「获取可用模型」，勾选要启用的模型后保存。也可以点击「添加模型」，填写模型 ID 和显示名称。"
+        },
+        {
+          "title": "发送第一条指令",
+          "body": "回到「AI 助手」，选择刚启用的模型。打开一篇想读的文章，试着把这个任务交给它。"
+        }
+      ],
+      "example": "“请把这篇文章的三个要点整理成清单。”",
+      "demoTitle": "模型服务配置演示",
+      "provider": "提供商",
+      "apiKey": "API 密钥",
+      "endpoint": "API 地址",
+      "models": "示例模型目录",
+      "noExamples": "本教程的七个示例中没有该提供商的模型。",
+      "fetch": "获取可用模型",
+      "save": "保存",
+      "saved": "已保存所选模型",
+      "replay": "重新演示"
+    },
     "stepsTitle": "三步完成接入",
     "steps": [
       {
@@ -1062,7 +1107,6 @@
     "pricing": "价格",
     "devColumn": "开发者",
     "docs": "文档",
-    "legalColumn": "法律法规",
     "privacy": "隐私政策",
     "agreement": "用户服务协议"
   },

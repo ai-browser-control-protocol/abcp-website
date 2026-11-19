@@ -21,9 +21,9 @@ describe("homepage content", () => {
     expect(copy.closing.titleAccent.length).toBeGreaterThan(0);
     expect(copy.closing.secondary.length).toBeGreaterThan(0);
     expect(copy.faq.items).toHaveLength(6);
-    expect(copy.background.comparisonRows).toHaveLength(5);
+    expect(copy.background.comparisonRows).toHaveLength(4);
     expect(copy.background.webcrossTitle).toContain("WebCross AI Agent");
-    expect(copy.background.webcrossSubtitle).toContain("DeepSeek Harness");
+    expect(copy.background.ordinaryItems).toHaveLength(4);
     expect(copy.marketplace.categories.map((category) => category.name)).toEqual([
       "Amazon",
       "TikTok Shop",

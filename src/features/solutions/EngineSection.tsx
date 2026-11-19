@@ -15,46 +15,13 @@
  * markup and the hydrated tree stay identical. With reduced motion (or no
  * JS) the section renders in its final state and nothing moves.
  */
-import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { useEnterMotion } from "./useEnterMotion";
 import type { SolutionsCopy } from "@/content/solutions";
 import "./engine-section.css";
 
-/** Arms the section before it scrolls in, then plays it once it enters the
- *  viewport. The motion is decorative, so a missing IntersectionObserver
- *  simply skips straight to the final state. */
-function useEnterMotion() {
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    node.dataset.motion = "armed";
-    if (typeof IntersectionObserver === "undefined") {
-      node.dataset.motion = "live";
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          node.dataset.motion = "live";
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.16 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  return ref;
-}
-
 export function EngineSection({ copy }: { copy: SolutionsCopy["engine"] }) {
-  const ref = useEnterMotion();
+  const ref = useEnterMotion<HTMLElement>();
 
   return (
     <section className="sol-section eng-section" id="engine" ref={ref}>
@@ -73,18 +40,18 @@ export function EngineSection({ copy }: { copy: SolutionsCopy["engine"] }) {
           <div className="eng-lanes">
             <article className="eng-lane eng-lane--direct">
               <header className="eng-lane-head">
-                <h4 className="eng-lane-name">{copy.direct.label}</h4>
+                <h4 className="eng-lane-name">
+                  <Image src="/brand/webcross-icon.webp" alt="" width={24} height={18} />
+                  {copy.direct.label}
+                </h4>
                 <span className="eng-lane-sub">{copy.direct.sub}</span>
               </header>
               <div className="eng-flow eng-flow--direct">
                 <span className="eng-node">{copy.direct.agent}</span>
                 <span className="eng-bridge">
-                  <span className="eng-bridge-line" aria-hidden="true" />
                   <span className="eng-hop">
-                    <span className="eng-hop-dot" aria-hidden="true" />
                     {copy.direct.hop}
                   </span>
-                  <span className="eng-bridge-line" aria-hidden="true" />
                   <span className="eng-pulse eng-pulse--direct" aria-hidden="true" />
                 </span>
                 <span className="eng-node eng-node--core">
@@ -142,7 +109,6 @@ export function EngineSection({ copy }: { copy: SolutionsCopy["engine"] }) {
                 <span className="eng-bar-name">{copy.speedRows.legacy}</span>
                 <span className="eng-bar-track" aria-hidden="true">
                   <span className="eng-bar-fill" />
-                  <span className="eng-bar-mark" />
                 </span>
                 <span className="eng-bar-value">3.2×</span>
               </div>
@@ -151,12 +117,6 @@ export function EngineSection({ copy }: { copy: SolutionsCopy["engine"] }) {
           </div>
         </div>
       </div>
-
-      <ul className="sol-bullets eng-bullets">
-        {copy.bullets.map((bullet) => (
-          <li key={bullet}>{bullet}</li>
-        ))}
-      </ul>
     </section>
   );
 }

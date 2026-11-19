@@ -200,7 +200,7 @@ function IllusToken({ t }: { t: Figures["tree"] }) {
       </g>
       <g className="obs-node">
         <circle cx="72" cy="103" r="5" fill="#ff6b35" />
-        <rect x="102" y="87" width="185" height="31" rx="7" fill="#fff7f2" stroke="#ff6b35" />
+        <rect x="102" y="87" width="185" height="31" rx="7" fill="var(--apricot)" stroke="#ff6b35" />
         <text x="114" y="107" fill="#9a3412" fontSize="10.2" fontWeight="700">{t.frame}</text>
       </g>
       <g className="obs-node obs-node-2">
@@ -215,7 +215,7 @@ function IllusToken({ t }: { t: Figures["tree"] }) {
       </g>
       <g className="obs-node obs-node-4">
         <circle cx="72" cy="204" r="4" fill="#ff6b35" />
-        <rect x="102" y="192" width="166" height="25" rx="6" fill="#fff1e8" stroke="#ff6b35" />
+        <rect x="102" y="192" width="166" height="25" rx="6" fill="var(--apricot)" stroke="#ff6b35" />
         <text x="113" y="208.5" fill="#9a3412" fontSize="9.8" fontWeight="700">{t.target}</text>
       </g>
       <g className="obs-completeness">
@@ -225,7 +225,7 @@ function IllusToken({ t }: { t: Figures["tree"] }) {
         <text x="116" y="247.5" fill="#52525b" fontSize="9.2" fontWeight="700" fontFamily="ui-monospace, monospace">{partial}</text>
       </g>
       <g className="obs-diff">
-        <rect x="347" y="22" width="157" height="100" rx="12" fill="#fff7f2" stroke="#ff6b35" />
+        <rect x="347" y="22" width="157" height="100" rx="12" fill="var(--apricot)" stroke="#ff6b35" />
         <text x="362" y="48" fill="#c2410c" fontSize="10.4" fontWeight="800">{t.diff}</text>
         <text x="362" y="69" fill="#71717a" fontSize="10" fontFamily="ui-monospace, monospace">{t.version}</text>
         {t.diffRows.map((row, index) => {
@@ -278,7 +278,7 @@ function IllusLocal({ t }: { t: Figures["local"] }) {
       <rect x="20" y="22" width="144" height="46" rx="12" fill="#0a0a0a" />
       <text x="92" y="49" textAnchor="middle" fill="#ffffff" fontSize="11" fontWeight="800">{t.intent}</text>
       <path className="audit-flow" d="M166 45 H202" fill="none" stroke="#ff6b35" strokeWidth="2" markerEnd="url(#audit-arrow)" />
-      <rect x="214" y="22" width="144" height="46" rx="12" fill="#fff7f2" stroke="#ff6b35" />
+      <rect x="214" y="22" width="144" height="46" rx="12" fill="var(--apricot)" stroke="#ff6b35" />
       <text x="286" y="49" textAnchor="middle" fill="#9a3412" fontSize="11" fontWeight="800">{t.page}</text>
       <path d="M80 98 V248" stroke="#d4d4d8" strokeWidth="2" />
       <text x="20" y="92" fill="#71717a" fontSize="9.5" fontWeight="700" fontFamily="ui-monospace, monospace">{t.timeline}</text>
@@ -458,7 +458,7 @@ function IllusSkill({ t }: { t: Figures["skill"] }) {
       {/* Card 2 — Distilled Workflow */}
       <g transform="translate(184, 44)">
         <rect width="144" height="126" rx="10" fill="#fffcf9" stroke="#ff6b35" strokeWidth="1.2" filter="url(#sk-card-shadow)" />
-        <path d="M0 10 Q0 0 10 0 L134 0 Q144 0 144 10 L144 27 L0 27 Z" fill="#fff2eb" />
+        <path d="M0 10 Q0 0 10 0 L134 0 Q144 0 144 10 L144 27 L0 27 Z" fill="var(--apricot)" />
         <line x1="0" y1="27" x2="144" y2="27" stroke="rgba(255, 107, 53, 0.22)" strokeWidth="1" />
 
         {/* Lightning workflow icon */}
@@ -468,7 +468,7 @@ function IllusSkill({ t }: { t: Figures["skill"] }) {
         <text x="28" y="17" fill="#c2410c" fontSize="8.5" fontWeight="700" fontFamily="ui-monospace, monospace">amazon.patrol</text>
 
         {/* Compiled pill */}
-        <rect x="94" y="6.5" width="42" height="14" rx="4" fill="#ffedd5" />
+        <rect x="94" y="6.5" width="42" height="14" rx="4" fill="var(--apricot)" />
         <text x="115" y="16.5" textAnchor="middle" fill="#ea580c" fontSize="7.5" fontWeight="700" fontFamily="ui-monospace, monospace">WORKFLOW</text>
 
         {/* Chained pipeline vertical connector */}
@@ -551,7 +551,7 @@ function IllusTakeover({ t }: { t: Figures["takeover"] }) {
       <circle className="tv-alert" cx="52" cy="152" r="8" fill="#ff6b35" stroke="#ffffff" strokeWidth="2.4" />
       <g transform="translate(74, 119)">
         <g className="tv-card">
-          <rect width="336" height="66" rx="10" fill="#fff7f2" stroke="#ff6b35" strokeWidth="1.4" />
+          <rect width="336" height="66" rx="10" fill="var(--apricot)" stroke="#ff6b35" strokeWidth="1.4" />
           <text x="18" y="27" fill="#ff6b35" fontSize="12" fontWeight="800">{t.prompt}</text>
           <text x="18" y="47" fill="#3f3f46" fontSize="10.5">{t.promptNote}</text>
         </g>

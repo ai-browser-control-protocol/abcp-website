@@ -186,8 +186,6 @@ export function SemanticSection({ copy }: { copy: SolutionsCopy["semantic"] }) {
               </dd>
             </div>
           </dl>
-
-          <p className="sol-fineprint sem-note">{compression.note}</p>
         </div>
       </div>
 

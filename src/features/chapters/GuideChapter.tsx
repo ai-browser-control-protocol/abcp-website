@@ -6,42 +6,21 @@
  *   - Real WebCross User desktop app mockup for Step 2 (FleetEditor / New Browser)
  *   - Two real agent terminals for Step 3 (Claude Code pane + Codex pane, ego-style
  *     workspace: browser Space cards behind, foreground terminal window, agent dock)
- *   - Homepage-matched shell: aura hero, numbered steps section, tips cards, FAQ,
- *     closing CTA band.
+ *   - A shared opening for the introduction and walkthrough, followed by
+ *     browser safety notes and installation questions.
  */
 "use client";
 
 import { useState } from "react";
 import Image from "next/image";
 import { FaqSection } from "@/components/ui/FaqSection";
-import { chapterPath } from "@/content/chapters";
 import type { Locale } from "@/content/types";
 import type { Messages } from "@/i18n/messages";
-import { Link } from "@/i18n/navigation";
 import { GuideStep3Agents } from "./GuideStep3Agents";
+import { AssistantGuide } from "./AssistantGuide";
 import "./guide-chapter.css";
 
 type GuideMockupCopy = Messages["guide"]["mockup"];
-
-function DownloadGlyph() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M12 3v12" />
-      <path d="m7 11 5 5 5-5" />
-      <path d="M4 20h16" />
-    </svg>
-  );
-}
 
 /** Tip icon 1 — local-first: a laptop the agent never leaves. */
 function LocalDeviceGlyph() {
@@ -123,9 +102,6 @@ function UserAppSidebar({ mockup }: { mockup: GuideMockupCopy }) {
 
             <button type="button" className="user-nav-item-btn">
               <span>{mockup.navAgentChat}</span>
-              <span className="user-coming-soon-badge">
-                {mockup.badgeComingSoon}
-              </span>
             </button>
           </div>
         </div>
@@ -426,127 +402,81 @@ export function GuideChapter({
 
   return (
     <article className="chapter guide-page">
-      <div className="guide-aura" aria-hidden="true" />
-
-      {/* ===== Hero Header — a single frosted "quick start card" slab:
-             centred copy above, a three-step readiness strip below. This is a
-             different composition from both the flat centred homepage hero and
-             the solutions page's floating-card collage, while sharing the same
-             glass + breathing-gradient material. ===== */}
-      <header className="guide-hero">
-        <div className="guide-hero-slab">
-          <span className="guide-eyebrow">{copy.eyebrow}</span>
+      <div className="guide-opening">
+        <header className="guide-hero">
           <h1 className="guide-hero-title">{copy.heading}</h1>
           <p className="guide-hero-lead">{copy.subheading}</p>
-
-          <div className="guide-cta-row">
-            <Link
-              className="guide-btn-primary"
-              href={`${chapterPath("download")}#download-platforms`}
-            >
-              <DownloadGlyph />
-              <span>{copy.ctaDownload}</span>
-            </Link>
+        </header>
+        <AssistantGuide copy={copy.assistant} />
+      </div>
+        <section className="guide-walkthrough guide-steps-section" id="guide-steps" aria-labelledby="external-guide-title" tabIndex={-1}>
+          <div className="guide-external-heading">
+            <h2 id="external-guide-title">{copy.externalTitle}</h2>
+            <p>{copy.externalIntro}</p>
           </div>
-
-          <p className="guide-hero-meta">{copy.heroMeta}</p>
-
-          <ol className="guide-hero-steps">
-            {copy.steps.map((step, index) => (
-              <li key={step.id} className="guide-hero-step">
-                <span className="guide-hero-step-index">
-                  {String(step.id).padStart(2, "0")}
-                </span>
-                <span className="guide-hero-step-body">
-                  <b>{step.title}</b>
-                  <small>{step.tag}</small>
-                </span>
-                {index < copy.steps.length - 1 ? (
-                  <span className="guide-hero-step-arrow" aria-hidden="true">
-                    →
-                  </span>
-                ) : null}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </header>
-
-      {/* ===== Interactive Stepper Section ===== */}
-      <section className="guide-steps-section" aria-label={copy.stepsTitle}>
-        <div className="guide-section-heading guide-section-heading--solo">
-          <h2>{copy.stepsTitle}</h2>
-        </div>
-
-        <div className="guide-stepper-container">
-          {/* Left Column: Interactive Step Cards */}
-          <div className="guide-steps-column" role="tablist">
-            {copy.steps.map((step) => {
-              const isSelected = activeStepId === step.id;
-              return (
-                <div
-                  key={step.id}
-                  role="tab"
-                  tabIndex={0}
-                  aria-selected={isSelected}
-                  className={`guide-step-card${isSelected ? " is-active" : ""}`}
-                  onClick={() => setActiveStepId(step.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setActiveStepId(step.id);
-                    }
-                  }}
-                >
-                  <div className="guide-step-header">
-                    <span className="guide-step-id-badge">
-                      {String(step.id).padStart(2, "0")}
-                    </span>
-                    <span className="guide-step-tag">{step.tag}</span>
+          <div className="guide-stepper-container">
+            {/* Left Column: Interactive Step Cards */}
+            <div className="guide-steps-column" role="tablist">
+              {copy.steps.map((step) => {
+                const isSelected = activeStepId === step.id;
+                return (
+                  <div
+                    key={step.id}
+                    role="tab"
+                    tabIndex={0}
+                    aria-selected={isSelected}
+                    className={`guide-step-card${isSelected ? " is-active" : ""}`}
+                    onClick={() => setActiveStepId(step.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setActiveStepId(step.id);
+                      }
+                    }}
+                  >
+                    <div className="guide-step-header">
+                      <span className="guide-step-id-badge">
+                        {String(step.id).padStart(2, "0")}
+                      </span>
+                      <span className="guide-step-tag">{step.tag}</span>
+                    </div>
+                    <h3 className="guide-step-title">{step.title}</h3>
+                    <p className="guide-step-desc">{step.desc}</p>
                   </div>
-                  <h3 className="guide-step-title">{step.title}</h3>
-                  <p className="guide-step-desc">{step.desc}</p>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
 
-          {/* Right Column: Dynamic Mockup Preview */}
-          <div aria-live="polite" className="guide-mockup-column">
-            <div className="guide-mockup-swap" key={activeStepId}>
-              {activeStepId === 1 && (
-                <UserStep1SkillMockup mockup={copy.mockup} />
-              )}
-              {activeStepId === 2 && (
-                <UserStep2BrowserMockup mockup={copy.mockup} />
-              )}
-              {activeStepId === 3 && <GuideStep3Agents copy={copy.mockup} />}
+            {/* Right Column: Dynamic Mockup Preview */}
+            <div aria-live="polite" className="guide-mockup-column">
+              <div className="guide-mockup-swap" key={activeStepId}>
+                {activeStepId === 1 && (
+                  <UserStep1SkillMockup mockup={copy.mockup} />
+                )}
+                {activeStepId === 2 && (
+                  <UserStep2BrowserMockup mockup={copy.mockup} />
+                )}
+                {activeStepId === 3 && <GuideStep3Agents copy={copy.mockup} />}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-
+        </section>
       {/* ===== Tips Bento Section ===== */}
       <section className="guide-tips-section">
-        <div className="guide-section-heading guide-section-heading--center">
+        <div className="guide-section-heading">
           <h2>{copy.tipsTitle}</h2>
         </div>
         <div className="guide-tips-grid">
           {copy.tips.map((tip, idx) => {
             const TipGlyph = TIP_GLYPHS[idx % TIP_GLYPHS.length];
             return (
-              <div
-                key={idx}
-                className={`guide-tip-card guide-tip-card-${idx % 3}`}
-              >
-                <h3 className="guide-tip-title">
-                  <span className="guide-tip-icon">
-                    <TipGlyph />
-                  </span>
-                  {tip.title}
-                </h3>
+              <article key={tip.title} className={`guide-tip-card guide-tip-card-${idx % 3}`}>
+                <div className="guide-tip-art" aria-hidden="true">
+                  <div className="guide-tip-window"><TipGlyph /><i /></div>
+                </div>
+                <h3 className="guide-tip-title">{tip.title}</h3>
                 <p className="guide-tip-desc">{tip.desc}</p>
-              </div>
+              </article>
             );
           })}
         </div>

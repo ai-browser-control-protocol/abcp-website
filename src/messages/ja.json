@@ -5,11 +5,28 @@
     "tagline": "最高の Agentic フィンガープリントブラウザ"
   },
   "nav": {
+    "useCases": "活用事例",
     "product": "製品紹介",
     "guide": "利用ガイド",
     "downloadSection": "ダウンロード",
     "download": "ダウンロード",
     "github": "GitHub"
+  },
+  "caseLibrary": {
+    "headline": "WebCross がお手伝いします！",
+    "intro": "商品リストから出品の下書きを作ったり、話題の投稿から記事のネタを集めたり。身近な仕事を選んで、WebCross がどう進めるか見てみましょう。",
+    "all": "すべての事例",
+    "filters": "業務別に絞り込む",
+    "count": "{count} 件の事例",
+    "categories": {
+      "commerce": "EC 運営",
+      "social": "ソーシャルメディア",
+      "data": "データ収集",
+      "marketing": "デジタル広告",
+      "career": "採用・求職"
+    },
+    "prompt": "Agent への依頼例",
+    "close": "事例を閉じる"
   },
   "locales": {
     "zh": "简体中文",
@@ -24,7 +41,7 @@
     },
     "guide": {
       "title": "利用ガイド · WebCross",
-      "description": "WebCrossの利用ガイド：起動時のSkill自動準備から専用ブラウザの作成、AI Agentからの直接操作まで。"
+      "description": "WebCross の内蔵 AI アシスタントの設定方法と、Skill を使って Claude Code や Codex を接続する手順を紹介します。"
     },
     "download": {
       "title": "WebCross をダウンロード · デスクトップクライアント",
@@ -864,10 +881,38 @@
   "guide": {
     "title": "利用ガイド",
     "eyebrow": "QUICK START GUIDE",
-    "heading": "3分でわかるクイックスタートガイド",
-    "subheading": "面倒な設定なし。3つのシンプルなステップで、AIに本物のブラウザ操作力を授けます。",
-    "ctaDownload": "WebCross を無料体験",
-    "heroMeta": "macOS 13+ と Windows 10 / 11 に対応 · 公開ベータ期間中は全機能無料",
+    "heading": "3分で始める WebCross",
+    "subheading": "内蔵 AI アシスタントに直接依頼することも、使い慣れたエージェントを接続することもできます。",
+    "externalTitle": "外部エージェントを接続する",
+    "externalIntro": "Skill をインストールし、ブラウザを作成して、最初のタスクをエージェントに依頼しましょう。",
+    "assistant": {
+      "title": "内蔵 AI アシスタントを使う",
+      "steps": [
+        {
+          "title": "モデルサービスを開く",
+          "body": "アプリの「設定 → AI アシスタント」を開くか、チャット画面で「モデルを設定」を選びます。「モデルサービス」でプロバイダーを追加するか、既存の設定を編集します。"
+        },
+        {
+          "title": "モデルを選んで保存する",
+          "body": "OpenRouter や DeepSeek などのプロバイダーを選び、API キーと API アドレスを入力します。「利用可能なモデルを取得」で使いたいモデルにチェックを入れて保存します。「モデルを追加」から ID と表示名を手入力することもできます。"
+        },
+        {
+          "title": "最初の依頼を送る",
+          "body": "「AI アシスタント」に戻り、有効にしたモデルを選びます。読みたい記事を開き、次のように依頼してみましょう。"
+        }
+      ],
+      "example": "「この記事の要点を3つ、箇条書きでまとめて。」",
+      "demoTitle": "モデル設定デモ",
+      "provider": "プロバイダー",
+      "apiKey": "API キー",
+      "endpoint": "API アドレス",
+      "models": "モデル一覧（デモ）",
+      "noExamples": "このプロバイダーに該当するモデルは、7つのサンプルには含まれていません。",
+      "fetch": "利用可能なモデルを取得",
+      "save": "保存",
+      "saved": "選択したモデルを保存しました",
+      "replay": "もう一度試す"
+    },
     "stepsTitle": "3ステップで接続完了",
     "steps": [
       {
@@ -1062,7 +1107,6 @@
     "pricing": "料金",
     "devColumn": "開発者",
     "docs": "ドキュメント",
-    "legalColumn": "法規",
     "privacy": "プライバシーポリシー",
     "agreement": "利用規約"
   },

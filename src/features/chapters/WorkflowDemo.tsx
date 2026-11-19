@@ -1,23 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { HomeCopy } from "@/content/home";
 import "./workflow-demo.css";
 
-const BEATS = 12;
+const BEATS_PER_STAGE = 12;
 const BEAT_MS = 1150;
+const motionQuery = "(prefers-reduced-motion: reduce)";
+
+function subscribeMotionPreference(notify: () => void) {
+  const preference = window.matchMedia(motionQuery);
+  preference.addEventListener("change", notify);
+  return () => preference.removeEventListener("change", notify);
+}
 const ease = [0.22, 1, 0.36, 1] as const;
 type Demo = HomeCopy["workflow"]["demo"];
 type BrowserFeed = Pick<Demo["research"], "topic" | "sources" | "xPosts" | "redditPosts" | "threadsPosts">;
 
 function Check() {
   return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-9" /></svg>;
-}
-
-function Arrow() {
-  return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" /></svg>;
 }
 
 function Spark() {
@@ -94,16 +97,25 @@ function Composer({
   );
 }
 
+function AgentThreadHeading() {
+  return (
+    <div className="wfc-thread-heading">
+      <Image className="wfc-agent-avatar" src="/brand/webcross-icon.webp" alt="" width={28} height={21} />
+      <strong>WebCross Agent</strong><small>ONLINE</small>
+    </div>
+  );
+}
+
 function ResearchAgent({ copy, beat }: { copy: Demo; beat: number }) {
   const doneAt = [4, 6, 8, 9];
   const complete = beat >= 9;
   return (
     <div className="wfc-agent-thread">
-      <div className="wfc-thread-heading"><span className="wfc-agent-avatar">AI</span><strong>WebCross Agent</strong><small>ONLINE</small></div>
+      <AgentThreadHeading />
       {beat >= 3 && <motion.div className="wfc-user-message" initial={false} animate={{ opacity: 1 }}>{copy.prompts[0]}</motion.div>}
       {beat >= 3 && (
         <div className="wfc-agent-answer">
-          <span className="wfc-agent-avatar">AI</span>
+          <Image className="wfc-agent-avatar" src="/brand/webcross-icon.webp" alt="" width={28} height={21} />
           <div><strong>{copy.taskTitle}</strong><p>{complete ? copy.research.done : copy.research.running}</p></div>
         </div>
       )}
@@ -250,7 +262,9 @@ function ResearchBrowser({ copy, beat, showDigest = true, feed }: { copy: Demo; 
           </motion.div>
         </AnimatePresence>
       )}
-      <motion.div className="wfc-agent-cursor" animate={{ left: `${point[0]}%`, top: `${point[1]}%` }} transition={{ duration: 0.75, ease }}><Cursor /><span>AI</span></motion.div>
+      {!displayDigest && !(feed && beat >= 8) && (
+        <motion.div className="wfc-agent-cursor" aria-hidden="true" animate={{ left: `${point[0]}%`, top: `${point[1]}%` }} transition={{ duration: 0.75, ease }}><Cursor /><span>AI</span></motion.div>
+      )}
     </div>
   );
 }
@@ -379,47 +393,34 @@ function ReuseView({ copy, beat }: { copy: Demo; beat: number }) {
 }
 
 export function WorkflowDemo({ copy }: { copy: HomeCopy }) {
-  const reduceMotion = useReducedMotion();
-  const [stage, setStage] = useState(0);
-  const [beat, setBeat] = useState(0);
-  const [playing, setPlaying] = useState(false);
+  const reduceMotion = useSyncExternalStore(subscribeMotionPreference, () => window.matchMedia(motionQuery).matches, () => false);
+  const [frame, setFrame] = useState(0);
   const [inView, setInView] = useState(false);
-  const hostRef = useRef<HTMLElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const demo = copy.workflow.demo;
 
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      setBeat(reduceMotion ? BEATS - 1 : 0);
-      setPlaying(!reduceMotion);
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [reduceMotion]);
+  const stageCount = copy.workflow.steps.length;
+  const stage = Math.floor(frame / BEATS_PER_STAGE);
+  const beat = reduceMotion ? BEATS_PER_STAGE - 1 : frame % BEATS_PER_STAGE;
 
   useEffect(() => {
-    const node = hostRef.current;
+    const node = panelRef.current;
     if (!node) return;
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.18 });
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.intersectionRatio >= 0.18), { threshold: 0.18 });
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    if (!playing || !inView || reduceMotion) return;
+    if (!inView || reduceMotion) return;
     const timer = window.setTimeout(() => {
-      if (beat >= BEATS - 1) {
-        setStage((current) => (current + 1) % 3);
-        setBeat(0);
-      } else {
-        setBeat((current) => current + 1);
-      }
+      setFrame((frame + 1) % (stageCount * BEATS_PER_STAGE));
     }, BEAT_MS);
     return () => window.clearTimeout(timer);
-  }, [playing, inView, reduceMotion, beat]);
+  }, [inView, reduceMotion, frame, stageCount]);
 
   const selectStage = (index: number) => {
-    setStage(index);
-    setBeat(reduceMotion ? BEATS - 1 : 0);
-    setPlaying(!reduceMotion);
+    setFrame(index * BEATS_PER_STAGE);
   };
 
   const prompt = demo.prompts[stage];
@@ -427,14 +428,14 @@ export function WorkflowDemo({ copy }: { copy: HomeCopy }) {
   const busy = stage === 2 ? beat >= 3 && beat < 8 : beat >= 3 && beat < 9;
 
   return (
-    <section className="home-section workflow-section" id="workflow" ref={hostRef}>
-      <div className="home-section-heading workflow-heading" data-reveal><h2>{copy.workflow.title}</h2><p className="workflow-subtitle">{copy.workflow.subtitle}</p></div>
-      <div className="workflow-v2-shell">
-        <div className="workflow-v2-steps" role="tablist" aria-label={copy.workflow.title}>
-          {copy.workflow.steps.map((step, index) => <button type="button" role="tab" aria-selected={stage === index} className={stage === index ? "is-active" : ""} onClick={() => selectStage(index)} key={step.title}><span className="workflow-v2-index">0{index + 1}</span><span><strong>{step.title}</strong><small>{step.description}</small></span><Arrow /></button>)}
-        </div>
-        <div className="workflow-product-stage">
-          <div className="wfc-client" aria-hidden="true">
+    <section className="home-section workflow-section" id="workflow" aria-labelledby="workflow-title">
+      <header className="workflow-caption">
+        <h2 id="workflow-title">{copy.workflow.title}</h2>
+        <p>{copy.workflow.subtitle}</p>
+      </header>
+      <div className="workflow-visual">
+        <div className="workflow-product-stage" role="tabpanel" id="workflow-panel" ref={panelRef} aria-labelledby={`workflow-tab-${stage}`}>
+          <div className="wfc-client">
             <Sidebar copy={demo} />
             <div className="wfc-main">
               <ClientTopbar copy={demo} stage={stage} />
@@ -448,6 +449,37 @@ export function WorkflowDemo({ copy }: { copy: HomeCopy }) {
               <Composer copy={demo} text={prompt.slice(0, typedLength)} active={beat < 3} busy={busy} selectedSkill={stage === 2 ? { skill: demo.reuse.skill, script: demo.reuse.script } : undefined} />
             </div>
           </div>
+        </div>
+
+        <div className="workflow-v2-steps" role="tablist" aria-label={copy.workflow.title}>
+          {copy.workflow.steps.map((step, index) => (
+            <button
+              type="button"
+              role="tab"
+              id={`workflow-tab-${index}`}
+              aria-controls="workflow-panel"
+              aria-selected={stage === index}
+              tabIndex={stage === index ? 0 : -1}
+              className={stage === index ? "is-active" : ""}
+              onClick={() => selectStage(index)}
+              onKeyDown={(event) => {
+                const keys: Record<string, number> = {
+                  ArrowRight: (index + 1) % stageCount,
+                  ArrowLeft: (index + stageCount - 1) % stageCount,
+                  Home: 0,
+                  End: stageCount - 1,
+                };
+                const next = keys[event.key];
+                if (next === undefined) return;
+                event.preventDefault();
+                selectStage(next);
+                document.getElementById(`workflow-tab-${next}`)?.focus();
+              }}
+              key={step.title}
+            >
+              <strong>{step.title}</strong>
+            </button>
+          ))}
         </div>
       </div>
     </section>

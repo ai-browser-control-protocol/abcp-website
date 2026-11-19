@@ -458,7 +458,7 @@
   padding: 0 6px;
   border: 1px solid rgba(255, 107, 53, 0.35);
   border-radius: 999px;
-  background: rgba(255, 107, 53, 0.12);
+  background: var(--apricot);
   color: #b4491c;
   font: 700 6.5px/1 var(--gs3-ui);
   letter-spacing: 0.02em;
@@ -913,7 +913,7 @@
   margin: 1px -4px;
   padding: 2px 4px;
   border-radius: 4px;
-  background: #fff5ec;
+  background: var(--apricot);
   box-shadow: inset 0 0 0 1px rgba(255, 107, 53, 0.42);
 }
 
@@ -1466,7 +1466,7 @@
   padding: 2px 4px;
   border: 1px solid rgba(255, 107, 53, 0.3);
   border-radius: 999px;
-  background: rgba(255, 107, 53, 0.12);
+  background: var(--apricot);
   color: #b4491c;
   font: 700 5.5px/1 var(--gs3-ui);
 }
@@ -1967,7 +1967,7 @@
 
 .gs3-ai-tab.is-active {
   border-color: #f2c9ad;
-  background: #fff4ec;
+  background: var(--apricot);
   color: #d95f1f;
   font-weight: 700;
   box-shadow: 0 1px 2px rgba(217, 95, 31, 0.08);
@@ -2007,7 +2007,7 @@
   padding: 4px 7px;
   border: 1px solid #f0d8c6;
   border-radius: 8px 8px 2px 8px;
-  background: #fff6ef;
+  background: var(--apricot-wash);
   color: #3a332b;
   font-size: 7px;
   line-height: 1.4;

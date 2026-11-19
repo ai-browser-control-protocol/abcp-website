@@ -1,11 +1,8 @@
 /**
  * "Solutions" chapter copy — the rewrite of the former How-it-works page.
  *
- * The page argues one story in seven beats: stealth (IP / fingerprint / CAPTCHA),
- * fingerprint + residential geography, a Chromium fork that drives the engine
- * directly, a semantic tree that keeps Token cost down, a 100+ environment
- * matrix, auditable action records with human takeover, and finally reusable JS
- * scripts wired into agent workflows.
+ * The page covers browser environments, the Chromium engine, page reading,
+ * action records and reusable scripts.
  *
  * zh and en are authored here. ja/ko currently reuse the English object (the
  * same fallback the homepage uses); the locale team can replace those two
@@ -32,22 +29,9 @@ export interface SolutionCheck {
 
 export interface SolutionsCopy {
   seo: { title: string; description: string };
-  eyebrow: string;
   hero: {
-    /** Leading line of the H1 (plain ink) */
-    titleA: string;
-    /** The phrase carried on a yellow highlight */
-    titleAccent: string;
-    /** Closing line of the H1 (plain ink) */
-    titleB: string;
+    title: string;
     lead: string;
-    meta: string;
-    ctaPrimary: string;
-    ctaSecondary: string;
-    /** Labels inside the hero stealth-check mini panel */
-    panelTitle: string;
-    panelPassed: string;
-    panelBlocked: string;
   };
   isolation: {
     kicker: string;
@@ -68,10 +52,7 @@ export interface SolutionsCopy {
     chartBars: { headless: string; homeIp: string; webcross: string };
     chartNote: string;
     geoTitle: string;
-    geoLead: string;
     pickLabel: string;
-    countriesLabel: string;
-    looksLocal: string;
     siteSeesTitle: string;
     siteSees: {
       connection: string;
@@ -133,13 +114,6 @@ export interface SolutionsCopy {
       droppedLabel: string;
     };
   };
-  fleet: {
-    kicker: string;
-    title: string;
-    lead: string;
-    bullets: string[];
-    panelLabel: string;
-  };
   evidence: {
     kicker: string;
     title: string;
@@ -147,6 +121,14 @@ export interface SolutionsCopy {
     bullets: string[];
     imageAlt: string;
     caption: string;
+    checkpoint: {
+      confirm: string;
+      replay: string;
+      pending: string;
+      resumed: string;
+      prompt: string;
+      result: string;
+    };
     callouts: { title: string; text: string }[];
   };
   script: {
@@ -165,20 +147,11 @@ const zh: SolutionsCopy = {
   seo: {
     title: "解决方案",
     description:
-      "从账号隔离、真实指纹与独立 IP，到自研 Chromium 直驱、语义树省 Token、100+ 环境并发、AI 行动留痕与可复用 JS Script——WebCross 如何把网页自动化做成可交付的业务能力。",
+      "了解 WebCross 的浏览器环境、Chromium 内核、页面读取、操作记录和可复用脚本。",
   },
-  eyebrow: "",
   hero: {
-    titleA: "网站会",
-    titleAccent: "把你的Agent当成真人",
-    titleB: "而不是脚本",
-    lead: "换掉一行 Playwright 代码，或从任意 RPA 工具迁移过来。WebCross 从浏览器内核层解决指纹、IP、速度与可维护性——让Agent第一次真正像人一样上网。",
-    meta: "网站总是检查三样信息：你从哪里来、浏览器像不像真人、你是不是真人。我们都会处理好。",
-    ctaPrimary: "免费下载 WebCross",
-    ctaSecondary: "三分钟使用指南",
-    panelTitle: "风控站点实际放行",
-    panelPassed: "通过",
-    panelBlocked: "被拦截",
+    title: "网站会把你的 Agent\n当成真人，而不是脚本",
+    lead: "换掉一行 Playwright 代码，或从任意 RPA 工具迁移过来。WebCross 从浏览器内核层解决指纹、IP、速度与可维护性——让 Agent 第一次真正像人一样上网。",
   },
   isolation: {
     kicker: "",
@@ -229,10 +202,7 @@ const zh: SolutionsCopy = {
     },
     chartNote: "公开指纹测试口径的参考值，非 WebCross 实测；实际放行率取决于站点风控策略与任务类型。",
     geoTitle: "在任意国家上网",
-    geoLead: "网站应当看到的是当地家庭宽带，而不是数据中心 IP。",
     pickLabel: "选择国家 / 地区",
-    countriesLabel: "多个国家地区可用",
-    looksLocal: "看起来像本地用户",
     siteSeesTitle: "网站看到的信息",
     siteSees: {
       connection: "网络",
@@ -317,17 +287,6 @@ const zh: SolutionsCopy = {
       droppedLabel: "丢弃：样式 · 脚本 · 隐藏节点",
     },
   },
-  fleet: {
-    kicker: "",
-    title: "100+ 个物理隔离环境统一管理",
-    lead: "每个账号拥有独立的浏览器环境：独立指纹、独立出口 IP、独立存储，互不串号。窗口集中管理，百级环境像管理一台浏览器一样简单。",
-    bullets: [
-      "每环境独立指纹、Cookie 与本地存储，物理隔离",
-      "独立出口 IP，可绑定固定地区与网络通道",
-      "统一窗口管理，批量就绪，100+ 环境互不干扰",
-    ],
-    panelLabel: "窗口管理",
-  },
   evidence: {
     kicker: "",
     title: "每一步都有据可查，关键步骤始终在你手里",
@@ -335,6 +294,11 @@ const zh: SolutionsCopy = {
     bullets: [],
     imageAlt: "WebCross 客户端的发布新贴文页面：x.com 页面来源、动作记录列表，以及一条等待人工接管的提示。",
     caption: "WebCross 客户端 · 发布新贴文",
+    checkpoint: {
+      confirm: "确认并继续", replay: "重新演示", pending: "待确认", resumed: "已恢复",
+      prompt: "发布前暂停，等待你确认草稿内容。",
+      result: "草稿内容已确认，任务从断点继续。",
+    },
     callouts: [
       {
         title: "人工接管卡点",
@@ -374,20 +338,11 @@ const en: SolutionsCopy = {
   seo: {
     title: "Solutions",
     description:
-      "Account isolation, real fingerprints and residential IPs, a Chromium fork that drives the engine directly, a semantic tree that cuts Token cost, 100+ concurrent environments, auditable action records and reusable JS scripts — how WebCross turns web automation into deliverable business capability.",
+      "Explore browser environments, the Chromium engine, page reading, action history and reusable scripts in WebCross.",
   },
-  eyebrow: "",
   hero: {
-    titleA: "Websites treat ",
-    titleAccent: "your Agent as a person",
-    titleB: "not a script",
+    title: "Websites treat your Agent as a person, not a script",
     lead: "Change one line of your Playwright code — or migrate straight from any RPA tool. WebCross fixes fingerprints, IPs, speed and maintainability at the browser-engine level, so your Agent finally browses like a person.",
-    meta: "Sites always check three things: where you connect from, whether your browser looks human, and whether you are human. We handle all of them.",
-    ctaPrimary: "Download WebCross — Free",
-    ctaSecondary: "3-minute quick start",
-    panelTitle: "Bot-protected sites let through",
-    panelPassed: "Passed",
-    panelBlocked: "Blocked",
   },
   isolation: {
     kicker: "",
@@ -436,10 +391,7 @@ const en: SolutionsCopy = {
     },
     chartNote: "Reference values from public fingerprint testing, not WebCross measurements; real pass rates depend on the site's bot policy and the task.",
     geoTitle: "Browse from any country",
-    geoLead: "What sites should see is a local home connection — not a data-center IP.",
     pickLabel: "Pick a country",
-    countriesLabel: "Many countries and regions available",
-    looksLocal: "Looks local",
     siteSeesTitle: "What the site sees",
     siteSees: {
       connection: "Connection",
@@ -524,17 +476,6 @@ const en: SolutionsCopy = {
       droppedLabel: "Dropped: styles · scripts · hidden nodes",
     },
   },
-  fleet: {
-    kicker: "",
-    title: "100+ physically isolated environments, managed together",
-    lead: "Every account owns a separate browser environment: its own fingerprint, its own residential exit IP, its own storage. Windows are managed in one place, so a hundred environments feel like one.",
-    bullets: [
-      "Per-environment fingerprint, cookies and local storage, physically isolated",
-      "Dedicated residential exit IP with pinned region and network path",
-      "Clone templates into a ready fleet; 100+ concurrent runs never cross",
-    ],
-    panelLabel: "Window management",
-  },
   evidence: {
     kicker: "",
     title: "Every action leaves proof — critical steps stay yours",
@@ -542,6 +483,11 @@ const en: SolutionsCopy = {
     bullets: [],
     imageAlt: "The WebCross client publish-post view on x.com: page source, the action-record list, and a human-takeover prompt.",
     caption: "WebCross client · Publish post",
+    checkpoint: {
+      confirm: "Confirm and resume", replay: "Replay demo", pending: "Awaiting review", resumed: "Resumed",
+      prompt: "Paused before publishing so you can review the draft.",
+      result: "Draft confirmed. The task resumed at the checkpoint.",
+    },
     callouts: [
       {
         title: "Human checkpoint",

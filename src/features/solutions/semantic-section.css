@@ -4,9 +4,8 @@
    One calm panel for one claim: a wide full-page DOM block settles into a
    small AXTree block, the 85% ratio counts up between them, the kept/dropped
    key sits directly under the diagram, and the two measurements close the
-   panel with the fine print as their caption. The palette is the homepage's
-   warm glass family: cream panels, an orange hairline accent, and green only
-   where the tree "keeps" something.
+   panel. The palette is the homepage's warm glass family: cream panels, an
+   orange hairline accent, and green only where the tree "keeps" something.
 
    Motion: on first view the DOM block compresses (with one filter sweep), the
    tree block fades in, and the ratio counts 0 → 98. Reduced motion / no JS
@@ -26,7 +25,7 @@
   --sem-line: #e7e2d8;
   --sem-line-soft: #f0eae0;
   --sem-accent: #ff6b35;
-  --sem-accent-soft: #ffefdf;
+  --sem-accent-soft: var(--apricot);
   --sem-amber: #f0a86a;
   --sem-ok: #2e8b62;
   --sem-faint-line: #c6bdb0;
@@ -377,12 +376,11 @@
   color: #7d766a;
 }
 
-/* ===== Footer: the two measurements, with the fine print as their caption ==== */
+/* ===== Footer: the two measurements close the panel ===== */
 .sem-foot {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: baseline;
-  gap: 10px 32px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
   margin-top: 20px;
   padding-top: 18px;
   border-top: 1px solid var(--sem-line-soft);
@@ -448,15 +446,6 @@
   line-height: 1;
 }
 
-.sem-note {
-  justify-self: end;
-  max-width: 620px;
-  margin: 0;
-  color: #8a8377;
-  text-align: right;
-  text-wrap: pretty;
-}
-
 /* ===== Compact principle legend =====
    The three claims have different lengths, so a plain three-column list left
    the first one ragged onto a second line while its neighbours stayed on one.
@@ -474,17 +463,10 @@
   display: flex;
   align-items: flex-start;
   gap: 11px;
-  min-height: 82px;
-  padding: 16px 18px;
+  padding: 8px 4px;
   color: var(--sol-body);
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: var(--glass-filter);
-  -webkit-backdrop-filter: var(--glass-filter);
   font-size: var(--fs-body);
-  line-height: var(--lh-body);
+  line-height: 1.7;
 }
 
 .solutions-page .sem-bullets li::before {
@@ -496,7 +478,7 @@
   height: 18px;
   margin-top: 0.16em;
   color: var(--oxide-text, #c2410c);
-  background: rgba(255, 107, 53, 0.13);
+  background: var(--apricot);
   border-radius: 50%;
   content: "✓";
   font-size: 10px;
@@ -754,15 +736,8 @@
 
   .sem-foot {
     grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
     margin-top: 18px;
     padding-top: 16px;
-  }
-
-  .sem-note {
-    justify-self: start;
-    max-width: none;
-    text-align: left;
   }
 
   .solutions-page .sem-bullets {

@@ -4,11 +4,13 @@
 import Image from "next/image";
 import { chapterPath } from "@/content/chapters";
 import { site } from "@/content/site";
+import { categories } from "@/content/use-cases";
 import type { ChromeCopy, GithubNavDisplay } from "@/content/models";
-import { Link } from "@/i18n/navigation";
+import { getPathname, Link } from "@/i18n/navigation";
 import "./footer.css";
 
 export function Footer({ chrome, github }: { chrome: ChromeCopy; github: GithubNavDisplay }) {
+  const casesPath = getPathname({ locale: chrome.locale, href: "/use-cases" });
   return (
     <footer className="site-footer">
       <div className="footer-container">
@@ -40,11 +42,13 @@ export function Footer({ chrome, github }: { chrome: ChromeCopy; github: GithubN
               </a>
               <Link href={chapterPath("guide")}>{chrome.footer.docs}</Link>
             </div>
-
-            <div className="footer-link-col">
-              <h4 className="footer-col-title">{chrome.footer.legalColumn}</h4>
-              <Link href="/privacy">{chrome.footer.privacy}</Link>
-              <Link href="/agreement">{chrome.footer.agreement}</Link>
+            <div className="footer-link-col footer-cases">
+              <h4 className="footer-col-title">{chrome.nav.useCases}</h4>
+              {categories.map((category) => (
+                <a key={category} href={`${casesPath}?category=${category}#cases`}>
+                  {chrome.caseCategories[category]}
+                </a>
+              ))}
             </div>
           </nav>
         </div>
@@ -61,6 +65,10 @@ export function Footer({ chrome, github }: { chrome: ChromeCopy; github: GithubN
             />
             © {site.copyrightYear} {chrome.brandName}. All rights reserved.
           </span>
+          <div className="footer-legal-links">
+            <Link href="/privacy">{chrome.footer.privacy}</Link>
+            <Link href="/agreement">{chrome.footer.agreement}</Link>
+          </div>
         </div>
       </div>
     </footer>

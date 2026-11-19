@@ -18,8 +18,9 @@ export function TopNav({ chrome, github }: { chrome: ChromeCopy; github: GithubN
   const pathname = usePathname();
   const solutionsActive = pathname.includes("/solutions");
   const legalPath = pathname.match(/\/(privacy|agreement)\/?$/)?.[0];
-  const productActive = chapter === "product" && !solutionsActive && !legalPath;
-  const localizedChapterPath = solutionsActive ? "/solutions" : (legalPath ?? chapterPath(chapter));
+  const useCasesActive = pathname.split("/").includes("use-cases");
+  const productActive = chapter === "product" && !solutionsActive && !useCasesActive && !legalPath;
+  const localizedChapterPath = useCasesActive ? "/use-cases" : solutionsActive ? "/solutions" : (legalPath ?? chapterPath(chapter));
   const [navOpen, setNavOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -90,6 +91,15 @@ export function TopNav({ chrome, github }: { chrome: ChromeCopy; github: GithubN
             onClick={closeAll}
           >
             {chrome.nav.product}
+          </Link>
+
+          <Link
+            className={`nav-link${useCasesActive ? " is-current" : ""}`}
+            href="/use-cases"
+            aria-current={useCasesActive ? "page" : undefined}
+            onClick={closeAll}
+          >
+            {chrome.nav.useCases}
           </Link>
 
           <Link

@@ -5,10 +5,14 @@
   --bg-surface: #ffffff;
   --bg-surface-elevated: #fafafa;
   --bg-surface-hover: #f4f4f5;
+  --surface-mist: #f5f7f8;
+  --ink-slate: #27343d;
+  --muted-slate: #53636e;
+  --edge-mist: #dfe5e8;
   --bg-glass: rgba(255, 255, 255, 0.56);
   --bg-glass-card: rgba(255, 255, 255, 0.54);
   --bg-glass-card-hover: rgba(255, 255, 255, 0.72);
-  --bg-accent-subtle: rgba(255, 107, 53, 0.08);
+  --bg-accent-subtle: var(--apricot);
   --glass-border: rgba(255, 255, 255, 0.72);
   --glass-filter: blur(24px) saturate(140%);
   --glass-shadow: 0 24px 64px -44px rgba(29, 31, 26, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.86);
@@ -34,10 +38,13 @@
   --text-note: #6c635a;
   --text-soft: #5b5349;
 
-  /* Brand accent — saturated WebCross orange, plus four local accents. */
+  /* Brand orange for actions, apricot for secondary surfaces and selection. */
   --oxide: #ff6b35;
+  --apricot: #ffe4d3;
+  --apricot-ink: #a93b0e;
+  --apricot-wash: color-mix(in srgb, var(--apricot) 45%, white);
   --oxide-hover: #ea580c;
-  --oxide-subtle: rgba(255, 107, 53, 0.1);
+  --oxide-subtle: var(--apricot);
   --oxide-glow: rgba(255, 107, 53, 0.25);
   --accent-orange: var(--oxide);
   --accent-sky: #8fd3ff;
@@ -81,18 +88,18 @@
 
   /* Soft grounds — the page is never flat white. A warm wash sits under the
      hero, and section bands alternate to give the scroll a rhythm. */
-  --wash-hero: radial-gradient(ellipse 104% 72% at 50% 14%, #ffdfcd 0%, #fff1e6 38%, rgba(255, 255, 255, 0) 74%);
+  --wash-hero: radial-gradient(ellipse 104% 72% at 50% 14%, var(--apricot) 0%, var(--apricot-wash) 38%, transparent 74%);
   --band-warm: #fff8f4;
   --band-mist: #fbfafa;
 
   /* Bento card grounds — every card commits to one of these three. */
   --card-ink: #101114;
   --card-ink-soft: #17181d;
-  --card-peach: #fff1e8;
+  --card-peach: var(--apricot);
   --card-cream: #fdf8f4;
 
   /* Tinted glass grounds derived from the accent colors. */
-  --pastel-peach: #ffe2d3;
+  --pastel-peach: var(--apricot);
   --pastel-sky: #c9ebff;
   --pastel-lilac: #ddd8ff;
   --pastel-green: #d2f8e7;

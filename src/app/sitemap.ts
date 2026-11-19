@@ -26,5 +26,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     })),
   );
-  return [...chapters, ...technicalPages, ...legalPages];
+  const caseDirectories = LOCALES.map((locale) => ({
+    url: siteUrl(locale, "use-cases"),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+  return [...chapters, ...caseDirectories, ...technicalPages, ...legalPages];
 }

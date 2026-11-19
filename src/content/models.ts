@@ -18,6 +18,7 @@ export interface ChromeCopy {
   tagline: string;
   nav: {
     product: string;
+    useCases: string;
     guide: string;
     solutions: string;
     downloadSection: string;
@@ -26,6 +27,7 @@ export interface ChromeCopy {
   };
   localeLabels: Record<Locale, string>;
   footer: Messages["footer"];
+  caseCategories: Messages["caseLibrary"]["categories"];
   a11y: Pick<Messages["a11y"], "mainNav" | "footerNav" | "localeNav" | "stage" | "menu" | "github" | "githubStars">;
 }
 
@@ -54,6 +56,7 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
     tagline: t.brand.tagline,
     nav: {
       product: t.nav.product,
+      useCases: t.nav.useCases,
       guide: t.nav.guide,
       solutions: locale === "zh" ? "解决方案" : locale === "ja" ? "ソリューション" : locale === "ko" ? "솔루션" : "Solutions",
       downloadSection: t.nav.downloadSection,
@@ -62,6 +65,7 @@ export function getChromeCopy(locale: Locale): ChromeCopy {
     },
     localeLabels: t.locales,
     footer: t.footer,
+    caseCategories: t.caseLibrary.categories,
     a11y: {
       mainNav: t.a11y.mainNav,
       footerNav: t.a11y.footerNav,

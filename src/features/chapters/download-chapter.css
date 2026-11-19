@@ -289,7 +289,7 @@
   font-weight: 700;
   color: var(--oxide);
   padding: 2px 6px;
-  background: rgba(255, 107, 53, 0.12);
+  background: var(--apricot);
   border-radius: 4px;
   flex-shrink: 0;
   margin-top: 2px;
@@ -338,7 +338,7 @@
   --download-muted-light: #a8a29b;
   --download-orange: #ff6b35;
   --download-orange-deep: #d94816;
-  --download-orange-pale: #fff0e8;
+  --download-orange-pale: var(--apricot);
   --download-orange-line: #ffc6ad;
   --download-line: #e8e4df;
   --download-line-strong: #d5d0ca;
@@ -438,8 +438,7 @@
   line-height: 1.75;
 }
 
-/* Beta board card — mirrors the home feature cards: white card, hairline rule,
-   soft shadow, orange eyebrow over an ink headline (feature-eyebrow pattern). */
+/* Release summary shown for every platform. */
 .download-modern-beta {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(145px, 0.75fr);
@@ -448,8 +447,8 @@
   width: min(100%, 480px);
   margin-top: 32px;
   padding: 20px 22px;
-  background: #ffffff;
-  border: 1px solid #e9e4da;
+  background: var(--apricot);
+  border: 1px solid var(--download-orange-line);
   border-radius: var(--radius-xl);
   box-shadow: 0 16px 36px -34px rgba(60, 45, 30, 0.45);
 }
@@ -480,7 +479,7 @@
 
 .download-modern-beta-main span,
 .download-modern-beta-version span {
-  color: var(--oxide-text);
+  color: var(--apricot-ink);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -621,7 +620,7 @@
 
 .download-modern-recommendation {
   padding: 2px 7px;
-  color: var(--download-orange-deep);
+  color: var(--apricot-ink);
   background: var(--download-orange-pale);
   border: 1px solid var(--download-orange-line);
   border-radius: 999px;

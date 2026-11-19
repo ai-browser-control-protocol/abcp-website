@@ -7,15 +7,10 @@
  * rewritten — by the agent against the live page, and (c) then chain several
  * sites into one serial pipeline.
  *
- * The section is static marketing chrome: a syntax-highlighted script card and
- * a three-stage pipeline. Only the stage connector animates, and only when the
- * section scrolls into view (CSS-only), with a reduced-motion opt-out.
+ * Hovering the demo or focusing the code plays the three stages in sequence.
  */
-"use client";
-
 import type { ReactNode } from "react";
 import type { SolutionsCopy } from "@/content/solutions";
-import { useEnterMotion } from "./useEnterMotion";
 import "./script-section.css";
 
 type ScriptCopy = SolutionsCopy["script"];
@@ -29,7 +24,7 @@ function CodeLines() {
   return (
     <pre className="scr-code" aria-label="WebCross workflow script example" tabIndex={0}>
       <code>
-        <span className="scr-code-line">
+        <span className="scr-code-line" data-phase="save">
           <span className="scr-ln">1</span>
           <Tok kind="com">{"// workflows/post-to-x.workflow.js"}</Tok>
         </span>
@@ -37,7 +32,7 @@ function CodeLines() {
           <span className="scr-ln">2</span>
           <Tok kind="com">{"// auto-activates when x.com/compose/post opens"}</Tok>
         </span>
-        <span className="scr-code-line">
+        <span className="scr-code-line" data-phase="save">
           <span className="scr-ln">3</span>
           <Tok kind="kw">export const</Tok> <Tok kind="plain">meta</Tok> <Tok kind="op">=</Tok> <Tok kind="plain">{"{ "}</Tok>
           <Tok kind="prop">site</Tok>
@@ -53,12 +48,12 @@ function CodeLines() {
           <span className="scr-ln">4</span>
           <Tok kind="plain">{" "}</Tok>
         </span>
-        <span className="scr-code-line">
+        <span className="scr-code-line" data-phase="run">
           <span className="scr-ln">5</span>
           <Tok kind="kw">export async function</Tok> <Tok kind="fn">run</Tok>
           <Tok kind="plain">(ctx) {"{"}</Tok>
         </span>
-        <span className="scr-code-line">
+        <span className="scr-code-line" data-phase="run">
           <span className="scr-ln">6</span>
           <Tok kind="plain">  {"await "}</Tok>
           <Tok kind="prop">Page</Tok>
@@ -99,7 +94,7 @@ function CodeLines() {
           <Tok kind="str">&quot;composer/post&quot;</Tok>
           <Tok kind="plain">);</Tok>
         </span>
-        <span className="scr-code-line">
+        <span className="scr-code-line" data-phase="chain">
           <span className="scr-ln">10</span>
           <Tok kind="plain">  </Tok>
           <Tok kind="kw">return</Tok>
@@ -146,51 +141,33 @@ const SITES = ["x.com/compose/post", "x.com/home", "sheet"];
 
 function Pipeline({ copy }: { copy: ScriptCopy }) {
   return (
-    <div className="scr-pipeline">
-      <div className="scr-pipeline-rail" aria-hidden="true" />
+    <ol className="scr-pipeline">
       {copy.steps.map((step, index) => (
-        <article className={`scr-stage scr-stage--${index + 1}`} key={step.title}>
-          <div className="scr-stage-top">
-            <span className="scr-stage-index">0{index + 1}</span>
-            {index === 1 ? (
-              <span className="scr-stage-node">
-                <span className="scr-node-dot" aria-hidden="true" />
-                Webcross Ai
-              </span>
-            ) : (
-              <span className="scr-stage-node">{SITES[Math.min(index, SITES.length - 1)]}</span>
+        <li className={`scr-stage scr-stage--${index + 1}`} key={step.title}>
+          <span className="scr-stage-index" aria-hidden="true">0{index + 1}</span>
+          <div>
+            <h3 className="scr-stage-title">{step.title}</h3>
+            <p className="scr-stage-text">{step.text}</p>
+            {index === 2 && (
+              <div className="scr-stage-flow" aria-hidden="true">
+                {SITES.map((site, siteIndex) => (
+                  <span key={site}>
+                    {siteIndex > 0 && <i>→</i>}
+                    <b>{site}</b>
+                  </span>
+                ))}
+              </div>
             )}
           </div>
-          <h3 className="scr-stage-title">{step.title}</h3>
-          <p className="scr-stage-text">{step.text}</p>
-          {index === 0 ? (
-            <div className="scr-stage-tags" aria-hidden="true">
-              <span>run</span>
-              <span>→</span>
-              <span>workflow.js</span>
-            </div>
-          ) : null}
-          {index === 2 ? (
-            <div className="scr-stage-flow" aria-hidden="true">
-              {SITES.map((site, siteIndex) => (
-                <span key={site}>
-                  <b>{site}</b>
-                  {siteIndex < SITES.length - 1 ? <i>→</i> : null}
-                </span>
-              ))}
-            </div>
-          ) : null}
-        </article>
+        </li>
       ))}
-    </div>
+    </ol>
   );
 }
 
 export function ScriptSection({ copy }: { copy: ScriptCopy }) {
-  const ref = useEnterMotion<HTMLElement>();
-
   return (
-    <section className="sol-section scr-section" id="script" ref={ref}>
+    <section className="sol-section scr-section" id="script">
       <div className="sol-section-head">
         <div>
           <span className="sol-kicker">{copy.kicker}</span>

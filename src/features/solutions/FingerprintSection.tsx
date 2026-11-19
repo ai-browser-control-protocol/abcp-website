@@ -1,21 +1,10 @@
 "use client";
 
-/**
- * Section 02 — fingerprints and residential IP geography.
- *
- * Two visuals argue the same point:
- *   (a) a pass-rate bar chart on the same bot-protected sites — the values are
- *       the reference benchmark figures from the source material and stay
- *       hardcoded here; the localised chartNote carries the disclaimer.
- *   (b) an interactive "browse from any country" demo — pick US / DE / JP / UK /
- *       SG and both the localised page greeting and the "what the site sees"
- *       panel switch to that country's residential connection.
- *
- * Bars grow once when the chart first enters the viewport; reduced-motion users
- * get the final state immediately.
- */
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
+import Image from "next/image";
+import type { Locale } from "@/content/types";
 import type { SolutionsCopy } from "@/content/solutions";
+import { useEnterMotion } from "./useEnterMotion";
 import "./fingerprint-section.css";
 
 type FingerprintCopy = SolutionsCopy["fingerprint"];
@@ -95,14 +84,6 @@ function buildCountries(copy: FingerprintCopy): Record<CountryCode, CountryView>
   };
 }
 
-function CheckGlyph() {
-  return (
-    <svg viewBox="0 0 20 20" aria-hidden="true">
-      <path d="m4 10.5 4 4 8-9" />
-    </svg>
-  );
-}
-
 function GlobeWatermark() {
   return (
     <svg className="fp-globe" viewBox="0 0 140 140" aria-hidden="true">
@@ -113,37 +94,48 @@ function GlobeWatermark() {
   );
 }
 
-export function FingerprintSection({ copy }: { copy: FingerprintCopy }) {
-  const countries = buildCountries(copy);
+export function RegionPreview({ copy, locale }: { copy: FingerprintCopy; locale: Locale }) {
   const [selected, setSelected] = useState<CountryCode>("DE");
-  const current = countries[selected];
+  const current = buildCountries(copy)[selected];
+  const names = new Intl.DisplayNames([locale], { type: "region" });
 
-  const chartRef = useRef<HTMLElement | null>(null);
+  const regionName = (code: CountryCode) => names.of(code === "UK" ? "GB" : code) ?? code;
 
-  // First-view bar growth without a React state machine: the effect toggles
-  // classes on the figure (an external DOM system), the stylesheet owns the
-  // animation, and prefers-reduced-motion is handled entirely in CSS.
-  useEffect(() => {
-    const node = chartRef.current;
-    if (!node) return;
-    if (typeof IntersectionObserver === "undefined") {
-      node.classList.add("is-play");
-      return;
-    }
-    node.classList.add("is-armed");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          node.classList.remove("is-armed");
-          node.classList.add("is-play");
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  return (
+    <figure className="fp-preview" aria-label={copy.geoTitle}>
+      <div className="fp-window">
+        <div className="fp-browser-chrome">
+          <Image src="/brand/webcross-icon.webp" alt="WebCross" width={29} height={22} />
+          <span className="fp-url">{current.url}</span>
+          <span className="fp-cc">{current.code}</span>
+        </div>
+        <div className="fp-browser-body" aria-live="polite" aria-atomic="true">
+          <div className="fp-page">
+            <GlobeWatermark />
+            <span className="fp-geo-title">{copy.geoTitle}</span>
+            <strong className="fp-greeting fp-swap" key={current.code}>{current.greeting}</strong>
+          </div>
+          <dl className="fp-sees-list" aria-label={copy.siteSeesTitle}>
+            <div><dt>{copy.siteSees.connection}</dt><dd>{current.connection}</dd></div>
+            <div><dt>{copy.siteSees.city}</dt><dd>{current.city}</dd></div>
+            <div><dt>{copy.siteSees.timezone}</dt><dd>{current.timezone}</dd></div>
+            <div><dt>{copy.siteSees.language}</dt><dd>{current.language}</dd></div>
+          </dl>
+        </div>
+        <div className="fp-picker" role="group" aria-label={copy.pickLabel}>
+          {COUNTRY_CODES.map((code) => (
+            <button key={code} type="button" className="fp-country" aria-pressed={selected === code} onClick={() => setSelected(code)}>
+              {regionName(code)}
+            </button>
+          ))}
+        </div>
+      </div>
+    </figure>
+  );
+}
+
+export function FingerprintSection({ copy }: { copy: FingerprintCopy }) {
+  const chartRef = useEnterMotion<HTMLElement>();
 
   const chartLabel = `${copy.chartTitle}: ${BENCHMARKS.map(
     (bar) => `${copy.chartBars[bar.key]} ${bar.value}%`,
@@ -157,22 +149,28 @@ export function FingerprintSection({ copy }: { copy: FingerprintCopy }) {
           <h2 className="sol-heading">{copy.title}</h2>
         </div>
         <p className="sol-lead">{copy.lead}</p>
+        <ul className="sol-bullets fp-bullets">
+          {copy.bullets.map((bullet) => (
+            <li key={bullet}>{bullet}</li>
+          ))}
+        </ul>
       </div>
 
-      {/* (a) benchmark pass-rate chart */}
       <figure className="sol-panel fp-chart" ref={chartRef}>
         <h3 className="fp-chart-title">{copy.chartTitle}</h3>
         <div className="fp-plot" role="img" aria-label={chartLabel}>
           {BENCHMARKS.map((bar, index) => (
-            <div className="fp-bar-col" data-tone={bar.tone} key={bar.key}>
-              <span className="fp-bar-value" style={{ "--fp-index": index } as CSSProperties}>
+            <div
+              className="fp-bar-col"
+              data-tone={bar.tone}
+              key={bar.key}
+              style={{ "--fp-height": `${bar.value}%`, "--fp-index": index } as CSSProperties}
+            >
+              <span className="fp-bar-value">
                 {bar.value}
                 <i>%</i>
               </span>
-              <div
-                className="fp-bar"
-                style={{ "--fp-height": `${bar.value}%`, "--fp-index": index } as CSSProperties}
-              />
+              <div className="fp-bar" />
             </div>
           ))}
         </div>
@@ -185,99 +183,6 @@ export function FingerprintSection({ copy }: { copy: FingerprintCopy }) {
         </div>
         <figcaption className="sol-fineprint fp-chart-note">{copy.chartNote}</figcaption>
       </figure>
-
-      <ul className="sol-bullets fp-bullets">
-        {copy.bullets.map((bullet) => (
-          <li key={bullet}>{bullet}</li>
-        ))}
-      </ul>
-
-      {/* (b) browse from any country */}
-      <div className="fp-geo">
-        <div className="fp-geo-head">
-          <h3 className="fp-geo-title">{copy.geoTitle}</h3>
-          <p className="fp-geo-lead">{copy.geoLead}</p>
-        </div>
-
-        <div className="fp-geo-body">
-          <div className="fp-picker">
-            <span className="fp-picker-label" id="fp-picker-label">
-              {copy.pickLabel}
-            </span>
-            <div className="fp-countries" role="group" aria-labelledby="fp-picker-label">
-              {COUNTRY_CODES.map((code) => (
-                <button
-                  key={code}
-                  type="button"
-                  className="fp-country"
-                  aria-pressed={selected === code}
-                  onClick={() => setSelected(code)}
-                >
-                  {code}
-                </button>
-              ))}
-            </div>
-            <span className="fp-countries-label">{copy.countriesLabel}</span>
-            <span className="fp-pick-arrow" aria-hidden="true">
-              <span className="fp-pick-line" />
-              <svg viewBox="0 0 8 12">
-                <path d="m1.4 1 4.8 5-4.8 5" />
-              </svg>
-            </span>
-          </div>
-
-          <div className="fp-browser sol-panel">
-            <div className="fp-browser-chrome">
-              <span className="fp-dots" aria-hidden="true">
-                <i />
-                <i />
-                <i />
-              </span>
-              <span className="fp-url">{current.url}</span>
-              <span className="fp-cc" aria-hidden="true">
-                {current.code}
-              </span>
-            </div>
-
-            <div className="fp-browser-body">
-              <div className="fp-page">
-                <GlobeWatermark />
-                <h4 className="fp-greeting fp-swap" key={current.code}>
-                  {current.greeting}
-                </h4>
-                <p className="fp-local">
-                  <CheckGlyph />
-                  {copy.looksLocal}
-                </p>
-              </div>
-
-              <aside className="fp-sees" aria-live="polite" aria-labelledby="fp-sees-title">
-                <span className="fp-sees-title" id="fp-sees-title">
-                  {copy.siteSeesTitle}
-                </span>
-                <dl className="fp-sees-list fp-swap" key={current.code}>
-                  <div>
-                    <dt>{copy.siteSees.connection}</dt>
-                    <dd>{current.connection}</dd>
-                  </div>
-                  <div>
-                    <dt>{copy.siteSees.city}</dt>
-                    <dd>{current.city}</dd>
-                  </div>
-                  <div>
-                    <dt>{copy.siteSees.timezone}</dt>
-                    <dd>{current.timezone}</dd>
-                  </div>
-                  <div>
-                    <dt>{copy.siteSees.language}</dt>
-                    <dd>{current.language}</dd>
-                  </div>
-                </dl>
-              </aside>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

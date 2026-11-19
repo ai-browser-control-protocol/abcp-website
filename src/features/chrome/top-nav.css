@@ -39,7 +39,7 @@
 
 .brand-logo-image {
   display: block;
-  width: clamp(124px, 13vw, 166px);
+  width: clamp(116px, 11vw, 148px);
   height: auto;
 }
 
@@ -169,7 +169,7 @@
   margin: 0;
   padding: 6px;
   list-style: none;
-  background: #ffffff;
+  background: var(--bg-surface);
   border: 1px solid var(--rule);
   border-radius: var(--radius-md);
   box-shadow: 0 16px 36px rgba(15, 17, 24, 0.1);
@@ -186,21 +186,19 @@
   justify-content: space-between;
   padding: 7px 10px;
   font-size: 13px;
-  color: var(--text-secondary);
+  color: #000;
   border-radius: var(--radius-xs);
   transition: all 120ms ease;
   text-decoration: none;
 }
 
 .lang-option:hover {
-  color: var(--text-primary);
   background: var(--bg-surface-hover);
 }
 
 .lang-option.is-current {
-  color: var(--oxide-text);
   font-weight: 600;
-  background: var(--oxide-subtle);
+  background: var(--apricot);
 }
 
 .menu-toggle {
@@ -386,13 +384,13 @@
 
 /* Frosted navigation, with the saturated orange brand action restored. */
 .top-nav {
-  background: rgba(246, 246, 243, .7);
+  background: rgba(247, 251, 253, .64);
   border-bottom-color: rgba(255, 255, 255, .72);
   backdrop-filter: blur(24px) saturate(150%);
   -webkit-backdrop-filter: blur(24px) saturate(150%);
 }
 .top-nav.is-scrolled {
-  background: rgba(246, 246, 243, .9);
+  background: rgba(250, 252, 253, .78);
   border-bottom-color: rgba(17, 17, 17, .08);
   box-shadow: 0 12px 32px -28px rgba(24, 25, 22, .45);
 }
@@ -404,7 +402,6 @@
 .lang-toggle { background: rgba(255, 255, 255, .44); border-color: rgba(255, 255, 255, .74); }
 .lang-toggle:hover,
 .lang-menu.is-open .lang-toggle { background: rgba(255, 255, 255, .72); border-color: rgba(17, 17, 17, .12); }
-.lang-menu-panel { background: rgba(246, 246, 243, .88); border-color: var(--glass-border); box-shadow: 0 14px 30px rgba(17, 17, 17, .08); backdrop-filter: blur(22px) saturate(140%); }
 .nav-download-btn {
   color: #fff;
   background: linear-gradient(180deg, #ff733d 0%, #ff5722 100%);

@@ -1,12 +1,4 @@
-/**
- * Shared closing CTA band: the dark card with the pixel colleague that sits
- * directly above the site footer on every chapter page.
- *
- * The homepage used to own this block. Rendering it from SiteFrame keeps the
- * closing promise — same copy, same character, same buttons — on the guide,
- * solutions and download pages too, so the last screen of the site never
- * changes shape between chapters.
- */
+/** Shared download invitation above the sitemap. */
 "use client";
 
 import Image from "next/image";

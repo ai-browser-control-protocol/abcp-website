@@ -1,489 +1,196 @@
-/* ==========================================================================
-   Account isolation — an unboxed ledger, not a pair of cards.
-
-   The comparison sits directly on the page's paper ground: two lanes share
-   one row rhythm (01–05), a single hairline seam divides them, and the only
-   filled surfaces are the two flat product mocks at the top of each lane.
-   Colour is functional, not decorative: the shared-session lane stays neutral
-   while WebCross owns the orange checks and the only warm rules in the ledger.
-   ========================================================================== */
-
-.home-section.accounts-section {
-  width: 100%;
-  max-width: 1248px;
-  margin: 0 auto;
-  padding: 100px 32px;
-  background: transparent;
-  border: 0;
-  scroll-margin-top: calc(var(--nav-h) + 12px);
+.home-v2 .home-section.accounts-section {
+  max-width: none;
+  background: var(--surface-mist);
+  color: var(--ink-slate);
+  scroll-margin-top: var(--nav-h);
 }
 
-.accounts-heading {
-  max-width: 820px;
-  margin-bottom: 52px;
-}
-.accounts-heading h2 {
+.accounts-intro {
   max-width: 760px;
-  margin: 0 auto;
+  margin: 0 auto clamp(30px, 3.6vw, 52px);
+  text-align: center;
+}
+.accounts-intro h2 {
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 48px);
+  font-weight: 650;
+  line-height: 1.18;
+  letter-spacing: -.045em;
   text-wrap: balance;
 }
-.home-section.accounts-section .accounts-heading p {
-  max-width: 860px;
-  margin-right: auto;
-  margin-left: auto;
-  color: var(--home-body);
-  font-size: var(--fs-lead);
-  line-height: 1.7;
+.accounts-intro p {
+  max-width: 40em;
+  margin: 16px auto 0;
+  color: var(--muted-slate);
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.72;
+  text-wrap: pretty;
 }
 
-/* ---- The ledger ----------------------------------------------------------
-   Two equal lanes with one seam in the middle. Rows are separated by hairlines
-   only, so the whole block scans as a single table rather than two panels. */
-.account-ledger {
+.accounts-matchup {
+  --accounts-gutter: clamp(20px, 2.2vw, 32px);
+  --accounts-inset: clamp(22px, 3.2vw, 46px);
+  --accounts-radius: 23px;
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  column-gap: 96px;
-  max-width: 1120px;
-  margin: 0 auto;
+  max-width: 1184px;
+  margin-inline: auto;
 }
-
-.ledger-seam {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc(50% - 0.5px);
-  width: 1px;
-  background: linear-gradient(
-    180deg,
-    rgba(17, 17, 17, 0) 0%,
-    rgba(17, 17, 17, 0.17) 12%,
-    rgba(17, 17, 17, 0.17) 88%,
-    rgba(17, 17, 17, 0) 100%
-  );
-  pointer-events: none;
+.accounts-matrix {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: var(--accounts-gutter) 0;
 }
-
-.ledger-lane {
-  min-width: 0;
+.accounts-matrix :is(th, td) {
+  --surface: #fff;
+  --edge: var(--edge-mist);
+  padding-inline: var(--accounts-inset);
+  border-inline: 1px solid var(--edge);
+  background: var(--surface);
+  text-align: start;
 }
-
-/* ---- Lane head ----------------------------------------------------------- */
-.lane-head {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  column-gap: 13px;
-  align-items: start;
-  min-height: 92px;
-  padding-bottom: 26px;
+.accounts-matrix :is(th, td):last-child {
+  --surface: var(--apricot);
+  --edge: color-mix(in srgb, var(--oxide) 34%, white);
+  --accent-ink: var(--apricot-ink);
 }
-
-.lane-glyph {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  color: #6d6960;
-  background: rgba(255, 255, 255, 0.42);
-  border: 1px solid rgba(17, 17, 17, 0.13);
-  border-radius: 9px;
+.accounts-matrix th {
+  padding-block: clamp(25px, 3.1vw, 44px) 18px;
+  border-top: 1px solid var(--edge);
+  border-radius: var(--accounts-radius) var(--accounts-radius) 0 0;
+  vertical-align: top;
 }
-.lane-glyph svg {
-  width: 19px;
-  height: 19px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.5;
-}
-.lane-glyph--webcross {
-  color: var(--oxide-text);
-  background: rgba(255, 107, 53, 0.07);
-  border-color: rgba(255, 107, 53, 0.3);
-}
-
-.lane-heading {
-  min-width: 0;
-  padding-top: 5px;
-}
-.lane-heading h3 {
-  margin: 0;
-  color: #4a4741;
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 680;
-  line-height: 1.32;
-  letter-spacing: -0.02em;
-}
-.ledger-lane--webcross .lane-heading h3 {
-  color: #1d1b18;
-  font-weight: 720;
-}
-.lane-subtitle {
-  max-width: 400px;
-  margin: 6px 0 0;
-  color: #8d8478;
-  font-size: 12px;
-  line-height: 1.55;
-  text-wrap: pretty;
-}
-
-/* ---- Lane visuals --------------------------------------------------------
-   Flat mocks: one shared session window on the left, three isolated
-   environments on the right. No glass, no shadow, no coloured edge strips. */
-.lane-visual {
-  display: flex;
-  flex-direction: column;
-  height: 150px;
-}
-
-.lane-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 9px;
-  color: #8a857b;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.16);
-  font: 9px/1.4 var(--font-mono);
-  letter-spacing: 0.09em;
-}
-.lane-meta span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-}
-.lane-meta i {
-  flex: 0 0 auto;
-  width: 5px;
-  height: 5px;
-  background: #a8a29a;
-  border-radius: 50%;
-}
-.ledger-lane--webcross .lane-meta {
-  border-bottom-color: rgba(255, 107, 53, 0.2);
-  color: #9c7c66;
-}
-.ledger-lane--webcross .lane-meta i {
-  background: var(--oxide);
-}
-.lane-meta small {
-  color: #9c968c;
-  font-size: 8.5px;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-.ledger-lane--webcross .lane-meta small {
-  color: #a98772;
-}
-
-.session-window {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin-top: 12px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.52);
-  border: 1px solid rgba(17, 17, 17, 0.1);
-  border-radius: 7px;
-}
-.session-window-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 26px;
-  padding: 0 10px;
-  background: rgba(247, 246, 242, 0.72);
-  border-bottom: 1px solid rgba(17, 17, 17, 0.06);
-}
-.window-dots {
-  display: inline-flex;
-  gap: 4px;
-}
-.window-dots i {
-  width: 5px;
-  height: 5px;
-  background: #d6d2c9;
-  border-radius: 50%;
-}
-.session-window-bar small {
-  margin-left: auto;
-  color: #9f998f;
-  font: 7.5px var(--font-mono);
-}
-.session-window-body {
-  display: grid;
-  flex: 1;
-  grid-template-columns: 30px minmax(0, 1fr) auto;
-  gap: 10px;
-  align-items: center;
-  padding: 0 12px;
-}
-.session-avatar {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  color: #75706a;
-  background: #eeede7;
-  border: 1px solid rgba(17, 17, 17, 0.06);
-  border-radius: 7px;
-  font-size: 10px;
-  font-weight: 700;
-}
-.session-id strong,
-.session-id small {
+.accounts-matrix .accounts-mark {
   display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  width: 48px;
+  height: 36px;
+  margin-bottom: 18px;
+  object-fit: contain;
+  object-position: left center;
 }
-.session-id strong {
-  color: #57544d;
-  font-size: 9px;
-  letter-spacing: 0.03em;
+.accounts-matrix svg.accounts-mark { width: 39px; color: #8392a8; }
+.accounts-name {
+  display: block;
+  font-size: clamp(20px, 1.95vw, 28px);
+  font-weight: 650;
+  letter-spacing: -.035em;
+  line-height: 1.25;
+  text-wrap: balance;
 }
-.session-id small {
-  margin-top: 3px;
-  color: #96918a;
-  font-size: 8px;
-  line-height: 1.4;
+.accounts-scope {
+  display: block;
+  margin-top: 6px;
+  color: #59677b;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
 }
-.session-switch {
-  display: grid;
+.accounts-matrix th:last-child .accounts-scope { color: var(--accent-ink); }
+.accounts-matrix td { padding-block: 9px; vertical-align: top; }
+.accounts-matrix tbody tr:last-child td {
+  padding-bottom: clamp(25px, 2.8vw, 40px);
+  border-bottom: 1px solid var(--edge);
+  border-radius: 0 0 var(--accounts-radius) var(--accounts-radius);
+}
+.accounts-point {
+  display: block;
+  color: var(--muted-slate);
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.accounts-check {
+  display: inline-grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
-  color: #8e8a83;
-  border: 1px solid rgba(17, 17, 17, 0.12);
+  align-self: start;
+  width: 1.3em;
+  height: 1.3em;
+  margin-top: .18em;
   border-radius: 50%;
-  font-size: 11px;
-}
-
-.isolation-stack {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin-top: 12px;
-}
-.isolation-row {
-  display: grid;
-  flex: 1;
-  grid-template-columns: 7px 13px minmax(0, 1fr) auto auto;
-  gap: 9px;
-  align-items: center;
-  min-height: 0;
-  border-bottom: 1px solid rgba(255, 107, 53, 0.12);
-}
-.isolation-row:last-child {
-  border-bottom: 0;
-}
-.isolation-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--accent-sky);
-  border-radius: 50%;
-}
-.isolation-row-1 .isolation-dot { background: var(--accent-green); }
-.isolation-row-2 .isolation-dot { background: var(--accent-purple); }
-.isolation-letter {
-  color: #8d8177;
-  font: 9px var(--font-mono);
-}
-.isolation-row strong {
-  overflow: hidden;
-  color: #403c37;
-  font-size: 11.5px;
-  font-weight: 600;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.isolation-row small {
-  color: #9b9289;
-  font-size: 9px;
-  white-space: nowrap;
-}
-.isolation-flag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: #2f6b4f;
-  font: 7.5px var(--font-mono);
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-}
-.isolation-flag svg {
-  width: 9px;
-  height: 9px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.6;
-}
-
-/* ---- Row ledger ----------------------------------------------------------
-   index · statement · mark. Both lanes use the same grid, so each pair of
-   rows sits on one baseline and the middle seam reads as the hinge. */
-.lane-list {
-  display: flex;
-  flex-direction: column;
-  margin: 14px 0 0;
-  padding: 0;
-  border-top: 1px solid rgba(17, 17, 17, 0.24);
-  list-style: none;
-}
-
-.lane-list li {
-  display: grid;
-  grid-template-columns: 24px minmax(0, 1fr) 22px;
-  gap: 12px;
-  align-items: center;
-  min-height: 60px;
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.095);
-  transition: background-color 180ms ease;
-}
-
-.lane-index {
-  color: #99938a;
-  font: 9px/1 var(--font-mono);
-  letter-spacing: 0.06em;
-  transition: color 180ms ease;
-}
-
-.lane-list li p {
-  margin: 0;
-  font-size: 13.5px;
-  line-height: 1.45;
-  text-wrap: pretty;
-}
-
-.ledger-lane--ordinary .lane-list li p { color: #6f6b63; }
-.ledger-lane--webcross .lane-list li p {
-  color: #2c2924;
-  font-weight: 540;
-}
-
-.ledger-lane--webcross .lane-list li {
-  border-bottom-color: rgba(255, 107, 53, 0.14);
-}
-
-.lane-mark {
-  display: grid;
-  justify-self: end;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-}
-.lane-mark svg {
-  width: 13px;
-  height: 13px;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.lane-mark--quiet {
-  color: #aca69c;
-}
-.lane-mark--quiet svg { stroke-width: 1.6; }
-.lane-mark--yes {
+  background: #fff;
   color: var(--oxide-text);
+  font: 600 .92em/1 system-ui, sans-serif;
 }
-.lane-mark--yes svg { stroke-width: 2.2; }
-
-/* ---- Pointer polish ------------------------------------------------------ */
-.lane-list li:hover { background: rgba(255, 255, 255, 0.52); }
-.ledger-lane--webcross .lane-list li:hover { background: rgba(255, 107, 53, 0.055); }
-.lane-list li:hover .lane-index { color: var(--oxide-text); }
-.lane-list li:hover .lane-mark--quiet { color: #8a847a; }
-
-.isolation-row { transition: background-color 180ms ease, padding 200ms var(--ease-expo); }
-.isolation-row:hover { background: rgba(255, 107, 53, 0.05); }
-.session-window { transition: border-color 180ms ease; }
-.session-window:hover { border-color: rgba(17, 17, 17, 0.16); }
-
-/* ---- One-time arrival: the WebCross checks settle row by row ------------- */
-.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-mark--yes {
-  animation: accountCheckIn 420ms var(--ease-expo) both;
+.accounts-point .accounts-check svg { width: .95em; height: .95em; stroke-width: 2; }
+.accounts-matrix td:last-child .accounts-point {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(5px, 1vw, 11px);
+  color: var(--ink-slate);
+  font-weight: 550;
 }
-.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(1) .lane-mark--yes { animation-delay: 90ms; }
-.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(2) .lane-mark--yes { animation-delay: 170ms; }
-.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(3) .lane-mark--yes { animation-delay: 250ms; }
-.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(4) .lane-mark--yes { animation-delay: 330ms; }
-.account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-list li:nth-child(5) .lane-mark--yes { animation-delay: 410ms; }
+.accounts-vs {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 3px 14px #263d641a;
+  color: #465775;
+  font: italic 750 16px/1 var(--font-display, system-ui), sans-serif;
+  letter-spacing: -.04em;
+}
 
-@keyframes accountCheckIn {
-  from {
+@media (max-width: 640px) {
+  .accounts-count { display: block; }
+  .accounts-matchup {
+    --accounts-gutter: 12px;
+    --accounts-inset: clamp(10px, 2.9vw, 18px);
+    --accounts-radius: 15px;
+    margin-inline: calc(-1 * var(--accounts-gutter));
+  }
+  .accounts-matrix th { padding-block: 20px 10px; }
+  .accounts-matrix .accounts-mark { width: 36px; height: 27px; margin-bottom: 12px; }
+  .accounts-matrix svg.accounts-mark { width: 30px; }
+  .accounts-name { font-size: clamp(16px, 3.3vw, 20px); }
+  .accounts-scope { font-size: 12px; }
+  .accounts-matrix td { padding-block: 7px; }
+  .accounts-point { font-size: 14px; }
+  .accounts-vs { width: 24px; font-size: 10px; }
+}
+
+@media (max-width: 480px) {
+  .accounts-name { min-height: 2.5em; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .accounts-matrix tbody[data-playing] .accounts-check path {
+    stroke-dasharray: 1;
+    animation: accountsDrawCheck 460ms ease-out var(--row-delay) backwards;
+  }
+  .accounts-matrix tbody[data-playing] .accounts-check {
+    animation: accountsCheckHalo 640ms ease-out var(--row-delay);
+  }
+  .accounts-matrix tbody[data-playing] .accounts-point {
+    position: relative;
+    isolation: isolate;
+  }
+  .accounts-matrix tbody[data-playing] .accounts-point::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -3px -6px;
+    border-radius: 8px;
+    background: #edf1f4;
     opacity: 0;
-    scale: 0.55;
+    animation: accountsFocusRow 760ms ease-out var(--row-delay);
   }
-
-  to {
-    opacity: 1;
-    scale: 1;
-  }
+  .accounts-matrix td:last-child .accounts-point::before { background: #fff; }
 }
-
-/* ---- Responsive ---------------------------------------------------------- */
-@media (max-width: 1180px) {
-  .account-ledger { column-gap: 64px; }
+@keyframes accountsDrawCheck {
+  from { stroke-dashoffset: 1; opacity: 0; }
+  12% { opacity: 1; }
+  to { stroke-dashoffset: 0; }
 }
-
-@media (max-width: 980px) {
-  .home-section.accounts-section { padding: 84px 28px; }
-  .account-ledger {
-    grid-template-columns: minmax(0, 1fr);
-    column-gap: 0;
-    max-width: 640px;
-  }
-  .ledger-seam { display: none; }
-  .lane-head {
-    min-height: 0;
-    padding-bottom: 22px;
-  }
-  .ledger-lane--webcross {
-    margin-top: 42px;
-    padding-top: 38px;
-    border-top: 1px solid rgba(17, 17, 17, 0.11);
-  }
-  .lane-visual { height: 158px; }
+@keyframes accountsCheckHalo {
+  35% { box-shadow: 0 0 0 4px rgb(255 117 58 / .18); }
+  to { box-shadow: 0 0 0 7px transparent; }
 }
-
-@media (max-width: 700px) {
-  .home-section.accounts-section { padding: 72px 22px; }
-  .accounts-heading { margin-bottom: 38px; }
-  .home-section.accounts-section .accounts-heading p { font-size: 15px; line-height: 1.66; }
-  .lane-head { grid-template-columns: 30px minmax(0, 1fr); column-gap: 11px; }
-  .lane-glyph { width: 30px; height: 30px; border-radius: 8px; }
-  .lane-glyph svg { width: 17px; height: 17px; }
-  .lane-heading { padding-top: 4px; }
-  .lane-heading h3,
-  .ledger-lane--webcross .lane-heading h3 { font-size: 17px; }
-  .lane-subtitle { font-size: 11.5px; }
-  .lane-meta { font-size: 8px; }
-  .lane-meta small { font-size: 8px; }
-  .lane-visual { height: 156px; }
-  .isolation-row { gap: 8px; }
-  .isolation-row strong { font-size: 11px; }
-  .isolation-row small { font-size: 8.5px; }
-  .isolation-flag { font-size: 7px; }
-  .lane-list { margin-top: 12px; }
-  .lane-list li { grid-template-columns: 20px minmax(0, 1fr) 20px; gap: 9px; min-height: 56px; padding: 8px 0; }
-  .lane-list li p { font-size: 13px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lane-list li,
-  .lane-index,
-  .isolation-row,
-  .session-window {
-    transition: none;
-  }
-
-  .account-ledger[data-reveal="in"] .ledger-lane--webcross .lane-mark--yes {
-    animation: none;
-  }
+@keyframes accountsFocusRow {
+  30%, 58% { opacity: .85; }
 }

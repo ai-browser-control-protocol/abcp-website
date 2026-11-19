@@ -1,16 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import type { HomeCopy } from "@/content/home";
+import type { ComparisonFeature, HomeCopy } from "@/content/home";
 import { chapterPath } from "@/content/chapters";
 import type { Locale } from "@/content/types";
 import { Link } from "@/i18n/navigation";
+import { useDemoPlayback } from "@/features/exhibition/useDemoPlayback";
 import { WorkflowDemo } from "./WorkflowDemo";
 import { AccountIsolation } from "./AccountIsolation";
-import { PixelScene } from "@/components/ui/PixelFolk";
 import "./home-chapter.css";
+
+/**
+ * Homepage layout.
+ *
+ * The page opens on one sentence and one pair of buttons, then hands over
+ * immediately to the workflow demo: the hero no longer carries an illustration
+ * of its own, so the first thing a reader sees after the headline is the
+ * product actually running a task. Sections then argue the same story in order
+ * (workflow → accounts → agents / environments → marketplace → comparison →
+ * FAQ), each with a centred heading; only the hero keeps a (small) footnote.
+ */
 
 function Arrow() {
   return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" /></svg>;
@@ -22,10 +32,6 @@ function DownloadIcon() {
 
 function Check() {
   return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-9" /></svg>;
-}
-
-function HeroFolk() {
-  return <PixelScene className="hero-pixel-scene" />;
 }
 
 /** Arms `[data-reveal]` blocks below the fold and reveals each once as it
@@ -80,16 +86,17 @@ function LockMark() {
   return <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="9" width="12" height="8" rx="2" /><path d="M7 9V6a3 3 0 0 1 6 0v3" /></svg>;
 }
 
-function FingerprintMark() {
-  return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 8.5a6 6 0 0 1 12 0v4.2M7 10a3 3 0 0 1 6 0v4M10 10v5.5M4.5 12v3M15.5 12v3" /></svg>;
-}
-
 function ShieldMark() {
   return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.8 4 5.2v4.4c0 3.6 2.4 5.8 6 7.6 3.6-1.8 6-4 6-7.6V5.2Z" /><path d="m7.5 10 1.7 1.7 3.4-3.8" /></svg>;
 }
 
 function Environments({ copy }: { copy: HomeCopy }) {
   const environment = copy.environment;
+  const [activeAccount, setActiveAccount] = useState(0);
+  const account = environment.accounts[activeAccount];
+  const labels = environment.accountLabels;
+  const flowRef = useDemoPlayback<HTMLOListElement>();
+
   return (
     <section className="home-section environment-section" id="environment">
       <div className="home-section-heading split-heading" data-reveal><h2>{environment.title}</h2><p>{environment.description}</p></div>
@@ -103,7 +110,7 @@ function Environments({ copy }: { copy: HomeCopy }) {
                 <div className={`agent-row agent-row-${index}`} key={agent}>
                   <span className={`agent-symbol agent-symbol-${index}`}><AgentGlyph name={agent} /></span>
                   <strong>{agent}</strong>
-                  <small>{index === environment.agents.length - 1 ? "CONNECT" : agent === "WebCross AI" ? "AI" : "AGENT"}</small>
+                  <small>{index === environment.agents.length - 1 ? "CONNECT" : "Agent"}</small>
                 </div>
               ))}
             </div>
@@ -113,22 +120,19 @@ function Environments({ copy }: { copy: HomeCopy }) {
         <article className="account-environments" data-reveal>
           <h3>{environment.accountsTitle}</h3>
           <p>{environment.accountsText}</p>
-          <div className="account-profile-list">
+          <div className="account-picker" role="group" aria-label={environment.accountsTitle}>
             {environment.accounts.map((item, index) => (
-              <div className={`account-profile account-profile-${index}`} key={item.account}>
-                <div className="account-profile-head">
-                  <span className="account-profile-avatar">{String.fromCharCode(65 + index)}</span>
-                  <div><strong>{item.account}</strong><small>{item.session}</small></div>
-                  <span className="account-isolated"><LockMark />独立环境</span>
-                </div>
-                <div className="account-profile-network">
-                  <span><i>IP</i>{item.ip}</span>
-                  <span>{item.region}</span>
-                </div>
-                <div className="account-profile-fingerprint"><FingerprintMark /><span>浏览器指纹</span><strong>{item.fingerprint}</strong></div>
-              </div>
+              <button type="button" key={item.name} aria-pressed={index === activeAccount} onClick={() => setActiveAccount(index)}>
+                {item.name}
+              </button>
             ))}
           </div>
+          <dl className="account-session-details" aria-live="polite" aria-atomic="true">
+            <div><dt>{labels.login}</dt><dd key={account.account}>{account.account}</dd></div>
+            <div><dt>{labels.session}</dt><dd key={account.session}>{account.session}</dd></div>
+            <div><dt>{labels.network}</dt><dd key={account.name}>{account.ip}<small>{account.region}</small></dd></div>
+            <div><dt>{labels.fingerprint}</dt><dd key={account.fingerprint}>{account.fingerprint}</dd></div>
+          </dl>
         </article>
 
         <article className="local-sessions" data-reveal>
@@ -136,35 +140,25 @@ function Environments({ copy }: { copy: HomeCopy }) {
           <div className="local-copy-lines">
             {environment.localLines.map((line) => <span key={line}>{line}</span>)}
           </div>
-          <div className="local-pipeline">
-            <div className="pipeline-step">
-              <span className="pipeline-icon pipeline-icon-task" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M4 5h12M4 10h8M4 15h5" /></svg></span>
-              <div className="pipeline-step-copy"><strong>{environment.localFlow.task}</strong><small>{environment.localFlow.taskMeta}</small></div>
-            </div>
-            <div className="pipeline-connector" aria-hidden="true"><i /><em /></div>
-            <div className="pipeline-step">
-              <span className="pipeline-icon pipeline-icon-harness" aria-hidden="true"><Image src="/brand/webcross-icon.webp" alt="" width={440} height={330} unoptimized /></span>
-              <div className="pipeline-step-copy"><strong>{environment.localFlow.harness}</strong><small>{environment.localFlow.harnessMeta}</small></div>
-            </div>
-            <div className="pipeline-connector is-gate">
-              <i /><em />
-              <span className="pipeline-gate"><ShieldMark /></span>
-              <b>{environment.localFlow.gate}</b>
-            </div>
-            <div className="pipeline-step">
-              <span className="pipeline-icon pipeline-icon-browser" aria-hidden="true" />
-              <div className="pipeline-step-copy"><strong>{environment.localFlow.browser}</strong><small>{environment.localFlow.browserMeta}</small></div>
-            </div>
-            <div className="pipeline-connector" aria-hidden="true"><i /><em /></div>
-            <div className="pipeline-sites">
-              <small>{environment.localFlow.sitesLabel}</small>
-              <div>
-                {environment.localFlow.sites.map((site) => (
-                  <span key={site} className="pipeline-site"><b>✓</b>{site}</span>
-                ))}
-              </div>
-            </div>
-          </div>
+          <ol className="local-flow" ref={flowRef} aria-label={environment.localTitle}>
+            <li className="local-flow-node local-flow-task">
+              <span className="local-flow-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h12M4 10h8M4 15h5" /></svg></span>
+              <strong>{environment.localFlow.task}</strong><small>{environment.localFlow.taskMeta}</small>
+            </li>
+            <li className="local-flow-node local-flow-harness">
+              <span className="local-flow-icon"><Image src="/brand/webcross-icon.webp" alt="" width={28} height={21} unoptimized /></span>
+              <strong>{environment.localFlow.harness}</strong><small>{environment.localFlow.harnessMeta}</small>
+            </li>
+            <li className="local-flow-approval"><span><ShieldMark />{environment.localFlow.gate}</span></li>
+            <li className="local-flow-node local-flow-browser">
+              <span className="local-flow-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="3" width="16" height="14" rx="3" /><path d="M2 7.5h16" /></svg></span>
+              <strong>{environment.localFlow.browser}</strong><small>{environment.localFlow.browserMeta}</small>
+            </li>
+            <li className="local-flow-sites">
+              <strong>{environment.localFlow.sitesLabel}</strong>
+              <ul>{environment.localFlow.sites.map((site) => <li key={site}><span aria-hidden="true">✓</span>{site}</li>)}</ul>
+            </li>
+          </ol>
           <div className="local-no-touch"><ShieldMark /><span>WebCross 不接触你的数据</span></div>
         </article>
       </div>
@@ -209,16 +203,29 @@ function MarketGlyph({ index }: { index: number }) {
 function SkillMarket({ copy }: { copy: HomeCopy }) {
   const market = copy.marketplace;
   const [active, setActive] = useState(0);
-  const [selected, setSelected] = useState<string | null>(null);
-  const [downloaded, setDownloaded] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [download, setDownload] = useState<"idle" | "running" | "done">("idle");
   const category = market.categories[active];
-  const selectedCard = category.cards.find((card) => card.title === selected);
-  const selectCategory = (index: number) => { setActive(index); setSelected(null); setDownloaded(null); };
-  const download = () => {
-    if (!selectedCard) return;
-    setDownloaded(selectedCard.title);
-    window.setTimeout(() => setDownloaded(null), 2600);
-  };
+  const demo = market.downloadDemo;
+
+  useEffect(() => {
+    if (download !== "running") return;
+    const timer = window.setTimeout(() => setDownload("done"), 1600);
+    return () => window.clearTimeout(timer);
+  }, [download]);
+
+  function toggleItem(id: string) {
+    setDownload("idle");
+    setSelected((items) => items.includes(id) ? items.filter((item) => item !== id) : [...items, id]);
+  }
+
+  function startDownload() {
+    if (download === "running" || !selected.length) return;
+    setDownload(window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "done" : "running");
+  }
+
+  const count = String(selected.length);
+  const downloadLabel = download === "running" ? demo.downloading : download === "done" ? demo.complete.replace("{count}", count) : demo.action;
   return (
     <section className="home-section marketplace-section" id="marketplace">
       <div className="marketplace-inner">
@@ -232,11 +239,6 @@ function SkillMarket({ copy }: { copy: HomeCopy }) {
           <div className="market-window-bar">
             <span className="market-window-brand"><Image src="/brand/webcross-horizontal.webp" alt="" width={1200} height={314} /><b>MARKETPLACE</b></span>
             <div className="market-window-tools">
-              {selectedCard && (
-                <motion.button type="button" className="market-download" onClick={download} initial={false} animate={{ opacity: 1, y: 0 }} whileTap={{ scale: .96 }}>
-                  <DownloadIcon /><span>下载 Skill</span>
-                </motion.button>
-              )}
               <span className="market-window-dots" aria-hidden="true"><i /><i /><i /></span>
             </div>
           </div>
@@ -244,7 +246,7 @@ function SkillMarket({ copy }: { copy: HomeCopy }) {
             <aside className="market-sidebar">
               <div className="market-categories" role="tablist" aria-label={market.sidebarTitle}>
                 {market.categories.map((item, index) => (
-                  <button type="button" role="tab" aria-selected={active === index} className={active === index ? "is-active" : ""} onClick={() => selectCategory(index)} key={item.id}>
+                  <button type="button" role="tab" aria-selected={active === index} className={active === index ? "is-active" : ""} onClick={() => setActive(index)} key={item.id}>
                     <PlatformMark id={item.id} />
                     <strong>{item.name}</strong>
                     <small>{item.cards.length}</small>
@@ -254,43 +256,43 @@ function SkillMarket({ copy }: { copy: HomeCopy }) {
             </aside>
 
             <div className="market-content">
-              <div className="market-category-head"><h3>{category.name}</h3></div>
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div className="market-grid" key={category.id} initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.22 }}>
-                  {category.cards.map((card, index) => (
-                    <div
-                      role="button"
-                      tabIndex={0}
-                      className={`market-card${selected === card.title ? " is-selected" : ""}`}
-                      style={{ "--market-i": index } as CSSProperties}
-                      aria-pressed={selected === card.title}
-                      onClick={() => setSelected(selected === card.title ? null : card.title)}
-                      onKeyDown={(event) => {
-                        if (event.key === "Enter" || event.key === " ") {
-                          event.preventDefault();
-                          setSelected(selected === card.title ? null : card.title);
-                        }
-                      }}
-                      key={card.title}
-                    >
-                      <div className="market-card-head"><MarketGlyph index={index} /><span className="market-card-kind">{market.filters.skill}</span><span className="market-card-check"><Check /></span></div>
-                      <h4>{card.title}</h4>
-                      <p>{card.description}</p>
-                      <div className="market-card-foot"><span>@{category.id}-{String(index + 1).padStart(2, "0")}</span><span>{market.comingSoon}</span></div>
-                    </div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
+              <div className="market-category-head">
+                <h3>{category.name}</h3>
+              </div>
+              <div className="market-grid" key={category.id}>
+                {category.cards.map((item, index) => {
+                  const id = `${category.id}-${index + 1}${item.kind === "script" ? ".js" : "/SKILL.md"}`;
+                  const checked = selected.includes(id);
+                  return (
+                    <label className={`market-card${checked ? " is-selected" : ""}`} key={id} style={{ "--market-i": index } as CSSProperties}>
+                      <input type="checkbox" className="sr-only" checked={checked} disabled={download === "running"}
+                        aria-label={item.title} onChange={() => toggleItem(id)} />
+                      <span className="market-card-head">
+                        <MarketGlyph index={index} />
+                        <strong className="market-card-title">{item.title}</strong>
+                        <span className="market-card-check" aria-hidden="true">{checked && <Check />}</span>
+                      </span>
+                      <span className="market-card-description">{item.description}</span>
+                    </label>
+                  );
+                })}
+              </div>
+              <div className="market-transfer" data-state={download}>
+                <button className="market-download" type="button" onClick={startDownload} disabled={!selected.length}
+                  aria-disabled={!selected.length || download === "running"} title={download === "done" ? selected.join("\n") : undefined}>
+                  {download === "running" ? (
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path className="market-download-sheet" d="M9 3h6v8H9z" />
+                      <path d="M3 11h6l2 2h10v7H3z" />
+                    </svg>
+                  ) : download === "done" ? <Check /> : <DownloadIcon />}
+                  {downloadLabel}
+                  {download === "idle" && selected.length > 0 && <span className="market-download-count">{count}</span>}
+                </button>
+                <span className="sr-only" role="status">{download === "idle" ? demo.count.replace("{count}", count) : downloadLabel}</span>
+              </div>
             </div>
           </div>
-          <AnimatePresence>
-            {downloaded && (
-              <motion.div className="market-toast" key="toast" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} role="status">
-                <span className="market-toast-icon"><Check /></span>
-                <div><strong>下载完成</strong><small>{downloaded} 已下载到本地</small></div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </div>
     </section>
@@ -298,6 +300,18 @@ function SkillMarket({ copy }: { copy: HomeCopy }) {
 }
 
 type ComparisonValue = HomeCopy["comparison"]["dimensions"][number]["webcross"];
+
+const featureIcons: Record<ComparisonFeature, { path: string; color: string }> = {
+  tokens: { color: "#ba6b09", path: "M4 7a8 3 0 1 0 16 0 8 3 0 1 0-16 0Zm0 0v5c0 4 16 4 16 0V7M4 12v5c0 4 16 4 16 0v-5" },
+  agents: { color: "#7943cc", path: "M8 3v5m8-5v5M6 8h12v3a6 6 0 0 1-12 0V8Zm6 9v4" },
+  accounts: { color: "#1674b9", path: "M4 20v-2a5 5 0 0 1 10 0v2m2-7a5 5 0 0 1 5 5v2M5.5 7a3.5 3.5 0 1 0 7 0 3.5 3.5 0 1 0-7 0Zm10-3a3.5 3.5 0 0 1 0 7" },
+  fingerprint: { color: "#c03d89", path: "M4 12a8 8 0 0 1 16 0M6 17c1-2 1-3 1-5a5 5 0 0 1 10 0c0 4-1 7-2 9M9 20c2-3 3-6 3-8m8 3-1 4" },
+  parallel: { color: "#3869c7", path: "M4 12h4c4 0 3-6 7-6h5m-3-3 3 3-3 3M8 12c4 0 3 6 7 6h5m-3-3 3 3-3 3" },
+  foreground: { color: "#008378", path: "M3 4h18v13H3zM8 21h8m-4-4v4M4 8h16" },
+  code: { color: "#9347b9", path: "m7 7-5 5 5 5m10-10 5 5-5 5m-4-14-2 18" },
+  local: { color: "#16805e", path: "M3 14l3-9h12l3 9v5H3v-5Zm0 0h18m-5 2.5h2" },
+  setup: { color: "#c95819", path: "M3 7h7m5 0h6M3 17h12m5 0h1M10 4h5v6h-5zM15 14h5v6h-5z" },
+};
 
 function ComparisonValueCell({ cell }: { cell: ComparisonValue }) {
   if (cell.mark) {
@@ -319,8 +333,11 @@ function ComparisonValueCell({ cell }: { cell: ComparisonValue }) {
 function Comparison({ copy }: { copy: HomeCopy }) {
   return (
     <section className="home-section comparison-section" id="comparison">
-      <div className="home-section-heading split-heading" data-reveal><h2>{copy.comparison.title}</h2><p>{copy.comparison.description}</p></div>
-      <p className="comparison-promo">{copy.comparison.promo}</p>
+      <header className="home-section-heading split-heading" data-reveal>
+        <h2>{copy.comparison.title}</h2>
+        <p>{copy.comparison.description}</p>
+        <p>{copy.comparison.promo}</p>
+      </header>
       <div className="comparison-matrix-wrap" data-reveal>
         <table className="comparison-matrix">
           <thead>
@@ -332,8 +349,13 @@ function Comparison({ copy }: { copy: HomeCopy }) {
           </thead>
           <tbody>
             {copy.comparison.dimensions.map((row, index) => (
-              <tr key={row.label} style={{ "--check-delay": `${120 + index * 45}ms` } as CSSProperties}>
-                <th className="comparison-dimension">{row.label}</th>
+              <tr key={row.feature} style={{ "--check-delay": `${120 + index * 45}ms` } as CSSProperties}>
+                <th scope="row" className="comparison-dimension">
+                  <span className="comparison-feature">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" style={{ color: featureIcons[row.feature].color }}><path d={featureIcons[row.feature].path} /></svg>
+                    {row.label}
+                  </span>
+                </th>
                 <td className="comparison-webcross-cell"><ComparisonValueCell cell={row.webcross} /></td>
                 {row.values.map((cell, i) => <td key={`${row.label}-${i}`}><ComparisonValueCell cell={cell} /></td>)}
               </tr>
@@ -349,7 +371,27 @@ function Comparison({ copy }: { copy: HomeCopy }) {
 function FaqAndStart({ copy }: { copy: HomeCopy }) {
   return (
     <section className="home-section faq-start-section" id="faq">
-      <div className="faq-column"><div className="home-section-heading" data-reveal><h2>{copy.faq.title}</h2>{copy.faq.description ? <p>{copy.faq.description}</p> : null}</div><div className="home-faq-list">{copy.faq.items.map((item, index) => <details key={item.q} open={index === 0}><summary><span>{item.q}</span><i aria-hidden="true" /></summary><p>{item.a}</p></details>)}</div><Link className="faq-how-link" href="/solutions"><span>{copy.common.how}</span><Arrow /></Link></div>
+      <div className="faq-column">
+        <div className="home-section-heading" data-reveal>
+          <h2>{copy.faq.title}</h2>
+          {copy.faq.description && <p>{copy.faq.description}</p>}
+        </div>
+        <div className="home-faq-list">
+          {copy.faq.items.map((item, index) => (
+            <details key={item.q} open={index === 0}>
+              <summary><span>{item.q}</span><i aria-hidden="true" /></summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+        <Link className="faq-how-link" href="/solutions">
+          <span className="faq-code-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m7.5 8-4 4 4 4m9-8 4 4-4 4m-3-11-3 14" /></svg>
+          </span>
+          <span>{copy.common.how}</span>
+          <Arrow />
+        </Link>
+      </div>
     </section>
   );
 }
@@ -359,11 +401,21 @@ export function HomeChapter({ copy, locale }: { copy: HomeCopy; locale: Locale }
 
   return (
     <article className={`home-v2 locale-${locale}`} ref={revealRef}>
-      <header className="home-hero">
-        <div className="hero-copy"><h1><span>{copy.hero.titleA}</span><span>{copy.hero.titleB}</span></h1><p>{copy.hero.description}</p><div className="home-actions"><Link className="primary-button" href={chapterPath("download")}><DownloadIcon />{copy.common.download}</Link><Link className="secondary-button" href={chapterPath("guide")}>{copy.common.guide}<Arrow /></Link></div></div>
-        <HeroFolk />
-      </header>
-      <WorkflowDemo copy={copy} />
+      <div className="home-opening">
+        <header className="home-hero">
+          <div className="hero-copy">
+            <h1>
+              <span>{copy.hero.titleA}</span>
+              <span><mark className="hero-highlight">{copy.hero.titleB}</mark><i className="hero-caret" aria-hidden="true" /></span>
+            </h1>
+            <div className="home-actions">
+              <Link className="primary-button" href={chapterPath("download")}><DownloadIcon />{copy.common.download}</Link>
+              <Link className="secondary-button" href={chapterPath("guide")}>{copy.common.guide}<Arrow /></Link>
+            </div>
+          </div>
+        </header>
+        <WorkflowDemo copy={copy} />
+      </div>
       <AccountIsolation copy={copy} />
       <Environments copy={copy} />
       <SkillMarket copy={copy} />

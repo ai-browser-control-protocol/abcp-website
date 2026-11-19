@@ -89,7 +89,7 @@
 
 .scenario-tab.is-active {
   color: var(--oxide-text);
-  background: #fff7f2;
+  background: var(--apricot);
   border-color: var(--border-accent);
 }
 
@@ -241,7 +241,7 @@
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--oxide);
-  background: rgba(255, 107, 53, 0.12);
+  background: var(--apricot);
   border-radius: var(--radius-full);
   white-space: nowrap;
 }
@@ -408,7 +408,7 @@
   gap: 5px;
   justify-items: start;
   padding: 10px 12px;
-  background: rgba(255, 107, 53, 0.1);
+  background: var(--apricot);
   border: 1px solid rgba(255, 107, 53, 0.32);
   border-radius: var(--radius-md);
   animation: promptIn 260ms var(--stage-easing) both;
@@ -522,7 +522,7 @@
 
 .client-step.is-current {
   color: #ffffff;
-  background: rgba(255, 107, 53, 0.1);
+  background: var(--apricot);
   border-color: rgba(255, 107, 53, 0.35);
 }
 
@@ -1034,7 +1034,7 @@
 
 .az-result.is-target {
   border-color: var(--oxide);
-  background: #fff7f2;
+  background: var(--apricot);
   animation: targetPulse 1.5s ease-in-out 0.5s infinite;
 }
 
@@ -1339,7 +1339,7 @@
   font-size: 9px;
   font-weight: 700;
   color: var(--oxide-text);
-  background: #fff7f2;
+  background: var(--apricot);
   border: 1px dashed var(--border-accent);
   border-radius: 4px;
   justify-self: start;
@@ -1642,7 +1642,7 @@
 .sc-upload.is-done {
   justify-items: stretch;
   border-color: var(--oxide);
-  background: #fff7f2;
+  background: var(--apricot);
 }
 
 .sc-upload-label {

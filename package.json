@@ -8,10 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "copy-editor": "node tools/copy-editor/server.mjs --open",
-    "copy-editor:no-site": "node tools/copy-editor/server.mjs --open --no-site",
-    "copy-editor:audit": "node tools/copy-editor/audit.mjs"
+    "test": "vitest run"
   },
   "dependencies": {
     "motion": "^14.12.0",

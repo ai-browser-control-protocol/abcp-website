@@ -14,8 +14,6 @@ import { SiteFrame } from "@/features/chrome/SiteFrame";
 import { routing } from "@/i18n/routing";
 import "@/styles/base.css";
 import "@/styles/common.css";
-/* Last in the cascade on purpose: the local copy/type editor writes here. */
-import "@/styles/editor-overrides.css";
 
 const inter = Inter({
   subsets: ["latin"],

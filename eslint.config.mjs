@@ -5,7 +5,7 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "scripts/**", "artifacts/**", "tools/copy-editor/ui/**"]),
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "scripts/**", "artifacts/**"]),
   {
     files: ["src/components/ui/**/*.{ts,tsx}"],
     rules: {

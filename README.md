@@ -24,22 +24,13 @@ pnpm lint
 pnpm build
 ```
 
-## Edit copy & type sizes
-
-A local editor (no database, no CMS) rewrites the real source files and keeps a backup before every write:
-
-```sh
-pnpm copy-editor        # http://localhost:4310, starts `next dev` if it is down
-pnpm copy-editor:no-site
-```
-
-It edits the four locale catalogs (`src/messages/*.json`), the content modules (`src/content/home.ts`, `solutions.ts`, `legal.ts`), the shared type scale in `src/styles/tokens.css`, and free-form font-size overrides in `src/styles/editor-overrides.css`. See `tools/copy-editor/README.md`.
-
 ## Replace placeholders
 
 | What | Where |
 |---|---|
 | Site URL, Twitter handles, docs/repo | `src/content/site.ts` or `SITE_URL` |
 | GitHub nav repo | `src/content/site.ts` (`github`) or `GITHUB_REPO_OWNER` / `GITHUB_REPO_NAME` |
-| Copy | `src/messages/{zh,ja,ko,en}.json` and `src/content/{home,solutions,legal}.ts` — or use `pnpm copy-editor` |
+| Team names | `src/content/team.ts` |
+| Company email | `src/content/company.ts` |
+| Copy | `src/messages/{zh,ja,ko,en}.json` |
 | Download links | fetched from GitHub Releases in `src/content/releases.ts` |

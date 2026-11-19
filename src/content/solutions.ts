@@ -10,38 +10,11 @@
  */
 import type { Locale } from "./types";
 
-export interface SolutionCheck {
-  /** Section card title, e.g. "出口 IP" */
-  title: string;
-  /** One-line question the site asks */
-  question: string;
-  /** Bad state label under the left illustration */
-  before: string;
-  /** Good state label under the right illustration */
-  after: string;
-  /** Closing takeaway of the card */
-  note: string;
-  /** "soon" marks a capability that ships in a later release. */
-  status?: "ready" | "soon";
-  /** Badge text for the soon state, e.g. "后续实现" */
-  soonLabel?: string;
-}
-
 export interface SolutionsCopy {
   seo: { title: string; description: string };
   hero: {
     title: string;
     lead: string;
-  };
-  isolation: {
-    kicker: string;
-    title: string;
-    lead: string;
-    checks: {
-      proxy: SolutionCheck;
-      fingerprint: SolutionCheck;
-      captcha: SolutionCheck;
-    };
   };
   fingerprint: {
     kicker: string;
@@ -140,7 +113,6 @@ export interface SolutionsCopy {
     codeCaption: string;
     codeNote: string;
   };
-  closing: { title: string; desc: string; cta: string };
 }
 
 const zh: SolutionsCopy = {
@@ -152,38 +124,6 @@ const zh: SolutionsCopy = {
   hero: {
     title: "网站会把你的 Agent\n当成真人，而不是脚本",
     lead: "换掉一行 Playwright 代码，或从任意 RPA 工具迁移过来。WebCross 从浏览器内核层解决指纹、IP、速度与可维护性——让 Agent 第一次真正像人一样上网。",
-  },
-  isolation: {
-    kicker: "",
-    title: "网站总是检查三样信息，而我们都会处理好",
-    lead: "从出口 IP、浏览器指纹到人机验证，任何一环露出自动化迹象，账号就会触发风控。Webcross 将会提供稳健的解决方案，保证你账号安全。",
-    checks: {
-      proxy: {
-        title: "出口 IP",
-        question: "网站看到你从哪里连接。",
-        before: "数据中心 IP",
-        after: "真实家庭宽带",
-        note: "每个环境可设置独立住宅IP。",
-        status: "ready",
-      },
-      fingerprint: {
-        title: "浏览器指纹",
-        question: "网站检查你的浏览器与设备。",
-        before: "无头浏览器特征",
-        after: "正常笔记本",
-        note: "自研 Chromium 内核，指纹表现就是一台真人设备。",
-        status: "ready",
-      },
-      captcha: {
-        title: "人机验证",
-        question: "网站问：你是不是人？",
-        before: "卡住",
-        after: "后续实现",
-        note: "人机验证能力正在开发中，后续版本将提供自动处理与人工接管。",
-        status: "soon",
-        soonLabel: "后续实现",
-      },
-    },
   },
   fingerprint: {
     kicker: "",
@@ -327,11 +267,6 @@ const zh: SolutionsCopy = {
     codeCaption: "workflows/post-to-x.workflow.js",
     codeNote: "",
   },
-  closing: {
-    title: "把下一次重复操作，交给 WebCross",
-    desc: "下载客户端，接上你熟悉的 Agent，用 JS Script 把重复工作变成可复用资产。",
-    cta: "免费下载 WebCross",
-  },
 };
 
 const en: SolutionsCopy = {
@@ -343,36 +278,6 @@ const en: SolutionsCopy = {
   hero: {
     title: "Websites treat your Agent as a person, not a script",
     lead: "Change one line of your Playwright code — or migrate straight from any RPA tool. WebCross fixes fingerprints, IPs, speed and maintainability at the browser-engine level, so your Agent finally browses like a person.",
-  },
-  isolation: {
-    kicker: "",
-    title: "Sites always check three signals — and we handle them all",
-    lead: "Exit IP, browser fingerprint, human verification — one automation tell anywhere in the chain and the account trips risk control. WebCross delivers robust safeguards to keep your accounts safe.",
-    checks: {
-      proxy: {
-        title: "Proxy",
-        question: "Sites see where you connect from.",
-        before: "Data center",
-        after: "Real home",
-        note: "Each environment can use its own residential IP.",
-      },
-      fingerprint: {
-        title: "Fingerprint",
-        question: "Sites check your browser and device.",
-        before: "Headless tells",
-        after: "Normal laptop",
-        note: "Our own Chromium fork reads as an ordinary human device.",
-      },
-      captcha: {
-        title: "CAPTCHA",
-        question: "Sites ask: are you human?",
-        before: "Stuck",
-        after: "Coming soon",
-        note: "CAPTCHA handling is in development and will ship automated solving plus human takeover in a later release.",
-        status: "soon",
-        soonLabel: "Coming soon",
-      },
-    },
   },
   fingerprint: {
     kicker: "",
@@ -515,11 +420,6 @@ const en: SolutionsCopy = {
     ],
     codeCaption: "workflows/post-to-x.workflow.js",
     codeNote: "",
-  },
-  closing: {
-    title: "Hand the next repetitive task to WebCross",
-    desc: "Download the client, connect the agent you already use, and turn repeated work into reusable assets with JS scripts.",
-    cta: "Download WebCross — Free",
   },
 };
 

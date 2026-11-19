@@ -123,7 +123,7 @@ export function jsonLd(model: ChapterViewModel) {
     },
   ];
 
-  if (model.id === "product" && model.product) {
+  if (model.id === "product") {
     const faq = getHomeCopy(model.locale).faq;
     graph.push({
       "@type": "FAQPage",

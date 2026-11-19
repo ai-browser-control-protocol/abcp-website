@@ -9,7 +9,7 @@ import { ProductChapter } from "./ProductChapter";
 
 export function ChapterView({ model }: { model: ChapterViewModel }) {
   const content =
-    model.id === "product" && model.product ? (
+    model.id === "product" ? (
       <ProductChapter locale={model.locale} />
     ) : model.id === "guide" && model.guide ? (
       <GuideChapter locale={model.locale} copy={model.guide} />

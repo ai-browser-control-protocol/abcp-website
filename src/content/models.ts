@@ -6,10 +6,7 @@ import { getMessages, type Messages } from "@/i18n/messages";
 
 /** Copy shapes the UI layer renders. Re-exported here so components in
  *  src/components/ui never have to import from @/i18n directly. */
-export type DemoCopy = Messages["product"]["demo"];
-export type FeaturesCopy = Messages["product"]["features"];
-export type ComparisonCopy = Messages["product"]["comparison"];
-export type FaqCopy = Messages["product"]["faq"];
+export type FaqCopy = Messages["guide"]["faq"];
 
 export interface ChromeCopy {
   locale: Locale;
@@ -43,7 +40,6 @@ export interface ChapterViewModel {
   title: string;
   seoTitle: string;
   seoDescription: string;
-  product?: Messages["product"];
   guide?: Messages["guide"];
   download?: Messages["download"];
 }
@@ -88,7 +84,6 @@ export function getChapterModel(chapter: ChapterId, locale: Locale): ChapterView
     seoTitle: seo.title,
     seoDescription: seo.description,
   };
-  if (chapter === "product") model.product = t.product;
   if (chapter === "guide") model.guide = t.guide;
   if (chapter === "download") model.download = t.download;
   return model;

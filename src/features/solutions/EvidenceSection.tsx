@@ -40,38 +40,42 @@ interface ActionRecord {
 }
 
 /** The publishing evidence chain, rewritten from the real client capture. */
-const RECORDS: ActionRecord[] = [
-  {
-    tone: "ok",
-    title: "读取页面可见字段，确认为「发布新贴文」编辑区而不是信息流首页",
-    method: "DOM.getAXTree",
-    state: "已完成",
-    time: "04:43 PM",
-  },
-  {
-    tone: "ok",
-    title: "确认发布按钮可用：Post 按钮已启用，无禁用遮罩或二次确认",
-    method: "Page.getState",
-    state: "已完成",
-    time: "04:43 PM",
-  },
-  {
-    tone: "flow",
-    title: "工作流详情",
-    sub: "18 个操作",
-    time: "04:43 PM",
-    action: "查看详情",
-  },
-  {
-    tone: "ok",
-    title: "确认绑定页面当前状态（是否 x.com 发布页、是否有未保存草稿/弹窗）",
-    method: "Page.getState",
-    state: "已完成",
-    time: "04:42 PM",
-  },
-];
+type EvidenceMockup = SolutionsCopy["evidence"]["mockup"];
 
-function ClientSidebar() {
+function actionRecords(mockup: EvidenceMockup): ActionRecord[] {
+  return [
+    {
+      tone: "ok",
+      title: mockup.readFields,
+      method: "DOM.getAXTree",
+      state: mockup.done,
+      time: "04:43 PM",
+    },
+    {
+      tone: "ok",
+      title: mockup.checkPost,
+      method: "Page.getState",
+      state: mockup.done,
+      time: "04:43 PM",
+    },
+    {
+      tone: "flow",
+      title: mockup.workflow,
+      sub: mockup.operations,
+      time: "04:43 PM",
+      action: mockup.details,
+    },
+    {
+      tone: "ok",
+      title: mockup.checkBinding,
+      method: "Page.getState",
+      state: mockup.done,
+      time: "04:42 PM",
+    },
+  ];
+}
+
+function ClientSidebar({ mockup }: { mockup: EvidenceMockup }) {
   return (
     <aside className="evd-side">
       <div className="evd-brand">
@@ -79,36 +83,36 @@ function ClientSidebar() {
       </div>
 
       <div className="evd-side-group">
-        <span className="evd-side-label">工作区</span>
-        <span className="evd-side-item evd-side-item--active">窗口</span>
-        <span className="evd-side-item">AI 助手</span>
+        <span className="evd-side-label">{mockup.workspace}</span>
+        <span className="evd-side-item evd-side-item--active">{mockup.windows}</span>
+        <span className="evd-side-item">{mockup.assistant}</span>
       </div>
 
       <div className="evd-side-group">
-        <span className="evd-side-label">系统</span>
-        <span className="evd-side-item">设置</span>
-        <span className="evd-side-item">指南</span>
+        <span className="evd-side-label">{mockup.system}</span>
+        <span className="evd-side-item">{mockup.settings}</span>
+        <span className="evd-side-item">{mockup.guide}</span>
       </div>
 
       <div className="evd-side-foot">
         <span className="evd-side-label">
-          接入
-          <em>邀请</em>
+          {mockup.access}
+          <em>{mockup.invite}</em>
         </span>
         <span className="evd-side-status">
           <i />
           WebSocket
-          <em>未连接</em>
+          <em>{mockup.disconnected}</em>
         </span>
         <span className="evd-side-status">
           <i />
           MCP
-          <em>未连接</em>
+          <em>{mockup.disconnected}</em>
         </span>
         <span className="evd-side-status evd-side-status--on">
           <i />
           CLI
-          <em>可调用</em>
+          <em>{mockup.available}</em>
         </span>
       </div>
     </aside>
@@ -135,7 +139,7 @@ function RecordRow({ record }: { record: ActionRecord }) {
 
 export function EvidenceSection({ copy }: { copy: SolutionsCopy["evidence"] }) {
   const [confirmed, setConfirmed] = useState(false);
-  const checkpoint = copy.checkpoint;
+  const { checkpoint, mockup } = copy;
 
   return (
     <section className="sol-section" id="evidence">
@@ -159,57 +163,57 @@ export function EvidenceSection({ copy }: { copy: SolutionsCopy["evidence"] }) {
         <figure className="evd-figure" aria-label={copy.caption} data-checkpoint={confirmed ? "resumed" : "pending"}>
           <div className="evd-client">
             <div className="evd-titlebar">
-              <span className="evd-titlebar-login">登录</span>
+              <span className="evd-titlebar-login">{mockup.login}</span>
               <i className="evd-winctl evd-winctl--min" />
               <i className="evd-winctl evd-winctl--max" />
               <i className="evd-winctl evd-winctl--close" />
             </div>
 
-            <ClientSidebar />
+            <ClientSidebar mockup={mockup} />
 
             <div className="evd-main">
               <div className="evd-topbar">
                 <span className="evd-back">
                   <i className="evd-back-caret" />
-                  返回
+                  {mockup.back}
                 </span>
                 <span className="evd-open">
                   <i />
-                  打开现场
+                  {mockup.open}
                 </span>
               </div>
 
               <div className="evd-page-head">
                 <div className="evd-title-block">
-                  <span className="evd-page-title">发布新贴文</span>
+                  <span className="evd-page-title">{mockup.publish}</span>
                   <span className="evd-url">https://x.com/compose/post</span>
                 </div>
                 <div className="evd-source">
-                  <span className="evd-source-label">页面来源</span>
-                  <span className="evd-source-value">弹窗打开</span>
-                  <span className="evd-source-meta">来自标签页 x.com</span>
+                  <span className="evd-source-label">{mockup.pageSource}</span>
+                  <span className="evd-source-value">{mockup.popup}</span>
+                  <span className="evd-source-meta">{mockup.sourceTab}</span>
                   <span className="evd-source-link">https://x.com/compose/post</span>
                 </div>
               </div>
 
               <div className="evd-tab-strip">
-                <span className="evd-page-pill">发布新贴文</span>
-                <span className="evd-tab-search">搜索标签页</span>
-                <span className="evd-tab-toggle">已关闭标签页</span>
+                <span className="evd-page-pill">{mockup.publish}</span>
+                <span className="evd-tab-search">{mockup.searchTabs}</span>
+                <span className="evd-tab-toggle">{mockup.closedTabs}</span>
               </div>
               <div className="evd-tabs">
-                <span className="evd-tab evd-tab--active">动作记录</span>
-                <span className="evd-tab">导航历史</span>
+                <span className="evd-tab evd-tab--active">{mockup.actions}</span>
+                <span className="evd-tab">{mockup.navigation}</span>
               </div>
 
               <div className="evd-records">
                 <div className="evd-records-head">
                   <span className="evd-records-label">
-                    动作记录
+                    {mockup.actions}
                   </span>
                   <span className="evd-records-tools">
-                    <span className="evd-sort"><em>最新优先</em><em>最早优先</em></span>
-                    <span className="evd-records-updated">最新更新: 04:44 PM</span>
+                    <span className="evd-sort"><em>{mockup.newest}</em><em>{mockup.oldest}</em></span>
+                    <span className="evd-records-updated">{mockup.updated}</span>
                     <button type="button" className="evd-confirm" onClick={() => setConfirmed(!confirmed)}>
                       {confirmed ? checkpoint.replay : checkpoint.confirm}
                     </button>
@@ -223,7 +227,7 @@ export function EvidenceSection({ copy }: { copy: SolutionsCopy["evidence"] }) {
                     state: confirmed ? checkpoint.resumed : checkpoint.pending,
                     time: "04:44 PM",
                   }} />
-                  {RECORDS.map((record) => (
+                  {actionRecords(mockup).map((record) => (
                     <RecordRow key={`${record.tone}-${record.title}`} record={record} />
                   ))}
                 </ul>

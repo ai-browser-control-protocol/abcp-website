@@ -23,7 +23,7 @@ export function ClosingCta() {
     <section className="site-closing" aria-label={copy.closing.title}>
       <div className="site-closing-inner">
         <div className="site-closing-copy">
-          <h2>{copy.closing.title}<span>{copy.closing.titleAccent}</span></h2>
+          <h2>{copy.closing.title}{" "}<span>{copy.closing.titleAccent}</span></h2>
           <p>{copy.closing.description}</p>
           <div className="site-closing-actions">
             <Link className="site-closing-primary" href={chapterPath("download")}>

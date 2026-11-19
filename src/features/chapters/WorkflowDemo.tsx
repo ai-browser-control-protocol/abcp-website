@@ -61,7 +61,7 @@ function ClientTopbar({ copy, stage }: { copy: Demo; stage: number }) {
     <div className="wfc-topbar" aria-hidden="true">
       <div className="wfc-history"><span>↶ {copy.history}</span><span>＋ {copy.newChat}</span></div>
       <div className="wfc-view-tabs">{copy.tabs.map((tab, index) => <span className={activeTab === index ? "is-active" : ""} key={tab}>{tab}</span>)}</div>
-      <span className="wfc-login">登录</span>
+      <span className="wfc-login">{copy.labels.login}</span>
     </div>
   );
 }
@@ -90,7 +90,7 @@ function Composer({
             <span className="wfc-composer-script"><b>JS</b>{selectedSkill.script}</span>
           </>
         )}
-        <span className="wfc-composer-mode">工作区内修改⌄</span>
+        <span className="wfc-composer-mode">{copy.labels.composerMode}</span>
         <b className={`wfc-composer-send${active ? "" : busy ? " is-busy" : " is-idle"}`}>{busy ? "■" : "↑"}</b>
       </div>
     </div>
@@ -130,20 +130,20 @@ function ResearchAgent({ copy, beat }: { copy: Demo; beat: number }) {
       {complete && (
         <motion.div className="wfc-agent-digest" initial={false} animate={{ opacity: 1 }}>
           <Spark />
-          <span>{copy.research.sources.length} 个来源已归档</span>
-          <strong>{copy.research.ideas.length} 个选题</strong>
+          <span>{copy.labels.archived.replace("{count}", String(copy.research.sources.length))}</span>
+          <strong>{copy.labels.ideas.replace("{count}", String(copy.research.ideas.length))}</strong>
         </motion.div>
       )}
     </div>
   );
 }
 
-function XPage({ topic, posts }: { topic: string; posts: Demo["research"]["xPosts"] }) {
+function XPage({ topic, posts, labels }: { topic: string; posts: Demo["research"]["xPosts"]; labels: Demo["labels"] }) {
   return (
     <div className="wfc-x-ui">
       <header className="wfc-x-header">
         <span className="wfc-x-logo">X</span>
-        <div className="wfc-x-tabs"><b>为你推荐</b><span>关注</span></div>
+        <div className="wfc-x-tabs"><b>{labels.forYou}</b><span>{labels.following}</span></div>
         <span className="wfc-x-search">⌕</span>
       </header>
       <div className="wfc-platform-topic"><small>TRENDING / AI</small><strong>{topic}</strong><span>LIVE</span></div>
@@ -163,7 +163,7 @@ function XPage({ topic, posts }: { topic: string; posts: Demo["research"]["xPost
   );
 }
 
-function RedditPage({ posts }: { posts: Demo["research"]["redditPosts"] }) {
+function RedditPage({ posts, labels }: { posts: Demo["research"]["redditPosts"]; labels: Demo["labels"] }) {
   return (
     <div className="wfc-reddit-ui">
       <header className="wfc-reddit-header">
@@ -174,13 +174,13 @@ function RedditPage({ posts }: { posts: Demo["research"]["redditPosts"] }) {
       <div className="wfc-reddit-community">
         <span className="wfc-reddit-community-icon">r/</span>
         <div><strong>{posts[0]?.forum ?? "r/AI_Agents"}</strong><small>12.4k members · 48 online</small></div>
-        <span className="wfc-reddit-join">加入</span>
+        <span className="wfc-reddit-join">{labels.join}</span>
       </div>
       <div className="wfc-reddit-feed">
         {posts.map((post, index) => (
           <article className="wfc-reddit-post" key={post.title}>
             <div className="wfc-reddit-votes"><span>▲</span><strong>{index === 0 ? "2.4k" : index === 1 ? "1.1k" : "870"}</strong><span>▼</span></div>
-            <div><small>{post.forum} · 热门</small><strong>{post.title}</strong><p>{post.meta}</p><footer><span>◯ 评论</span><span>分享</span><span>保存</span></footer></div>
+            <div><small>{post.forum} · {labels.trending}</small><strong>{post.title}</strong><p>{post.meta}</p><footer><span>◯ {labels.comments}</span><span>{labels.share}</span><span>{labels.save}</span></footer></div>
           </article>
         ))}
       </div>
@@ -188,12 +188,12 @@ function RedditPage({ posts }: { posts: Demo["research"]["redditPosts"] }) {
   );
 }
 
-function ThreadsPage({ topic, posts }: { topic: string; posts: Demo["research"]["threadsPosts"] }) {
+function ThreadsPage({ topic, posts, labels }: { topic: string; posts: Demo["research"]["threadsPosts"]; labels: Demo["labels"] }) {
   return (
     <div className="wfc-threads-ui">
       <header className="wfc-threads-header">
         <span className="wfc-threads-logo">@</span>
-        <div><b>为你推荐</b><span>关注</span></div>
+        <div><b>{labels.forYou}</b><span>{labels.following}</span></div>
         <span className="wfc-threads-search">⌕</span>
       </header>
       <div className="wfc-platform-topic"><small>THREADS / CREATORS</small><strong>{topic}</strong><span>LIVE</span></div>
@@ -247,9 +247,9 @@ function ResearchBrowser({ copy, beat, showDigest = true, feed }: { copy: Demo; 
         <small>{source.detail}</small>
       </div>
       <div className="wfc-source-page">
-        {sourceIndex === 0 && <XPage topic={browser.topic} posts={browser.xPosts} />}
-        {sourceIndex === 1 && <RedditPage posts={browser.redditPosts} />}
-        {sourceIndex === 2 && <ThreadsPage topic={browser.topic} posts={browser.threadsPosts} />}
+        {sourceIndex === 0 && <XPage topic={browser.topic} posts={browser.xPosts} labels={copy.labels} />}
+        {sourceIndex === 1 && <RedditPage posts={browser.redditPosts} labels={copy.labels} />}
+        {sourceIndex === 2 && <ThreadsPage topic={browser.topic} posts={browser.threadsPosts} labels={copy.labels} />}
       </div>
       {displayDigest && (
         <AnimatePresence>
@@ -294,7 +294,7 @@ function SkillDelivery({ copy }: { copy: Demo }) {
       <h4>{copy.workflowName}</h4>
       <p>{copy.saved}</p>
       <div className="wfc-delivery-files">{copy.authoring.files.map((file, index) => <span className={index === 1 ? "is-current" : ""} key={file}>{index === 1 ? "JS" : index === 2 ? "MD" : "TS"} {file}</span>)}</div>
-      <span className="wfc-delivery-caption">UI 执行路径 · JavaScript · Skill package</span>
+      <span className="wfc-delivery-caption">{copy.labels.delivery}</span>
     </motion.div>
   );
 }

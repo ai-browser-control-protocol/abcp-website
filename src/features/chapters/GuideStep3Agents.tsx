@@ -555,7 +555,8 @@ function AppSidebarProject({
   );
 }
 
-function ChatGPTWindow() {
+function ChatGPTWindow({ copy }: { copy: GuideMockupCopy }) {
+  const labels = copy.agentWindows;
   return (
     <div className="gs3-win gs3-win--agent gs3-win--app">
       <AppWindowChrome
@@ -569,7 +570,7 @@ function ChatGPTWindow() {
           />
         }
         title="ChatGPT"
-        detail="结算页回归测试"
+        detail={labels.checkoutTest}
         chip={<LiveChip variant="run" />}
       />
 
@@ -603,28 +604,28 @@ function ChatGPTWindow() {
 
           <div className="gs3-app-side-row">
             {Icon.edit}
-            <span>新聊天</span>
+            <span>{labels.newChat}</span>
           </div>
           <div className="gs3-app-side-row">
             <i className="gs3-app-dot" />
-            <span>你的 Dot</span>
+            <span>{labels.yourDot}</span>
           </div>
 
-          <span className="gs3-app-side-label">项目</span>
+          <span className="gs3-app-side-label">{labels.projects}</span>
 
           <div className="gs3-app-projects">
             <AppSidebarProject
               name="ecommerce-ops"
-              threads={["结算页回归测试", "批量商品上架"]}
-              activeThread="结算页回归测试"
+              threads={[labels.checkoutTest, labels.bulkListing]}
+              activeThread={labels.checkoutTest}
             />
-            <AppSidebarProject name="pricing-watch" threads={["竞品价格巡检"]} />
-            <AppSidebarProject name="growth-lab" threads={["促销活动核对"]} />
+            <AppSidebarProject name="pricing-watch" threads={[labels.priceCheck]} />
+            <AppSidebarProject name="growth-lab" threads={[labels.promotionCheck]} />
           </div>
 
           <div className="gs3-app-onside">
             <div className="gs3-app-onside-head">
-              <span>开始使用</span>
+              <span>{labels.start}</span>
               <small>1/4</small>
             </div>
             <span className="gs3-app-progress">
@@ -633,22 +634,22 @@ function ChatGPTWindow() {
             <div className="gs3-app-checklist">
               <span>
                 <i className="gs3-app-check" />
-                设置每日更新
+                {labels.dailyUpdate}
                 <b>∞</b>
               </span>
               <span>
                 <i className="gs3-app-check" />
-                快速了解 WebCross
+                {labels.overview}
                 <b>◈</b>
               </span>
               <span>
                 <i className="gs3-app-check" />
-                分类处理浏览器任务
+                {labels.sortTasks}
                 <b>◉</b>
               </span>
               <span>
                 <i className="gs3-app-check" />
-                查看项目的最新决策
+                {labels.projectDecisions}
                 <b>A</b>
               </span>
             </div>
@@ -664,7 +665,7 @@ function ChatGPTWindow() {
           <div className="gs3-app-main-head">
             <span className="gs3-app-crumb">
               {Icon.folder}
-              结算页回归测试
+              {labels.checkoutTest}
               {Icon.chevronDown}
             </span>
             <span className="gs3-app-main-actions">
@@ -684,49 +685,49 @@ function ChatGPTWindow() {
                   height={330}
                   unoptimized
                 />
-                <b>WebCross 浏览器</b>
+                <b>{labels.browser}</b>
                 <span>checkout.acme-app.dev</span>
                 <i className="gs3-app-live">LIVE</i>
               </div>
               <div className="gs3-app-run-row">
-                <span>打开结算页 · Space「Checkout test」</span>
+                <span>{labels.openCheckout}</span>
                 <b className="is-ok">✓</b>
               </div>
               <div className="gs3-app-run-row">
-                <span>选择配送方式 · Express</span>
+                <span>{labels.shipping}</span>
                 <b className="is-ok">✓</b>
               </div>
               <div className="gs3-app-run-row">
-                <span>重新计算运费 · OrderSummary.tsx</span>
+                <span>{labels.recalculate}</span>
                 <b className="is-new">+6 −1</b>
               </div>
               <div className="gs3-app-run-row">
-                <span>运行 10 项结算页检查</span>
-                <b className="is-ok">全部通过</b>
+                <span>{labels.runChecks}</span>
+                <b className="is-ok">{labels.allPassed}</b>
               </div>
             </div>
 
-            <span className="gs3-app-timestamp">10月26日周一 20:07</span>
+            <span className="gs3-app-timestamp">{labels.timestamp}</span>
 
             <div className="gs3-app-user">
-              用 WebCross 跑一遍结算页回归，运费计算不对就修好。
+              {labels.checkoutPrompt}
             </div>
 
-            <span className="gs3-app-duration">用时 38s ›</span>
+            <span className="gs3-app-duration">{labels.duration}</span>
 
             <p className="gs3-app-answer">
-              已通过 WebCross 重新计算运费，结算页 10 项检查全部通过。
+              {labels.checkoutResult}
             </p>
-            <span className="gs3-app-link">预览：checkout.acme-app.dev</span>
+            <span className="gs3-app-link">{labels.previewUrl}</span>
 
             <div className="gs3-app-preview">
               <span className="gs3-app-preview-icon">{Icon.globe}</span>
               <span className="gs3-app-preview-body">
-                <b>网页预览</b>
-                <small>结算页 · 运费已更新</small>
+                <b>{labels.preview}</b>
+                <small>{labels.shippingUpdated}</small>
               </span>
               <span className="gs3-app-preview-open">
-                打开方式 {Icon.chevronDown}
+                {labels.openWith} {Icon.chevronDown}
               </span>
             </div>
 
@@ -739,12 +740,12 @@ function ChatGPTWindow() {
           </div>
 
           <div className="gs3-app-composer">
-            <span className="gs3-app-composer-hint">和 ChatGPT 一起工作</span>
+            <span className="gs3-app-composer-hint">{labels.workWithChatgpt}</span>
             <div className="gs3-app-composer-foot">
               <span className="gs3-app-plus">{Icon.plus}</span>
-              <span className="gs3-app-approve">帮我批准</span>
+              <span className="gs3-app-approve">{labels.approve}</span>
               <span className="gs3-app-model">
-                GPT-6 Astra <span>中</span> {Icon.chevronDown}
+                GPT-6 Astra <span>{labels.medium}</span> {Icon.chevronDown}
               </span>
               <span className="gs3-app-mic">{Icon.mic}</span>
               <span className="gs3-app-wave">
@@ -764,11 +765,12 @@ function ChatGPTWindow() {
 /* ---- WebCross client window: AI 助手 page -------------------------------- */
 
 function AiAssistantWindow({ copy }: { copy: GuideMockupCopy }) {
+  const labels = copy.agentWindows;
   return (
     <div className="gs3-win gs3-win--agent gs3-win--ai">
       <div className="gs3-winbar gs3-winbar--ai">
         <span className="gs3-winbar-right">
-          <span className="gs3-ai-login">登录</span>
+          <span className="gs3-ai-login">{copy.navLogin}</span>
           <span className="gs3-ai-winctl" aria-hidden="true">
             <i>—</i>
             <i>□</i>
@@ -791,8 +793,8 @@ function AiAssistantWindow({ copy }: { copy: GuideMockupCopy }) {
 
           <span className="gs3-ai-label">{copy.groupWorkspace}</span>
           <div className="gs3-ai-nav">
-            <span className="gs3-ai-nav-item">窗口</span>
-            <span className="gs3-ai-nav-item is-active">AI 助手</span>
+            <span className="gs3-ai-nav-item">{copy.navBrowsers}</span>
+            <span className="gs3-ai-nav-item is-active">{copy.navAgentChat}</span>
           </div>
 
           <span className="gs3-ai-label">{copy.groupSystem}</span>
@@ -828,16 +830,16 @@ function AiAssistantWindow({ copy }: { copy: GuideMockupCopy }) {
           <div className="gs3-ai-toolbar">
             <span className="gs3-ai-tool">
               {Icon.history}
-              历史
+              {labels.history}
             </span>
             <span className="gs3-ai-tool gs3-ai-new">
               {Icon.plus}
-              新建会话
+              {labels.newSession}
             </span>
             <div className="gs3-ai-tabs">
-              <span className="gs3-ai-tab is-active">会话</span>
-              <span className="gs3-ai-tab">任务</span>
-              <span className="gs3-ai-tab">自动化</span>
+              <span className="gs3-ai-tab is-active">{labels.chat}</span>
+              <span className="gs3-ai-tab">{labels.tasks}</span>
+              <span className="gs3-ai-tab">{labels.automation}</span>
             </div>
             <span className="gs3-ai-screen">{Icon.screen}</span>
           </div>
@@ -845,8 +847,8 @@ function AiAssistantWindow({ copy }: { copy: GuideMockupCopy }) {
           {/* One live agent session driving the browser, as in the reference. */}
           <div className="gs3-ai-session">
             <div className="gs3-ai-user">
-              <span className="gs3-ai-user-tag">你</span>
-              <span>用 WebCross 帮我在 x.com 发布一条新贴文</span>
+              <span className="gs3-ai-user-tag">{labels.you}</span>
+              <span>{labels.postPrompt}</span>
             </div>
 
             <div className="gs3-ai-reply">
@@ -866,51 +868,51 @@ function AiAssistantWindow({ copy }: { copy: GuideMockupCopy }) {
               <div className="gs3-ai-trace">
                 <div className="gs3-ai-trace-row">
                   <i className="gs3-ai-step is-ok">✓</i>
-                  <span className="gs3-ai-step-text">打开 x.com/compose/post</span>
+                  <span className="gs3-ai-step-text">{labels.openPost}</span>
                   <code className="gs3-ai-method">Page.navigate</code>
                 </div>
                 <div className="gs3-ai-trace-row">
                   <i className="gs3-ai-step is-ok">✓</i>
                   <span className="gs3-ai-step-text">
-                    读取 AXTree 语义树 <em>· 128 元素</em>
+                    {labels.readTree} <em>{labels.elements}</em>
                   </span>
                   <code className="gs3-ai-method">DOM.getAXTree</code>
                 </div>
                 <div className="gs3-ai-trace-row">
                   <i className="gs3-ai-step is-ok">✓</i>
-                  <span className="gs3-ai-step-text">输入贴文内容</span>
+                  <span className="gs3-ai-step-text">{labels.enterPost}</span>
                   <code className="gs3-ai-method">Input.type</code>
                 </div>
                 <div className="gs3-ai-trace-row">
                   <i className="gs3-ai-step is-ok">✓</i>
-                  <span className="gs3-ai-step-text">点击「发布」</span>
+                  <span className="gs3-ai-step-text">{labels.clickPublish}</span>
                   <code className="gs3-ai-method">Input.click</code>
                 </div>
                 <div className="gs3-ai-trace-row gs3-ai-trace-row--note">
                   <i className="gs3-ai-step is-ok">✓</i>
                   <span className="gs3-ai-step-text">
-                    动作记录已写入 <em>· 18 个操作</em>
+                    {labels.logged} <em>{labels.actionCount}</em>
                   </span>
-                  <code className="gs3-ai-method">动作记录</code>
+                  <code className="gs3-ai-method">{labels.actionLog}</code>
                 </div>
               </div>
 
               <div className="gs3-ai-session-meta">
-                <span>10月26日周一 20:07</span>
+                <span>{labels.timestamp}</span>
                 <i />
-                <b>执行完成 · 12.4s</b>
+                <b>{labels.complete}</b>
               </div>
             </div>
           </div>
 
           <div className="gs3-ai-composer">
             <div className="gs3-ai-input">
-              发消息或创建任务，/ 调用指令，@ 文件或对话
+              {labels.composer}
             </div>
             <div className="gs3-ai-compose-row">
               <span className="gs3-ai-plus">{Icon.plus}</span>
               <span className="gs3-ai-scope">
-                工作区内修改 {Icon.chevronDown}
+                {labels.workspace} {Icon.chevronDown}
               </span>
               <span className="gs3-ai-model">
                 volcengine · deepseek-v4.1-flash {Icon.chevronDown}
@@ -953,10 +955,10 @@ function ClaudePair({ prompt }: { prompt: string }) {
   );
 }
 
-function ChatGPTPair() {
+function ChatGPTPair({ copy }: { copy: GuideMockupCopy }) {
   return (
     <div className="gs3-pair">
-      <ChatGPTWindow />
+      <ChatGPTWindow copy={copy} />
       <BrowserWindow variant="chatgpt" />
     </div>
   );
@@ -1115,7 +1117,7 @@ export function GuideStep3Agents({ copy }: { copy: GuideMockupCopy }) {
           className={`gs3-view-wrap${active === "chatgpt" ? " is-active" : ""}`}
           aria-hidden={active !== "chatgpt"}
         >
-          <ChatGPTPair />
+          <ChatGPTPair copy={copy} />
         </div>
         <div
           className={`gs3-view-wrap${active === "webcross" ? " is-active" : ""}`}

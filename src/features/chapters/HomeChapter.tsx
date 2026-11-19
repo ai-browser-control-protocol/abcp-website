@@ -159,7 +159,7 @@ function Environments({ copy }: { copy: HomeCopy }) {
               <ul>{environment.localFlow.sites.map((site) => <li key={site}><span aria-hidden="true">✓</span>{site}</li>)}</ul>
             </li>
           </ol>
-          <div className="local-no-touch"><ShieldMark /><span>WebCross 不接触你的数据</span></div>
+          <div className="local-no-touch"><ShieldMark /><span>{environment.localNotice}</span></div>
         </article>
       </div>
     </section>
@@ -313,12 +313,12 @@ const featureIcons: Record<ComparisonFeature, { path: string; color: string }> =
   setup: { color: "#c95819", path: "M3 7h7m5 0h6M3 17h12m5 0h1M10 4h5v6h-5zM15 14h5v6h-5z" },
 };
 
-function ComparisonValueCell({ cell }: { cell: ComparisonValue }) {
+function ComparisonValueCell({ cell, supported, unsupported }: { cell: ComparisonValue; supported: string; unsupported: string }) {
   if (cell.mark) {
     const isCheck = cell.mark === "check";
     return (
       <span className={`comparison-value is-mark is-${cell.tone}`}>
-        <b className={`comparison-mark ${isCheck ? "is-check" : "is-dash"}`} aria-label={isCheck ? "支持" : "不支持"}>{isCheck ? <Check /> : "—"}</b>
+        <b className={`comparison-mark ${isCheck ? "is-check" : "is-dash"}`} aria-label={isCheck ? supported : unsupported}>{isCheck ? <Check /> : "—"}</b>
       </span>
     );
   }
@@ -331,6 +331,7 @@ function ComparisonValueCell({ cell }: { cell: ComparisonValue }) {
 }
 
 function Comparison({ copy }: { copy: HomeCopy }) {
+  const { supported, unsupported } = copy.comparison;
   return (
     <section className="home-section comparison-section" id="comparison">
       <header className="home-section-heading split-heading" data-reveal>
@@ -342,7 +343,7 @@ function Comparison({ copy }: { copy: HomeCopy }) {
         <table className="comparison-matrix">
           <thead>
             <tr>
-              <th className="comparison-dimension-head">能力维度</th>
+              <th className="comparison-dimension-head">{copy.comparison.dimension}</th>
               <th className="comparison-webcross-head"><strong>WebCross</strong><small>fork chromium</small></th>
               {copy.comparison.columns.map((column) => <th key={column.name}><strong>{column.name}</strong><small>{column.meta}</small></th>)}
             </tr>
@@ -356,8 +357,8 @@ function Comparison({ copy }: { copy: HomeCopy }) {
                     {row.label}
                   </span>
                 </th>
-                <td className="comparison-webcross-cell"><ComparisonValueCell cell={row.webcross} /></td>
-                {row.values.map((cell, i) => <td key={`${row.label}-${i}`}><ComparisonValueCell cell={cell} /></td>)}
+                <td className="comparison-webcross-cell"><ComparisonValueCell cell={row.webcross} supported={supported} unsupported={unsupported} /></td>
+                {row.values.map((cell, i) => <td key={`${row.label}-${i}`}><ComparisonValueCell cell={cell} supported={supported} unsupported={unsupported} /></td>)}
               </tr>
             ))}
           </tbody>
@@ -405,7 +406,7 @@ export function HomeChapter({ copy, locale }: { copy: HomeCopy; locale: Locale }
         <header className="home-hero">
           <div className="hero-copy">
             <h1>
-              <span>{copy.hero.titleA}</span>
+              <span>{copy.hero.titleA}</span>{" "}
               <span><mark className="hero-highlight">{copy.hero.titleB}</mark><i className="hero-caret" aria-hidden="true" /></span>
             </h1>
             <div className="home-actions">

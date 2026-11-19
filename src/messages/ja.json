@@ -1,8 +1,8 @@
 {
   "brand": {
     "name": "WebCross",
-    "thesis": "WebCross はあなたのエージェント",
-    "tagline": "最高の Agentic フィンガープリントブラウザ"
+    "thesis": "WebCross がエージェントの作業を支えます",
+    "tagline": "AI エージェントのための最高のステルスブラウザー"
   },
   "nav": {
     "useCases": "活用事例",
@@ -13,19 +13,19 @@
     "github": "GitHub"
   },
   "caseLibrary": {
-    "headline": "WebCross がお手伝いします！",
-    "intro": "商品リストから出品の下書きを作ったり、話題の投稿から記事のネタを集めたり。身近な仕事を選んで、WebCross がどう進めるか見てみましょう。",
+    "headline": "WebCross でできること",
+    "intro": "商品リストから出品の下書きを作る。話題の投稿から次の記事のヒントを探す。普段の仕事に近い事例を選んで、頼み方と結果を見てみましょう。",
     "all": "すべての事例",
     "filters": "業務別に絞り込む",
     "count": "{count} 件の事例",
     "categories": {
       "commerce": "EC 運営",
-      "social": "ソーシャルメディア",
+      "social": "SNS 運用",
       "data": "データ収集",
       "marketing": "デジタル広告",
-      "career": "採用・求職"
+      "career": "採用・就職活動"
     },
-    "prompt": "Agent への依頼例",
+    "prompt": "エージェントへの依頼例",
     "close": "事例を閉じる"
   },
   "locales": {
@@ -37,11 +37,11 @@
   "seo": {
     "product": {
       "title": "WebCross · 緊急タスクは AI に。繰り返しの作業はワークフローに。",
-      "description": "WebCross は、使い慣れた Agent が完全なブラウザを操作できるようにします。商品登録、キャンペーン点検、コメント分析をバックグラウンドで実行し、必要に応じて人が引き継げます。"
+      "description": "使い慣れたエージェントが WebCross でブラウザーを操作し、商品登録、セールの点検、コメントの分析をバックグラウンドで行います。必要に応じて人が引き継ぎ、定型作業は保存して再利用できます。"
     },
     "guide": {
       "title": "利用ガイド · WebCross",
-      "description": "WebCross の内蔵 AI アシスタントの設定方法と、Skill を使って Claude Code や Codex を接続する手順を紹介します。"
+      "description": "WebCross の内蔵 AI アシスタントの設定方法と、スキルを使って Claude Code や Codex を接続する手順を紹介します。"
     },
     "download": {
       "title": "WebCross をダウンロード · デスクトップクライアント",
@@ -55,9 +55,9 @@
     "title": "利用ガイド",
     "eyebrow": "QUICK START GUIDE",
     "heading": "3分で始める WebCross",
-    "subheading": "内蔵 AI アシスタントに直接依頼することも、使い慣れたエージェントを接続することもできます。",
-    "externalTitle": "外部エージェントを接続する",
-    "externalIntro": "Skill をインストールし、ブラウザを作成して、最初のタスクをエージェントに依頼しましょう。",
+    "subheading": "内蔵 AI アシスタントに仕事を頼む方法と、いつものエージェントをつなぐ方法を紹介します。",
+    "externalTitle": "使い慣れたエージェントと連携する",
+    "externalIntro": "スキルをインストールしてブラウザーを作成したら、エージェントに最初の仕事を頼んでみましょう。",
     "assistant": {
       "title": "内蔵 AI アシスタントを使う",
       "steps": [
@@ -90,39 +90,39 @@
     "steps": [
       {
         "id": 1,
-        "title": "アプリを起動してスキルを導入",
-        "desc": "WebCross を初回起動し、ポップアップに従ってスキルをインストールします。",
+        "title": "ブラウザー操作用のスキルをインストールする",
+        "desc": "WebCross を初めて開くと、スキルのインストール画面が表示されます。案内に沿ってインストールします。",
         "tag": "ステップ 01 · かんたん準備",
-        "previewTitle": "Skill 準備状況"
+        "previewTitle": "スキルのインストール"
       },
       {
         "id": 2,
-        "title": "ブラウザを作成",
-        "desc": "ブラウザに名前を付ければすぐに開けます。詳細設定で個別設定も可能です。",
+        "title": "ブラウザーを作成する",
+        "desc": "ブラウザーに名前を付けたらすぐに開けます。自分に合わせて調整するには、詳細設定を開きます。",
         "tag": "ステップ 02 · 独立実行環境",
         "previewTitle": "ブラウザ構成情報"
       },
       {
         "id": 3,
-        "title": "Claude Code / Codex などの Agent から直接呼び出し",
-        "desc": "Claude Code や Codex などの AI Agent で /webcross-browser と入力するか、自然言語で伝えるだけで、AI がブラウザを操作してタスクを実行します。",
+        "title": "最初の仕事をエージェントに頼む",
+        "desc": "Claude Code や Codex で /webcross-browser と入力するか、自然な言葉でタスクを伝えると、エージェントがブラウザーを操作して実行します。",
         "tag": "ステップ 03 · 即座に実行",
         "previewTitle": "AI 対話・実行シミュレーション"
       }
     ],
-    "tipsTitle": "主要な特徴と安全基準",
+    "tipsTitle": "ブラウザーデータと操作権限",
     "tips": [
       {
-        "title": "完全ローカルファースト",
-        "desc": "すべてのCookie、認証情報、履歴は100%お手元のPCに保存され、クラウドへ送信されることはありません。"
+        "title": "データは端末に保存",
+        "desc": "Cookie、ログイン情報、閲覧履歴はお使いの端末にのみ保存されます。"
       },
       {
-        "title": "専用プロンプトによる制約",
-        "desc": "ブラウザごとに行動ルールを設定でき、AIが接続時に自動読み込みするため誤操作を防ぎます。"
+        "title": "ブラウザーごとに指示を設定",
+        "desc": "各ブラウザーに専用の行動指示を設定できます。AI は操作するたびに指示を読み、誤操作や権限外の操作を防ぎます。"
       },
       {
-        "title": "マルチ環境の安全な分離",
-        "desc": "各ブラウザが独立したCookie・キャッシュ・プロキシを持ち、アカウント間の関連付けリスクを遮断します。"
+        "title": "アカウントごとに専用のプロファイル",
+        "desc": "ブラウザーごとに Cookie、キャッシュ、プロキシが分かれているため、取り扱いに注意が必要な複数の業務アカウントを一人で管理できます。"
       }
     ],
     "faq": {
@@ -152,14 +152,63 @@
         {
           "q": "外部の AI Agent で使うにはどう設定しますか？",
           "a": [
-            "WebCross の起動時に webcross-browser Skill が自動で準備されます。初回起動時やインストール画面から、汎用・Claude・Codex の各ディレクトリへワンクリックでインストールでき、複数の Agent を同時に選べます。更新前には自動でバックアップされます。",
-            "インストール後は Claude Code や Codex など Skills 対応の Agent で / を入力して webcross-browser を選ぶか、自然言語で指示するだけです。すでに起動中の Agent が Skill を認識しない場合は、その Agent を一度再起動してください。SDK 連携や手動でのファイルコピーは不要です。"
+            "WebCross を起動すると、ブラウザー操作用のスキル webcross-browser が用意されます。初回起動時やインストール画面から、汎用、Claude、Codex の各ディレクトリを選んで一括インストールできます。更新前には自動でバックアップされます。",
+            "Claude Code や Codex など、スキルに対応したエージェントで / を入力し、webcross-browser を選んでください。普段の言葉で依頼することもできます。起動中のエージェントにスキルが表示されない場合は、そのエージェントを再起動してください。SDK の連携や手動でのファイルコピーは不要です。"
           ]
         }
       ]
     },
     "closingDesc": "WebCross をダウンロードして、Claude Code や Codex など普段使いの Agent に、あなたのブラウザを直接操作させましょう。",
     "mockup": {
+      "agentWindows": {
+        "checkoutTest": "チェックアウトの回帰テスト",
+        "newChat": "新しいチャット",
+        "yourDot": "あなたの Dot",
+        "projects": "プロジェクト",
+        "bulkListing": "商品の一括登録",
+        "priceCheck": "競合商品の価格点検",
+        "promotionCheck": "セールの照合",
+        "start": "使い始める",
+        "dailyUpdate": "毎日の更新を設定",
+        "overview": "WebCross を知る",
+        "sortTasks": "ブラウザータスクを分類",
+        "projectDecisions": "プロジェクトの最新の決定を見る",
+        "browser": "WebCross ブラウザー",
+        "openCheckout": "チェックアウトを開く · スペース「Checkout test」",
+        "shipping": "配送方法を選択 · Express",
+        "recalculate": "配送料を再計算 · OrderSummary.tsx",
+        "runChecks": "チェックアウトを 10 項目検証",
+        "allPassed": "すべて合格",
+        "timestamp": "10月26日（月）20:07",
+        "checkoutPrompt": "WebCross でチェックアウトの回帰テストを実行し、配送料の計算が間違っていたら直して。",
+        "duration": "所要時間 38 秒 ›",
+        "checkoutResult": "WebCross で配送料を再計算しました。チェックアウトの検証は 10 項目すべて合格です。",
+        "previewUrl": "checkout.acme-app.dev をプレビュー",
+        "preview": "ページのプレビュー",
+        "shippingUpdated": "チェックアウト · 配送料を更新済み",
+        "openWith": "開く方法",
+        "workWithChatgpt": "ChatGPT と一緒に作業",
+        "approve": "承認を任せる",
+        "medium": "中",
+        "history": "履歴",
+        "newSession": "新しいチャット",
+        "chat": "チャット",
+        "tasks": "タスク",
+        "automation": "自動化",
+        "you": "あなた",
+        "postPrompt": "WebCross を使って x.com に新しい投稿を公開して",
+        "openPost": "x.com/compose/post を開く",
+        "readTree": "アクセシビリティツリー（AXTree）を読み取る",
+        "elements": "· 128 要素",
+        "enterPost": "投稿内容を入力",
+        "clickPublish": "「ポストする」をクリック",
+        "logged": "操作履歴を保存済み",
+        "actionCount": "· 18 件の操作",
+        "actionLog": "操作履歴",
+        "complete": "完了 · 12.4 秒",
+        "composer": "メッセージを送信するかタスクを作成。/ でコマンド、@ でファイルや会話を指定",
+        "workspace": "ワークスペースで編集"
+      },
       "userBadge": "Development user",
       "groupWorkspace": "ワークスペース",
       "navBrowsers": "ブラウザ",
@@ -221,34 +270,40 @@
   },
   "download": {
     "eyebrow": "クライアントをダウンロード / DESKTOP",
-    "titleLead": "プラットフォームを選んで、",
-    "titleAccent": "エージェントを動かそう。",
+    "titleLead": "WebCross を",
+    "titleAccent": "ダウンロード",
     "lead": "WebCross はコンピューター上で動作し、インストール後すぐに複雑な Web タスクを処理できます。",
     "betaLabel": "パブリックベータ",
     "betaValue": "全機能無料",
     "currentVersion": "現在のバージョン",
     "packageSize": "インストーラーサイズは未設定",
     "panelOverline": "クライアントをダウンロード / DESKTOP",
-    "panelTitle": "プラットフォームを選択",
-    "panelLead": "お使いのシステムに合うバージョンを選択。いつでも切り替えられます。",
+    "panelTitle": "お使いの OS を選択",
+    "panelLead": "お使いの環境に合わせて、macOS 版または Windows 版を選んでください。",
     "supportedLabel": "対応プラットフォーム",
     "supportedValue": "macOS · Windows",
     "recommendation": "このデバイスにおすすめ",
     "platforms": {
       "macos": {
         "name": "macOS",
-        "requirements": ["macOS 13 以降", "Apple Silicon"],
+        "requirements": [
+          "macOS 13 以降",
+          "Apple Silicon"
+        ],
         "download": "macOS 版をダウンロード"
       },
       "windows": {
         "name": "Windows",
-        "requirements": ["Windows 10 / 11", "64 ビット"],
+        "requirements": [
+          "Windows 10 / 11",
+          "64 ビット"
+        ],
         "download": "Windows 版をダウンロード"
       }
     },
-    "faqTitleLead": "始める",
-    "faqTitleAccent": "前に確認。",
-    "faqIntro": "システムやインストール方法を確認したい場合は、以下の説明をご覧ください。",
+    "faqTitleLead": "インストールに関する",
+    "faqTitleAccent": "よくある質問",
+    "faqIntro": "対応 OS、インストーラーの選び方、初回の設定を確認できます。",
     "faq": [
       {
         "question": "対応しているシステムは？",
@@ -271,7 +326,7 @@
     "toastClose": "通知を閉じる"
   },
   "footer": {
-    "localFirst": "重要なプロセスを自分で管理",
+    "localFirst": "大切な操作は自分で承認",
     "productColumn": "製品",
     "pricing": "料金",
     "devColumn": "開発者",

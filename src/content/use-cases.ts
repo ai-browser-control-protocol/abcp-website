@@ -17,8 +17,8 @@ const entries = [
     text: {
       zh: ["Amazon Listing 上架", "在 Amazon 卖家后台按颜色建立父子变体，检查图片和必填项，确认后提交上架。", "用这份 SKU 表、五点描述和主图在 Amazon 创建保温杯 Listing，把不同颜色归到同一父体。先给我看草稿和缺图的 SKU，确认后提交资料齐全的变体。"],
       en: ["Publish an Amazon listing", "Build colour variants in Amazon Seller Central, check required details and images, then submit the reviewed listing.", "Use this SKU sheet, bullet points and photos to draft a bottle listing on Amazon. Group the colours under one parent, flag missing photos and submit the complete variants after I review them."],
-      ja: ["Amazon の商品登録", "Amazon の出品画面で色違いを親子商品にまとめ、画像と必須項目を確認して出品します。", "SKU 表、箇条書きの商品説明、写真を使って、Amazon にボトルの出品下書きを作って。色違いは同じ親商品にまとめ、画像がない SKU を一覧にして。私が確認したら、資料がそろったものを出品して。"],
-      ko: ["Amazon 상품 등록", "Amazon 판매자 센터에서 색상 옵션을 상위 상품 하나로 묶고, 이미지와 필수 항목을 검토한 뒤 등록합니다.", "SKU 표와 상품 설명, 사진으로 Amazon 텀블러 상품 초안을 만들어줘. 색상별 옵션을 상위 상품 하나에 묶고 사진이 빠진 SKU를 표시해줘. 내가 확인하면 자료가 갖춰진 옵션을 등록해줘."],
+      ja: ["Amazon に商品を出品", "Amazon の出品画面で色違いを親子商品にまとめ、画像と必須項目を確認して出品します。", "SKU 表、箇条書きの商品説明、写真を使って、Amazon にボトルの出品下書きを作って。色違いは同じ親商品にまとめ、画像がない SKU を一覧にして。私が確認したら、資料がそろったものを出品して。"],
+      ko: ["Amazon에 상품 등록", "Amazon 판매자 센터에서 색상 옵션을 상위 상품 하나로 묶고, 이미지와 필수 항목을 검토한 뒤 등록합니다.", "SKU 표와 상품 설명, 사진으로 Amazon 텀블러 상품 초안을 만들어줘. 색상별 옵션을 상위 상품 하나에 묶고 사진이 빠진 SKU를 표시해줘. 내가 확인하면 자료가 갖춰진 옵션을 등록해줘."],
     },
   },
   {
@@ -35,8 +35,8 @@ const entries = [
     text: {
       zh: ["采集搜索结果", "按关键词收集 Google、Bing 的自然搜索结果，保留排名、标题和来源。", "分别查这十个关键词在 Google 和 Bing 的前十条自然搜索结果，把搜索引擎、关键词、排名、标题和网址导出为 CSV。"],
       en: ["Collect search results", "Capture organic Google and Bing results with their rank, title and source URL.", "Look up these ten keywords on Google and Bing. Export each engine’s first ten organic results per keyword to a CSV with engine, keyword, rank, title and URL."],
-      ja: ["検索結果を収集", "Google と Bing の自然検索結果を順位、見出し、URL とともに記録。", "この十個のキーワードを Google と Bing で検索し、それぞれ自然検索の上位十件を CSV にして。検索サービス名、キーワード、順位、タイトル、URL を入れて。"],
-      ko: ["검색 결과 수집", "Google과 Bing의 자연 검색 순위, 제목, 출처 URL을 정리합니다.", "이 키워드 열 개를 Google과 Bing에서 각각 검색해 자연 검색 상위 열 건을 CSV로 만들어줘. 검색 엔진, 키워드, 순위, 제목, URL을 담아줘."],
+      ja: ["Google と Bing の検索結果を収集", "Google と Bing の自然検索結果を順位、見出し、URL とともに記録。", "この十個のキーワードを Google と Bing で検索し、それぞれ自然検索の上位十件を CSV にして。検索サービス名、キーワード、順位、タイトル、URL を入れて。"],
+      ko: ["Google·Bing 검색 결과 수집", "Google과 Bing의 자연 검색 순위, 제목, 출처 URL을 정리합니다.", "이 키워드 열 개를 Google과 Bing에서 각각 검색해 자연 검색 상위 열 건을 CSV로 만들어줘. 검색 엔진, 키워드, 순위, 제목, URL을 담아줘."],
     },
   },
   {
@@ -44,7 +44,7 @@ const entries = [
     text: {
       zh: ["批量巡检 Facebook 广告账号", "逐个核对广告账号的花费、投放状态和预算余量，汇总需要处理的异常。", "检查我管理的 Facebook 广告账号，按账号列出昨天的花费、投放状态和剩余预算。把有花费却没有转化的广告组单独标出，附后台链接。"],
       en: ["Review Facebook ad accounts", "Compare spend, delivery status and remaining budget across your ad accounts.", "Review yesterday’s spend, delivery status and remaining budget across my Facebook ad accounts. Flag ad sets with spend but no conversions and include dashboard links."],
-      ja: ["Facebook 広告を一括点検", "複数アカウントの消化額、配信状況、残予算を一つの表に。", "私の Facebook 広告アカウントごとに昨日の消化額、配信状況、残予算をまとめて。支出があり成果がゼロの広告セットに管理画面のリンクを付けて。"],
+      ja: ["Facebook 広告アカウントを一括確認", "複数アカウントの消化額、配信状況、残予算を一つの表に。", "私の Facebook 広告アカウントごとに昨日の消化額、配信状況、残予算をまとめて。支出があり成果がゼロの広告セットに管理画面のリンクを付けて。"],
       ko: ["Facebook 광고 계정 일괄 점검", "여러 계정의 지출, 게재 상태, 잔여 예산을 한 번에 비교합니다.", "내 Facebook 광고 계정별로 어제 지출, 게재 상태, 잔여 예산을 정리해줘. 지출이 있지만 전환이 없는 광고 세트를 표시하고 관리 화면 링크를 붙여줘."],
     },
   },
@@ -80,8 +80,8 @@ const entries = [
     text: {
       zh: ["跟踪房源与租金变化", "把挂牌房源的租金、面积和位置整理成表，与上次采集结果对比。", "把这份房源清单和上周的记录比一比，只列新增、降租和下架的房源。附位置、面积和原链接，降租的写清原租金和现租金。"],
       en: ["Track rental listings", "Record rents, floor areas and locations, then compare them with the previous collection.", "Compare these rentals with last week’s list. Show new, discounted and removed listings with location, floor area and original link. Include both rents for reductions."],
-      ja: ["物件と賃料を追跡", "賃料、面積、所在地を前回の記録と比較。", "この物件リストを先週と比べ、新着、値下げ、掲載終了だけを所在地、面積、元の URL とともに一覧にして。値下げ物件には変更前後の賃料も付けて。"],
-      ko: ["매물과 임대료 추적", "임대료, 면적, 위치를 기록하고 지난번 수집 결과와 비교합니다.", "이 매물 목록을 지난주와 비교해 신규, 임대료 인하, 등록 종료 건만 위치, 면적, 원본 링크와 함께 정리해줘. 임대료가 내린 매물은 전후 금액도 적어줘."],
+      ja: ["賃貸物件と家賃の変動を追う", "賃料、面積、所在地を前回の記録と比較。", "この物件リストを先週と比べ、新着、値下げ、掲載終了だけを所在地、面積、元の URL とともに一覧にして。値下げ物件には変更前後の賃料も付けて。"],
+      ko: ["임대 매물과 임대료 변동 추적", "임대료, 면적, 위치를 기록하고 지난번 수집 결과와 비교합니다.", "이 매물 목록을 지난주와 비교해 신규, 임대료 인하, 등록 종료 건만 위치, 면적, 원본 링크와 함께 정리해줘. 임대료가 내린 매물은 전후 금액도 적어줘."],
     },
   },
   {
@@ -89,8 +89,8 @@ const entries = [
     text: {
       zh: ["批量管理 Google Ads 预算", "比较多个 Google Ads 账号的广告系列日预算和转化成本，给出预算调整建议。", "比较这三个 Google Ads 账号最近七天各广告系列的转化成本，列出当前日预算、建议日预算和调整理由，等我确认后再修改。"],
       en: ["Manage Google Ads budgets", "Compare campaign budgets and cost per conversion across accounts and prepare budget changes for review.", "Compare seven days of campaign conversion costs across these three Google Ads accounts. Show current and suggested daily budgets with reasons, then wait for approval before changing them."],
-      ja: ["Google Ads の予算管理", "アカウントごとに予算と獲得単価を比較し、変更案を作成。", "この三つの Google Ads アカウントで過去七日間のキャンペーン別獲得単価を比較して。現行と変更案の日予算、提案理由を示し、私の確認後に変更して。"],
-      ko: ["Google Ads 예산 일괄 관리", "계정별 캠페인 예산과 전환 비용을 비교하고 검토할 조정안을 만듭니다.", "세 Google Ads 계정의 최근 7일 캠페인별 전환 비용을 비교해줘. 현재 일 예산, 추천 일 예산과 근거를 보여주고 내가 확인하면 변경해줘."],
+      ja: ["Google 広告の予算を一括管理", "アカウントごとに予算と獲得単価を比較し、変更案を作成。", "この3つの Google 広告アカウントで、過去7日間のキャンペーン別コンバージョン単価を比較して。現在の日予算と変更案、その理由を示して。予算の変更は私が確認してからにして。"],
+      ko: ["Google Ads 예산 일괄 관리", "계정별 캠페인 예산과 전환 비용을 비교하고 검토할 조정안을 만듭니다.", "이 Google Ads 계정 세 개에서 최근 7일간 캠페인별 전환당 비용을 비교해 줘. 현재 일일 예산과 추천 예산, 조정 이유를 정리하고 내가 승인한 뒤에만 예산을 바꿔 줘."],
     },
   },
   {
@@ -98,7 +98,7 @@ const entries = [
     text: {
       zh: ["自动下载应聘者简历", "下载 BOSS直聘招聘会话中已收到的简历附件，按应聘岗位归档，并列出待补的简历。", "从 BOSS直聘本周的设计岗会话中下载已收到的简历，按岗位建文件夹，用姓名和日期命名。给我一张文件索引，并标出还没收到附件的应聘者。"],
       en: ["Download applicant résumés", "Download résumé attachments received in BOSS Zhipin recruiting chats, file them by role and flag missing attachments.", "Download the résumés received in this week’s BOSS Zhipin design-role chats. File them by role, name each by applicant and date, and list the files and applicants still missing an attachment."],
-      ja: ["応募者の履歴書を保存", "BOSS直聘の採用チャットに届いた履歴書を職種別に保存し、添付が未着の応募者も一覧にします。", "今週の BOSS直聘 のデザイン職のチャットから届いた履歴書を保存して。職種別に分け、氏名と日付でファイルに名前を付けて。ファイル一覧と添付が未着の応募者を教えて。"],
+      ja: ["応募者の履歴書をダウンロード", "BOSS直聘の採用チャットに届いた履歴書を職種別に保存し、添付が未着の応募者も一覧にします。", "今週の BOSS直聘 のデザイン職のチャットから届いた履歴書を保存して。職種別に分け、氏名と日付でファイルに名前を付けて。ファイル一覧と添付が未着の応募者を教えて。"],
       ko: ["지원자 이력서 자동 다운로드", "BOSS直聘 채용 대화에서 받은 이력서 파일을 직무별로 정리하고 아직 첨부 파일이 없는 지원자를 표시합니다.", "이번 주 BOSS直聘 디자인 직무 대화에서 받은 이력서를 내려받아 직무별 폴더에 이름과 날짜로 저장해줘. 파일 목록과 아직 첨부 파일이 없는 지원자 명단도 만들어줘."],
     },
   },
@@ -115,9 +115,9 @@ const entries = [
     slug: "post-comments", category: "social", icon: ["x"],
     text: {
       zh: ["抓取帖子评论", "收集指定 X 帖子的公开回复，按讨论主题整理，保留有代表性的原话和链接。", "帮我整理这条 X 帖子下的公开回复。我想知道大家主要在讨论什么、有哪些不同看法。按话题分组，每组挑一两条有代表性的原话，附上回复链接。"],
-      en: ["Collect post comments", "Collect public replies to an X post and group them by topic, with representative quotes and links.", "Read the public replies to this X post. What are people talking about, and where do their views differ? Group the replies by topic and include one or two quotes with links for each."],
-      ja: ["投稿のコメントを収集", "指定した X の投稿への公開返信を話題別に整理し、代表的な意見を原文とリンクで残します。", "この X の投稿についた公開返信を読んで、何が話題で、どこで意見が分かれているか整理して。話題ごとに代表的な返信を一、二件選んで、原文とリンクを添えて。"],
-      ko: ["게시물 댓글 수집", "지정한 X 게시물의 공개 답글을 주제별로 정리하고 대표 의견을 원문과 링크로 남깁니다.", "이 X 게시물의 공개 답글을 읽고 사람들이 주로 어떤 이야기를 하는지, 어디서 의견이 갈리는지 정리해줘. 주제마다 대표 답글 한두 개를 골라 원문과 링크를 붙여줘."],
+      en: ["Collect replies on X", "Collect public replies to an X post and group them by topic, with representative quotes and links.", "Read the public replies to this X post. What are people talking about, and where do their views differ? Group the replies by topic and include one or two quotes with links for each."],
+      ja: ["X の投稿に寄せられた返信を収集", "指定した X の投稿への公開返信を話題別に整理し、代表的な意見を原文とリンクで残します。", "この X の投稿についた公開返信を読んで、何が話題で、どこで意見が分かれているか整理して。話題ごとに代表的な返信を一、二件選んで、原文とリンクを添えて。"],
+      ko: ["X 게시물 답글 수집", "지정한 X 게시물의 공개 답글을 주제별로 정리하고 대표 의견을 원문과 링크로 남깁니다.", "이 X 게시물의 공개 답글을 읽고 사람들이 주로 어떤 이야기를 하는지, 어디서 의견이 갈리는지 정리해줘. 주제마다 대표 답글 한두 개를 골라 원문과 링크를 붙여줘."],
     },
   },
   {
@@ -125,8 +125,8 @@ const entries = [
     text: {
       zh: ["汇总活动与展会日程", "从多个主办方页面提取日期、地点和报名截止时间，合并重复场次。", "从主办方页面汇总下月上海的设计展，同一场只记一次。按开幕日期排序，附地址、报名截止时间和报名链接。"],
       en: ["Build an event calendar", "Combine dates, venues and registration deadlines from organisers’ pages into one calendar.", "Use organisers’ pages to list next month’s Shanghai design exhibitions once each, ordered by opening date. Include the venue, registration deadline and sign-up link."],
-      ja: ["イベント日程を集約", "主催者ページから日時、会場、申込期限を集めて重複を整理。", "主催者ページから来月の上海のデザイン展を集めて。同じ展示は一件にまとめ、開幕日順に会場、申込期限、申込リンクを並べて。"],
-      ko: ["행사 일정 수집", "주최 측 페이지에서 일정, 장소, 등록 마감일을 모아 중복을 정리합니다.", "주최 측 페이지에서 다음 달 상하이 디자인 전시회를 모아줘. 중복을 합쳐 개막일순으로 정리하고 장소, 신청 마감일과 신청 링크를 붙여줘."],
+      ja: ["イベント・展示会の日程をまとめる", "主催者ページから日時、会場、申込期限を集めて重複を整理。", "主催者ページから来月の上海のデザイン展を集めて。同じ展示は一件にまとめ、開幕日順に会場、申込期限、申込リンクを並べて。"],
+      ko: ["행사·전시 일정 모으기", "주최 측 페이지에서 일정, 장소, 등록 마감일을 모아 중복을 정리합니다.", "주최 측 페이지에서 다음 달 상하이 디자인 전시회를 모아줘. 중복을 합쳐 개막일순으로 정리하고 장소, 신청 마감일과 신청 링크를 붙여줘."],
     },
   },
   {
@@ -134,17 +134,17 @@ const entries = [
     text: {
       zh: ["生成跨渠道投放日报", "将 Facebook 与 Google Ads 的花费、转化数和获客成本汇总到同一张日报。", "把昨天 Facebook 和 Google Ads 的花费、转化数和获客成本整理成一张日报。花费统一币种，各渠道与前一天对比，缺转化数据的系列单独标出。"],
       en: ["Build a cross-channel ad report", "Bring Facebook and Google Ads spend, conversions and acquisition costs into one daily report.", "Build yesterday’s Facebook and Google Ads report with spend, conversions and acquisition cost. Use one currency, compare each channel with the previous day and flag campaigns missing conversion data."],
-      ja: ["広告日報を作成", "Facebook と Google Ads の費用、獲得数、獲得単価を日報に集約。", "昨日の Facebook と Google Ads の費用、獲得数、獲得単価を日報にして。通貨をそろえて前日と比べ、獲得数のデータがないキャンペーンに印を付けて。"],
-      ko: ["채널별 광고 일보 작성", "Facebook과 Google Ads의 지출, 전환, 고객 획득 비용을 한 보고서로 모읍니다.", "어제 Facebook과 Google Ads의 지출, 전환 수, 고객 획득 비용을 일보로 만들어줘. 통화를 통일해 채널별로 전날과 비교하고 전환 데이터가 없는 캠페인을 표시해줘."],
+      ja: ["媒体別の広告実績を日報にまとめる", "Facebook と Google 広告の費用、コンバージョン数、顧客獲得単価を1日分のレポートにまとめます。", "昨日の Facebook 広告と Google 広告の費用、コンバージョン数、顧客獲得単価を日報にまとめて。通貨をそろえて媒体別に前日と比較し、コンバージョンのデータがないキャンペーンには印を付けて。"],
+      ko: ["채널별 광고 성과 일일 보고서 작성", "Facebook과 Google Ads의 광고비, 전환 수, 고객 획득 비용을 일일 보고서 한 장에 정리합니다.", "어제 Facebook과 Google Ads의 광고비, 전환 수, 고객 획득 비용으로 일일 보고서를 만들어 줘. 통화를 통일하고 채널별로 전날과 비교해 줘. 전환 데이터가 빠진 캠페인은 따로 표시해 줘."],
     },
   },
   {
     slug: "candidate-outreach", category: "career", icon: ["linkedin"],
     text: {
       zh: ["主动联系目标候选人", "结合 LinkedIn 候选人的项目经历和岗位职责拟好首条消息，确认后发送并记录联系进度。", "看这三位候选人的 LinkedIn 资料，各选一个与岗位相关的项目，写一条简短的面谈邀请。我确认后逐一发送，在招聘跟进表里记下联系时间和状态。"],
-      en: ["Reach out to candidates", "Draft a LinkedIn introduction that connects each candidate’s experience to the role, then log the outreach after approval.", "Read these three LinkedIn profiles and draft an interview invitation for each, mentioning a relevant project. After I approve, send the messages and log the contact time and status."],
-      ja: ["候補者へ連絡", "LinkedIn の候補者ごとに経験と職務を結び付けた案内を作り、確認後に送信して連絡状況を記録します。", "この三人の LinkedIn プロフィールを読み、募集職種に関連するプロジェクトを一つ挙げて面談の案内を書いて。私の確認後に送り、連絡日時と状況を記録して。"],
-      ko: ["채용 후보자에게 먼저 연락", "LinkedIn 후보자의 프로젝트 경험을 직무와 연결해 첫 메시지를 작성하고, 확인 후 발송 내역을 기록합니다.", "세 후보자의 LinkedIn 프로필에서 이 직무와 관련된 프로젝트를 하나씩 골라 면담 제안을 써줘. 내가 확인하면 각각 발송하고 연락 시간과 상태를 기록해줘."],
+      en: ["Contact candidates on LinkedIn", "Draft a LinkedIn introduction that connects each candidate’s experience to the role, then log the outreach after approval.", "Read these three LinkedIn profiles and draft an interview invitation for each, mentioning a relevant project. After I approve, send the messages and log the contact time and status."],
+      ja: ["LinkedIn で候補者に声をかける", "LinkedIn の候補者ごとに経験と職務を結び付けた案内を作り、確認後に送信して連絡状況を記録します。", "この三人の LinkedIn プロフィールを読み、募集職種に関連するプロジェクトを一つ挙げて面談の案内を書いて。私の確認後に送り、連絡日時と状況を記録して。"],
+      ko: ["LinkedIn에서 후보자에게 먼저 연락", "LinkedIn 후보자의 프로젝트 경험을 직무와 연결해 첫 메시지를 작성하고, 확인 후 발송 내역을 기록합니다.", "세 후보자의 LinkedIn 프로필에서 이 직무와 관련된 프로젝트를 하나씩 골라 면담 제안을 써줘. 내가 확인하면 각각 발송하고 연락 시간과 상태를 기록해줘."],
     },
   },
   {
@@ -160,9 +160,9 @@ const entries = [
     slug: "direct-message-sync", category: "social", icon: ["whatsapp"],
     text: {
       zh: ["自动同步私信消息", "把 WhatsApp 新收到的私信同步到表格，按会话更新最新消息、收到时间和回复状态。", "把我今天收到的 WhatsApp 私信同步到这张表。同一个会话只保留一行，有新消息就更新内容和时间，再标出哪些会话我还没回复。"],
-      en: ["Sync incoming messages", "Sync new WhatsApp direct messages to a sheet, keeping the latest message, time received and reply status for each chat.", "Sync the WhatsApp direct messages I received today to this sheet. Keep one row per chat, update the message and time when a new one arrives, and flag chats I haven’t replied to."],
-      ja: ["DM を同期", "WhatsApp で受け取った個別メッセージを表に同期し、チャットごとに最新の内容、受信時刻、返信状況を更新します。", "今日 WhatsApp に届いた個別メッセージをこの表にまとめて。チャットごとに一行だけ使い、新着があれば内容と受信時刻を更新して。まだ私が返信していないチャットに印を付けて。"],
-      ko: ["DM 자동 동기화", "WhatsApp에서 받은 개인 메시지를 표에 동기화하고 대화별로 최근 메시지, 수신 시간, 답장 여부를 갱신합니다.", "오늘 내가 받은 WhatsApp 개인 메시지를 이 표에 동기화해줘. 대화마다 한 행만 쓰고 새 메시지가 오면 내용과 수신 시간을 업데이트해줘. 내가 아직 답하지 않은 대화는 표시해줘."],
+      en: ["Sync WhatsApp messages", "Sync new WhatsApp direct messages to a sheet, keeping the latest message, time received and reply status for each chat.", "Sync the WhatsApp direct messages I received today to this sheet. Keep one row per chat, update the message and time when a new one arrives, and flag chats I haven’t replied to."],
+      ja: ["WhatsApp のメッセージを同期", "WhatsApp で受け取った個別メッセージを表に同期し、チャットごとに最新の内容、受信時刻、返信状況を更新します。", "今日 WhatsApp に届いた個別メッセージをこの表にまとめて。チャットごとに一行だけ使い、新着があれば内容と受信時刻を更新して。まだ私が返信していないチャットに印を付けて。"],
+      ko: ["WhatsApp 개인 메시지 동기화", "WhatsApp에서 받은 개인 메시지를 표에 동기화하고 대화별로 최근 메시지, 수신 시간, 답장 여부를 갱신합니다.", "오늘 내가 받은 WhatsApp 개인 메시지를 이 표에 동기화해줘. 대화마다 한 행만 쓰고 새 메시지가 오면 내용과 수신 시간을 업데이트해줘. 내가 아직 답하지 않은 대화는 표시해줘."],
     },
   },
   {
@@ -170,8 +170,8 @@ const entries = [
     text: {
       zh: ["把网页表格整理成 CSV", "从分页目录提取指定列，统一字段名，去重后导出可分析的表格。", "遍历这份供应商目录的所有分页，按「公司、主营品类、官网」三列导出 CSV，同一官网只留一行。"],
       en: ["Turn web tables into CSV", "Extract columns across paginated directories, normalise headers and export deduplicated rows.", "Export company name, main category and website from every page of this supplier directory as a CSV. Keep one row per website."],
-      ja: ["Web 表を CSV に変換", "ページをまたぐ表から列を抽出し、見出しと重複を整理。", "仕入先一覧の全ページから会社名、主要カテゴリ、公式サイトを CSV にして。同一サイトは一行にまとめて。"],
-      ko: ["웹 표를 CSV로 변환", "여러 페이지의 표에서 열을 추출하고 머리글을 통일해 중복을 제거합니다.", "이 공급업체 목록의 모든 페이지에서 회사명, 주요 품목, 홈페이지를 CSV로 내보내줘. 같은 홈페이지는 한 행만 남겨줘."],
+      ja: ["ウェブページの表を CSV に変換", "ページをまたぐ表から列を抽出し、見出しと重複を整理。", "仕入先一覧の全ページから会社名、主要カテゴリ、公式サイトを CSV にして。同一サイトは一行にまとめて。"],
+      ko: ["웹페이지 표를 CSV로 변환", "여러 페이지의 표에서 열을 추출하고 머리글을 통일해 중복을 제거합니다.", "이 공급업체 목록의 모든 페이지에서 회사명, 주요 품목, 홈페이지를 CSV로 내보내줘. 같은 홈페이지는 한 행만 남겨줘."],
     },
   },
   {
@@ -205,9 +205,9 @@ const entries = [
     slug: "post-replies", category: "social", icon: ["rednote"],
     text: {
       zh: ["为指定帖子自动留评", "根据每篇小红书笔记的内容起草评论，确认后发到对应笔记下，记录发布结果。", "读一下我选的这三篇小红书徒步笔记。结合每篇提到的路线，帮我各写一句想问作者的话，比如哪段路雨后难走、沿途哪里能补水。我确认后，分别发到对应笔记下，把笔记链接和发布结果记下来。"],
-      en: ["Reply to selected posts", "Draft a comment that fits each selected Rednote post, then publish the approved comments and record the outcome.", "Read these three hiking posts I picked on Rednote. Draft one question for each author about their route, such as which stretch gets tricky after rain or where to refill a water bottle. Once I approve, post each comment on its matching post and log the link and outcome."],
-      ja: ["指定投稿にコメント", "選んだ小紅書の投稿を読み、それぞれの内容に合ったコメントを下書きします。確認後、該当する投稿にコメントして結果を記録します。", "選んだ小紅書のハイキング投稿を三件読んで。雨の後に歩きにくい区間や給水できる場所など、それぞれのルートに合わせて作者に聞きたいことを一つずつ書いて。私が確認したら各投稿にコメントして、投稿リンクと結果を残して。"],
-      ko: ["선택한 게시물에 자동 댓글", "선택한 샤오홍슈 게시물마다 내용에 어울리는 댓글을 작성하고, 확인 후 해당 게시물에 올려 결과를 기록합니다.", "내가 고른 샤오홍슈 등산 게시물 세 개를 읽어줘. 비가 온 뒤 걷기 힘든 구간이나 물을 채울 수 있는 곳처럼, 각 코스에 맞춰 작성자에게 물어볼 질문을 하나씩 써줘. 내가 확인하면 해당 게시물에 댓글을 달고 게시물 링크와 결과를 기록해줘."],
+      en: ["Comment on selected Rednote posts", "Draft a comment that fits each selected Rednote post, then publish the approved comments and record the outcome.", "Read these three hiking posts I picked on Rednote. Draft one question for each author about their route, such as which stretch gets tricky after rain or where to refill a water bottle. Once I approve, post each comment on its matching post and log the link and outcome."],
+      ja: ["小紅書の投稿を選んでコメント", "選んだ小紅書の投稿を読み、それぞれの内容に合ったコメントを下書きします。確認後、該当する投稿にコメントして結果を記録します。", "選んだ小紅書のハイキング投稿を三件読んで。雨の後に歩きにくい区間や給水できる場所など、それぞれのルートに合わせて作者に聞きたいことを一つずつ書いて。私が確認したら各投稿にコメントして、投稿リンクと結果を残して。"],
+      ko: ["선택한 샤오홍슈 게시물에 댓글 달기", "선택한 샤오홍슈 게시물마다 내용에 어울리는 댓글을 작성하고, 확인 후 해당 게시물에 올려 결과를 기록합니다.", "내가 고른 샤오홍슈 등산 게시물 세 개를 읽어줘. 비가 온 뒤 걷기 힘든 구간이나 물을 채울 수 있는 곳처럼, 각 코스에 맞춰 작성자에게 물어볼 질문을 하나씩 써줘. 내가 확인하면 해당 게시물에 댓글을 달고 게시물 링크와 결과를 기록해줘."],
     },
   },
 ] as const satisfies readonly CaseEntry[];

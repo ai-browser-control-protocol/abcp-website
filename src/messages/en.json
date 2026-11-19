@@ -2,7 +2,7 @@
   "brand": {
     "name": "WebCross",
     "thesis": "WebCross helps your agent",
-    "tagline": "The best Agentic fingerprint browser."
+    "tagline": "The best stealth browser for AI agents."
   },
   "nav": {
     "useCases": "Use cases",
@@ -54,9 +54,9 @@
   "guide": {
     "title": "User Guide",
     "eyebrow": "QUICK START GUIDE",
-    "heading": "Get started in three minutes",
+    "heading": "WebCross in three minutes",
     "subheading": "Chat with the built-in AI assistant or connect the agent you already use.",
-    "externalTitle": "Connect an external agent",
+    "externalTitle": "Connect your familiar Agent",
     "externalIntro": "Install the Skill, create a browser, and give your agent its first task.",
     "assistant": {
       "title": "Use the built-in AI assistant",
@@ -90,39 +90,39 @@
     "steps": [
       {
         "id": 1,
-        "title": "Launch App & Install Skill",
+        "title": "Install the browser Skill",
         "desc": "Open WebCross and confirm the prompt to install the browser skill.",
         "tag": "Step 01 · Quick Start",
         "previewTitle": "Skill Readiness"
       },
       {
         "id": 2,
-        "title": "Create Browser",
-        "desc": "Name the browser and open it directly; expand advanced options for customized settings.",
+        "title": "Create a browser",
+        "desc": "Give your browser a name and open it. Expand Advanced Options to customize the setup.",
         "tag": "Step 02 · Isolated Runtime",
         "previewTitle": "Browser Profile Config"
       },
       {
         "id": 3,
-        "title": "Call it from Claude Code / Codex and other Agents",
-        "desc": "Type /webcross-browser in Claude Code, Codex or any other AI agent — or just ask in plain language — and the agent drives the browser for you.",
+        "title": "Give your agent its first task",
+        "desc": "Type /webcross-browser in Claude Code or Codex, or describe the task in plain language. Your agent controls the browser to carry it out.",
         "tag": "Step 03 · Instant Automation",
         "previewTitle": "AI Conversation Simulation"
       }
     ],
-    "tipsTitle": "Key Features & Safety Boundaries",
+    "tipsTitle": "Browser data and permissions",
     "tips": [
       {
-        "title": "Strictly Local-First",
+        "title": "Local data storage",
         "desc": "All cookies, credentials, and browsing history stay 100% on your personal machine and are never uploaded."
       },
       {
-        "title": "Dedicated Prompt Rules",
-        "desc": "Define custom guidelines per browser; AI assistants read and obey them on every connection to prevent mistakes."
+        "title": "Instructions for each browser",
+        "desc": "Set custom instructions for each browser. The AI reads them whenever it takes action to help avoid mistakes and stay within your permissions."
       },
       {
-        "title": "Anti-Detect Isolation",
-        "desc": "Each browser maintains separate cookies, storage, and proxies, enabling safe multi-account management."
+        "title": "One browser profile per account",
+        "desc": "Each browser has its own cookies, cache, and proxy connection, so you can manage several sensitive business accounts from one device."
       }
     ],
     "faq": {
@@ -160,6 +160,55 @@
     },
     "closingDesc": "Download WebCross and let everyday agents like Claude Code and Codex drive your own browser directly.",
     "mockup": {
+      "agentWindows": {
+        "checkoutTest": "Checkout regression test",
+        "newChat": "New chat",
+        "yourDot": "Your Dot",
+        "projects": "Projects",
+        "bulkListing": "Bulk product listings",
+        "priceCheck": "Competitor price check",
+        "promotionCheck": "Promotion review",
+        "start": "Get started",
+        "dailyUpdate": "Set up daily updates",
+        "overview": "Get to know WebCross",
+        "sortTasks": "Organize browser tasks",
+        "projectDecisions": "See the latest project decisions",
+        "browser": "WebCross browser",
+        "openCheckout": "Open checkout · Space “Checkout test”",
+        "shipping": "Select shipping method · Express",
+        "recalculate": "Recalculate shipping · OrderSummary.tsx",
+        "runChecks": "Run 10 checkout checks",
+        "allPassed": "All passed",
+        "timestamp": "Mon, Oct 26 at 8:07 PM",
+        "checkoutPrompt": "Run the checkout regression test with WebCross and fix any shipping calculation errors.",
+        "duration": "38 s elapsed ›",
+        "checkoutResult": "WebCross recalculated shipping. All 10 checkout checks passed.",
+        "previewUrl": "Preview checkout.acme-app.dev",
+        "preview": "Page preview",
+        "shippingUpdated": "Checkout · Shipping updated",
+        "openWith": "Open with",
+        "workWithChatgpt": "Work with ChatGPT",
+        "approve": "Approve for me",
+        "medium": "Medium",
+        "history": "History",
+        "newSession": "New chat",
+        "chat": "Chat",
+        "tasks": "Tasks",
+        "automation": "Automation",
+        "you": "You",
+        "postPrompt": "Use WebCross to publish a new post on x.com for me",
+        "openPost": "Open x.com/compose/post",
+        "readTree": "Read the accessibility tree (AXTree)",
+        "elements": "· 128 elements",
+        "enterPost": "Enter the post text",
+        "clickPublish": "Click Post",
+        "logged": "Actions recorded",
+        "actionCount": "· 18 actions",
+        "actionLog": "Action log",
+        "complete": "Completed · 12.4 s",
+        "composer": "Send a message or create a task. Use / for commands and @ for files or chats.",
+        "workspace": "Edit in workspace"
+      },
       "userBadge": "Development user",
       "groupWorkspace": "Workspace",
       "navBrowsers": "Browsers",
@@ -221,8 +270,8 @@
   },
   "download": {
     "eyebrow": "DOWNLOAD CLIENT / DESKTOP",
-    "titleLead": "Choose your platform, ",
-    "titleAccent": "put your agent to work.",
+    "titleLead": "Download ",
+    "titleAccent": "WebCross",
     "lead": "WebCross runs on your computer, ready to handle complex web tasks after installation.",
     "betaLabel": "PUBLIC BETA",
     "betaValue": "FULL ACCESS, FREE",
@@ -237,17 +286,23 @@
     "platforms": {
       "macos": {
         "name": "macOS",
-        "requirements": ["macOS 13 or later", "Apple Silicon"],
+        "requirements": [
+          "macOS 13 or later",
+          "Apple Silicon"
+        ],
         "download": "Download for macOS"
       },
       "windows": {
         "name": "Windows",
-        "requirements": ["Windows 10 / 11", "64-bit"],
+        "requirements": [
+          "Windows 10 / 11",
+          "64-bit"
+        ],
         "download": "Download for Windows"
       }
     },
-    "faqTitleLead": "Know ",
-    "faqTitleAccent": "before you start.",
+    "faqTitleLead": "Installation ",
+    "faqTitleAccent": "FAQs",
     "faqIntro": "If you are checking your system or installation path, these short answers should help.",
     "faq": [
       {
@@ -271,7 +326,7 @@
     "toastClose": "Dismiss notification"
   },
   "footer": {
-    "localFirst": "Critical tasks · Under your control",
+    "localFirst": "Critical steps stay under your control",
     "productColumn": "Product",
     "pricing": "Pricing",
     "devColumn": "Developers",

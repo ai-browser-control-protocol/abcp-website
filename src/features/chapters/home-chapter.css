@@ -1228,9 +1228,6 @@
 .market-window-brand img { width: 76px; }
 .market-window-tools { display: flex; align-items: center; gap: 10px; margin-left: auto; }
 .market-window-hint { color: #a29b8f; font-size: 8px; }
-.market-download { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; color: #fff; background: var(--oxide); border: 1px solid var(--oxide); border-radius: 999px; font-size: 9px; font-weight: 600; cursor: pointer; }
-.market-download:hover { background: var(--oxide-hover); }
-.market-download svg { width: 12px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
 .market-window-dots { display: flex; gap: 4px; }
 
 .market-body { display: grid; grid-template-columns: 196px minmax(0, 1fr); min-height: 356px; }
@@ -1259,44 +1256,14 @@
     border: 1px solid #e9e4db;
     border-radius: 11px;
     box-shadow: 0 5px 16px -18px rgba(48, 35, 24, .4);
-    cursor: pointer;
     transition: border-color 180ms, box-shadow 180ms, transform 180ms;
   }
-/* Category switches remount the grid, so each card can arrive on a 40ms wave.
-   `translate` is used instead of `transform`, leaving the hover lift free. */
-.marketplace-section .market-card {
-  animation: marketCardIn 300ms var(--ease-expo) backwards;
-  animation-delay: calc(var(--market-i, 0) * 40ms);
-}
-
-@keyframes marketCardIn {
-  from {
-    opacity: 0;
-    translate: 0 8px;
-  }
-
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
-}
-
-.marketplace-section .market-card:hover { border-color: #d9cdbd; box-shadow: 0 10px 24px -18px rgba(48, 35, 24, .5); transform: translateY(-1px); }
-
 .market-glyph {
   transition: transform 180ms var(--ease-expo);
 }
-
-.marketplace-section .market-card:hover .market-glyph {
-  transform: translateY(-1px) rotate(-4deg);
-}
-.marketplace-section .market-card.is-selected { border-color: var(--oxide); box-shadow: 0 0 0 3px rgba(255, 107, 53, .1), 0 10px 24px -18px rgba(48, 35, 24, .5); }
 .market-card-head { display: flex; align-items: center; width: 100%; gap: 6px; }
 .market-glyph { width: 30px; height: 30px; border-radius: 8px; }
 .market-glyph svg { width: 16px; height: 16px; }
-.market-card-check { display: grid; place-items: center; width: 19px; height: 19px; margin-left: auto; color: #fff; background: var(--oxide); border-radius: 50%; opacity: 0; transform: scale(.8); transition: opacity 160ms, transform 160ms; }
-.market-card-check svg { width: 10px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.2; }
-.market-card.is-selected .market-card-check { opacity: 1; transform: scale(1); }
 .market-card h4 { margin-top: 9px; color: #33312c; font-size: 13.5px; line-height: 1.35; letter-spacing: -.02em; }
 .market-card p { display: -webkit-box; overflow: hidden; margin-top: 5px; color: #7a766d; font-size: 10.5px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 
@@ -1353,7 +1320,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .market-card, .market-card-check { transition: none !important; animation: none !important; }
+  .market-card { transition: none !important; animation: none !important; }
 }
 
 /* Final pass: compact 3-up environment, 16:9 market window, larger matrix,
@@ -1381,7 +1348,6 @@
 .marketplace-section .market-card p { display: block !important; flex: 0 0 auto; overflow: hidden; margin-top: 5px; color: #7a766d; font-size: 10.5px; line-height: 1.5; max-height: 3em; -webkit-line-clamp: none; }
 .marketplace-section .market-glyph { width: 26px; height: 26px; border-radius: 7px; }
 .marketplace-section .market-glyph svg { width: 14px; height: 14px; }
-.marketplace-section .market-card-check { width: 18px; height: 18px; }
 .marketplace-section .market-window-hint { display: none; }
 
 .comparison-matrix { min-width: 1180px; }
@@ -1486,7 +1452,7 @@
 .comparison-value { align-items: center; }
 .comparison-value b { align-self: center; }
 
-/* Let the catalog and download area determine the desktop window height. */
+/* Fit the catalog to its content at each breakpoint. */
 .marketplace-section .market-window { display: flex; flex-direction: column; aspect-ratio: auto; }
 .marketplace-section .market-body { flex: none; min-height: 0; }
 .marketplace-section .market-content { justify-content: flex-start; }
@@ -1494,13 +1460,13 @@
   display: grid;
   flex: 1 0 auto;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(min-content, 1fr));
+  grid-template-rows: none;
   grid-auto-rows: auto;
-  align-content: start;
+  align-content: stretch;
   gap: 12px;
   margin-top: 0;
 }
-.marketplace-section .market-card { min-height: 0; justify-content: flex-start; padding: 14px 16px; }
+.marketplace-section .market-card { min-height: 0; justify-content: center; padding: 16px; }
 
 /* Hero: one sentence, one pair of buttons — the illustration lives in the
    workflow demo just below, so the hero stays compact and hands over early. */
@@ -2167,15 +2133,16 @@
   border-radius: 14px;
   box-shadow: none;
 }
-.home-v2 .marketplace-section .market-card:hover {
-  border-color: #cfcfcb;
-  box-shadow: 0 14px 30px -26px rgba(20, 20, 30, .35);
+@media (hover: hover) and (pointer: fine) {
+  .home-v2 .marketplace-section .market-card:hover {
+    border-color: #cfcfcb;
+    box-shadow: 0 14px 30px -26px rgba(20, 20, 30, .35);
+  }
 }
-.home-v2 .marketplace-section .market-card.is-selected {
-  border-color: #ff6b35;
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, .12);
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .marketplace-section .market-card:hover { transform: translateY(-2px); }
+  .marketplace-section .market-card:hover .market-glyph { transform: translateY(-1px) rotate(-4deg); }
 }
-.home-v2 .market-card.is-selected .market-card-check { background: #ff6b35; }
 .home-v2 .market-card h4 { color: #282828; }
 .home-v2 .market-card p { color: #737373; }
 .home-v2 .market-card-foot { border-color: #f0f0ee; }
@@ -2266,56 +2233,17 @@
 .account-session-details dd { margin: 0; text-align: end; color: #233944; overflow-wrap: anywhere; }
 .account-session-details small { display: block; font-size: 12px; color: #63757e; }
 
-.marketplace-section .market-card { position: relative; }
-.market-card:has(input:focus-visible), .account-picker button:focus-visible, .market-download:focus-visible {
+.account-picker button:focus-visible {
   outline: 2px solid var(--oxide-text);
   outline-offset: 2px;
 }
 .home-v2 .market-categories button { min-height: 33px; padding-block: 4px; }
 .market-card-title { color: var(--ink-slate); font-size: 16px; line-height: 1.35; }
 .market-card-description { margin-top: 8px; color: var(--muted-slate); font-size: 13px; line-height: 1.55; }
-.home-v2 .market-card-check { flex: none; transform: none; opacity: 1; border: 1px solid #acb8bc; border-radius: 5px; background: #fff; }
-.home-v2 .market-card.is-selected .market-card-check { border-color: var(--oxide-text); background: var(--oxide-text); }
-.home-v2 .market-card-check svg { width: 14px; height: 14px; }
-.market-transfer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 12px;
-}
-.market-transfer .market-download {
-  position: relative;
-  overflow: hidden;
-  min-height: 38px;
-  padding: 6px 14px;
-  font: 600 13px/1.25 var(--font-sans);
-  background: var(--oxide-text);
-  border: 0;
-  color: #fff;
-}
-.market-transfer .market-download svg { width: 16px; height: 16px; }
-.market-transfer .market-download:disabled { cursor: default; background: #e1e5e7; color: #59646b; }
-.market-download-count { min-width: 1.45em; padding: 2px 4px; border-radius: 10px; background: #ffffff29; font-variant-numeric: tabular-nums; }
-.market-transfer[data-state="running"] .market-download { cursor: progress; }
-.market-transfer[data-state="done"] .market-download { background: #e7f3ec; color: #246448; }
 @media (prefers-reduced-motion: no-preference) {
   .account-session-details dd { animation: account-value-in 210ms ease-out; }
-  .market-card-check path { stroke-dasharray: 24; animation: market-check-in 180ms ease-out; }
-  .market-download-sheet { animation: market-file-drop 800ms ease-in 2 both; }
-  .market-transfer[data-state="running"] .market-download::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    height: 3px;
-    background: #ffc3a3;
-    transform-origin: left;
-    animation: market-transfer-progress 1600ms ease-in-out both;
-  }
   @keyframes account-value-in { from { opacity: .45; transform: translateY(3px); } }
-  @keyframes market-check-in { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
-  @keyframes market-file-drop { 0% { opacity: 0; transform: translateY(-3px); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateY(8px); } }
-  @keyframes market-transfer-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 }
 @media (max-width: 760px) {
   .marketplace-section .market-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-auto-rows: auto; }
-  .market-transfer .market-download { min-height: 42px; padding-inline: 10px; }
 }

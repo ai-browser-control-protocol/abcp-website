@@ -180,8 +180,6 @@ export interface HomeCopy {
     creatorAction: string;
     creatorTitle: string;
     creatorText: string;
-    previewNote: string;
-    downloadDemo: { count: string; action: string; downloading: string; complete: string };
     footerNote: string;
     categories: {
       id: string;
@@ -190,7 +188,6 @@ export interface HomeCopy {
         title: string;
         description: string;
         kind: "skill" | "script";
-        preview: { columns: [string, string, string]; rows: [string, string, string][] };
       }[];
     }[];
   };
@@ -461,224 +458,174 @@ const zh: HomeCopy = {
     creatorAction: "提交你的 Skill / 脚本",
     creatorTitle: "成为首批 Skill 创作者",
     creatorText: "市场开放后，你可以在这里发布 Skill，让下一次任务直接复用",
-    downloadDemo: { count: "已选 {count} 项", action: "下载到本地", downloading: "正在下载", complete: "下载演示完成 · {count} 项" },
-    previewNote: "个预览",
     footerNote: "首批 Skill 与脚本正在整理中，开放时间以官方通知为准",
     categories: [
       { id: "amazon", name: "Amazon", cards: [
         {
           title: "商品价格与库存巡检", description: "批量读取商品页价格、库存与促销状态，输出带时间戳的差异表", kind: "script",
-          preview: { columns: ["商品", "当前价", "变化"], rows: [["帆布托特包", "$24.00", "−$4.00"], ["随行杯", "$18.50", "持平"], ["桌面灯", "$39.00", "+$2.00"]] },
         },
         {
           title: "竞品评论差评归因", description: "整理公开可见差评，归纳产品缺陷、物流与客服问题", kind: "skill",
-          preview: { columns: ["问题", "样本数", "代表性反馈"], rows: [["包装破损", "8 / 36", "杯盖在运输中开裂"]] },
         },
         {
           title: "Listing 全流程上架", description: "从商品资料到标题、规格、图片与平台反馈，完整记录上架过程", kind: "skill",
-          preview: { columns: ["商品", "提交状态", "平台反馈"], rows: [["陶瓷杯 · 蓝", "待补充", "缺少容量规格"]] },
         },
         {
           title: "促销活动一致性核验", description: "核对活动价、优惠券和前台展示，标记异常并保留来源", kind: "script",
-          preview: { columns: ["项目", "活动价", "页面显示"], rows: [["随行杯优惠券", "$15.00", "$18.50 · 待核对"]] },
         },
       ] },
       { id: "tiktok-shop", name: "TikTok Shop", cards: [
         {
           title: "商品与价格采集", description: "读取目标店铺商品、价格与活动信息，生成可对比清单", kind: "skill",
-          preview: { columns: ["商品", "当前价", "变化"], rows: [["折叠支架", "¥39.00", "−¥10.00"], ["收纳袋", "¥29.90", "持平"], ["桌面灯", "¥89.00", "+¥5.00"]] },
         },
         {
           title: "上传带货视频", description: "上传本地带货视频并关联商品，记录发布状态与平台反馈", kind: "script",
-          preview: { columns: ["视频", "关联商品", "上传结果"], rows: [["折叠支架开箱", "桌面支架", "草稿已保存"]] },
         },
         {
           title: "评论与售后问题归因", description: "汇总公开评论与售后关键词，识别高频问题与产品机会", kind: "skill",
-          preview: { columns: ["问题", "频次", "建议"], rows: [["尺码偏小", "9 条", "补充尺码对照表"]] },
         },
         {
           title: "店铺状态巡检", description: "定时检查商品上架、库存和活动状态，记录异常并输出报告", kind: "script",
-          preview: { columns: ["项目", "状态", "待办"], rows: [["桌面灯库存", "剩余 3 件", "复核补货"]] },
         },
       ] },
       { id: "airbnb", name: "Airbnb", cards: [
         {
           title: "房源价格与可订日历", description: "采集公开房源价格、可订日期和基础信息，导出为表格", kind: "script",
-          preview: { columns: ["房源", "每晚价格", "可订日期"], rows: [["河畔一居室", "$135", "12月2日至5日"]] },
         },
         {
           title: "竞品房源对比", description: "对比同区域房源价格、评分与设施，生成可复用的竞品观察", kind: "skill",
-          preview: { columns: ["房源", "房型", "价格差"], rows: [["花园公寓", "两居室", "低于同区中位数 $12"]] },
         },
         {
           title: "区域搜索页采集", description: "按地区与日期读取搜索结果，保留房源链接与关键字段", kind: "skill",
-          preview: { columns: ["区域", "匹配房源", "筛选条件"], rows: [["北岸", "18 套", "整套 · 可做饭"]] },
         },
         {
           title: "评论与设施抽取", description: "整理公开评论中的设施反馈与体验问题，输出结构化摘要", kind: "script",
-          preview: { columns: ["关注点", "提及次数", "房客反馈"], rows: [["自助入住", "11 次", "深夜到达也方便"]] },
         },
       ] },
       { id: "youtube", name: "YouTube", cards: [
         {
           title: "频道更新与视频筛选", description: "跟踪频道新视频，按发布时间与主题筛选值得关注的条目", kind: "script",
-          preview: { columns: ["视频", "主题", "发布时间"], rows: [["我的一周工作流", "效率工具", "11月17日"]] },
         },
         {
           title: "字幕与摘要导出", description: "读取公开字幕或转写结果，生成摘要与来源链接", kind: "skill",
-          preview: { columns: ["时间点", "字幕内容", "摘要"], rows: [["02:18", "打开任务历史", "从上次运行恢复"]] },
         },
         {
           title: "评论观点聚类", description: "整理高相关评论，归纳观众观点、争议与内容机会", kind: "skill",
-          preview: { columns: ["观点", "评论数", "代表问题"], rows: [["安装配置", "16 条", "首次连接要多久？"]] },
         },
         {
           title: "竞品选题分析", description: "收集竞品近期视频表现与标题模式，输出选题参考", kind: "script",
-          preview: { columns: ["选题", "视频数", "观察"], rows: [["一人团队的周报", "4 条", "实操演示互动较高"]] },
         },
       ] },
       { id: "reddit", name: "Reddit", cards: [
         {
           title: "子版块主题追踪", description: "按关键词和版块筛选帖子，保留热度、时间与链接", kind: "script",
-          preview: { columns: ["版块", "主题", "互动"], rows: [["r/SideProject", "每周研究流程", "32 条回复"]] },
         },
         {
           title: "高赞评论与争议点", description: "读取公开评论，提炼高赞观点、反方意见和讨论焦点", kind: "skill",
-          preview: { columns: ["讨论点", "支持观点", "反方观点"], rows: [["自动周报", "整理更快", "来源需复核"]] },
         },
         {
           title: "品牌与产品提及监控", description: "跟踪品牌词与产品名提及，整理情绪和问题类型", kind: "skill",
-          preview: { columns: ["提及", "情绪", "原因"], rows: [["模板导入", "正向", "省去重复配置"]] },
         },
         {
           title: "帖子与评论来源导出", description: "将帖子、评论与 permalink 导出为可复核的来源表", kind: "script",
-          preview: { columns: ["来源", "内容类型", "摘要"], rows: [["r/productivity", "回复", "按主题归档资料"]] },
         },
       ] },
       { id: "x", name: "X", cards: [
         {
           title: "关键词与话题追踪", description: "监控关键词、话题和账号动态，按时间整理相关帖子", kind: "script",
-          preview: { columns: ["关键词", "匹配帖子", "趋势"], rows: [["独立开发", "24 条", "较上周 +6"]] },
         },
         {
           title: "帖子与评论采集", description: "读取公开帖子与可见回复，提炼观点和传播线索", kind: "skill",
-          preview: { columns: ["帖子", "可见回复", "讨论点"], rows: [["展示工作流", "19 条", "如何复用步骤"]] },
         },
         {
           title: "趋势与情绪摘要", description: "汇总热门话题与情绪变化，保留代表性帖子作为依据", kind: "script",
-          preview: { columns: ["话题", "倾向", "代表观点"], rows: [["本地自动化", "正向", "可复查过程"]] },
         },
         {
           title: "竞品账号动态观察", description: "整理竞品近期发布、互动与内容方向，形成观察笔记", kind: "skill",
-          preview: { columns: ["账号", "更新", "内容方向"], rows: [["Studio North", "3 条", "公开产品演示"]] },
         },
       ] },
       { id: "whatsapp", name: "WhatsApp", cards: [
         {
           title: "群消息整理与待办", description: "把群内待办、时间点和负责人整理成清晰清单", kind: "skill",
-          preview: { columns: ["事项", "负责人", "时间"], rows: [["核对发货清单", "Mia", "周五"]] },
         },
         {
           title: "客户问题归类", description: "按主题归类客户消息，识别高频问题并输出处理建议", kind: "script",
-          preview: { columns: ["主题", "消息数", "处理建议"], rows: [["配送时效", "12 条", "补充预计到达时间"]] },
         },
         {
           title: "会话摘要与跟进", description: "提炼会话结论、未完成事项和下一步跟进动作", kind: "skill",
-          preview: { columns: ["会话", "结论", "跟进"], rows: [["春季样品", "颜色已确认", "周三发样"]] },
         },
         {
           title: "消息批量导出", description: "在授权范围内导出可检索的消息记录", kind: "script",
-          preview: { columns: ["会话", "记录数", "导出格式"], rows: [["项目小组", "28 条", "CSV"]] },
         },
       ] },
       { id: "facebook", name: "Facebook", cards: [
         {
           title: "主页内容与互动采集", description: "收集公开主页帖子、互动数据与发布时间", kind: "script",
-          preview: { columns: ["帖子", "互动", "发布时间"], rows: [["新品试用记录", "38 次", "11月16日"]] },
         },
         {
           title: "广告素材观察", description: "整理公开广告素材与落地页线索，保留来源", kind: "skill",
-          preview: { columns: ["素材", "落地页", "观察"], rows: [["桌灯短片", "桌灯详情页", "首屏突出亮度调节"]] },
         },
         {
           title: "群组讨论主题", description: "归纳公开群组讨论的热门问题与用户需求", kind: "skill",
-          preview: { columns: ["主题", "讨论数", "常见需求"], rows: [["家庭办公", "8 条", "小桌面布置"]] },
         },
         {
           title: "评论线索整理", description: "提取公开评论中的购买意向、问题与联系方式线索", kind: "script",
-          preview: { columns: ["评论", "需求", "下一步"], rows: [["请问有白色款吗？", "颜色咨询", "回复库存信息"]] },
         },
       ] },
       { id: "instagram", name: "Instagram", cards: [
         {
           title: "账号主页数据采集", description: "采集公开主页资料、帖子与互动数据", kind: "script",
-          preview: { columns: ["账号", "帖子数", "可见互动"], rows: [["Studio North", "12 条", "426 次"]] },
         },
         {
           title: "帖子与评论分析", description: "提炼内容主题、评论反馈与可借鉴的表达", kind: "skill",
-          preview: { columns: ["内容", "反馈主题", "建议"], rows: [["新品演示", "尺寸咨询", "加入尺寸对照"]] },
         },
         {
           title: "竞品内容选题", description: "对比竞品近期选题与互动表现，输出内容机会", kind: "skill",
-          preview: { columns: ["选题", "近期样本", "观察"], rows: [["小空间收纳", "6 条", "改造前后对比"]] },
         },
         {
           title: "达人合作线索", description: "按领域和互动质量筛选公开达人账号，整理合作线索", kind: "script",
-          preview: { columns: ["账号", "领域", "互动率"], rows: [["North Studio", "家居", "3.8%"]] },
         },
       ] },
       { id: "linkedin", name: "LinkedIn", cards: [
         {
           title: "职位列表采集", description: "按关键词和地点收集公开职位，保留发布时间与链接", kind: "script",
-          preview: { columns: ["职位", "地点", "发布日期"], rows: [["产品设计师", "上海", "11月15日"]] },
         },
         {
           title: "自动投递岗位申请", description: "按你的条件筛选职位并自动填写申请，提交前保留确认", kind: "skill",
-          preview: { columns: ["职位", "材料", "状态"], rows: [["产品设计师", "简历、作品集", "等待确认提交"]] },
         },
         {
           title: "行业内容监测", description: "跟踪行业账号与话题，汇总值得关注的观点", kind: "skill",
-          preview: { columns: ["话题", "来源", "观察"], rows: [["本地工作流", "3 篇文章", "关注可审计性"]] },
         },
         {
           title: "招聘流程自动跟进", description: "整理候选人状态与待办，按节点提醒下一步动作", kind: "script",
-          preview: { columns: ["候选编号", "当前阶段", "下一步"], rows: [["C-012", "作品集已收", "安排评审"]] },
         },
       ] },
       { id: "zillow", name: "Zillow", cards: [
         {
           title: "房源列表与价格采集", description: "读取公开房源价格、面积、卧室数和链接，导出表格", kind: "script",
-          preview: { columns: ["房源", "挂牌价", "面积"], rows: [["North Ave 12", "$485,000", "1,250 ft²"]] },
         },
         {
           title: "区域市场对比", description: "对比同区域房源的挂牌价与特征，生成市场观察", kind: "skill",
-          preview: { columns: ["区域", "中位挂牌价", "样本"], rows: [["北区", "$465,000", "12 套"]] },
         },
         {
           title: "房源详情抽取", description: "抓取指定房源的设施、税费与历史价格信息", kind: "skill",
-          preview: { columns: ["房源", "卧室", "设施"], rows: [["Lake St 8", "3 间", "车库、露台"]] },
         },
         {
           title: "租金与历史价格追踪", description: "定期记录租金与挂牌价变化，保留时间序列", kind: "script",
-          preview: { columns: ["房源", "本月租金", "变化"], rows: [["Park Ave 22", "$1,950", "−$50"]] },
         },
       ] },
       { id: "google-bing-serp", name: "Google & Bing SERP", cards: [
         {
           title: "搜索结果与排名采集", description: "读取公开搜索结果页，记录排名、标题与链接", kind: "script",
-          preview: { columns: ["关键词", "位置", "页面"], rows: [["桌面收纳", "第 3 位", "收纳指南"]] },
         },
         {
           title: "品牌词曝光监控", description: "跟踪品牌词在搜索中的曝光与结果变化", kind: "skill",
-          preview: { columns: ["品牌词", "结果页", "曝光位置"], rows: [["North Studio", "官网首页", "第 1 位"]] },
         },
         {
           title: "竞品广告位观察", description: "记录公开广告位与落地页线索，保留查询条件", kind: "script",
-          preview: { columns: ["查询", "广告位置", "落地页"], rows: [["折叠支架", "页首", "支架系列"]] },
         },
         {
           title: "长尾关键词拓展", description: "从搜索结果与相关词中整理长尾关键词机会", kind: "skill",
-          preview: { columns: ["种子词", "相关词", "意图"], rows: [["桌面灯", "小户型桌面灯", "选购"]] },
         },
       ] },
     ],
@@ -1067,224 +1014,174 @@ const en: HomeCopy = {
     creatorAction: "Submit your Skill / script",
     creatorTitle: "Become an early Skill creator",
     creatorText: "When the market opens, publish your Skills here so the next task can reuse them",
-    downloadDemo: { count: "Selected: {count}", action: "Download locally", downloading: "Downloading", complete: "Download demo complete · {count}" },
-    previewNote: "previews",
     footerNote: "The first Skills and scripts are being prepared. Launch timing will be announced officially",
     categories: [
       { id: "amazon", name: "Amazon", cards: [
         {
           title: "Price and stock check", description: "Read product prices, stock and promotions in batches, then export a timestamped difference table", kind: "script",
-          preview: { columns: ["Product", "Current price", "Change"], rows: [["Canvas tote", "$24.00", "−$4.00"], ["Travel cup", "$18.50", "No change"], ["Desk lamp", "$39.00", "+$2.00"]] },
         },
         {
           title: "Competitor review triage", description: "Collect publicly visible negative reviews and group product, shipping and support issues", kind: "skill",
-          preview: { columns: ["Issue", "Reviews", "Example"], rows: [["Damaged packaging", "8 of 36", "Lid cracked in transit"]] },
         },
         {
           title: "End-to-end listing", description: "Turn product inputs into titles, specs, images and a recorded platform response", kind: "skill",
-          preview: { columns: ["Product", "Status", "Feedback"], rows: [["Blue mug", "Needs details", "Capacity missing"]] },
         },
         {
           title: "Campaign consistency audit", description: "Compare campaign prices, coupons and storefront display, then flag exceptions with sources", kind: "script",
-          preview: { columns: ["Item", "Offer price", "Displayed"], rows: [["Travel cup coupon", "$15.00", "$18.50 · review"]] },
         },
       ] },
       { id: "tiktok-shop", name: "TikTok Shop", cards: [
         {
           title: "Product and price collection", description: "Read store products, prices and campaign details, then build a comparable list", kind: "skill",
-          preview: { columns: ["Product", "Current price", "Change"], rows: [["Folding stand", "¥39.00", "−¥10.00"], ["Organizer pouch", "¥29.90", "No change"], ["Desk lamp", "¥89.00", "+¥5.00"]] },
         },
         {
           title: "Upload shoppable video", description: "Upload a local shoppable video, attach products and record the platform response", kind: "script",
-          preview: { columns: ["Video", "Product", "Upload"], rows: [["Stand unboxing", "Folding stand", "Draft saved"]] },
         },
         {
           title: "Review and support triage", description: "Group public comments and support keywords into recurring issues and product opportunities", kind: "skill",
-          preview: { columns: ["Issue", "Mentions", "Action"], rows: [["Runs small", "9", "Add size chart"]] },
         },
         {
           title: "Shop status monitor", description: "Check listing, inventory and campaign status, then log exceptions in a report", kind: "script",
-          preview: { columns: ["Item", "Status", "Action"], rows: [["Lamp stock", "3 left", "Review restock"]] },
         },
       ] },
       { id: "airbnb", name: "Airbnb", cards: [
         {
           title: "Price and availability", description: "Collect public listing prices, available dates and core details into a table", kind: "script",
-          preview: { columns: ["Listing", "Nightly rate", "Available"], rows: [["Riverside flat", "$135", "Dec 2–5"]] },
         },
         {
           title: "Competitor listing compare", description: "Compare local listings by price, rating and amenities for reusable market notes", kind: "skill",
-          preview: { columns: ["Listing", "Type", "Difference"], rows: [["Garden flat", "2 bedrooms", "$12 below local median"]] },
         },
         {
           title: "Regional search collection", description: "Read search results by area and date while retaining listing links and key fields", kind: "skill",
-          preview: { columns: ["Area", "Matches", "Filters"], rows: [["North Shore", "18 listings", "Entire home · kitchen"]] },
         },
         {
           title: "Review and amenity extract", description: "Turn public review feedback into structured amenity and experience summaries", kind: "script",
-          preview: { columns: ["Topic", "Mentions", "Guest feedback"], rows: [["Self check-in", "11", "Easy late arrival"]] },
         },
       ] },
       { id: "youtube", name: "YouTube", cards: [
         {
           title: "Channel update screening", description: "Follow new uploads and shortlist videos by publish time and topic", kind: "script",
-          preview: { columns: ["Video", "Topic", "Published"], rows: [["My weekly workflow", "Productivity", "Nov 17"]] },
         },
         {
           title: "Transcript and summary export", description: "Read public captions or transcripts, then produce summaries with source links", kind: "skill",
-          preview: { columns: ["Timestamp", "Transcript", "Summary"], rows: [["02:18", "Open task history", "Resume a previous run"]] },
         },
         {
           title: "Comment theme clustering", description: "Organize relevant comments into audience views, disputes and content opportunities", kind: "skill",
-          preview: { columns: ["Topic", "Comments", "Question"], rows: [["Setup", "16", "How long to connect?"]] },
         },
         {
           title: "Competitor topic analysis", description: "Collect recent competitor performance and title patterns for topic planning", kind: "script",
-          preview: { columns: ["Topic", "Videos", "Finding"], rows: [["Solo team reports", "4", "Demos drew more replies"]] },
         },
       ] },
       { id: "reddit", name: "Reddit", cards: [
         {
           title: "Subreddit topic tracking", description: "Filter posts by keyword and community while keeping score, time and links", kind: "script",
-          preview: { columns: ["Community", "Topic", "Activity"], rows: [["r/SideProject", "Weekly research", "32 replies"]] },
         },
         {
           title: "Top comments and disputes", description: "Read public comments and extract top viewpoints, counterpoints and discussion focus", kind: "skill",
-          preview: { columns: ["Topic", "In favor", "Concern"], rows: [["Weekly reports", "Less sorting", "Sources need review"]] },
         },
         {
           title: "Brand mention monitor", description: "Track brand and product mentions, then group sentiment and issue types", kind: "skill",
-          preview: { columns: ["Mention", "Sentiment", "Reason"], rows: [["Template import", "Positive", "Less setup"]] },
         },
         {
           title: "Post and comment export", description: "Export posts, comments and permalinks into a reviewable source table", kind: "script",
-          preview: { columns: ["Source", "Type", "Summary"], rows: [["r/productivity", "Reply", "Archive by topic"]] },
         },
       ] },
       { id: "x", name: "X", cards: [
         {
           title: "Keyword and topic tracking", description: "Monitor keywords, topics and accounts, then organize posts over time", kind: "script",
-          preview: { columns: ["Keyword", "Posts", "Trend"], rows: [["Indie building", "24", "Up 6 this week"]] },
         },
         {
           title: "Post and reply collection", description: "Read public posts and visible replies to extract viewpoints and propagation clues", kind: "skill",
-          preview: { columns: ["Post", "Replies", "Topic"], rows: [["Workflow demo", "19", "Reusing steps"]] },
         },
         {
           title: "Trend and sentiment digest", description: "Summarize trending topics and sentiment shifts with representative posts as evidence", kind: "script",
-          preview: { columns: ["Topic", "Sentiment", "Example"], rows: [["Local automation", "Positive", "Reviewable history"]] },
         },
         {
           title: "Competitor account watch", description: "Organize competitor posts, engagement and content direction into observation notes", kind: "skill",
-          preview: { columns: ["Account", "Updates", "Focus"], rows: [["Studio North", "3", "Public demos"]] },
         },
       ] },
       { id: "whatsapp", name: "WhatsApp", cards: [
         {
           title: "Group message to-dos", description: "Turn group to-dos, deadlines and owners into a clean action list", kind: "skill",
-          preview: { columns: ["Task", "Owner", "Due"], rows: [["Check shipment list", "Mia", "Friday"]] },
         },
         {
           title: "Customer issue grouping", description: "Group customer messages by topic, identify recurring issues and suggest next steps", kind: "script",
-          preview: { columns: ["Topic", "Messages", "Action"], rows: [["Delivery timing", "12", "Add arrival estimate"]] },
         },
         {
           title: "Conversation summary", description: "Extract conclusions, unfinished items and follow-up actions from a conversation", kind: "skill",
-          preview: { columns: ["Conversation", "Decision", "Follow-up"], rows: [["Spring samples", "Color approved", "Ship on Wednesday"]] },
         },
         {
           title: "Authorized message export", description: "Export messages within an approved scope into searchable records", kind: "script",
-          preview: { columns: ["Chat", "Records", "Export"], rows: [["Project group", "28", "CSV"]] },
         },
       ] },
       { id: "facebook", name: "Facebook", cards: [
         {
           title: "Page content and engagement", description: "Collect public page posts, engagement and publish times", kind: "script",
-          preview: { columns: ["Post", "Interactions", "Published"], rows: [["Product trial", "38", "Nov 16"]] },
         },
         {
           title: "Ad creative watch", description: "Organize public ad creatives and landing-page clues with source references", kind: "skill",
-          preview: { columns: ["Creative", "Destination", "Observation"], rows: [["Desk lamp video", "Lamp detail page", "Starts with dimmer demo"]] },
         },
         {
           title: "Group discussion themes", description: "Summarize popular questions and needs from public group discussions", kind: "skill",
-          preview: { columns: ["Topic", "Discussions", "Need"], rows: [["Home office", "8", "Small desk layouts"]] },
         },
         {
           title: "Comment lead extraction", description: "Extract purchase intent, questions and contact clues from public comments", kind: "script",
-          preview: { columns: ["Comment", "Intent", "Follow-up"], rows: [["Available in white?", "Color options", "Reply with stock"]] },
         },
       ] },
       { id: "instagram", name: "Instagram", cards: [
         {
           title: "Profile data collection", description: "Collect public profile details, posts and engagement data", kind: "script",
-          preview: { columns: ["Account", "Posts", "Interactions"], rows: [["Studio North", "12", "426"]] },
         },
         {
           title: "Post and comment analysis", description: "Extract content themes, audience feedback and reusable wording patterns", kind: "skill",
-          preview: { columns: ["Content", "Feedback", "Action"], rows: [["Product demo", "Size questions", "Add dimensions"]] },
         },
         {
           title: "Competitor content planning", description: "Compare recent competitor topics and engagement to surface content opportunities", kind: "skill",
-          preview: { columns: ["Topic", "Samples", "Finding"], rows: [["Small spaces", "6", "Before-and-after views"]] },
         },
         {
           title: "Creator partnership leads", description: "Filter public creator accounts by niche and engagement quality into a lead list", kind: "script",
-          preview: { columns: ["Creator", "Category", "Engagement"], rows: [["North Studio", "Home", "3.8%"]] },
         },
       ] },
       { id: "linkedin", name: "LinkedIn", cards: [
         {
           title: "Job listing collection", description: "Collect public roles by keyword and location with dates and links", kind: "script",
-          preview: { columns: ["Role", "Location", "Posted"], rows: [["Product designer", "Shanghai", "Nov 15"]] },
         },
         {
           title: "Auto-submit job applications", description: "Filter roles and fill applications from your profile, pausing before each submission", kind: "skill",
-          preview: { columns: ["Role", "Documents", "Status"], rows: [["Product designer", "CV and portfolio", "Awaiting confirmation"]] },
         },
         {
           title: "Industry content monitor", description: "Follow industry accounts and topics to collect viewpoints worth reviewing", kind: "skill",
-          preview: { columns: ["Topic", "Sources", "Finding"], rows: [["Local workflows", "3 articles", "Interest in audit trails"]] },
         },
         {
           title: "Recruiting follow-up", description: "Track candidate status and reminders by stage", kind: "script",
-          preview: { columns: ["Candidate", "Stage", "Next step"], rows: [["C-012", "Portfolio received", "Schedule review"]] },
         },
       ] },
       { id: "zillow", name: "Zillow", cards: [
         {
           title: "Listing and price collection", description: "Read public prices, area, bedroom count and links, then export a table", kind: "script",
-          preview: { columns: ["Listing", "Asking price", "Area"], rows: [["12 North Ave", "$485,000", "1,250 ft²"]] },
         },
         {
           title: "Regional market compare", description: "Compare asking prices and features across an area for a market snapshot", kind: "skill",
-          preview: { columns: ["Area", "Median price", "Sample"], rows: [["North district", "$465,000", "12 listings"]] },
         },
         {
           title: "Listing detail extraction", description: "Extract amenities, taxes and price history from selected listings", kind: "skill",
-          preview: { columns: ["Listing", "Bedrooms", "Amenities"], rows: [["8 Lake St", "3", "Garage, patio"]] },
         },
         {
           title: "Rent and price tracking", description: "Record rent and asking-price changes over time as a time series", kind: "script",
-          preview: { columns: ["Listing", "Monthly rent", "Change"], rows: [["22 Park Ave", "$1,950", "−$50"]] },
         },
       ] },
       { id: "google-bing-serp", name: "Google & Bing SERP", cards: [
         {
           title: "Search ranking collection", description: "Read public search result pages and record rank, title and link", kind: "script",
-          preview: { columns: ["Query", "Rank", "Page"], rows: [["Desk storage", "3", "Storage guide"]] },
         },
         {
           title: "Brand visibility monitor", description: "Track brand results and visibility changes across searches", kind: "skill",
-          preview: { columns: ["Brand query", "Result", "Rank"], rows: [["North Studio", "Homepage", "1"]] },
         },
         {
           title: "Competitor ad position watch", description: "Record public ad positions and landing-page clues with the query used", kind: "script",
-          preview: { columns: ["Query", "Ad position", "Destination"], rows: [["Folding stand", "Top of page", "Stand collection"]] },
         },
         {
           title: "Long-tail keyword ideas", description: "Organize long-tail opportunities from search results and related queries", kind: "skill",
-          preview: { columns: ["Seed", "Related query", "Intent"], rows: [["Desk lamp", "Desk lamps for small spaces", "Shopping"]] },
         },
       ] },
     ],
@@ -1658,224 +1555,174 @@ const ja: HomeCopy = {
     creatorAction: "スキルやスクリプトを提出",
     creatorTitle: "スキルの先行クリエイターを募集",
     creatorText: "公開後は、自作のスキルを掲載してほかの利用者に共有できます。",
-    downloadDemo: { count: "{count} 件選択中", action: "端末にダウンロード", downloading: "ダウンロード中", complete: "ダウンロードのデモ完了 · {count} 件" },
-    previewNote: "件のプレビュー",
     footerNote: "最初のスキルとスクリプトを準備しています。公開日は公式のお知らせでご案内します。",
     categories: [
       { id: "amazon", name: "Amazon", cards: [
         {
           title: "価格と在庫の点検", description: "価格、在庫、セール状況を一括取得し、確認時刻付きの差分表にまとめます", kind: "script",
-          preview: { columns: ["商品", "現在の価格", "変動"], rows: [["キャンバストート", "$24.00", "−$4.00"], ["タンブラー", "$18.50", "変動なし"], ["デスクライト", "$39.00", "+$2.00"]] },
         },
         {
           title: "競合商品の低評価レビュー分析", description: "公開レビューから製品の不満、配送、サポートの課題を分類します", kind: "skill",
-          preview: { columns: ["問題", "サンプル数", "代表的な意見"], rows: [["梱包の破損", "8 / 36", "配送中にふたが割れた"]] },
         },
         {
           title: "商品登録の全工程", description: "商品資料からタイトル、仕様、画像、プラットフォームの応答まで記録します", kind: "skill",
-          preview: { columns: ["商品", "提出状況", "プラットフォームの応答"], rows: [["セラミックマグ · 青", "追加入力待ち", "容量の記載なし"]] },
         },
         {
           title: "セール表示の照合", description: "セール価格、クーポン、購入画面の表示を照合し、不一致と出典を記録します", kind: "script",
-          preview: { columns: ["項目", "セール価格", "ページ表示"], rows: [["タンブラーのクーポン", "$15.00", "$18.50 · 要確認"]] },
         },
       ] },
       { id: "tiktok-shop", name: "TikTok Shop", cards: [
         {
           title: "商品と価格の収集", description: "対象ストアの商品、価格、セール情報を比較表にします", kind: "skill",
-          preview: { columns: ["商品", "現在の価格", "変動"], rows: [["折りたたみスタンド", "¥39.00", "−¥10.00"], ["収納ポーチ", "¥29.90", "変動なし"], ["デスクライト", "¥89.00", "+¥5.00"]] },
         },
         {
           title: "商品紹介動画のアップロード", description: "端末の動画をアップロードして商品と関連付け、公開状態と応答を記録します", kind: "script",
-          preview: { columns: ["動画", "関連商品", "アップロード結果"], rows: [["折りたたみスタンドの開封", "デスクスタンド", "下書きを保存済み"]] },
         },
         {
           title: "コメントと購入後の問題の分析", description: "公開コメントと購入後の問い合わせから、よくある課題と改善のヒントを見つけます", kind: "skill",
-          preview: { columns: ["問題", "頻度", "提案"], rows: [["サイズが小さめ", "9 件", "サイズ対応表を追加"]] },
         },
         {
           title: "ストアの定期点検", description: "出品、在庫、セール状況を定期確認し、異常をレポートにまとめます", kind: "script",
-          preview: { columns: ["項目", "状態", "ToDo"], rows: [["デスクライトの在庫", "残り 3 点", "補充を確認"]] },
         },
       ] },
       { id: "airbnb", name: "Airbnb", cards: [
         {
           title: "宿泊料金と空き状況", description: "公開されている料金、空き日程、基本情報を表に出力します", kind: "script",
-          preview: { columns: ["物件", "1 泊の料金", "予約可能日"], rows: [["川沿いの 1 ベッドルーム", "$135", "12 月 2 日〜5 日"]] },
         },
         {
           title: "競合宿泊先の比較", description: "同じ地域の料金、評価、設備を比較し、繰り返し使える調査表を作ります", kind: "skill",
-          preview: { columns: ["物件", "間取り", "価格差"], rows: [["ガーデンアパート", "2 ベッドルーム", "同エリアの中央値より $12 安い"]] },
         },
         {
           title: "地域別の検索結果収集", description: "地域と日付を指定して検索結果を読み、宿泊先のリンクと主要項目を残します", kind: "skill",
-          preview: { columns: ["地域", "該当する物件", "絞り込み条件"], rows: [["北岸", "18 件", "貸切 · 調理可"]] },
         },
         {
           title: "レビューから設備情報を抽出", description: "公開レビューから設備への意見と滞在中の課題を整理します", kind: "script",
-          preview: { columns: ["注目点", "言及数", "宿泊者の感想"], rows: [["セルフチェックイン", "11 回", "深夜でも到着しやすい"]] },
         },
       ] },
       { id: "youtube", name: "YouTube", cards: [
         {
           title: "チャンネルの更新と動画の絞り込み", description: "新着動画を追い、公開日とテーマで注目すべき動画を選びます", kind: "script",
-          preview: { columns: ["動画", "テーマ", "公開日時"], rows: [["私の一週間のワークフロー", "生産性ツール", "11 月 17 日"]] },
         },
         {
           title: "字幕と要約の書き出し", description: "公開字幕や文字起こしを読み、要約と出典リンクをまとめます", kind: "skill",
-          preview: { columns: ["時刻", "字幕", "要約"], rows: [["02:18", "タスク履歴を開く", "前回の実行から再開"]] },
         },
         {
           title: "コメントの意見を分類", description: "関連性の高いコメントから視聴者の意見、論点、次の企画のヒントを抽出します", kind: "skill",
-          preview: { columns: ["意見", "コメント数", "代表的な質問"], rows: [["インストールと設定", "16 件", "最初の接続にはどれくらいかかる？"]] },
         },
         {
           title: "競合チャンネルの企画分析", description: "競合の最近の動画の反応とタイトルの傾向から、次の企画の参考をまとめます", kind: "script",
-          preview: { columns: ["企画テーマ", "動画数", "所見"], rows: [["一人チームの週報", "4 件", "実演動画は反応が多い"]] },
         },
       ] },
       { id: "reddit", name: "Reddit", cards: [
         {
           title: "サブレディットの話題を追跡", description: "キーワードとサブレディットで絞り込み、反応数、日時、リンクを残します", kind: "script",
-          preview: { columns: ["サブレディット", "テーマ", "反応"], rows: [["r/SideProject", "毎週の調査手順", "返信 32 件"]] },
         },
         {
           title: "高評価コメントと論点", description: "公開コメントから支持の多い意見、反対意見、主な論点を整理します", kind: "skill",
-          preview: { columns: ["論点", "賛成意見", "反対意見"], rows: [["週報の自動作成", "整理が早くなる", "出典の確認が必要"]] },
         },
         {
           title: "ブランドや商品の言及を監視", description: "ブランド名や商品名の言及を追い、反応の傾向と課題を分類します", kind: "skill",
-          preview: { columns: ["言及", "反応の傾向", "理由"], rows: [["テンプレートの取り込み", "好意的", "設定の繰り返しが不要"]] },
         },
         {
           title: "投稿とコメントの出典を出力", description: "投稿、コメント、固定リンクを検証できる一覧にまとめます", kind: "script",
-          preview: { columns: ["出典", "コンテンツ形式", "要約"], rows: [["r/productivity", "返信", "資料をテーマ別に保存"]] },
         },
       ] },
       { id: "x", name: "X", cards: [
         {
           title: "キーワードと話題の追跡", description: "キーワード、話題、アカウントの動きを追い、関連投稿を時系列で整理します", kind: "script",
-          preview: { columns: ["キーワード", "関連投稿", "傾向"], rows: [["個人開発", "24 件", "先週比 +6"]] },
         },
         {
           title: "投稿と返信の収集", description: "公開投稿と表示される返信から、主な意見と拡散の手がかりをまとめます", kind: "skill",
-          preview: { columns: ["投稿", "表示される返信", "論点"], rows: [["ワークフローの紹介", "19 件", "手順の再利用方法"]] },
         },
         {
           title: "トレンドと反応の要約", description: "注目の話題と反応の変化をまとめ、代表的な投稿を根拠として残します", kind: "script",
-          preview: { columns: ["話題", "反応の傾向", "代表的な意見"], rows: [["ローカル自動化", "好意的", "手順を振り返れる"]] },
         },
         {
           title: "競合アカウントの動向調査", description: "競合の最近の投稿、反応、コンテンツの方向性を調査メモにまとめます", kind: "skill",
-          preview: { columns: ["アカウント", "更新", "コンテンツの方向性"], rows: [["Studio North", "3 件", "公開製品デモ"]] },
         },
       ] },
       { id: "whatsapp", name: "WhatsApp", cards: [
         {
           title: "グループのメッセージと ToDo", description: "やるべきこと、日時、担当者をわかりやすい一覧に整理します", kind: "skill",
-          preview: { columns: ["タスク", "担当者", "日時"], rows: [["出荷リストを確認", "Mia", "金曜日"]] },
         },
         {
           title: "顧客の問い合わせを分類", description: "問い合わせを話題別に整理し、頻出する質問と対応案をまとめます", kind: "script",
-          preview: { columns: ["テーマ", "メッセージ数", "対応案"], rows: [["配送の所要時間", "12 件", "到着予定日を追記"]] },
         },
         {
           title: "会話の要約とフォローアップ", description: "会話の結論、残件、次に取るべき対応を整理します", kind: "skill",
-          preview: { columns: ["会話", "結論", "フォローアップ"], rows: [["春のサンプル", "色を確認済み", "水曜日にサンプル発送"]] },
         },
         {
           title: "メッセージの一括書き出し", description: "許可された範囲で、検索できるメッセージ履歴を出力します", kind: "script",
-          preview: { columns: ["会話", "記録件数", "出力形式"], rows: [["プロジェクトチーム", "28 件", "CSV"]] },
         },
       ] },
       { id: "facebook", name: "Facebook", cards: [
         {
           title: "ページの投稿と反応を収集", description: "公開ページの投稿、反応データ、公開日時を集めます", kind: "script",
-          preview: { columns: ["投稿", "反応", "公開日時"], rows: [["新製品の試用記録", "38 回", "11 月 16 日"]] },
         },
         {
           title: "広告クリエイティブの調査", description: "公開広告とランディングページを調べ、出典を残します", kind: "skill",
-          preview: { columns: ["クリエイティブ", "ランディングページ", "所見"], rows: [["デスクライトの短編動画", "デスクライトの商品ページ", "最初の画面で調光を強調"]] },
         },
         {
           title: "グループの話題分析", description: "公開グループの議論から注目の質問と利用者のニーズをまとめます", kind: "skill",
-          preview: { columns: ["テーマ", "議論の件数", "よくあるニーズ"], rows: [["在宅勤務", "8 件", "狭い机のレイアウト"]] },
         },
         {
           title: "コメントから見込み情報を抽出", description: "公開コメントから購入意向、質問、連絡先の手がかりを整理します", kind: "script",
-          preview: { columns: ["コメント", "ニーズ", "次の対応"], rows: [["白はありますか？", "色についての質問", "在庫状況を返信"]] },
         },
       ] },
       { id: "instagram", name: "Instagram", cards: [
         {
           title: "プロフィールのデータ収集", description: "公開プロフィール、投稿、反応データを集めます", kind: "script",
-          preview: { columns: ["アカウント", "投稿数", "公開の反応"], rows: [["Studio North", "12 件", "426 回"]] },
         },
         {
           title: "投稿とコメントの分析", description: "投稿のテーマ、返信の反応、参考になる表現を整理します", kind: "skill",
-          preview: { columns: ["内容", "フィードバックの話題", "提案"], rows: [["新製品のデモ", "サイズの問い合わせ", "サイズ比較を追加"]] },
         },
         {
           title: "競合コンテンツの企画調査", description: "競合の最近のテーマと反応を比較し、次のコンテンツのヒントを見つけます", kind: "skill",
-          preview: { columns: ["企画テーマ", "最近のサンプル", "所見"], rows: [["狭い空間の収納", "6 件", "模様替えの前後比較"]] },
         },
         {
           title: "クリエイターとの協業候補", description: "分野と反応の質で公開アカウントを絞り込み、協業候補を整理します", kind: "script",
-          preview: { columns: ["アカウント", "分野", "エンゲージメント率"], rows: [["North Studio", "インテリア", "3.8%"]] },
         },
       ] },
       { id: "linkedin", name: "LinkedIn", cards: [
         {
           title: "求人情報の収集", description: "キーワードと勤務地で公開求人を集め、掲載日時とリンクを残します", kind: "script",
-          preview: { columns: ["職種", "勤務地", "掲載日"], rows: [["プロダクトデザイナー", "上海", "11 月 15 日"]] },
         },
         {
           title: "応募フォームの自動入力", description: "条件に合う求人を選び、応募フォームを入力します。送信前に確認できます", kind: "skill",
-          preview: { columns: ["職種", "提出書類", "状態"], rows: [["プロダクトデザイナー", "履歴書、ポートフォリオ", "提出の確認待ち"]] },
         },
         {
           title: "業界の動向を追跡", description: "業界のアカウントや話題を追い、注目すべき見解をまとめます", kind: "skill",
-          preview: { columns: ["話題", "出典", "所見"], rows: [["ローカルワークフロー", "記事 3 件", "監査しやすさへの関心"]] },
         },
         {
           title: "採用プロセスのフォローアップ", description: "候補者の進捗と ToDo を整理し、各段階で次の対応を知らせます", kind: "script",
-          preview: { columns: ["候補者 ID", "現在の段階", "次の対応"], rows: [["C-012", "ポートフォリオ受領済み", "審査を手配"]] },
         },
       ] },
       { id: "zillow", name: "Zillow", cards: [
         {
           title: "物件一覧と価格を収集", description: "公開物件の価格、広さ、寝室数、リンクを表に出力します", kind: "script",
-          preview: { columns: ["物件", "掲載価格", "広さ"], rows: [["North Ave 12", "$485,000", "1,250 ft²"]] },
         },
         {
           title: "地域の不動産市場を比較", description: "同じエリアの掲載価格と物件の特徴を整理し、市場の傾向をまとめます", kind: "skill",
-          preview: { columns: ["地域", "掲載価格の中央値", "サンプル"], rows: [["北部エリア", "$465,000", "12 件"]] },
         },
         {
           title: "物件の詳細情報を抽出", description: "指定物件の設備、税金・諸費用、価格履歴を収集します", kind: "skill",
-          preview: { columns: ["物件", "寝室", "設備"], rows: [["Lake St 8", "3 室", "ガレージ、テラス"]] },
         },
         {
           title: "賃料と価格履歴の追跡", description: "賃料と掲載価格の変化を定期的に記録し、時系列で保存します", kind: "script",
-          preview: { columns: ["物件", "今月の賃料", "変動"], rows: [["Park Ave 22", "$1,950", "−$50"]] },
         },
       ] },
       { id: "google-bing-serp", name: "Google & Bing SERP", cards: [
         {
           title: "検索結果と順位を収集", description: "公開検索結果から順位、タイトル、リンクを記録します", kind: "script",
-          preview: { columns: ["キーワード", "順位", "ページ"], rows: [["デスクの収納", "3 位", "収納ガイド"]] },
         },
         {
           title: "ブランド検索での露出を追跡", description: "ブランド名の検索結果で、露出や順位の変化を追います", kind: "skill",
-          preview: { columns: ["ブランドキーワード", "検索結果ページ", "表示順位"], rows: [["North Studio", "公式サイトのトップページ", "1 位"]] },
         },
         {
           title: "競合の広告枠を調査", description: "公開広告枠とランディングページを記録し、検索条件を残します", kind: "script",
-          preview: { columns: ["検索クエリ", "広告の位置", "ランディングページ"], rows: [["折りたたみスタンド", "ページ上部", "スタンドシリーズ"]] },
         },
         {
           title: "ロングテールキーワードの発掘", description: "検索結果と関連語から、有望なロングテールキーワードを見つけます", kind: "skill",
-          preview: { columns: ["シードキーワード", "関連キーワード", "検索意図"], rows: [["デスクライト", "狭い部屋向けのデスクライト", "購入検討"]] },
         },
       ] },
     ],
@@ -2271,224 +2118,174 @@ const ko: HomeCopy = {
     creatorAction: "스킬 또는 스크립트 제출",
     creatorTitle: "스킬 제작자 사전 모집",
     creatorText: "마켓이 열리면 직접 만든 스킬을 올려 다른 사용자와 공유할 수 있습니다.",
-    downloadDemo: { count: "{count}개 선택됨", action: "기기에 다운로드", downloading: "다운로드 중", complete: "다운로드 데모 완료 · {count}개" },
-    previewNote: "개 미리보기",
     footerNote: "첫 스킬과 스크립트를 준비하고 있습니다. 공개 일정은 공식 안내에서 확인하세요.",
     categories: [
       { id: "amazon", name: "Amazon", cards: [
         {
           title: "상품 가격·재고 점검", description: "가격, 재고, 행사 상태를 일괄 확인해 시각이 포함된 변경 내역표를 만듭니다", kind: "script",
-          preview: { columns: ["상품", "현재 가격", "변동"], rows: [["캔버스 토트백", "$24.00", "−$4.00"], ["텀블러", "$18.50", "변동 없음"], ["책상 조명", "$39.00", "+$2.00"]] },
         },
         {
           title: "경쟁 상품의 낮은 평점 분석", description: "공개된 부정적 리뷰에서 제품 결함, 배송, 고객 지원 문제를 분류합니다", kind: "skill",
-          preview: { columns: ["문제", "표본 수", "대표 의견"], rows: [["포장 파손", "8 / 36", "배송 중 뚜껑에 금이 감"]] },
         },
         {
           title: "상품 등록 전체 과정", description: "상품 자료부터 제목, 규격, 이미지, 플랫폼 응답까지 등록 과정을 기록합니다", kind: "skill",
-          preview: { columns: ["상품", "제출 상태", "플랫폼 응답"], rows: [["세라믹 머그 · 파란색", "정보 보완 대기", "용량 정보 누락"]] },
         },
         {
           title: "프로모션 표시 일치 여부 확인", description: "행사 가격, 쿠폰, 구매 화면 표시를 대조하고 이상 항목과 출처를 기록합니다", kind: "script",
-          preview: { columns: ["항목", "행사 가격", "페이지 표시"], rows: [["텀블러 쿠폰", "$15.00", "$18.50 · 확인 필요"]] },
         },
       ] },
       { id: "tiktok-shop", name: "TikTok Shop", cards: [
         {
           title: "상품·가격 수집", description: "대상 스토어의 상품, 가격, 행사 정보를 비교 목록으로 만듭니다", kind: "skill",
-          preview: { columns: ["상품", "현재 가격", "변동"], rows: [["접이식 거치대", "¥39.00", "−¥10.00"], ["수납 파우치", "¥29.90", "변동 없음"], ["책상 조명", "¥89.00", "+¥5.00"]] },
         },
         {
           title: "쇼핑 영상 업로드", description: "기기의 쇼핑 영상을 올리고 상품을 연결한 뒤 게시 상태와 응답을 기록합니다", kind: "script",
-          preview: { columns: ["영상", "연결 상품", "업로드 결과"], rows: [["접이식 거치대 개봉", "탁상용 거치대", "초안 저장 완료"]] },
         },
         {
           title: "댓글과 구매 후 문제 분석", description: "공개 댓글과 구매 후 문의 키워드를 모아 자주 나오는 문제와 개선 기회를 찾습니다", kind: "skill",
-          preview: { columns: ["문제", "빈도", "제안"], rows: [["사이즈가 작음", "9건", "사이즈 비교표 추가"]] },
         },
         {
           title: "스토어 정기 점검", description: "상품 등록, 재고, 행사 상태를 정기 점검해 이상 내역을 보고서로 정리합니다", kind: "script",
-          preview: { columns: ["항목", "상태", "할 일"], rows: [["책상 조명 재고", "3개 남음", "재입고 확인"]] },
         },
       ] },
       { id: "airbnb", name: "Airbnb", cards: [
         {
           title: "숙소 요금과 예약 가능 일정", description: "공개 숙소 요금, 예약 가능 날짜와 기본 정보를 표로 내보냅니다", kind: "script",
-          preview: { columns: ["매물", "1박 요금", "예약 가능 날짜"], rows: [["강변 침실 1개 숙소", "$135", "12월 2~5일"]] },
         },
         {
           title: "경쟁 숙소 비교", description: "같은 지역 숙소의 요금, 평점, 시설을 비교해 재사용할 수 있는 조사표를 만듭니다", kind: "skill",
-          preview: { columns: ["매물", "객실 유형", "가격 차이"], rows: [["가든 아파트", "침실 2개", "같은 지역 중간값보다 $12 낮음"]] },
         },
         {
           title: "지역별 검색 결과 수집", description: "지역과 날짜로 검색 결과를 읽고 숙소 링크와 주요 항목을 기록합니다", kind: "skill",
-          preview: { columns: ["지역", "조건에 맞는 매물", "필터 조건"], rows: [["북쪽 해안", "18곳", "독채 · 취사 가능"]] },
         },
         {
           title: "리뷰에서 시설 정보 추출", description: "공개 리뷰에서 시설에 대한 의견과 이용 중 겪은 문제를 정리합니다", kind: "script",
-          preview: { columns: ["관심 사항", "언급 횟수", "투숙객 의견"], rows: [["셀프 체크인", "11회", "늦은 밤에도 도착이 편리함"]] },
         },
       ] },
       { id: "youtube", name: "YouTube", cards: [
         {
           title: "채널 업데이트와 영상 선별", description: "새 영상을 추적하고 게시일과 주제로 주목할 영상을 고릅니다", kind: "script",
-          preview: { columns: ["영상", "주제", "게시 시각"], rows: [["나의 일주일 워크플로", "생산성 도구", "11월 17일"]] },
         },
         {
           title: "자막과 요약 내보내기", description: "공개 자막이나 전사본을 읽고 요약과 출처 링크를 정리합니다", kind: "skill",
-          preview: { columns: ["시각", "자막 내용", "요약"], rows: [["02:18", "작업 기록 열기", "지난 실행에서 재개"]] },
         },
         {
           title: "댓글 의견 분류", description: "관련 댓글을 모아 시청자 의견, 쟁점과 다음 콘텐츠 기회를 찾습니다", kind: "skill",
-          preview: { columns: ["의견", "댓글 수", "대표 질문"], rows: [["설치 및 설정", "16건", "처음 연결하는 데 얼마나 걸리나요?"]] },
         },
         {
           title: "경쟁 채널의 콘텐츠 주제 분석", description: "경쟁 채널의 최근 영상 성과와 제목 패턴을 모아 기획 참고 자료를 만듭니다", kind: "script",
-          preview: { columns: ["콘텐츠 주제", "영상 수", "관찰 내용"], rows: [["1인 팀의 주간 보고서", "4건", "실제 시연 영상의 반응이 높음"]] },
         },
       ] },
       { id: "reddit", name: "Reddit", cards: [
         {
           title: "서브레딧 주제 추적", description: "키워드와 서브레딧으로 게시물을 선별하고 반응, 게시 시각, 링크를 기록합니다", kind: "script",
-          preview: { columns: ["서브레딧", "주제", "반응"], rows: [["r/SideProject", "주간 조사 절차", "답글 32개"]] },
         },
         {
           title: "추천 댓글과 쟁점", description: "공개 댓글에서 추천이 많은 의견, 반대 의견과 핵심 쟁점을 정리합니다", kind: "skill",
-          preview: { columns: ["쟁점", "찬성 의견", "반대 의견"], rows: [["주간 보고서 자동 작성", "정리가 더 빨라짐", "출처 확인 필요"]] },
         },
         {
           title: "브랜드와 상품 언급 추적", description: "브랜드명과 상품명 언급을 추적해 반응과 문제 유형을 분류합니다", kind: "skill",
-          preview: { columns: ["언급", "반응 성향", "이유"], rows: [["템플릿 가져오기", "긍정적", "설정을 반복할 필요가 없음"]] },
         },
         {
           title: "게시물과 댓글 출처 내보내기", description: "게시물, 댓글과 고유 링크를 다시 확인할 수 있는 출처 표로 만듭니다", kind: "script",
-          preview: { columns: ["출처", "콘텐츠 유형", "요약"], rows: [["r/productivity", "답글", "자료를 주제별로 보관"]] },
         },
       ] },
       { id: "x", name: "X", cards: [
         {
           title: "키워드와 화제 추적", description: "키워드, 화제와 계정 활동을 추적해 관련 게시물을 시간순으로 정리합니다", kind: "script",
-          preview: { columns: ["키워드", "관련 게시물", "추세"], rows: [["개인 개발", "24건", "지난주 대비 +6"]] },
         },
         {
           title: "게시물과 답글 수집", description: "공개 게시물과 보이는 답글을 읽어 주요 의견과 확산 단서를 정리합니다", kind: "skill",
-          preview: { columns: ["게시물", "표시된 답글", "쟁점"], rows: [["워크플로 소개", "19건", "절차 재사용 방법"]] },
         },
         {
           title: "트렌드와 반응 요약", description: "인기 주제와 반응 변화를 정리하고 대표 게시물을 근거로 남깁니다", kind: "script",
-          preview: { columns: ["화제", "반응 성향", "대표 의견"], rows: [["로컬 자동화", "긍정적", "작업 과정 재확인 가능"]] },
         },
         {
           title: "경쟁 계정 활동 조사", description: "경쟁 계정의 최근 게시물, 반응, 콘텐츠 방향을 조사 메모로 정리합니다", kind: "skill",
-          preview: { columns: ["계정", "업데이트", "콘텐츠 방향"], rows: [["Studio North", "3건", "공개 제품 데모"]] },
         },
       ] },
       { id: "whatsapp", name: "WhatsApp", cards: [
         {
           title: "그룹 메시지와 할 일 정리", description: "그룹 대화에서 할 일, 일정, 담당자를 뽑아 목록으로 정리합니다", kind: "skill",
-          preview: { columns: ["할 일", "담당자", "시간"], rows: [["출고 목록 확인", "Mia", "금요일"]] },
         },
         {
           title: "고객 문의 분류", description: "고객 메시지를 주제별로 분류해 자주 묻는 질문과 대응안을 정리합니다", kind: "script",
-          preview: { columns: ["주제", "메시지 수", "대응 제안"], rows: [["배송 소요 시간", "12건", "예상 도착일 추가"]] },
         },
         {
           title: "대화 요약과 후속 조치", description: "대화의 결론, 미완료 항목과 다음 후속 조치를 정리합니다", kind: "skill",
-          preview: { columns: ["대화", "결론", "후속 조치"], rows: [["봄 시즌 샘플", "색상 확인 완료", "수요일 샘플 발송"]] },
         },
         {
           title: "메시지 일괄 내보내기", description: "승인된 범위에서 검색 가능한 메시지 기록을 내보냅니다", kind: "script",
-          preview: { columns: ["대화", "기록 수", "내보내기 형식"], rows: [["프로젝트 팀", "28건", "CSV"]] },
         },
       ] },
       { id: "facebook", name: "Facebook", cards: [
         {
           title: "페이지 게시물과 반응 수집", description: "공개 페이지의 게시물, 반응 데이터와 게시 시점을 수집합니다", kind: "script",
-          preview: { columns: ["게시물", "반응", "게시 시각"], rows: [["신제품 체험 기록", "38회", "11월 16일"]] },
         },
         {
           title: "광고 소재 조사", description: "공개 광고 소재와 랜딩 페이지 단서를 정리하고 출처를 기록합니다", kind: "skill",
-          preview: { columns: ["광고 소재", "랜딩 페이지", "관찰 내용"], rows: [["탁상 조명 짧은 영상", "책상 조명 상세 페이지", "첫 화면에 밝기 조절 강조"]] },
         },
         {
           title: "그룹 토론 주제 분석", description: "공개 그룹 대화에서 인기 질문과 사용자 요구를 요약합니다", kind: "skill",
-          preview: { columns: ["주제", "토론 수", "자주 나오는 요구"], rows: [["재택근무", "8건", "작은 책상 배치"]] },
         },
         {
           title: "댓글에서 잠재 수요 파악", description: "공개 댓글에서 구매 의향, 질문과 연락처 단서를 정리합니다", kind: "script",
-          preview: { columns: ["댓글", "요구", "다음 단계"], rows: [["흰색도 있나요?", "색상 문의", "재고 정보 답변"]] },
         },
       ] },
       { id: "instagram", name: "Instagram", cards: [
         {
           title: "프로필 데이터 수집", description: "공개 프로필, 게시물과 반응 데이터를 수집합니다", kind: "script",
-          preview: { columns: ["계정", "게시물 수", "공개 반응"], rows: [["Studio North", "12건", "426회"]] },
         },
         {
           title: "게시물과 댓글 분석", description: "콘텐츠 주제, 댓글 반응과 참고할 만한 표현을 정리합니다", kind: "skill",
-          preview: { columns: ["내용", "피드백 주제", "제안"], rows: [["신제품 데모", "크기 문의", "크기 비교 추가"]] },
         },
         {
           title: "경쟁 콘텐츠 주제 조사", description: "경쟁 계정의 최근 주제와 반응을 비교해 콘텐츠 기회를 찾습니다", kind: "skill",
-          preview: { columns: ["콘텐츠 주제", "최근 표본", "관찰 내용"], rows: [["좁은 공간 수납", "6건", "꾸미기 전후 비교"]] },
         },
         {
           title: "크리에이터 협업 후보", description: "분야와 반응의 질로 공개 크리에이터 계정을 선별해 협업 후보를 정리합니다", kind: "script",
-          preview: { columns: ["계정", "분야", "참여율"], rows: [["North Studio", "인테리어", "3.8%"]] },
         },
       ] },
       { id: "linkedin", name: "LinkedIn", cards: [
         {
           title: "채용 공고 수집", description: "키워드와 근무 지역으로 공개 채용 공고를 찾아 게시 시각과 링크를 기록합니다", kind: "script",
-          preview: { columns: ["직무", "근무 지역", "게시 날짜"], rows: [["제품 디자이너", "상하이", "11월 15일"]] },
         },
         {
           title: "지원서 자동 작성", description: "조건에 맞는 공고를 선별해 지원서를 채웁니다. 제출 전에 확인할 수 있습니다", kind: "skill",
-          preview: { columns: ["직무", "제출 자료", "상태"], rows: [["제품 디자이너", "이력서, 포트폴리오", "제출 확인 대기"]] },
         },
         {
           title: "업계 동향 추적", description: "업계 계정과 주제를 추적해 주목할 의견을 정리합니다", kind: "skill",
-          preview: { columns: ["화제", "출처", "관찰 내용"], rows: [["로컬 워크플로", "글 3건", "감사 가능성에 주목"]] },
         },
         {
           title: "채용 절차 후속 작업", description: "후보자 상태와 할 일을 정리하고 단계마다 다음 조치를 알려 줍니다", kind: "script",
-          preview: { columns: ["후보자 ID", "현재 단계", "다음 단계"], rows: [["C-012", "포트폴리오 수신 완료", "평가 일정 잡기"]] },
         },
       ] },
       { id: "zillow", name: "Zillow", cards: [
         {
           title: "매물 목록과 가격 수집", description: "공개 매물의 가격, 면적, 침실 수와 링크를 표로 내보냅니다", kind: "script",
-          preview: { columns: ["매물", "등록 가격", "면적"], rows: [["North Ave 12", "$485,000", "1,250 ft²"]] },
         },
         {
           title: "지역 부동산 시장 비교", description: "같은 지역 매물의 등록 가격과 특징을 비교해 시장 동향을 정리합니다", kind: "skill",
-          preview: { columns: ["지역", "등록 가격 중간값", "표본"], rows: [["북부 지역", "$465,000", "12곳"]] },
         },
         {
           title: "매물 세부 정보 추출", description: "지정한 매물의 시설, 세금과 비용, 가격 이력을 수집합니다", kind: "skill",
-          preview: { columns: ["매물", "침실", "시설"], rows: [["Lake St 8", "3개", "차고, 테라스"]] },
         },
         {
           title: "임대료와 과거 가격 추적", description: "임대료와 등록 가격 변화를 정기적으로 기록해 시간순으로 저장합니다", kind: "script",
-          preview: { columns: ["매물", "이번 달 임대료", "변동"], rows: [["Park Ave 22", "$1,950", "−$50"]] },
         },
       ] },
       { id: "google-bing-serp", name: "Google & Bing SERP", cards: [
         {
           title: "검색 결과와 순위 수집", description: "공개 검색 결과의 순위, 제목과 링크를 기록합니다", kind: "script",
-          preview: { columns: ["키워드", "위치", "페이지"], rows: [["책상 수납", "3위", "수납 가이드"]] },
         },
         {
           title: "브랜드 검색 노출 추적", description: "브랜드 키워드의 검색 노출과 결과 변화를 추적합니다", kind: "skill",
-          preview: { columns: ["브랜드 키워드", "검색 결과 페이지", "노출 위치"], rows: [["North Studio", "공식 홈페이지", "1위"]] },
         },
         {
           title: "경쟁사 광고 노출 조사", description: "공개 광고 위치와 랜딩 페이지 단서를 기록하고 검색 조건을 남깁니다", kind: "script",
-          preview: { columns: ["검색어", "광고 위치", "랜딩 페이지"], rows: [["접이식 거치대", "페이지 상단", "거치대 시리즈"]] },
         },
         {
           title: "롱테일 키워드 발굴", description: "검색 결과와 관련어에서 유망한 롱테일 키워드를 찾습니다", kind: "skill",
-          preview: { columns: ["시드 키워드", "관련 키워드", "검색 의도"], rows: [["책상 조명", "작은 집에 어울리는 책상 조명", "구매 검토"]] },
         },
       ] },
     ],

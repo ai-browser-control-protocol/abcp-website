@@ -203,29 +203,7 @@ function MarketGlyph({ index }: { index: number }) {
 function SkillMarket({ copy }: { copy: HomeCopy }) {
   const market = copy.marketplace;
   const [active, setActive] = useState(0);
-  const [selected, setSelected] = useState<string[]>([]);
-  const [download, setDownload] = useState<"idle" | "running" | "done">("idle");
   const category = market.categories[active];
-  const demo = market.downloadDemo;
-
-  useEffect(() => {
-    if (download !== "running") return;
-    const timer = window.setTimeout(() => setDownload("done"), 1600);
-    return () => window.clearTimeout(timer);
-  }, [download]);
-
-  function toggleItem(id: string) {
-    setDownload("idle");
-    setSelected((items) => items.includes(id) ? items.filter((item) => item !== id) : [...items, id]);
-  }
-
-  function startDownload() {
-    if (download === "running" || !selected.length) return;
-    setDownload(window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "done" : "running");
-  }
-
-  const count = String(selected.length);
-  const downloadLabel = download === "running" ? demo.downloading : download === "done" ? demo.complete.replace("{count}", count) : demo.action;
   return (
     <section className="home-section marketplace-section" id="marketplace">
       <div className="marketplace-inner">
@@ -259,37 +237,16 @@ function SkillMarket({ copy }: { copy: HomeCopy }) {
               <div className="market-category-head">
                 <h3>{category.name}</h3>
               </div>
-              <div className="market-grid" key={category.id}>
-                {category.cards.map((item, index) => {
-                  const id = `${category.id}-${index + 1}${item.kind === "script" ? ".js" : "/SKILL.md"}`;
-                  const checked = selected.includes(id);
-                  return (
-                    <label className={`market-card${checked ? " is-selected" : ""}`} key={id} style={{ "--market-i": index } as CSSProperties}>
-                      <input type="checkbox" className="sr-only" checked={checked} disabled={download === "running"}
-                        aria-label={item.title} onChange={() => toggleItem(id)} />
-                      <span className="market-card-head">
-                        <MarketGlyph index={index} />
-                        <strong className="market-card-title">{item.title}</strong>
-                        <span className="market-card-check" aria-hidden="true">{checked && <Check />}</span>
-                      </span>
-                      <span className="market-card-description">{item.description}</span>
-                    </label>
-                  );
-                })}
-              </div>
-              <div className="market-transfer" data-state={download}>
-                <button className="market-download" type="button" onClick={startDownload} disabled={!selected.length}
-                  aria-disabled={!selected.length || download === "running"} title={download === "done" ? selected.join("\n") : undefined}>
-                  {download === "running" ? (
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path className="market-download-sheet" d="M9 3h6v8H9z" />
-                      <path d="M3 11h6l2 2h10v7H3z" />
-                    </svg>
-                  ) : download === "done" ? <Check /> : <DownloadIcon />}
-                  {downloadLabel}
-                  {download === "idle" && selected.length > 0 && <span className="market-download-count">{count}</span>}
-                </button>
-                <span className="sr-only" role="status">{download === "idle" ? demo.count.replace("{count}", count) : downloadLabel}</span>
+              <div className="market-grid">
+                {category.cards.map((item, index) => (
+                  <article className="market-card" key={item.title}>
+                    <div className="market-card-head">
+                      <MarketGlyph index={index} />
+                      <strong className="market-card-title">{item.title}</strong>
+                    </div>
+                    <span className="market-card-description">{item.description}</span>
+                  </article>
+                ))}
               </div>
             </div>
           </div>
